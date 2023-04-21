@@ -12,7 +12,6 @@ import kotlinx.coroutines.*
 class LogoFragment: BaseLaunchFragment() {
 
     private lateinit var binding: FragmentLogoBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

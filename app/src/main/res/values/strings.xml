@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">Bird Voice</string>
+
+    <!-- Launcher -->
+    <string name="launcher_app_name">bird voice</string>
+    <string name="log_in">Log In</string>
+    <string name="new_account">New account</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Галасы птушак</string>
+
+    <!-- Launcher -->
+    <string name="launcher_app_name">галасы птушак</string>
+    <string name="log_in">Уваход</string>
+    <string name="new_account">Новы акаунт</string>
+</resources>

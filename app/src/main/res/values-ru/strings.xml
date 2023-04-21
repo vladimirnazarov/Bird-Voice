@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Голоса птиц</string>
+
+    <!-- Launcher -->
+    <string name="launcher_app_name">голоса птиц</string>
+    <string name="log_in">Вход</string>
+    <string name="new_account">Новый аккаунт</string>
+</resources>

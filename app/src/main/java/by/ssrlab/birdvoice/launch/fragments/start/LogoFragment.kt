@@ -20,13 +20,15 @@ class LogoFragment: BaseLaunchFragment() {
 
         binding = FragmentLogoBinding.inflate(layoutInflater)
 
-        mActivity.hideStatusBar()
+        activityLaunch.hideStatusBar()
 
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
+
+        animVM.setLaunchVM(launchVM)
 
         launchVM.getScope().launch {
             delay(3000)
@@ -35,7 +37,7 @@ class LogoFragment: BaseLaunchFragment() {
                 alpha(0f)
 
                 withEndAction {
-                    launchVM.getNavController().navigate(R.id.action_logoFragment_to_choiceFragment)
+                    launchVM.navigate(R.id.action_logoFragment_to_choiceFragment)
                 }
             }
         }

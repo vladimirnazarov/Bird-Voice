@@ -2,7 +2,6 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/launcher_graph"
     app:startDestination="@id/logoFragment">
@@ -21,6 +20,14 @@
     <fragment
         android:id="@+id/choiceFragment"
         android:name="by.ssrlab.birdvoice.launch.fragments.choice.ChoiceFragment"
-        android:label="ChoiceFragment" />
+        android:label="ChoiceFragment" >
+        <action
+            android:id="@+id/action_choiceFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.login.LoginFragment"
+        android:label="LoginFragment" />
 
 </navigation>

@@ -13,6 +13,9 @@ class LaunchVM: ViewModel() {
     fun setNavController(controller: NavController){
         navController = controller
     }
+    fun navigate(address: Int){
+        navController.navigate(address)
+    }
 
     private val mediaJob = Job()
     private val mediaScope = CoroutineScope(Dispatchers.Main + mediaJob)

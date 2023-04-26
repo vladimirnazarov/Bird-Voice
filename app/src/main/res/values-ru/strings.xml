@@ -6,4 +6,6 @@
     <string name="launcher_app_name">голоса птиц</string>
     <string name="log_in">Вход</string>
     <string name="new_account">Новый аккаунт</string>
+    <string name="welcome_back">Добро пожаловать!</string>
+    <string name="sign_in_to_continue">Войдите, чтобы продолжить</string>
 </resources>

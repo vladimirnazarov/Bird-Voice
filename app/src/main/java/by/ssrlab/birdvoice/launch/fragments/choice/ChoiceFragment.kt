@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import by.ssrlab.birdvoice.R
+import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
-import by.ssrlab.birdvoice.launch.vm.LaunchVM
+import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 
-class ChoiceFragment: Fragment() {
+class ChoiceFragment: BaseLaunchFragment() {
 
     private lateinit var binding: FragmentChoiceBinding
-    private val launchVM: LaunchVM by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,24 +21,14 @@ class ChoiceFragment: Fragment() {
 
         binding = FragmentChoiceBinding.inflate(layoutInflater)
 
-        return binding.root
-    }
+        activityLaunch.showStatusBar()
+        animVM.choiceDefineElementsVisibility(binding)
+        animVM.choiceObjectEnter(MainApp.appContext, binding)
 
-    private fun defineElementsVisibility(){
-        if (binding.choiceBlueBird.visibility == View.VISIBLE) {
-            binding.choiceBlueBird.visibility = View.INVISIBLE
-            binding.choiceLoginButton.visibility = View.INVISIBLE
-            binding.choiceRegisterButton.visibility = View.INVISIBLE
-            binding.choiceBottomLeftCloud.visibility = View.INVISIBLE
-            binding.choiceBottomRightCloud.visibility = View.INVISIBLE
-            binding.choiceTopRightCloud.visibility = View.INVISIBLE
-        } else {
-            binding.choiceBlueBird.visibility = View.VISIBLE
-            binding.choiceLoginButton.visibility = View.VISIBLE
-            binding.choiceRegisterButton.visibility = View.VISIBLE
-            binding.choiceBottomLeftCloud.visibility = View.VISIBLE
-            binding.choiceBottomRightCloud.visibility = View.VISIBLE
-            binding.choiceTopRightCloud.visibility = View.VISIBLE
+        binding.choiceLoginButton.setOnClickListener {
+            animVM.choiceObjectOut(MainApp.appContext, binding, R.id.action_choiceFragment_to_loginFragment)
         }
+
+        return binding.root
     }
 }

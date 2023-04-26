@@ -6,17 +6,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import by.ssrlab.birdvoice.launch.LaunchActivity
+import by.ssrlab.birdvoice.launch.vm.AnimVM
 import by.ssrlab.birdvoice.launch.vm.LaunchVM
 
 open class BaseLaunchFragment: Fragment() {
 
     val launchVM: LaunchVM by activityViewModels()
-    lateinit var mActivity: LaunchActivity
+    val animVM: AnimVM by activityViewModels()
+    lateinit var activityLaunch: LaunchActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mActivity = (activity as LaunchActivity)
+        activityLaunch = (activity as LaunchActivity)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

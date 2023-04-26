@@ -6,4 +6,6 @@
     <string name="launcher_app_name">галасы птушак</string>
     <string name="log_in">Уваход</string>
     <string name="new_account">Новы акаунт</string>
+    <string name="welcome_back">Вітаем зноў!</string>
+    <string name="sign_in_to_continue">Вайдзіце, каб працягнуць</string>
 </resources>

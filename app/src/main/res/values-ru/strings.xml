@@ -8,4 +8,12 @@
     <string name="new_account">Новый аккаунт</string>
     <string name="welcome_back">Добро пожаловать!</string>
     <string name="sign_in_to_continue">Войдите, чтобы продолжить</string>
+    <!--  Translate  -->
+    <string name="sign_up_to_continue">Sign up to continue</string>
+    <!--  Translate  -->
+    <string name="email">Почта</string>
+    <string name="password">Пароль</string>
+    <string name="remember_me">Запомнить меня</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="sign_in">Войти</string>
 </resources>

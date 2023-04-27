@@ -5,15 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
 
     tools:context=".launch.LaunchActivity"
-    android:background="@color/primaryBackgroundWhite"
+    tools:ignore="ContentDescription"
+    android:background="@color/primary_background_white"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/launcher_arrow_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/ic_arrow_back"
+
+        android:background="@drawable/ripple_rounded"
+        android:visibility="invisible"
+
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:padding="8dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/launcher_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
 
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:defaultNavHost="true"
@@ -22,6 +40,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/launcher_arrow_back"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

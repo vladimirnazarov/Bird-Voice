@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class AnimVM: ViewModel() {
 
@@ -52,14 +50,7 @@ class AnimVM: ViewModel() {
         choiceDefineElementsVisibility(binding)
     }
 
-    fun choiceObjectOut(context: Context, binding: FragmentChoiceBinding, address: Int){
-        binding.choiceBottomLeftCloud.clearAnimation()
-        binding.choiceTopRightCloud.clearAnimation()
-        binding.choiceBottomRightCloud.clearAnimation()
-        binding.choiceBlueBird.clearAnimation()
-        binding.choiceLoginButton.clearAnimation()
-        binding.choiceRegisterButton.clearAnimation()
-
+    fun choiceObjectOut(context: Context, binding: FragmentChoiceBinding){
         val leftCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_out_1)
         val rightTopCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_out_1)
         val rightBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_out_2)
@@ -73,31 +64,40 @@ class AnimVM: ViewModel() {
         binding.choiceRegisterButton.startAnimation(alphaAnim)
 
         choiceDefineElementsVisibility(binding)
-
-        launchVM.getScope().launch {
-            delay(1500)
-            launchVM.navigate(address)
-        }
     }
 
     //Login
     fun loginDefineElementsVisibility(binding: FragmentLoginBinding){
         if (binding.loginOrangeBird.visibility == View.VISIBLE) {
-            binding.loginArrowBack.visibility = View.INVISIBLE
             binding.loginWelcomeText.visibility = View.INVISIBLE
-            binding.loginSignIn.visibility = View.INVISIBLE
+            binding.loginSignInText.visibility = View.INVISIBLE
             binding.loginOrangeBird.visibility = View.INVISIBLE
             binding.loginBottomLeftCloud.visibility = View.INVISIBLE
             binding.loginBottomRightCloud.visibility = View.INVISIBLE
             binding.loginTopRightCloud.visibility = View.INVISIBLE
+            binding.loginEmailTitle.visibility = View.INVISIBLE
+            binding.loginEmailInput.visibility = View.INVISIBLE
+            binding.loginPasswordTitle.visibility = View.INVISIBLE
+            binding.loginPasswordInput.visibility = View.INVISIBLE
+            binding.loginRememberMe.visibility = View.INVISIBLE
+            binding.loginForgotPassword.visibility = View.INVISIBLE
+            binding.loginSignInButton.visibility = View.INVISIBLE
+            binding.loginShowPasswordButton.visibility = View.INVISIBLE
         } else {
-            binding.loginArrowBack.visibility = View.VISIBLE
             binding.loginWelcomeText.visibility = View.VISIBLE
-            binding.loginSignIn.visibility = View.VISIBLE
+            binding.loginSignInText.visibility = View.VISIBLE
             binding.loginOrangeBird.visibility = View.VISIBLE
             binding.loginBottomLeftCloud.visibility = View.VISIBLE
             binding.loginBottomRightCloud.visibility = View.VISIBLE
             binding.loginTopRightCloud.visibility = View.VISIBLE
+            binding.loginEmailTitle.visibility = View.VISIBLE
+            binding.loginEmailInput.visibility = View.VISIBLE
+            binding.loginPasswordTitle.visibility = View.VISIBLE
+            binding.loginPasswordInput.visibility = View.VISIBLE
+            binding.loginRememberMe.visibility = View.VISIBLE
+            binding.loginForgotPassword.visibility = View.VISIBLE
+            binding.loginSignInButton.visibility = View.VISIBLE
+            binding.loginShowPasswordButton.visibility = View.VISIBLE
         }
     }
 
@@ -105,16 +105,46 @@ class AnimVM: ViewModel() {
         val leftCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_enter_1)
         val rightTopCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_enter_1)
         val rightBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_enter_2)
-        val leftObjAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_obj_enter)
         val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_in)
 
         binding.loginBottomLeftCloud.startAnimation(leftCloudAnim)
         binding.loginBottomRightCloud.startAnimation(rightBottomCloudAnim)
         binding.loginTopRightCloud.startAnimation(rightTopCloudAnim)
         binding.loginWelcomeText.startAnimation(alphaAnim)
-        binding.loginSignIn.startAnimation(alphaAnim)
+        binding.loginSignInText.startAnimation(alphaAnim)
         binding.loginOrangeBird.startAnimation(alphaAnim)
-        binding.loginArrowBack.startAnimation(leftObjAnim)
+        binding.loginEmailTitle.startAnimation(alphaAnim)
+        binding.loginEmailInput.startAnimation(alphaAnim)
+        binding.loginPasswordTitle.startAnimation(alphaAnim)
+        binding.loginPasswordInput.startAnimation(alphaAnim)
+        binding.loginRememberMe.startAnimation(alphaAnim)
+        binding.loginForgotPassword.startAnimation(alphaAnim)
+        binding.loginSignInButton.startAnimation(alphaAnim)
+        binding.loginShowPasswordButton.startAnimation(alphaAnim)
+
+        loginDefineElementsVisibility(binding)
+    }
+
+    fun loginObjectOut(context: Context, binding: FragmentLoginBinding){
+        val leftCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_out_1)
+        val rightTopCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_out_1)
+        val rightBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_out_2)
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_out)
+
+        binding.loginBottomLeftCloud.startAnimation(leftCloudAnim)
+        binding.loginBottomRightCloud.startAnimation(rightBottomCloudAnim)
+        binding.loginTopRightCloud.startAnimation(rightTopCloudAnim)
+        binding.loginWelcomeText.startAnimation(alphaAnim)
+        binding.loginSignInText.startAnimation(alphaAnim)
+        binding.loginOrangeBird.startAnimation(alphaAnim)
+        binding.loginEmailTitle.startAnimation(alphaAnim)
+        binding.loginEmailInput.startAnimation(alphaAnim)
+        binding.loginPasswordTitle.startAnimation(alphaAnim)
+        binding.loginPasswordInput.startAnimation(alphaAnim)
+        binding.loginRememberMe.startAnimation(alphaAnim)
+        binding.loginForgotPassword.startAnimation(alphaAnim)
+        binding.loginSignInButton.startAnimation(alphaAnim)
+        binding.loginShowPasswordButton.startAnimation(alphaAnim)
 
         loginDefineElementsVisibility(binding)
     }

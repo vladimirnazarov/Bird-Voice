@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    tools:ignore="ContentDescription"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/register_top_right_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/register_cloud_top_right"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/register_new_account_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:paddingHorizontal="8dp"
+
+        android:text="@string/new_account"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="28sp"
+        android:fontFamily="@font/roboto"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/register_sign_up_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="6dp"
+        android:paddingHorizontal="8dp"
+
+        android:text="@string/sign_up_to_continue"
+        android:textSize="18sp"
+        android:textColor="@color/primary_text_blue"
+        android:fontFamily="@font/roboto"
+
+        app:layout_constraintStart_toStartOf="@id/register_new_account_text"
+        app:layout_constraintEnd_toEndOf="@id/register_new_account_text"
+        app:layout_constraintTop_toBottomOf="@id/register_new_account_text"/>
+
+    <TextView
+        android:id="@+id/register_email_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/email"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="18sp"
+        android:fontFamily="@font/roboto"
+
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="24dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_sign_up_text"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/register_email_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/background_launcher_edittext"
+        android:elevation="4dp"
+        android:layout_marginTop="4dp"
+        android:paddingVertical="18dp"
+        android:paddingHorizontal="22dp"
+
+        android:textSize="18sp"
+        android:textColor="@color/primary_text_blue"
+        android:fontFamily="@font/roboto"
+        android:inputType="textEmailAddress"
+
+        android:lines="1"
+        android:maxLines="1"
+        android:maxLength="28"
+
+        app:layout_constraintStart_toStartOf="@id/register_email_title"
+        app:layout_constraintEnd_toEndOf="@id/register_email_title"
+        app:layout_constraintTop_toBottomOf="@id/register_email_title"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

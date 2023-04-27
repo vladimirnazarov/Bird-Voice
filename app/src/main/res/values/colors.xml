@@ -9,15 +9,15 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
 
-    <color name="primaryButtonBlue">#1466FF</color>
-    <color name="primaryBackgroundBlue">#76B9FF</color>
-    <color name="primaryFooterBlue">#286FE4</color>
-    <color name="primaryTextBlue">#0047CA</color>
-    <color name="primaryWhite">#DAEDFF</color>
-    <color name="primaryBackgroundWhite">#F0F0F3</color>
-    <color name="primaryRed">#ED033B</color>
+    <color name="primary_button_blue">#1466FF</color>
+    <color name="primary_background_blue">#76B9FF</color>
+    <color name="primary_footer_blue">#286FE4</color>
+    <color name="primary_text_blue">#0047CA</color>
+    <color name="primary_white">#DAEDFF</color>
+    <color name="primary_background_white">#F0F0F3</color>
+    <color name="primary_red">#ED033B</color>
+    <color name="primary_button_push">#6661618E</color>
 
-    <color name="secondaryTitle">#ACB6C9</color>
-
-    <color name="buttonPush">#6661618E</color>
+    <color name="secondary_title">#ACB6C9</color>
+    <color name="secondary_text_blue">#7CA7F9</color>
 </resources>

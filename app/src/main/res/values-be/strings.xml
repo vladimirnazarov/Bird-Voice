@@ -8,4 +8,12 @@
     <string name="new_account">Новы акаунт</string>
     <string name="welcome_back">Вітаем зноў!</string>
     <string name="sign_in_to_continue">Вайдзіце, каб працягнуць</string>
+    <!--  Translate  -->
+    <string name="sign_up_to_continue">Sign up to continue</string>
+    <!--  Translate  -->
+    <string name="email">Пошта</string>
+    <string name="password">Пароль</string>
+    <string name="remember_me">Запомніць мяне</string>
+    <string name="forgot_password">Забыліся на пароль?</string>
+    <string name="sign_in">Вайсці</string>
 </resources>

@@ -16,6 +16,7 @@
 
         <activity
             android:name=".launch.LaunchActivity"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.BirdVoice.Launcher"
             android:exported="true" >
 

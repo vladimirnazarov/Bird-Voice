@@ -26,7 +26,8 @@ class ChoiceFragment: BaseLaunchFragment() {
         animVM.choiceObjectEnter(MainApp.appContext, binding)
 
         binding.choiceLoginButton.setOnClickListener {
-            animVM.choiceObjectOut(MainApp.appContext, binding, R.id.action_choiceFragment_to_loginFragment)
+            animVM.choiceObjectOut(MainApp.appContext, binding)
+            launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_loginFragment)
         }
 
         return binding.root

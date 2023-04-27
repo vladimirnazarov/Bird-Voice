@@ -9,7 +9,7 @@ import by.ssrlab.birdvoice.databinding.FragmentLogoBinding
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 import kotlinx.coroutines.*
 
-class LogoFragment: BaseLaunchFragment() {
+class StartFragment: BaseLaunchFragment() {
 
     private lateinit var binding: FragmentLogoBinding
     override fun onCreateView(

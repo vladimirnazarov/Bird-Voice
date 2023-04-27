@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
 
-        app:lottie_rawRes="@raw/birds_animation"
+        app:lottie_rawRes="@raw/logo_animation"
         app:lottie_autoPlay="true"
         app:lottie_speed="0.5"
 

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/logoFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.start.LogoFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.start.StartFragment"
         android:label="LogoFragment" >
         <action
             android:id="@+id/action_logoFragment_to_choiceFragment"
@@ -24,10 +24,17 @@
         <action
             android:id="@+id/action_choiceFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_choiceFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="by.ssrlab.birdvoice.launch.fragments.login.LoginFragment"
         android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.register.RegisterFragment"
+        android:label="RegisterFragment" />
 
 </navigation>

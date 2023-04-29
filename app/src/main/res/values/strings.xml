@@ -1,20 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Bird Voice</string>
 
-    <!-- Launcher -->
+    <!-- Choice -->
     <string name="launcher_app_name">bird voice</string>
     <string name="log_in">Log In</string>
     <string name="new_account">New account</string>
+
+    <!--  Login  -->
     <string name="welcome_back">Welcome back!</string>
     <string name="sign_in_to_continue">Sign in to continue</string>
-    <!--  Translate  -->
     <string name="sign_up_to_continue">Sign up to continue</string>
-    <!--  Translate  -->
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="remember_me">Remember me</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_in">Sign In</string>
 
+    <!--  Register  -->
+    <string name="telephone_number">Telephone number</string>
+    <string name="by_continuing_you_agree_to_our_privacy_policy">By continuing, you agree to our <a href="http://google.com">Privacy Policy</a>.</string>
+    <string name="create">Create</string>
+
+    <!--  Code confirmation  -->
+    <string name="code">Code</string>
+    <string name="send_again">send again</string>
 </resources>

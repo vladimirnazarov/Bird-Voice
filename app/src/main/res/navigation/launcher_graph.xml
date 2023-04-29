@@ -35,6 +35,14 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="by.ssrlab.birdvoice.launch.fragments.register.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_codeFragment"
+            app:destination="@id/codeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/codeFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.register.CodeFragment"
+        android:label="CodeFragment" />
 
 </navigation>

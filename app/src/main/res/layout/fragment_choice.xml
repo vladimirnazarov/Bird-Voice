@@ -10,7 +10,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/choice_blue_bird"
+        android:id="@+id/choice_bird"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -73,7 +73,7 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="100dp"
 
-        app:icon="@drawable/ic_launcher_register"
+        app:icon="@drawable/ic_button_bird"
         app:iconGravity="textEnd"
 
         app:cornerRadius="32dp"
@@ -99,7 +99,7 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
 
-        app:icon="@drawable/ic_launcher_login"
+        app:icon="@drawable/ic_button_bird_home"
         app:iconGravity="textEnd"
 
         app:cornerRadius="32dp"

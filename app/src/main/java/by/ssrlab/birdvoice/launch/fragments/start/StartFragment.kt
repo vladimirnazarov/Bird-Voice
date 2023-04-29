@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.databinding.FragmentLogoBinding
+import by.ssrlab.birdvoice.databinding.FragmentStartBinding
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 import kotlinx.coroutines.*
 
 class StartFragment: BaseLaunchFragment() {
 
-    private lateinit var binding: FragmentLogoBinding
+    private lateinit var binding: FragmentStartBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentLogoBinding.inflate(layoutInflater)
+        binding = FragmentStartBinding.inflate(layoutInflater)
 
         activityLaunch.hideStatusBar()
 

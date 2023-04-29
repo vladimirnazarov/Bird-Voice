@@ -2,9 +2,9 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
 
     <translate
-        android:fromXDelta="-300"
+        android:fromXDelta="-750"
         android:toXDelta="0"
-        android:duration="1200"/>
+        android:duration="2000"/>
 
     <translate
         android:fromYDelta="-15"

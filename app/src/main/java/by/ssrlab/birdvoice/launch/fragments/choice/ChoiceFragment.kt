@@ -30,6 +30,11 @@ class ChoiceFragment: BaseLaunchFragment() {
             launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_loginFragment)
         }
 
+        binding.choiceRegisterButton.setOnClickListener {
+            animVM.choiceObjectOut(MainApp.appContext, binding)
+            launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_registerFragment)
+        }
+
         return binding.root
     }
 }

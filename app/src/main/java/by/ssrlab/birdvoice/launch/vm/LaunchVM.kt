@@ -8,7 +8,6 @@ class LaunchVM: ViewModel() {
 
     //NavController set
     private lateinit var navController: NavController
-    fun getNavController() = navController
     fun setNavController(controller: NavController){
         navController = controller
     }

@@ -235,6 +235,8 @@
         app:icon="@drawable/ic_button_bird_home"
         app:iconGravity="textEnd"
 
+        android:clickable="false"
+
         app:cornerRadius="32dp"
         app:rippleColor="@color/primary_button_push"
 

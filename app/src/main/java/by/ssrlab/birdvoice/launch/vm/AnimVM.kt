@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModel
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
+import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 
@@ -235,5 +236,76 @@ class AnimVM: ViewModel() {
         binding.registerCreateButton.startAnimation(alphaAnim)
 
         registerDefineElementsVisibility(binding)
+    }
+
+    //Code
+    fun codeDefineElementsVisibility(binding: FragmentCodeConfirmationBinding){
+        if (binding.codeBird.visibility == View.VISIBLE) {
+            binding.codeBird.visibility = View.INVISIBLE
+            binding.codeBottomLeftCloud.visibility = View.INVISIBLE
+            binding.codeBottomRightCloud.visibility = View.INVISIBLE
+            binding.codeTopLeftCloud.visibility = View.INVISIBLE
+            binding.codeEnter1.visibility = View.INVISIBLE
+            binding.codeEnter2.visibility = View.INVISIBLE
+            binding.codeEnter3.visibility = View.INVISIBLE
+            binding.codeEnter4.visibility = View.INVISIBLE
+            binding.codeCodeTitle.visibility = View.INVISIBLE
+            binding.codeLoginButton.visibility = View.INVISIBLE
+            binding.codeSendAgain.visibility = View.INVISIBLE
+        } else {
+            binding.codeBird.visibility = View.VISIBLE
+            binding.codeBottomLeftCloud.visibility = View.VISIBLE
+            binding.codeBottomRightCloud.visibility = View.VISIBLE
+            binding.codeTopLeftCloud.visibility = View.VISIBLE
+            binding.codeEnter1.visibility = View.VISIBLE
+            binding.codeEnter2.visibility = View.VISIBLE
+            binding.codeEnter3.visibility = View.VISIBLE
+            binding.codeEnter4.visibility = View.VISIBLE
+            binding.codeCodeTitle.visibility = View.VISIBLE
+            binding.codeLoginButton.visibility = View.VISIBLE
+            binding.codeSendAgain.visibility = View.VISIBLE
+        }
+    }
+
+    fun codeObjectEnter(context: Context, binding: FragmentCodeConfirmationBinding){
+        val leftBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_enter_1)
+        val rightBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_enter_1)
+        val leftCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_enter_2)
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_in)
+
+        binding.codeBird.startAnimation(alphaAnim)
+        binding.codeBottomLeftCloud.startAnimation(leftBottomCloudAnim)
+        binding.codeBottomRightCloud.startAnimation(rightBottomCloudAnim)
+        binding.codeTopLeftCloud.startAnimation(leftCloudAnim)
+        binding.codeEnter1.startAnimation(alphaAnim)
+        binding.codeEnter2.startAnimation(alphaAnim)
+        binding.codeEnter3.startAnimation(alphaAnim)
+        binding.codeEnter4.startAnimation(alphaAnim)
+        binding.codeCodeTitle.startAnimation(alphaAnim)
+        binding.codeLoginButton.startAnimation(alphaAnim)
+        binding.codeSendAgain.startAnimation(alphaAnim)
+
+        codeDefineElementsVisibility(binding)
+    }
+
+    fun codeObjectOut(context: Context, binding: FragmentCodeConfirmationBinding){
+        val leftBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_out_1)
+        val rightBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_out_1)
+        val leftCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_out_2)
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_out)
+
+        binding.codeBird.startAnimation(alphaAnim)
+        binding.codeBottomLeftCloud.startAnimation(leftBottomCloudAnim)
+        binding.codeBottomRightCloud.startAnimation(rightBottomCloudAnim)
+        binding.codeTopLeftCloud.startAnimation(leftCloudAnim)
+        binding.codeEnter1.startAnimation(alphaAnim)
+        binding.codeEnter2.startAnimation(alphaAnim)
+        binding.codeEnter3.startAnimation(alphaAnim)
+        binding.codeEnter4.startAnimation(alphaAnim)
+        binding.codeCodeTitle.startAnimation(alphaAnim)
+        binding.codeLoginButton.startAnimation(alphaAnim)
+        binding.codeSendAgain.startAnimation(alphaAnim)
+
+        codeDefineElementsVisibility(binding)
     }
 }

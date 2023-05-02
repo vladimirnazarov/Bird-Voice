@@ -7,6 +7,8 @@ import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.Animation.AnimationListener
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
@@ -29,12 +31,31 @@ class RegisterFragment: BaseLaunchFragment() {
         animVM.registerDefineElementsVisibility(binding)
         animVM.registerObjectEnter(MainApp.appContext, binding)
 
-        activityLaunch.showArrow()
-        activityLaunch.setArrowAction {
-            animVM.registerObjectOut(MainApp.appContext, binding)
-            activityLaunch.hideArrow()
-            launchVM.navigateUpWithDelay()
+        if (launchVM.boolPopBack) {
+            launchVM.showArrow()
         }
+
+        binding.registerBird.animation.setAnimationListener(object : AnimationListener{
+            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
+                binding.registerCreateButton.setOnClickListener {
+                    animVM.registerObjectOut(MainApp.appContext, binding)
+                    launchVM.navigateToWithDelay(R.id.action_registerFragment_to_codeFragment)
+                    binding.registerCreateButton.isClickable = false
+                    launchVM.activityBinding?.launcherArrowBack?.isClickable = false
+                }
+
+                activityLaunch.setArrowAction {
+                    animVM.registerObjectOut(MainApp.appContext, binding)
+                    launchVM.hideArrow()
+                    launchVM.navigateUpWithDelay()
+                }
+            }
+            override fun onAnimationRepeat(animation: Animation?) {}
+        })
+
+        launchVM.boolPopBack = true
+        launchVM.boolArrowHide = true
 
         binding.registerShowPasswordButton.setOnClickListener {
             if (binding.registerPasswordInput.transformationMethod == PasswordTransformationMethod.getInstance()) {
@@ -52,9 +73,6 @@ class RegisterFragment: BaseLaunchFragment() {
     override fun onResume() {
         super.onResume()
 
-        binding.registerCreateButton.setOnClickListener {
-            animVM.registerObjectOut(MainApp.appContext, binding)
-            launchVM.navigateToWithDelay(R.id.action_registerFragment_to_codeFragment)
-        }
+        activityLaunch.setPopBackCallback { animVM.registerObjectOut(MainApp.appContext, binding) }
     }
 }

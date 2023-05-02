@@ -26,12 +26,17 @@ class LoginFragment: BaseLaunchFragment() {
         animVM.loginDefineElementsVisibility(binding)
         animVM.loginObjectEnter(MainApp.appContext, binding)
 
-        activityLaunch.showArrow()
+        if (launchVM.boolPopBack) {
+            launchVM.showArrow()
+        }
         activityLaunch.setArrowAction {
             animVM.loginObjectOut(MainApp.appContext, binding)
-            activityLaunch.hideArrow()
+            launchVM.hideArrow()
             launchVM.navigateUpWithDelay()
         }
+
+        launchVM.boolPopBack = true
+        launchVM.boolArrowHide = true
 
         binding.loginShowPasswordButton.setOnClickListener {
             if (binding.loginPasswordInput.transformationMethod == PasswordTransformationMethod.getInstance()) {
@@ -44,5 +49,11 @@ class LoginFragment: BaseLaunchFragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        activityLaunch.setPopBackCallback { animVM.loginObjectOut(MainApp.appContext, binding) }
     }
 }

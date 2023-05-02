@@ -25,4 +25,7 @@
     <!--  Code confirmation  -->
     <string name="code">Code</string>
     <string name="send_again">send again</string>
+
+    <!--  User data  -->
+    <string name="photo">Photo</string>
 </resources>

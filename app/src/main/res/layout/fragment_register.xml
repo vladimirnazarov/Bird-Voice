@@ -256,6 +256,8 @@
         android:textColor="@color/primary_text_blue"
         android:textSize="16sp"
 
+        android:clickable="false"
+
         android:backgroundTint="@color/white"
 
         android:layout_marginHorizontal="24dp"

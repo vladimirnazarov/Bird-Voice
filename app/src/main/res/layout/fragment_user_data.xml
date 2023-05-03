@@ -5,14 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     tools:ignore="ContentDescription"
-    android:background="@color/black"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/user_data_photo_label"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:text="@string/photo"
@@ -20,10 +19,86 @@
         android:textSize="18sp"
         android:fontFamily="@font/roboto"
 
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/user_data_photo_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/ic_add_photo"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_data_photo_label"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/user_data_name_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/name"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="18sp"
+        android:fontFamily="@font/roboto"
+
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_data_photo_button"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/user_data_name_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/background_launcher_edittext"
+        android:elevation="4dp"
+        android:layout_marginTop="4dp"
+        android:paddingVertical="18dp"
+        android:paddingHorizontal="22dp"
+
+        android:textSize="18sp"
+        android:textColor="@color/primary_text_blue"
+        android:fontFamily="@font/roboto"
+        android:inputType="text"
+
+        android:lines="1"
+        android:maxLines="1"
+        android:maxLength="28"
+
+        app:layout_constraintStart_toStartOf="@id/user_data_name_label"
+        app:layout_constraintEnd_toEndOf="@id/user_data_name_label"
+        app:layout_constraintTop_toBottomOf="@id/user_data_name_label"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/user_data_approve_button"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+
+        android:text="@string/approve"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="16sp"
+
+        android:backgroundTint="@color/white"
+
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="64dp"
+
+        android:clickable="false"
+
+        app:cornerRadius="32dp"
+        app:rippleColor="@color/primary_button_push"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_data_name_input"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

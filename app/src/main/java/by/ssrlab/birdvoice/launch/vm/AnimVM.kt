@@ -9,6 +9,7 @@ import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
 import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
+import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
 
 class AnimVM: ViewModel() {
 
@@ -307,5 +308,46 @@ class AnimVM: ViewModel() {
         binding.codeSendAgain.startAnimation(alphaAnim)
 
         codeDefineElementsVisibility(binding)
+    }
+
+    //User data
+    fun dataDefineElementsVisibility(binding: FragmentUserDataBinding){
+        if (binding.userDataPhotoButton.visibility == View.VISIBLE){
+            binding.userDataPhotoButton.visibility = View.INVISIBLE
+            binding.userDataApproveButton.visibility = View.INVISIBLE
+            binding.userDataNameInput.visibility = View.INVISIBLE
+            binding.userDataNameLabel.visibility = View.INVISIBLE
+            binding.userDataPhotoLabel.visibility = View.INVISIBLE
+        } else {
+            binding.userDataPhotoButton.visibility = View.VISIBLE
+            binding.userDataApproveButton.visibility = View.VISIBLE
+            binding.userDataNameInput.visibility = View.VISIBLE
+            binding.userDataNameLabel.visibility = View.VISIBLE
+            binding.userDataPhotoLabel.visibility = View.VISIBLE
+        }
+    }
+
+    fun dataObjectEnter(context: Context, binding: FragmentUserDataBinding){
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_in)
+
+        binding.userDataPhotoButton.startAnimation(alphaAnim)
+        binding.userDataApproveButton.startAnimation(alphaAnim)
+        binding.userDataNameInput.startAnimation(alphaAnim)
+        binding.userDataNameLabel.startAnimation(alphaAnim)
+        binding.userDataPhotoLabel.startAnimation(alphaAnim)
+
+        dataDefineElementsVisibility(binding)
+    }
+
+    fun dataObjectOut(context: Context, binding: FragmentUserDataBinding){
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_out)
+
+        binding.userDataPhotoButton.startAnimation(alphaAnim)
+        binding.userDataApproveButton.startAnimation(alphaAnim)
+        binding.userDataNameInput.startAnimation(alphaAnim)
+        binding.userDataNameLabel.startAnimation(alphaAnim)
+        binding.userDataPhotoLabel.startAnimation(alphaAnim)
+
+        dataDefineElementsVisibility(binding)
     }
 }

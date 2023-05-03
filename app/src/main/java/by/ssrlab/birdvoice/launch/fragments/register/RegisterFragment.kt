@@ -34,7 +34,6 @@ class RegisterFragment: BaseLaunchFragment() {
         if (launchVM.boolPopBack) {
             launchVM.showArrow()
         }
-
         binding.registerBird.animation.setAnimationListener(object : AnimationListener{
             override fun onAnimationStart(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
+import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -31,6 +32,13 @@ class CodeFragment: BaseLaunchFragment() {
                 activityLaunch.setArrowAction {
                     animVM.codeObjectOut(MainApp.appContext, binding)
                     launchVM.navigateUpWithDelay()
+                }
+
+                binding.codeLoginButton.setOnClickListener {
+                    animVM.codeObjectOut(MainApp.appContext, binding)
+                    launchVM.navigateToWithDelay(R.id.action_codeFragment_to_userDataFragment)
+                    binding.codeLoginButton.isClickable = false
+                    launchVM.activityBinding?.launcherArrowBack?.isClickable = false
                 }
             }
             override fun onAnimationRepeat(animation: Animation?) {}

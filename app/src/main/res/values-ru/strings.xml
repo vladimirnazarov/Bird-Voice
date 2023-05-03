@@ -28,4 +28,6 @@
 
     <!--  User data  -->
     <string name="photo">Photo</string>
+    <string name="name">Name</string>
+    <string name="approve">Approve</string>
 </resources>

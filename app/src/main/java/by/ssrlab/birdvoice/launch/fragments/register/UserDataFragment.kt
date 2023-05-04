@@ -6,13 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
+import coil.load
+import coil.transform.CircleCropTransformation
+import com.canhub.cropper.*
+import java.util.*
 
-class UserDataFragment: BaseLaunchFragment() {
+@Suppress("DEPRECATION")
+class UserDataFragment : BaseLaunchFragment() {
 
     private lateinit var binding: FragmentUserDataBinding
+    private lateinit var cropImage: ActivityResultLauncher<CropImageContractOptions>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +33,9 @@ class UserDataFragment: BaseLaunchFragment() {
         animVM.dataDefineElementsVisibility(binding)
         animVM.dataObjectEnter(MainApp.appContext, binding)
 
-        binding.userDataPhotoButton.animation.setAnimationListener(object : AnimationListener{
+        registerCropImage()
+
+        binding.userDataPhotoButton.animation.setAnimationListener(object : AnimationListener {
             override fun onAnimationStart(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
                 binding.userDataApproveButton.isClickable = true
@@ -35,7 +45,12 @@ class UserDataFragment: BaseLaunchFragment() {
                     animVM.dataObjectOut(MainApp.appContext, binding)
                     launchVM.navigateUpWithDelay()
                 }
+
+                binding.userDataPhotoButton.setOnClickListener {
+                    pickPhoto()
+                }
             }
+
             override fun onAnimationRepeat(animation: Animation?) {}
         })
 
@@ -46,5 +61,29 @@ class UserDataFragment: BaseLaunchFragment() {
         super.onResume()
 
         activityLaunch.setPopBackCallback { animVM.dataObjectOut(MainApp.appContext, binding) }
+    }
+
+    private fun pickPhoto(){
+        cropImage.launch(
+            options {
+                setAspectRatio(1, 1)
+                setCropShape(CropImageView.CropShape.OVAL)
+            }
+        )
+    }
+
+    private fun registerCropImage(){
+        cropImage = registerForActivityResult(CropImageContract()){ result ->
+            if (result.isSuccessful){
+                val uriContent = result.uriContent
+                if (uriContent != null) {
+                    binding.userDataPhotoButton.load(uriContent) {
+                        transformations(CircleCropTransformation())
+                    }
+                }
+            } else {
+                Toast.makeText(MainApp.appContext, result.error?.message.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

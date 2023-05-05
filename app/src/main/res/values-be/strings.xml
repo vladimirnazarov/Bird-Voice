@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Галасы птушак</string>
 
+    <!-- Error information -->
+    <string name="this_field_must_be_not_empty">This field must be not empty</string>
+
     <!-- Choice -->
     <string name="launcher_app_name">галасы птушак</string>
     <string name="log_in">Уваход</string>

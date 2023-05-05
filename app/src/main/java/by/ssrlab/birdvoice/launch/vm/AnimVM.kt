@@ -316,13 +316,13 @@ class AnimVM: ViewModel() {
             binding.userDataPhotoButton.visibility = View.INVISIBLE
             binding.userDataApproveButton.visibility = View.INVISIBLE
             binding.userDataNameInput.visibility = View.INVISIBLE
-            binding.userDataNameLabel.visibility = View.INVISIBLE
+            binding.userDataNameTitle.visibility = View.INVISIBLE
             binding.userDataPhotoLabel.visibility = View.INVISIBLE
         } else {
             binding.userDataPhotoButton.visibility = View.VISIBLE
             binding.userDataApproveButton.visibility = View.VISIBLE
             binding.userDataNameInput.visibility = View.VISIBLE
-            binding.userDataNameLabel.visibility = View.VISIBLE
+            binding.userDataNameTitle.visibility = View.VISIBLE
             binding.userDataPhotoLabel.visibility = View.VISIBLE
         }
     }
@@ -333,7 +333,7 @@ class AnimVM: ViewModel() {
         binding.userDataPhotoButton.startAnimation(alphaAnim)
         binding.userDataApproveButton.startAnimation(alphaAnim)
         binding.userDataNameInput.startAnimation(alphaAnim)
-        binding.userDataNameLabel.startAnimation(alphaAnim)
+        binding.userDataNameTitle.startAnimation(alphaAnim)
         binding.userDataPhotoLabel.startAnimation(alphaAnim)
 
         dataDefineElementsVisibility(binding)
@@ -345,7 +345,7 @@ class AnimVM: ViewModel() {
         binding.userDataPhotoButton.startAnimation(alphaAnim)
         binding.userDataApproveButton.startAnimation(alphaAnim)
         binding.userDataNameInput.startAnimation(alphaAnim)
-        binding.userDataNameLabel.startAnimation(alphaAnim)
+        binding.userDataNameTitle.startAnimation(alphaAnim)
         binding.userDataPhotoLabel.startAnimation(alphaAnim)
 
         dataDefineElementsVisibility(binding)

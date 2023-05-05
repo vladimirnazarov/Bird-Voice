@@ -2,6 +2,9 @@
 <resources>
     <string name="app_name">Bird Voice</string>
 
+    <!-- Error information -->
+    <string name="this_field_must_be_not_empty">This field must be not empty</string>
+
     <!-- Choice -->
     <string name="launcher_app_name">bird voice</string>
     <string name="log_in">Log In</string>

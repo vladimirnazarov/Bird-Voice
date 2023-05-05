@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".app.MainApp"
@@ -15,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BirdVoice"
         tools:targetApi="33">
+
+        <activity
+            android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
 
         <activity
             android:name=".launch.LaunchActivity"

@@ -43,7 +43,7 @@ class LaunchVM: ViewModel() {
     }
     fun navigateUpWithDelay(){
         scope.launch {
-            delay(1500)
+            delay(1200)
             navController.popBackStack()
         }
     }

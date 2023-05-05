@@ -74,6 +74,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/code_bird" />
 
+    <TextView
+        android:id="@+id/code_code_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Test test test"
+        android:textSize="18sp"
+        android:textColor="@color/primary_red"
+        android:fontFamily="@font/roboto"
+
+        app:layout_constraintEnd_toEndOf="@id/code_code_title"
+        app:layout_constraintTop_toTopOf="@id/code_code_title"/>
+
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/code_enter_1"
         android:layout_width="80dp"

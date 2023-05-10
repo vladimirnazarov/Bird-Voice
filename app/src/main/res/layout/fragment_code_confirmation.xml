@@ -79,10 +79,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Test test test"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/primary_red"
         android:fontFamily="@font/roboto"
+
+        android:visibility="invisible"
 
         app:layout_constraintEnd_toEndOf="@id/code_code_title"
         app:layout_constraintTop_toTopOf="@id/code_code_title"/>

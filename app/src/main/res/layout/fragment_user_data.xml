@@ -27,13 +27,10 @@
 
     <ImageView
         android:id="@+id/user_data_photo_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
 
         android:src="@drawable/ic_add_photo"
-
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="24dp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_data_photo_label"
@@ -61,13 +58,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="Test test test"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textColor="@color/primary_red"
         android:fontFamily="@font/roboto"
 
-        app:layout_constraintEnd_toEndOf="@id/user_data_name_title"
-        app:layout_constraintTop_toTopOf="@id/user_data_name_title"/>
+        android:elevation="6dp"
+        android:visibility="invisible"
+
+        android:layout_marginEnd="24dp"
+
+        app:layout_constraintEnd_toEndOf="@id/user_data_name_input"
+        app:layout_constraintBottom_toBottomOf="@id/user_data_name_input"
+        app:layout_constraintTop_toTopOf="@id/user_data_name_input"/>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/user_data_name_input"

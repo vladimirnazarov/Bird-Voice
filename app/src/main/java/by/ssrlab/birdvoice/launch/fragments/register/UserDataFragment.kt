@@ -1,22 +1,27 @@
 package by.ssrlab.birdvoice.launch.fragments.register
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.canhub.cropper.*
-import java.util.*
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageView
+import com.canhub.cropper.options
 
-@Suppress("DEPRECATION")
 class UserDataFragment : BaseLaunchFragment() {
 
     private lateinit var binding: FragmentUserDataBinding
@@ -38,9 +43,6 @@ class UserDataFragment : BaseLaunchFragment() {
         binding.userDataPhotoButton.animation.setAnimationListener(object : AnimationListener {
             override fun onAnimationStart(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
-                binding.userDataApproveButton.isClickable = true
-                launchVM.activityBinding?.launcherArrowBack?.isClickable = true
-
                 activityLaunch.setArrowAction {
                     animVM.dataObjectOut(MainApp.appContext, binding)
                     launchVM.navigateUpWithDelay()
@@ -48,6 +50,12 @@ class UserDataFragment : BaseLaunchFragment() {
 
                 binding.userDataPhotoButton.setOnClickListener {
                     pickPhoto()
+                }
+
+                binding.userDataApproveButton.setOnClickListener {
+                    checkName {
+                        Toast.makeText(MainApp.appContext, "Everything is fine!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 
@@ -79,11 +87,44 @@ class UserDataFragment : BaseLaunchFragment() {
                 if (uriContent != null) {
                     binding.userDataPhotoButton.load(uriContent) {
                         transformations(CircleCropTransformation())
+                        size(320, 320)
                     }
                 }
             } else {
                 Toast.makeText(MainApp.appContext, result.error?.message.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun checkName(onSuccess: () -> Unit){
+        val errorAnim = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_error_message_animation)
+
+        setEditTextListener()
+
+        if (binding.userDataNameInput.text?.isEmpty() == true){
+            binding.userDataNameErrorMessage.text = resources.getString(R.string.this_field_must_be_not_empty)
+            binding.userDataNameErrorMessage.startAnimation(errorAnim)
+            binding.userDataNameErrorMessage.visibility = View.VISIBLE
+        }
+        else onSuccess()
+    }
+
+    private fun errorAnimOut(){
+        val alphaOut = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_alpha_out)
+
+        if (binding.userDataNameErrorMessage.visibility == View.VISIBLE){
+            binding.userDataNameErrorMessage.startAnimation(alphaOut)
+            binding.userDataNameErrorMessage.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setEditTextListener(){
+        binding.userDataNameInput.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                errorAnimOut()
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 }

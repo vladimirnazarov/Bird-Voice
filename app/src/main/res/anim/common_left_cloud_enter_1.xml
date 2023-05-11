@@ -4,7 +4,7 @@
     <translate
         android:fromXDelta="-300"
         android:toXDelta="0"
-        android:duration="1500"/>
+        android:duration="1000"/>
 
     <translate
         android:fromYDelta="-20"

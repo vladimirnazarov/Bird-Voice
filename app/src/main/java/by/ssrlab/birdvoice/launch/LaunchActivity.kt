@@ -35,13 +35,6 @@ class LaunchActivity : AppCompatActivity() {
         controller.show(WindowInsetsCompat.Type.systemBars())
     }
 
-    fun setArrowAction(action: () -> Unit){
-        binding.launcherArrowBack.setOnClickListener {
-            action()
-            binding.launcherArrowBack.isClickable = false
-        }
-    }
-
     fun setPopBackCallback(anim: () -> Unit){
         launchVM.setNavUpAnimLambda(anim)
         onBackPressedDispatcher.addCallback(this, launchVM.onMapBackPressedCallback)

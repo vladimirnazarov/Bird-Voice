@@ -1,17 +1,11 @@
 package by.ssrlab.birdvoice.launch.fragments.register
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.Animation.AnimationListener
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -40,26 +34,21 @@ class UserDataFragment : BaseLaunchFragment() {
 
         registerCropImage()
 
-        binding.userDataPhotoButton.animation.setAnimationListener(object : AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {}
-            override fun onAnimationEnd(animation: Animation?) {
-                activityLaunch.setArrowAction {
-                    animVM.dataObjectOut(MainApp.appContext, binding)
-                    launchVM.navigateUpWithDelay()
-                }
-
-                binding.userDataPhotoButton.setOnClickListener {
-                    pickPhoto()
-                }
-
-                binding.userDataApproveButton.setOnClickListener {
-                    checkName {
-                        Toast.makeText(MainApp.appContext, "Everything is fine!", Toast.LENGTH_SHORT).show()
-                    }
-                }
+        binding.userDataPhotoButton.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
+            launchVM.setArrowAction {
+                animVM.dataObjectOut(MainApp.appContext, binding)
+                launchVM.navigateUpWithDelay()
             }
 
-            override fun onAnimationRepeat(animation: Animation?) {}
+            binding.userDataPhotoButton.setOnClickListener {
+                pickPhoto()
+            }
+
+            binding.userDataApproveButton.setOnClickListener {
+                checkName {
+                    Toast.makeText(MainApp.appContext, "Everything is fine!", Toast.LENGTH_SHORT).show()
+                }
+            }
         })
 
         return binding.root
@@ -90,41 +79,24 @@ class UserDataFragment : BaseLaunchFragment() {
                         size(320, 320)
                     }
                 }
-            } else {
-                Toast.makeText(MainApp.appContext, result.error?.message.toString(), Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun checkName(onSuccess: () -> Unit){
-        val errorAnim = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_error_message_animation)
+        var errorValue = 0
 
         setEditTextListener()
 
-        if (binding.userDataNameInput.text?.isEmpty() == true){
-            binding.userDataNameErrorMessage.text = resources.getString(R.string.this_field_must_be_not_empty)
-            binding.userDataNameErrorMessage.startAnimation(errorAnim)
-            binding.userDataNameErrorMessage.visibility = View.VISIBLE
-        }
-        else onSuccess()
+        errorValue += fragmentVM.checkTextInput(binding.userDataNameInput.text, binding.userDataNameErrorMessage, resources)
+        if (errorValue == 0) onSuccess()
     }
 
-    private fun errorAnimOut(){
-        val alphaOut = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_alpha_out)
-
-        if (binding.userDataNameErrorMessage.visibility == View.VISIBLE){
-            binding.userDataNameErrorMessage.startAnimation(alphaOut)
-            binding.userDataNameErrorMessage.visibility = View.INVISIBLE
-        }
+    private fun errorViewOut(){
+        fragmentVM.checkErrorViewAvailability(binding.userDataNameErrorMessage)
     }
 
     private fun setEditTextListener(){
-        binding.userDataNameInput.addTextChangedListener(object : TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                errorAnimOut()
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        binding.userDataNameInput.addTextChangedListener(fragmentVM.createEditTextListener({ errorViewOut() }, {}))
     }
 }

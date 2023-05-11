@@ -4,6 +4,7 @@
 
     <!-- Error information -->
     <string name="this_field_must_be_not_empty">This field must be not empty</string>
+    <string name="please_enter_the_code">Please, enter the code</string>
 
     <!-- Choice -->
     <string name="launcher_app_name">bird voice</string>

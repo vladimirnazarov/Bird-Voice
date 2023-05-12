@@ -35,4 +35,9 @@
     <string name="photo">Photo</string>
     <string name="name">Name</string>
     <string name="approve">Approve</string>
+
+    <!--  Inform page  -->
+    <string name="inform_rv_item_1_text">Our service, thanks to a new unique technology, helps to recognize and determine by the sounds reproduced by a particular bird, its name, species, family, habitat.</string>
+    <string name="recording_of_a_bird_singing">Recording of a bird singing</string>
+    <string name="inform_rv_item_2_description">Press the microphone to start recognition and the stop button to end recording of birdsong</string>
 </resources>

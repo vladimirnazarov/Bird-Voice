@@ -26,6 +26,12 @@ class LaunchVM: ViewModel() {
         activityBinding?.launcherArrowBack?.startAnimation(arrowAnim)
         activityBinding?.launcherArrowBack?.visibility = View.INVISIBLE
     }
+    fun setArrowAction(action: () -> Unit){
+        activityBinding?.launcherArrowBack?.setOnClickListener {
+            action()
+            activityBinding!!.launcherArrowBack.isClickable = false
+        }
+    }
 
     //NavController set
     private lateinit var navController: NavController

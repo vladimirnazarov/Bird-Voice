@@ -4,9 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    android:background="@drawable/rv_item_shape_1"
+    android:background="@drawable/rv_item_shape_2"
     android:elevation="4dp"
-    android:layout_marginTop="32dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginHorizontal="12dp"
     tools:ignore="ContentDescription"
 
     android:layout_width="match_parent"
@@ -14,7 +15,7 @@
 
     <TextView
         android:id="@+id/inform_rv_item_2_title"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:text="@string/recording_of_a_bird_singing"
@@ -23,8 +24,8 @@
         android:fontFamily="@font/roboto"
         android:textStyle="bold"
 
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,9 +37,9 @@
         android:layout_height="60dp"
 
         android:background="@drawable/rv_image_button_background"
-        android:elevation="4dp"
+        android:elevation="8dp"
 
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="16dp"
 
         app:layout_constraintStart_toStartOf="@id/inform_rv_item_2_title"
@@ -63,9 +64,9 @@
         android:layout_height="60dp"
 
         android:background="@drawable/rv_image_button_background"
-        android:elevation="4dp"
+        android:elevation="8dp"
 
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="8dp"
 
         app:layout_constraintStart_toEndOf="@id/inform_rv_item_2_rec_img"
@@ -95,8 +96,8 @@
         android:fontFamily="@font/roboto"
         android:textSize="16sp"
 
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="16dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="20dp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

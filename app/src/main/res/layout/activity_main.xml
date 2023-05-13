@@ -18,7 +18,8 @@
         app:title="Main"
         app:titleTextColor="@color/primary_text_blue"
 
-        android:elevation="4dp"
+        android:elevation="6dp"
+        android:background="@color/white"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

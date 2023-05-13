@@ -18,7 +18,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.lifecycle.ViewModel
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
-import by.ssrlab.birdvoice.helpers.NoSpaceFilter
+import by.ssrlab.birdvoice.launch.helpers.NoSpaceFilter
 
 class BaseLaunchFragmentVM: ViewModel() {
 

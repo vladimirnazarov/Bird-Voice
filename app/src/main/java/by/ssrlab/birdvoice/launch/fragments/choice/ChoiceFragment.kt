@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
@@ -26,22 +25,18 @@ class ChoiceFragment: BaseLaunchFragment() {
         animVM.choiceDefineElementsVisibility(binding)
         animVM.choiceObjectEnter(MainApp.appContext, binding)
 
-        binding.choiceBird.animation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation?) {}
-            override fun onAnimationEnd(animation: Animation?) {
-                binding.choiceLoginButton.setOnClickListener {
-                    animVM.choiceObjectOut(MainApp.appContext, binding)
-                    binding.choiceLoginButton.isClickable = false
-                    launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_loginFragment)
-                }
-
-                binding.choiceRegisterButton.setOnClickListener {
-                    animVM.choiceObjectOut(MainApp.appContext, binding)
-                    binding.choiceRegisterButton.isClickable = false
-                    launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_registerFragment)
-                }
+        binding.choiceBird.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
+            binding.choiceLoginButton.setOnClickListener {
+                animVM.choiceObjectOut(MainApp.appContext, binding)
+                binding.choiceLoginButton.isClickable = false
+                launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_loginFragment)
             }
-            override fun onAnimationRepeat(animation: Animation?) {}
+
+            binding.choiceRegisterButton.setOnClickListener {
+                animVM.choiceObjectOut(MainApp.appContext, binding)
+                binding.choiceRegisterButton.isClickable = false
+                launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_registerFragment)
+            }
         })
 
         return binding.root

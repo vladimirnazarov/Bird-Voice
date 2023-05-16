@@ -30,11 +30,11 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.login.LoginFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.login.LoginFragment"
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.register.RegisterFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.RegisterFragment"
         android:label="RegisterFragment" >
         <action
             android:id="@+id/action_registerFragment_to_codeFragment"
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/codeFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.register.CodeFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.CodeFragment"
         android:label="CodeFragment" >
         <action
             android:id="@+id/action_codeFragment_to_userDataFragment"
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/userDataFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.register.UserDataFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.UserDataFragment"
         android:label="UserDataFragment" />
 
 </navigation>

@@ -27,8 +27,11 @@ class InformPage: BaseMainFragment() {
     override fun onResume() {
         super.onResume()
 
-        val rv = binding.informRv
-        rv.layoutManager = LinearLayoutManager(requireContext())
-        rv.adapter = InformAdapter()
+        binding.informRv.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = InformAdapter()
+        }
+
+        mainVM.setToolbarTitle("Map")
     }
 }

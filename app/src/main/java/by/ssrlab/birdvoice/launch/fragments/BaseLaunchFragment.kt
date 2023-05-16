@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import by.ssrlab.birdvoice.launch.LaunchActivity
-import by.ssrlab.birdvoice.launch.vm.AnimVM
+import by.ssrlab.birdvoice.helpers.AnimVM
 import by.ssrlab.birdvoice.launch.vm.BaseLaunchFragmentVM
 import by.ssrlab.birdvoice.launch.vm.LaunchVM
 

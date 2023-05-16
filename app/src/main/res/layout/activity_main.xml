@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        app:title="Main"
         app:titleTextColor="@color/primary_text_blue"
 
         android:elevation="6dp"

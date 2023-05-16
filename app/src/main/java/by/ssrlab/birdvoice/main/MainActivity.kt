@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.mainToolbar)
+        mainVM.setToolbarTitleObserver(binding.mainToolbar, this)
     }
 
     fun setToolbarAction(icon: Int, action: () -> Unit){
@@ -39,5 +40,10 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun setPopBackCallback(anim: () -> Unit){
+        mainVM.setNavUpAnimLambda(anim)
+        onBackPressedDispatcher.addCallback(this, mainVM.onMapBackPressedCallback)
     }
 }

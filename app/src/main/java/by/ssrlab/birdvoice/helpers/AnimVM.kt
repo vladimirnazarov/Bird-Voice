@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.launch.vm
+package by.ssrlab.birdvoice.helpers
 
 import android.content.Context
 import android.view.View
@@ -8,15 +8,12 @@ import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
 import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
+import by.ssrlab.birdvoice.databinding.FragmentMainInformPageBinding
+import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
 
 class AnimVM: ViewModel() {
-
-    private lateinit var launchVM: LaunchVM
-    fun setLaunchVM(launchVM: LaunchVM){
-        this.launchVM = launchVM
-    }
 
     //Choice
     fun choiceDefineElementsVisibility(binding: FragmentChoiceBinding){
@@ -349,5 +346,73 @@ class AnimVM: ViewModel() {
         binding.userDataPhotoLabel.startAnimation(alphaAnim)
 
         dataDefineElementsVisibility(binding)
+    }
+
+    //Inform
+    fun informDefineElementsVisibility(binding: FragmentMainInformPageBinding){
+        if (binding.informRv.visibility == View.VISIBLE) binding.informRv.visibility = View.INVISIBLE
+        else binding.informRv.visibility = View.VISIBLE
+    }
+
+    fun informObjectEnter(context: Context, binding: FragmentMainInformPageBinding){
+        binding.informRv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_in))
+        informDefineElementsVisibility(binding)
+    }
+
+    fun informObjectOut(context: Context, binding: FragmentMainInformPageBinding){
+        binding.informRv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
+        informDefineElementsVisibility(binding)
+    }
+
+    //Record
+    fun recDefineElementsVisibility(binding: FragmentRecordBinding){
+        if (binding.recBird.visibility == View.VISIBLE){
+            binding.recBird.visibility = View.INVISIBLE
+            binding.recTopRightCloud.visibility = View.INVISIBLE
+            binding.recBottomLeftCloud.visibility = View.INVISIBLE
+            binding.recBottomRightCloud.visibility = View.INVISIBLE
+            binding.recRecordButtonIcon.visibility = View.INVISIBLE
+            binding.recRecordButtonContainer.visibility = View.INVISIBLE
+
+        } else {
+            binding.recBird.visibility = View.VISIBLE
+            binding.recTopRightCloud.visibility = View.VISIBLE
+            binding.recBottomLeftCloud.visibility = View.VISIBLE
+            binding.recBottomRightCloud.visibility = View.VISIBLE
+            binding.recRecordButtonIcon.visibility = View.VISIBLE
+            binding.recRecordButtonContainer.visibility = View.VISIBLE
+        }
+    }
+
+    fun recObjectEnter(context: Context, binding: FragmentRecordBinding){
+        val leftCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_enter_2)
+        val rightTopCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_enter_1)
+        val rightBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_enter_2)
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_in)
+
+        binding.recBird.startAnimation(alphaAnim)
+        binding.recTopRightCloud.startAnimation(rightTopCloudAnim)
+        binding.recBottomRightCloud.startAnimation(rightBottomCloudAnim)
+        binding.recBottomLeftCloud.startAnimation(leftCloudAnim)
+        binding.recRecordButtonIcon.startAnimation(alphaAnim)
+        binding.recRecordButtonContainer.startAnimation(alphaAnim)
+
+        recDefineElementsVisibility(binding)
+    }
+
+    fun recObjectOut(context: Context, binding: FragmentRecordBinding){
+        val leftCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_out_2)
+        val rightTopCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_out_2)
+        val rightBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_out_2)
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_out)
+
+        binding.recBird.startAnimation(alphaAnim)
+        binding.recTopRightCloud.startAnimation(rightTopCloudAnim)
+        binding.recBottomRightCloud.startAnimation(rightBottomCloudAnim)
+        binding.recBottomLeftCloud.startAnimation(leftCloudAnim)
+        binding.recRecordButtonIcon.startAnimation(alphaAnim)
+        binding.recRecordButtonContainer.startAnimation(alphaAnim)
+
+        recDefineElementsVisibility(binding)
     }
 }

@@ -28,8 +28,6 @@ class StartFragment: BaseLaunchFragment() {
     override fun onResume() {
         super.onResume()
 
-        animVM.setLaunchVM(launchVM)
-
         launchVM.getScope().launch {
             delay(3000)
             binding.logoLottie.animate().apply {

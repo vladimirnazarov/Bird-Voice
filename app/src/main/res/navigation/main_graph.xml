@@ -2,10 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_graph"
-    app:startDestination="@id/informPage">
+    app:startDestination="@id/recordFragment">
 
     <fragment
         android:id="@+id/informPage"
         android:name="by.ssrlab.birdvoice.main.fragments.record.InformPage"
         android:label="InformPage" />
+    <fragment
+        android:id="@+id/recordFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.record.record.RecordFragment"
+        android:label="RecordFragment" />
 </navigation>

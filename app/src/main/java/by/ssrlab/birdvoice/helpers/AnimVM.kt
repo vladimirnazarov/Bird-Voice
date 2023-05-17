@@ -9,6 +9,7 @@ import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
 import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
 import by.ssrlab.birdvoice.databinding.FragmentMainInformPageBinding
+import by.ssrlab.birdvoice.databinding.FragmentRecognition1Binding
 import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
@@ -364,7 +365,7 @@ class AnimVM: ViewModel() {
         informDefineElementsVisibility(binding)
     }
 
-    //Record
+    //Recording
     fun recDefineElementsVisibility(binding: FragmentRecordBinding){
         if (binding.recBird.visibility == View.VISIBLE){
             binding.recBird.visibility = View.INVISIBLE
@@ -414,5 +415,56 @@ class AnimVM: ViewModel() {
         binding.recRecordButtonContainer.startAnimation(alphaAnim)
 
         recDefineElementsVisibility(binding)
+    }
+
+    //Recognition 1
+    fun recognition1DefineElementsVisibility(binding: FragmentRecognition1Binding){
+        if (binding.recognitionBird.visibility == View.VISIBLE){
+            binding.recognitionBird.visibility = View.INVISIBLE
+            binding.recognitionText.visibility = View.INVISIBLE
+            binding.recognitionPlatform.visibility = View.INVISIBLE
+            binding.recognitionBottomLeftCloud.visibility = View.INVISIBLE
+            binding.recognitionTopLeftCloud.visibility = View.INVISIBLE
+            binding.recognitionTopRightCloud.visibility = View.INVISIBLE
+        } else {
+            binding.recognitionBird.visibility = View.VISIBLE
+            binding.recognitionText.visibility = View.VISIBLE
+            binding.recognitionPlatform.visibility = View.VISIBLE
+            binding.recognitionBottomLeftCloud.visibility = View.VISIBLE
+            binding.recognitionTopLeftCloud.visibility = View.VISIBLE
+            binding.recognitionTopRightCloud.visibility = View.VISIBLE
+        }
+    }
+
+    fun recognition1ObjectEnter(context: Context, binding: FragmentRecognition1Binding){
+        val leftBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_enter_1)
+        val rightBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_enter_1)
+        val leftCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_enter_2)
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_in)
+
+        binding.recognitionBird.startAnimation(alphaAnim)
+        binding.recognitionText.startAnimation(alphaAnim)
+        binding.recognitionPlatform.startAnimation(alphaAnim)
+        binding.recognitionBottomLeftCloud.startAnimation(leftBottomCloudAnim)
+        binding.recognitionTopLeftCloud.startAnimation(leftCloudAnim)
+        binding.recognitionTopRightCloud.startAnimation(rightBottomCloudAnim)
+
+        recognition1DefineElementsVisibility(binding)
+    }
+
+    fun recognition1ObjectOut(context: Context, binding: FragmentRecognition1Binding){
+        val leftBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_out_1)
+        val rightBottomCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_right_cloud_out_1)
+        val leftCloudAnim = AnimationUtils.loadAnimation(context, R.anim.common_left_cloud_out_2)
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_out)
+
+        binding.recognitionBird.startAnimation(alphaAnim)
+        binding.recognitionText.startAnimation(alphaAnim)
+        binding.recognitionPlatform.startAnimation(alphaAnim)
+        binding.recognitionBottomLeftCloud.startAnimation(leftBottomCloudAnim)
+        binding.recognitionTopLeftCloud.startAnimation(leftCloudAnim)
+        binding.recognitionTopRightCloud.startAnimation(rightBottomCloudAnim)
+
+        recognition1DefineElementsVisibility(binding)
     }
 }

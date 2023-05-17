@@ -45,4 +45,7 @@
     <string name="get_recognition_options">Get recognition options</string>
     <string name="common_blackbird">Common Blackbird</string>
     <string name="inform_rv_item_4_description">Check out the search results, the percentages indicate the likely recognition options</string>
+
+    <!--  Recognition page 1  -->
+    <string name="in_the_process_please_wait_a_bit">in the process, please wait a bit</string>
 </resources>

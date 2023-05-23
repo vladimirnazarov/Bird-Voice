@@ -22,20 +22,20 @@ class InformPageFragment: BaseMainFragment() {
 
         binding = FragmentMainInformPageBinding.inflate(layoutInflater)
 
-        animVM.informDefineElementsVisibility(binding)
-        animVM.informObjectEnter(MainApp.appContext, binding)
-
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
 
+        activityMain.deletePopBackCallback()
+
         binding.informRv.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = InformAdapter()
+            layoutManager = LinearLayoutManager(MainApp.appContext)
+            adapter = InformAdapter(MainApp.appContext, mainVM)
         }
 
-        mainVM.setToolbarTitle("Map")
+        mainVM.setToolbarTitle("How it works?")
+        activityMain.supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
 }

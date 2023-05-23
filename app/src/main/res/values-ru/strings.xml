@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Голоса птиц</string>
+    <string name="app_name">Bird Voice</string>
 
     <!-- Error information -->
     <string name="this_field_must_be_not_empty">This field must be not empty</string>
@@ -8,19 +8,19 @@
     <string name="space_is_not_allowed">Space is not allowed here</string>
 
     <!-- Choice -->
-    <string name="launcher_app_name">голоса птиц</string>
-    <string name="log_in">Вход</string>
-    <string name="new_account">Новый аккаунт</string>
+    <string name="launcher_app_name">bird voice</string>
+    <string name="log_in">Log In</string>
+    <string name="new_account">New account</string>
 
     <!--  Login  -->
-    <string name="welcome_back">Добро пожаловать!</string>
-    <string name="sign_in_to_continue">Войдите, чтобы продолжить</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
     <string name="sign_up_to_continue">Sign up to continue</string>
-    <string name="email">Почта</string>
-    <string name="password">Пароль</string>
-    <string name="remember_me">Запомнить меня</string>
-    <string name="forgot_password">Забыли пароль?</string>
-    <string name="sign_in">Войти</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_in">Sign In</string>
 
     <!--  Register  -->
     <string name="telephone_number">Telephone number</string>
@@ -28,7 +28,7 @@
     <string name="create">Create</string>
 
     <!--  Code confirmation  -->
-    <string name="code">Code</string>
+    <string name="code">Enter code here:</string>
     <string name="send_again">send again</string>
 
     <!--  User data  -->
@@ -40,11 +40,12 @@
     <string name="inform_rv_item_1_description">Our service, thanks to a new unique technology, helps to recognize and determine by the sounds reproduced by a particular bird, its name, species, family, habitat.</string>
     <string name="recording_of_a_bird_singing">Recording of a bird singing</string>
     <string name="inform_rv_item_2_description">Press the microphone to start recognition and the stop button to end recording of birdsong</string>
-    <string name="choosing_the_necessary_part">Choosing the necessary part</string>
-    <string name="inform_rv_item_3_description">You need to choose the part where the bird\'s song is clearly audible without extraneous sounds</string>
+    <string name="listen_your_recording">Listen to your record</string>
+    <string name="inform_rv_item_3_description">You may listen to your recording of the bird singing and make sure about it cleanliness before the recognition</string>
     <string name="get_recognition_options">Get recognition options</string>
     <string name="common_blackbird">Common Blackbird</string>
     <string name="inform_rv_item_4_description">Check out the search results, the percentages indicate the likely recognition options</string>
+    <string name="try_now">Try now</string>
 
     <!--  Edit record  -->
     <string name="time">Time</string>
@@ -54,7 +55,7 @@
     <string name="place">Place</string>
     <string name="place_plug">Belarus, Minsk, Moskovsky district</string>
     <string name="timer_plug">00:00</string>
-    <string name="edit_rec_description">00:00</string>
+    <string name="edit_rec_description">Select the fragment to be recognized from the proposed audio recording, click on the screen of the stereogram</string>
     <string name="edit_rec_start">Start</string>
 
     <!--  Recognition page 1  -->

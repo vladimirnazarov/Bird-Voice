@@ -28,9 +28,9 @@ class CodeFragment: BaseLaunchFragment() {
 
         binding.codeBird.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
             launchVM.setArrowAction {
-                animVM.codeObjectOut(MainApp.appContext, binding)
-                launchVM.navigateUpWithDelay()
-                errorViewOut()
+                navigationBackAction({ animVM.codeObjectOut(MainApp.appContext, binding) }){
+                    errorViewOut()
+                }
             }
 
             binding.codeLoginButton.setOnClickListener {

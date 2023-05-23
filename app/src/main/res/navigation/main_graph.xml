@@ -2,16 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_graph"
-    app:startDestination="@id/editRecordFragment">
+    app:startDestination="@id/informPage">
 
     <fragment
         android:id="@+id/informPage"
         android:name="by.ssrlab.birdvoice.main.fragments.record.InformPageFragment"
-        android:label="InformPage" />
+        android:label="InformPage" >
+        <action
+            android:id="@+id/action_informPage_to_recordFragment"
+            app:destination="@id/recordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recordFragment"
         android:name="by.ssrlab.birdvoice.main.fragments.record.record.RecordFragment"
-        android:label="RecordFragment" />
+        android:label="RecordFragment" >
+        <action
+            android:id="@+id/action_recordFragment_to_editRecordFragment"
+            app:destination="@id/editRecordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recognitionFragment1"
         android:name="by.ssrlab.birdvoice.main.fragments.record.recognition.RecognitionFragment1"
@@ -19,5 +27,9 @@
     <fragment
         android:id="@+id/editRecordFragment"
         android:name="by.ssrlab.birdvoice.main.fragments.record.record.EditRecordFragment"
-        android:label="EditRecordFragment" />
+        android:label="EditRecordFragment" >
+        <action
+            android:id="@+id/action_editRecordFragment_to_recognitionFragment1"
+            app:destination="@id/recognitionFragment1" />
+    </fragment>
 </navigation>

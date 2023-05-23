@@ -5,14 +5,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModel
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
-import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
-import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
-import by.ssrlab.birdvoice.databinding.FragmentMainInformPageBinding
-import by.ssrlab.birdvoice.databinding.FragmentRecognition1Binding
-import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
-import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
-import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
+import by.ssrlab.birdvoice.databinding.*
 
 class AnimVM: ViewModel() {
 
@@ -347,22 +340,6 @@ class AnimVM: ViewModel() {
         binding.userDataPhotoLabel.startAnimation(alphaAnim)
 
         dataDefineElementsVisibility(binding)
-    }
-
-    //Inform
-    fun informDefineElementsVisibility(binding: FragmentMainInformPageBinding){
-        if (binding.informRv.visibility == View.VISIBLE) binding.informRv.visibility = View.INVISIBLE
-        else binding.informRv.visibility = View.VISIBLE
-    }
-
-    fun informObjectEnter(context: Context, binding: FragmentMainInformPageBinding){
-        binding.informRv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_in))
-        informDefineElementsVisibility(binding)
-    }
-
-    fun informObjectOut(context: Context, binding: FragmentMainInformPageBinding){
-        binding.informRv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
-        informDefineElementsVisibility(binding)
     }
 
     //Recording

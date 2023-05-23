@@ -28,4 +28,10 @@ open class BaseLaunchFragment: Fragment() {
 
         launchVM.setNavController(view.findNavController())
     }
+
+    fun navigationBackAction(animFun: () -> Unit, otherFun: () -> Unit){
+        launchVM.navigateUpWithDelay()
+        animFun()
+        otherFun()
+    }
 }

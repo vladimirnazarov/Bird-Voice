@@ -31,10 +31,10 @@ class LoginFragment: BaseLaunchFragment() {
         }
         binding.loginBird.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
             launchVM.setArrowAction {
-                animVM.loginObjectOut(MainApp.appContext, binding)
-                launchVM.hideArrow()
-                launchVM.navigateUpWithDelay()
-                errorViewOut(checkLogin = true, checkPassword = true)
+                navigationBackAction({ animVM.loginObjectOut(MainApp.appContext, binding) }){
+                    launchVM.hideArrow()
+                    errorViewOut(checkLogin = true, checkPassword = true)
+                }
             }
 
             binding.loginSignInButton.setOnClickListener {

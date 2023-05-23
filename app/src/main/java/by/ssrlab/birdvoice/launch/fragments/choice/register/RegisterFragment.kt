@@ -36,10 +36,10 @@ class RegisterFragment: BaseLaunchFragment() {
         }
         binding.registerBird.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
             launchVM.setArrowAction {
-                animVM.registerObjectOut(MainApp.appContext, binding)
-                launchVM.hideArrow()
-                launchVM.navigateUpWithDelay()
-                errorViewOut(checkEmail = true, checkTelephone = true, checkPassword = true)
+                navigationBackAction({ animVM.registerObjectOut(MainApp.appContext, binding) }){
+                    launchVM.hideArrow()
+                    errorViewOut(checkEmail = true, checkTelephone = true, checkPassword = true)
+                }
             }
 
             binding.registerCreateButton.setOnClickListener {

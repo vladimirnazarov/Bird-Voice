@@ -35,10 +35,7 @@ class UserDataFragment : BaseLaunchFragment() {
         registerCropImage()
 
         binding.userDataPhotoButton.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
-            launchVM.setArrowAction {
-                animVM.dataObjectOut(MainApp.appContext, binding)
-                launchVM.navigateUpWithDelay()
-            }
+            launchVM.setArrowAction { navigationBackAction({ animVM.dataObjectOut(MainApp.appContext, binding) }, {}) }
 
             binding.userDataPhotoButton.setOnClickListener {
                 pickPhoto()

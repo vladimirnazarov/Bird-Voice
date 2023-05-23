@@ -28,7 +28,7 @@
     <string name="create">Create</string>
 
     <!--  Code confirmation  -->
-    <string name="code">Code</string>
+    <string name="code">Enter code here:</string>
     <string name="send_again">send again</string>
 
     <!--  User data  -->
@@ -40,11 +40,12 @@
     <string name="inform_rv_item_1_description">Our service, thanks to a new unique technology, helps to recognize and determine by the sounds reproduced by a particular bird, its name, species, family, habitat.</string>
     <string name="recording_of_a_bird_singing">Recording of a bird singing</string>
     <string name="inform_rv_item_2_description">Press the microphone to start recognition and the stop button to end recording of birdsong</string>
-    <string name="choosing_the_necessary_part">Choosing the necessary part</string>
-    <string name="inform_rv_item_3_description">You need to choose the part where the bird\'s song is clearly audible without extraneous sounds</string>
+    <string name="listen_your_recording">Listen to your record</string>
+    <string name="inform_rv_item_3_description">You may listen to your recording of the bird singing and make sure about it cleanliness before the recognition</string>
     <string name="get_recognition_options">Get recognition options</string>
     <string name="common_blackbird">Common Blackbird</string>
     <string name="inform_rv_item_4_description">Check out the search results, the percentages indicate the likely recognition options</string>
+    <string name="try_now">Try now</string>
 
     <!--  Edit record  -->
     <string name="time">Time</string>

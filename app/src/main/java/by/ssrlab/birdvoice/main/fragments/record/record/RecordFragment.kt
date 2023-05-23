@@ -32,9 +32,22 @@ class RecordFragment: BaseMainFragment() {
                     else R.drawable.ic_rec_start
                 )
 
+//                if (!pressedBool){
+//                    binding.recRecordButtonIcon.isClickable = false
+//                    animVM.recObjectOut(MainApp.appContext, binding)
+//                    mainVM.navigateToWithDelay(R.id.action_recordFragment_to_editRecordFragment)
+//                }
+
                 pressedBool = !pressedBool
             }
         })
+
+        activityMain.setPopBackCallback {
+            animVM.recObjectOut(MainApp.appContext, binding)
+            binding.recRecordButtonIcon.setImageResource(R.drawable.ic_rec_start)
+            pressedBool = true
+            binding.recRecordButtonIcon.isClickable = false
+        }
 
         return binding.root
     }
@@ -43,5 +56,12 @@ class RecordFragment: BaseMainFragment() {
         super.onResume()
 
         mainVM.setToolbarTitle("Recording")
+        activityMain.setToolbarAction(R.drawable.ic_arrow_back){
+            navigationBackAction({ animVM.recObjectOut(MainApp.appContext, binding) }, {
+                binding.recRecordButtonIcon.setImageResource(R.drawable.ic_rec_start)
+                pressedBool = true
+                binding.recRecordButtonIcon.isClickable = false
+            })
+        }
     }
 }

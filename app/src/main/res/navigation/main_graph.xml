@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_graph"
-    app:startDestination="@id/recognitionFragment1">
+    app:startDestination="@id/editRecordFragment">
 
     <fragment
         android:id="@+id/informPage"
@@ -16,4 +16,8 @@
         android:id="@+id/recognitionFragment1"
         android:name="by.ssrlab.birdvoice.main.fragments.record.recognition.RecognitionFragment1"
         android:label="RecognitionFragment1" />
+    <fragment
+        android:id="@+id/editRecordFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.record.record.EditRecordFragment"
+        android:label="EditRecordFragment" />
 </navigation>

@@ -32,11 +32,11 @@ class RecordFragment: BaseMainFragment() {
                     else R.drawable.ic_rec_start
                 )
 
-//                if (!pressedBool){
-//                    binding.recRecordButtonIcon.isClickable = false
-//                    animVM.recObjectOut(MainApp.appContext, binding)
-//                    mainVM.navigateToWithDelay(R.id.action_recordFragment_to_editRecordFragment)
-//                }
+                if (!pressedBool){
+                    binding.recRecordButtonIcon.isClickable = false
+                    animVM.recObjectOut(MainApp.appContext, binding)
+                    mainVM.navigateToWithDelay(R.id.action_recordFragment_to_editRecordFragment)
+                }
 
                 pressedBool = !pressedBool
             }

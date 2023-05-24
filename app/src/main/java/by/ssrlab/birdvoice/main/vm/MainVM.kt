@@ -43,6 +43,7 @@ class MainVM: ViewModel() {
     //Scope
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)
+    fun getScope() = scope
 
     //OnBackPressedCallback
     val onMapBackPressedCallback = object : OnBackPressedCallback(true){

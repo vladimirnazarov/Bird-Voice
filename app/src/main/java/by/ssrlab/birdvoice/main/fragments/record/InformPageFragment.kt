@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.ssrlab.birdvoice.app.MainApp
-import by.ssrlab.birdvoice.databinding.FragmentMainInformPageBinding
+import by.ssrlab.birdvoice.databinding.FragmentInformPageBinding
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import by.ssrlab.birdvoice.main.rv.InformAdapter
 
 class InformPageFragment: BaseMainFragment() {
 
-    private lateinit var binding: FragmentMainInformPageBinding
+    private lateinit var binding: FragmentInformPageBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,7 +20,7 @@ class InformPageFragment: BaseMainFragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentMainInformPageBinding.inflate(layoutInflater)
+        binding = FragmentInformPageBinding.inflate(layoutInflater)
 
         return binding.root
     }

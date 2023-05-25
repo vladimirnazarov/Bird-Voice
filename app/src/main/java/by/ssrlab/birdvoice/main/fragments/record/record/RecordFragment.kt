@@ -12,7 +12,7 @@ import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 class RecordFragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentRecordBinding
-    var pressedBool = true
+    private var pressedBool = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +55,7 @@ class RecordFragment: BaseMainFragment() {
     override fun onResume() {
         super.onResume()
 
-        mainVM.setToolbarTitle("Recording")
+        mainVM.setToolbarTitle("Record your environment")
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
             navigationBackAction({ animVM.recObjectOut(MainApp.appContext, binding) }, {
                 binding.recRecordButtonIcon.setImageResource(R.drawable.ic_rec_start)

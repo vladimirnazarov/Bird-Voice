@@ -66,14 +66,16 @@
         android:layout_width="match_parent"
         android:layout_height="400dp"
 
-        android:src="@drawable/recognition_platform"
-
         android:layout_marginTop="18dp"
 
+        android:src="@drawable/recognition_platform"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/recognition_bird"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintVertical_bias="0.497" />
 
     <TextView
         android:id="@+id/recognition_text"
@@ -91,5 +93,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recognition_bird"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/recognition_dots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:textColor="@color/primary_text_blue"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+
+        app:layout_constraintStart_toEndOf="@id/recognition_text"
+        app:layout_constraintTop_toTopOf="@id/recognition_text"
+        app:layout_constraintBottom_toBottomOf="@id/recognition_text"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

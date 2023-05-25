@@ -29,13 +29,13 @@ class MainVM: ViewModel() {
     }
     fun navigateToWithDelay(address: Int){
         scope.launch {
-            delay(1500)
+            delay(600)
             navController.navigate(address)
         }
     }
     fun navigateUpWithDelay(){
         scope.launch {
-            delay(1200)
+            delay(600)
             navController.popBackStack()
         }
     }

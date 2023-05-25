@@ -46,4 +46,8 @@ class MainActivity : AppCompatActivity() {
         mainVM.setNavUpAnimLambda(anim)
         onBackPressedDispatcher.addCallback(this, mainVM.onMapBackPressedCallback)
     }
+
+    fun deletePopBackCallback(){
+        if (mainVM.onMapBackPressedCallback.isEnabled) mainVM.onMapBackPressedCallback.remove()
+    }
 }

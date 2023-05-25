@@ -5,14 +5,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModel
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
-import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
-import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
-import by.ssrlab.birdvoice.databinding.FragmentMainInformPageBinding
-import by.ssrlab.birdvoice.databinding.FragmentRecognition1Binding
-import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
-import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
-import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
+import by.ssrlab.birdvoice.databinding.*
 
 class AnimVM: ViewModel() {
 
@@ -349,22 +342,6 @@ class AnimVM: ViewModel() {
         dataDefineElementsVisibility(binding)
     }
 
-    //Inform
-    fun informDefineElementsVisibility(binding: FragmentMainInformPageBinding){
-        if (binding.informRv.visibility == View.VISIBLE) binding.informRv.visibility = View.INVISIBLE
-        else binding.informRv.visibility = View.VISIBLE
-    }
-
-    fun informObjectEnter(context: Context, binding: FragmentMainInformPageBinding){
-        binding.informRv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_in))
-        informDefineElementsVisibility(binding)
-    }
-
-    fun informObjectOut(context: Context, binding: FragmentMainInformPageBinding){
-        binding.informRv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
-        informDefineElementsVisibility(binding)
-    }
-
     //Recording
     fun recDefineElementsVisibility(binding: FragmentRecordBinding){
         if (binding.recBird.visibility == View.VISIBLE){
@@ -415,6 +392,75 @@ class AnimVM: ViewModel() {
         binding.recRecordButtonContainer.startAnimation(alphaAnim)
 
         recDefineElementsVisibility(binding)
+    }
+
+    //Edit Record
+    fun editRecDefineElementsVisibility(binding: FragmentEditRecordBinding){
+        if (binding.editRecConcaveWaveHolder.visibility == View.VISIBLE){
+            binding.editRecConcaveTimeHolder.visibility = View.INVISIBLE
+            binding.editRecConcaveDateHolder.visibility = View.INVISIBLE
+            binding.editRecConcavePlaceHolder.visibility = View.INVISIBLE
+            binding.editRecConcaveWaveHolder.visibility = View.INVISIBLE
+            binding.editRecTopHolder.visibility = View.INVISIBLE
+            binding.editRecBottomHolder.visibility = View.INVISIBLE
+            binding.editRecPlayButton.visibility = View.INVISIBLE
+            binding.editRecTimer.visibility = View.INVISIBLE
+            binding.editRecAudioProgress.visibility = View.INVISIBLE
+            binding.editRecLoadButton.visibility = View.INVISIBLE
+            binding.editRecShareButton.visibility = View.INVISIBLE
+            binding.editRecStartButton.visibility = View.INVISIBLE
+        } else {
+            binding.editRecConcaveTimeHolder.visibility = View.VISIBLE
+            binding.editRecConcaveDateHolder.visibility = View.VISIBLE
+            binding.editRecConcavePlaceHolder.visibility = View.VISIBLE
+            binding.editRecConcaveWaveHolder.visibility = View.VISIBLE
+            binding.editRecTopHolder.visibility = View.VISIBLE
+            binding.editRecBottomHolder.visibility = View.VISIBLE
+            binding.editRecPlayButton.visibility = View.VISIBLE
+            binding.editRecTimer.visibility = View.VISIBLE
+            binding.editRecAudioProgress.visibility = View.VISIBLE
+            binding.editRecLoadButton.visibility = View.VISIBLE
+            binding.editRecShareButton.visibility = View.VISIBLE
+            binding.editRecStartButton.visibility = View.VISIBLE
+        }
+    }
+
+    fun editRecordObjectEnter(context: Context, binding: FragmentEditRecordBinding){
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_in)
+
+        binding.editRecConcaveTimeHolder.startAnimation(alphaAnim)
+        binding.editRecConcaveDateHolder.startAnimation(alphaAnim)
+        binding.editRecConcavePlaceHolder.startAnimation(alphaAnim)
+        binding.editRecConcaveWaveHolder.startAnimation(alphaAnim)
+        binding.editRecTopHolder.startAnimation(alphaAnim)
+        binding.editRecBottomHolder.startAnimation(alphaAnim)
+        binding.editRecPlayButton.startAnimation(alphaAnim)
+        binding.editRecTimer.startAnimation(alphaAnim)
+        binding.editRecAudioProgress.startAnimation(alphaAnim)
+        binding.editRecLoadButton.startAnimation(alphaAnim)
+        binding.editRecShareButton.startAnimation(alphaAnim)
+        binding.editRecStartButton.startAnimation(alphaAnim)
+
+        editRecDefineElementsVisibility(binding)
+    }
+
+    fun editRecordObjectOut(context: Context, binding: FragmentEditRecordBinding){
+        val alphaAnim = AnimationUtils.loadAnimation(context, R.anim.common_alpha_out)
+
+        binding.editRecConcaveTimeHolder.startAnimation(alphaAnim)
+        binding.editRecConcaveDateHolder.startAnimation(alphaAnim)
+        binding.editRecConcavePlaceHolder.startAnimation(alphaAnim)
+        binding.editRecConcaveWaveHolder.startAnimation(alphaAnim)
+        binding.editRecTopHolder.startAnimation(alphaAnim)
+        binding.editRecBottomHolder.startAnimation(alphaAnim)
+        binding.editRecPlayButton.startAnimation(alphaAnim)
+        binding.editRecTimer.startAnimation(alphaAnim)
+        binding.editRecAudioProgress.startAnimation(alphaAnim)
+        binding.editRecLoadButton.startAnimation(alphaAnim)
+        binding.editRecShareButton.startAnimation(alphaAnim)
+        binding.editRecStartButton.startAnimation(alphaAnim)
+
+        editRecDefineElementsVisibility(binding)
     }
 
     //Recognition 1

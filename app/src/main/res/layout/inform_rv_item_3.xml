@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:text="@string/choosing_the_necessary_part"
+        android:text="@string/listen_your_recording"
         android:textColor="@color/primary_text_blue"
         android:textSize="18sp"
         android:fontFamily="@font/roboto"

@@ -1,17 +1,23 @@
 package by.ssrlab.birdvoice.main.rv
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import by.ssrlab.birdvoice.R
+import by.ssrlab.birdvoice.main.vm.MainVM
+import com.google.android.material.button.MaterialButton
 
-class InformAdapter : RecyclerView.Adapter<InformAdapter.InformHolder>() {
+class InformAdapter(private val context: Context, private val mainVM: MainVM) : RecyclerView.Adapter<InformAdapter.InformHolder>() {
 
-    inner class InformHolder(itemView: View) : RecyclerView.ViewHolder(itemView){}
+    private val viewArray = arrayListOf<View>()
+
+    inner class InformHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InformHolder {
-        val layoutResId = when (viewType) {
+        val layoutResId = when(viewType) {
             ITEM_TYPE_1 -> R.layout.inform_rv_item_1
             ITEM_TYPE_2 -> R.layout.inform_rv_item_2
             ITEM_TYPE_3 -> R.layout.inform_rv_item_3
@@ -21,12 +27,29 @@ class InformAdapter : RecyclerView.Adapter<InformAdapter.InformHolder>() {
         }
 
         val view = LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
+
+        viewArray.add(view)
+
+        view.visibility = View.INVISIBLE
+        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_in))
+        view.visibility = View.VISIBLE
+
         return InformHolder(view)
     }
 
     override fun getItemCount(): Int = 5
 
-    override fun onBindViewHolder(holder: InformHolder, position: Int) {}
+    override fun onBindViewHolder(holder: InformHolder, position: Int) {
+        if (position == 4){
+            holder.itemView.findViewById<MaterialButton>(R.id.inform_rv_item_5_try_button).setOnClickListener {
+                for (i in viewArray) {
+                    i.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
+                    i.visibility = View.INVISIBLE
+                }
+                mainVM.navigateToWithDelay(R.id.action_informPage_to_recordFragment)
+            }
+        }
+    }
 
     override fun getItemViewType(position: Int): Int = position
 

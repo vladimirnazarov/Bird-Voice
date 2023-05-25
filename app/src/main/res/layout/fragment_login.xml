@@ -120,6 +120,7 @@
             android:visibility="invisible"
 
             android:layout_marginEnd="24dp"
+            android:layout_marginTop="4dp"
             android:elevation="6dp"
 
             app:layout_constraintEnd_toEndOf="@id/login_email_input"
@@ -219,6 +220,7 @@
             android:visibility="invisible"
 
             android:layout_marginEnd="24dp"
+            android:layout_marginTop="4dp"
             android:elevation="6dp"
 
             app:layout_constraintEnd_toEndOf="@id/login_password_input"
@@ -236,7 +238,7 @@
 
             app:buttonTint="@color/primary_button_blue"
 
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
 
             app:layout_constraintStart_toStartOf="@id/login_password_title"
             app:layout_constraintTop_toBottomOf="@id/login_password_input"/>

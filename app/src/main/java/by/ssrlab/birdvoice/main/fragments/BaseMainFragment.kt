@@ -26,6 +26,12 @@ open class BaseMainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainVM.setNavController(view.findNavController())
+        mainVM.setNavController(requireView().findNavController())
+    }
+
+    fun navigationBackAction(animFun: () -> Unit, otherFun: () -> Unit){
+        mainVM.navigateUpWithDelay()
+        animFun()
+        otherFun()
     }
 }

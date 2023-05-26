@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:ignore="ContentDescription"
+    android:layout_gravity="center|top"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/recognition_2_rv_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+
+        android:background="@drawable/rv_bird_card_2"
+        android:elevation="5dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/recognition_2_rv_item_title_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginTop="18dp"
+
+            android:background="@drawable/rv_bird_card_1"
+            android:elevation="4dp"
+
+            app:layout_constraintEnd_toEndOf="@id/recognition_2_rv_item_image"
+            app:layout_constraintStart_toStartOf="@id/recognition_2_rv_item_image"
+            app:layout_constraintTop_toTopOf="@id/recognition_2_rv_item">
+
+            <TextView
+                android:id="@+id/recognition_2_rv_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/roboto"
+                android:text="@string/common_blackbird"
+                android:textColor="@color/primary_text_blue"
+                android:textSize="18sp"
+                android:textStyle="bold"
+
+                app:layout_constraintBottom_toBottomOf="@id/recognition_2_rv_item_title_container"
+
+                app:layout_constraintEnd_toEndOf="@id/recognition_2_rv_item_title_container"
+                app:layout_constraintStart_toStartOf="@id/recognition_2_rv_item_title_container"
+                app:layout_constraintTop_toTopOf="@id/recognition_2_rv_item_title_container"
+                tools:ignore="SmallSp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/recognition_2_rv_item_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_bird_card_1_large"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/recognition_2_rv_item_percent"
+            app:layout_constraintTop_toBottomOf="@id/recognition_2_rv_item_title_container" />
+
+        <ImageView
+            android:id="@+id/recognition_2_rv_item_percent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="2dp"
+
+            android:src="@drawable/ic_80_percent_large"
+
+            app:layout_constraintBottom_toBottomOf="@id/recognition_2_rv_item_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/recognition_2_rv_item_image" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/recognition_2_rv_item_button"
+            android:layout_width="60dp"
+            android:layout_height="38dp"
+
+            android:text="@string/recognition_2_dots"
+            android:textColor="@color/primary_text_blue"
+            android:textSize="14sp"
+
+            app:cornerRadius="32dp"
+            app:rippleColor="@color/primary_button_push"
+            app:backgroundTint="@color/white"
+
+            android:layout_marginEnd="8dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recognition_2_rv_item_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

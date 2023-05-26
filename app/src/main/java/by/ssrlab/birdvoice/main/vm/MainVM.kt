@@ -56,4 +56,7 @@ class MainVM: ViewModel() {
     fun setNavUpAnimLambda(anim: () -> Unit){
         navUpAnimLambda = anim
     }
+
+    //Adapter value to listen to
+    val recognition2Value = MutableLiveData<Boolean>()
 }

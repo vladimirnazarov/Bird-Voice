@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_graph"
-    app:startDestination="@id/editRecordFragment">
+    app:startDestination="@id/recognitionFragment2">
 
     <fragment
         android:id="@+id/informPage"
@@ -23,7 +23,11 @@
     <fragment
         android:id="@+id/recognitionFragment1"
         android:name="by.ssrlab.birdvoice.main.fragments.record.recognition.RecognitionFragment1"
-        android:label="RecognitionFragment1" />
+        android:label="RecognitionFragment1" >
+        <action
+            android:id="@+id/action_recognitionFragment1_to_recognitionFragment2"
+            app:destination="@id/recognitionFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/editRecordFragment"
         android:name="by.ssrlab.birdvoice.main.fragments.record.record.EditRecordFragment"
@@ -32,4 +36,8 @@
             android:id="@+id/action_editRecordFragment_to_recognitionFragment1"
             app:destination="@id/recognitionFragment1" />
     </fragment>
+    <fragment
+        android:id="@+id/recognitionFragment2"
+        android:name="by.ssrlab.birdvoice.main.fragments.record.recognition.RecognitionFragment2"
+        android:label="RecognitionFragment2" />
 </navigation>

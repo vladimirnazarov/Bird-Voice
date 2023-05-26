@@ -32,10 +32,11 @@ class EditRecordFragment: BaseMainFragment() {
             binding.editRecWaveAnimation.apply {
                 if (isPlaying){
                     cancelAnimation()
+                    progress /= 2
                     mainVM.getScope().launch {
                         while (progress != 0f) {
                             delay(10)
-                            progress -= 0.005f
+                            progress -= 0.01f
                         }
                     }
                     isPlaying = !isPlaying

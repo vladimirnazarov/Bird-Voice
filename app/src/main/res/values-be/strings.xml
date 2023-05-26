@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Bird Voice</string>
 
     <!-- Error information -->
@@ -60,4 +60,7 @@
 
     <!--  Recognition page 1  -->
     <string name="in_the_process_please_wait_a_bit">in the process, please wait a bit</string>
+
+    <!--  Recognition page 2  -->
+    <string name="recognition_2_dots" tools:ignore="TypographyEllipsis">...</string>
 </resources>

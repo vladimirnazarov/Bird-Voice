@@ -12,16 +12,19 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recognition_2_rv_item"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginHorizontal="16dp"
 
         android:background="@drawable/rv_bird_card_2"
         android:elevation="5dp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,18 +54,16 @@
                 android:textStyle="bold"
 
                 app:layout_constraintBottom_toBottomOf="@id/recognition_2_rv_item_title_container"
-
                 app:layout_constraintEnd_toEndOf="@id/recognition_2_rv_item_title_container"
                 app:layout_constraintStart_toStartOf="@id/recognition_2_rv_item_title_container"
-                app:layout_constraintTop_toTopOf="@id/recognition_2_rv_item_title_container"
-                tools:ignore="SmallSp" />
+                app:layout_constraintTop_toTopOf="@id/recognition_2_rv_item_title_container" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/recognition_2_rv_item_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
 
             android:layout_marginTop="4dp"
             android:layout_marginStart="16dp"
@@ -78,9 +79,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginEnd="2dp"
-
             android:src="@drawable/ic_80_percent_large"
+
+            android:layout_marginStart="10dp"
 
             app:layout_constraintBottom_toBottomOf="@id/recognition_2_rv_item_image"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +90,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/recognition_2_rv_item_button"
             android:layout_width="60dp"
-            android:layout_height="38dp"
+            android:layout_height="wrap_content"
 
             android:text="@string/recognition_2_dots"
             android:textColor="@color/primary_text_blue"
@@ -99,9 +100,11 @@
             app:rippleColor="@color/primary_button_push"
             app:backgroundTint="@color/white"
 
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="6dp"
 
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recognition_2_rv_item_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

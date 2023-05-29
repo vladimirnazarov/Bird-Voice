@@ -45,6 +45,16 @@ class RecognitionFragment1: BaseMainFragment() {
                 breakableMarker = true
             }
         }
+
+        mainVM.recognition2Value.value = false
+
+        mainVM.getScope().launch {
+            delay(5000)
+            if (!breakableMarker) {
+                animVM.recognition1ObjectOut(MainApp.appContext, binding)
+                mainVM.navigateToWithDelay(R.id.action_recognitionFragment1_to_recognitionFragment2)
+            }
+        }
     }
 
     private suspend fun toolbarTitleAnimation(){

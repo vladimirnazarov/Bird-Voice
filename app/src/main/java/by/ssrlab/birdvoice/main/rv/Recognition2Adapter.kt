@@ -62,9 +62,11 @@ class Recognition2Adapter(private val context: Context, private val mainVM: Main
 
     override fun onBindViewHolder(holder: Recognition2Holder, position: Int) {
         mainVM.recognition2Value.observe(activity) {
-            for (i in viewArray) {
-                i.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
-                i.visibility = View.INVISIBLE
+            if (it == true) {
+                for (i in viewArray) {
+                    i.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
+                    i.visibility = View.INVISIBLE
+                }
             }
         }
     }

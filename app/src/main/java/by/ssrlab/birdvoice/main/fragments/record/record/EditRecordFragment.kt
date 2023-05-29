@@ -28,6 +28,23 @@ class EditRecordFragment: BaseMainFragment() {
         animVM.editRecDefineElementsVisibility(binding)
         animVM.editRecordObjectEnter(MainApp.appContext, binding)
 
+        binding.editRecTopHolder.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
+            binding.editRecStartButton.setOnClickListener {
+                binding.editRecWaveAnimation.apply {
+                    if (isPlaying){
+                        pauseAnimation()
+                        isPlaying = !isPlaying
+                        animVM.editRecordObjectOut(MainApp.appContext, binding)
+                        mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1)
+
+                    } else {
+                        animVM.editRecordObjectOut(MainApp.appContext, binding)
+                        mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1)
+                    }
+                }
+            }
+        })
+
         binding.editRecPlayButton.setOnClickListener {
             binding.editRecWaveAnimation.apply {
                 if (isPlaying){
@@ -47,6 +64,10 @@ class EditRecordFragment: BaseMainFragment() {
                     isPlaying = !isPlaying
                 }
             }
+        }
+
+        activityMain.setPopBackCallback {
+            animVM.editRecordObjectOut(MainApp.appContext, binding)
         }
 
         return binding.root

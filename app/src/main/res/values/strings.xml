@@ -63,4 +63,10 @@
 
     <!--  Recognition page 2  -->
     <string name="recognition_2_dots" tools:ignore="TypographyEllipsis">...</string>
+
+    <!--  Tabs  -->
+    <string name="tab_1_appearance">Appearance</string>
+    <string name="tab_1_text_plug">Lorem ipsum dolor sit amet. Et minima ntium aut ratione numquam ut consectetur odio in distinctio quis ut laboriosam voluptate sed rum corrupti non internos error.</string>
+    <string name="tab_1_behaviour">Behaviour</string>
+    <string name="tab_1_habitat">Habitat</string>
 </resources>

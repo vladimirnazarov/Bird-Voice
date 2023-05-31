@@ -33,7 +33,13 @@ class RecognitionFragment2: BaseMainFragment() {
 
         binding.recognition2Rv.apply {
             layoutManager = LinearLayoutManager(MainApp.appContext)
-            adapter = Recognition2Adapter(MainApp.appContext, mainVM, activityMain)
+            adapter = Recognition2Adapter(
+                MainApp.appContext,
+                mainVM,
+                activityMain,
+                resources.getString(R.string.general_information),
+                resources.getString(R.string.scientific_information)
+            )
         }
 
         mainVM.setToolbarTitle("Recognition results")

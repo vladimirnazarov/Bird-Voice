@@ -60,13 +60,20 @@
 
     <!--  Recognition page 1  -->
     <string name="in_the_process_please_wait_a_bit">in the process, please wait a bit</string>
+    <string name="recognition_1_dots" tools:ignore="TypographyEllipsis">...</string>
 
     <!--  Recognition page 2  -->
-    <string name="recognition_2_dots" tools:ignore="TypographyEllipsis">...</string>
+    <string name="already_in_collection">Already in collection</string>
+    <string name="add_to_collection">Add to collection</string>
 
     <!--  Tabs  -->
     <string name="tab_1_appearance">Appearance</string>
     <string name="tab_1_text_plug">Lorem ipsum dolor sit amet. Et minima ntium aut ratione numquam ut consectetur odio in distinctio quis ut laboriosam voluptate sed rum corrupti non internos error.</string>
     <string name="tab_1_behaviour">Behaviour</string>
     <string name="tab_1_habitat">Habitat</string>
+    <string name="id">ID</string>
+    <string name="id_plug">1234566788999888884545</string>
+    <string name="data_display_areas">Data display areas</string>
+    <string name="general_information">General Information</string>
+    <string name="scientific_information">Scientific Information</string>
 </resources>

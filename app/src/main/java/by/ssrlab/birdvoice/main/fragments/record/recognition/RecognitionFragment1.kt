@@ -30,6 +30,7 @@ class RecognitionFragment1: BaseMainFragment() {
         activityMain.setPopBackCallback {
             animVM.recognition1ObjectOut(MainApp.appContext, binding)
             breakableMarker = true
+            binding.recognitionDots.visibility = View.INVISIBLE
         }
 
         return binding.root
@@ -43,6 +44,7 @@ class RecognitionFragment1: BaseMainFragment() {
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
             navigationBackAction({ animVM.recognition1ObjectOut(MainApp.appContext, binding) }){
                 breakableMarker = true
+                binding.recognitionDots.visibility = View.INVISIBLE
             }
         }
 
@@ -53,6 +55,7 @@ class RecognitionFragment1: BaseMainFragment() {
             if (!breakableMarker) {
                 animVM.recognition1ObjectOut(MainApp.appContext, binding)
                 mainVM.navigateToWithDelay(R.id.action_recognitionFragment1_to_recognitionFragment2)
+                binding.recognitionDots.visibility = View.INVISIBLE
             }
         }
     }
@@ -60,6 +63,8 @@ class RecognitionFragment1: BaseMainFragment() {
     private suspend fun toolbarTitleAnimation(){
         val dotArray = arrayListOf("", ".", "..", "...")
         var i = 0
+
+        binding.recognitionDots.visibility = View.VISIBLE
 
         val a = {
             binding.recognitionDots.text = dotArray[i]

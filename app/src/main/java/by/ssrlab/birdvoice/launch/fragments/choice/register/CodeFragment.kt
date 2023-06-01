@@ -9,6 +9,7 @@ import android.widget.EditText
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
+import by.ssrlab.birdvoice.helpers.*
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 
 class CodeFragment: BaseLaunchFragment() {
@@ -26,7 +27,7 @@ class CodeFragment: BaseLaunchFragment() {
         animVM.codeDefineElementsVisibility(binding)
         animVM.codeObjectEnter(MainApp.appContext, binding)
 
-        binding.codeBird.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
+        binding.codeBird.animation.setAnimationListener(createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction({ animVM.codeObjectOut(MainApp.appContext, binding) }){
                     errorViewOut()
@@ -45,7 +46,7 @@ class CodeFragment: BaseLaunchFragment() {
             setEditTextListeners()
         })
 
-        fragmentVM.controlPopBack(launchVM, false)
+        controlPopBack(launchVM, false)
 
         return binding.root
     }
@@ -69,7 +70,7 @@ class CodeFragment: BaseLaunchFragment() {
     }
 
     private fun errorViewOut(){
-        fragmentVM.checkErrorViewAvailability(binding.codeCodeErrorMessage)
+        checkErrorViewAvailability(binding.codeCodeErrorMessage)
     }
 
     private fun setEditTextListeners(){
@@ -78,15 +79,15 @@ class CodeFragment: BaseLaunchFragment() {
         val etArray = arrayOf(binding.codeEnter1, binding.codeEnter2, binding.codeEnter3, binding.codeEnter4)
 
         etArray.forEachIndexed { index, appCompatEditText ->
-            appCompatEditText.filters = fragmentVM.editTextFilters
-            appCompatEditText.addTextChangedListener(fragmentVM.createEditTextListener({ errorViewOut() }, {
+            appCompatEditText.filters = editTextFilters
+            appCompatEditText.addTextChangedListener(createEditTextListener({ errorViewOut() }, {
                     if (it?.length == 1) {
                     if (index < etArray.size - 1) {
                         etArray[index + 1].text?.clear()
                         requestFocus(etArray[index + 1])
                     }
                     else {
-                        fragmentVM.hideKeyboard(view, MainApp.appContext)
+                        hideKeyboard(view, MainApp.appContext)
                         binding.codeEnter4.clearFocus()
                     }
                 }
@@ -96,6 +97,6 @@ class CodeFragment: BaseLaunchFragment() {
 
     private fun requestFocus(et: EditText){
         et.requestFocus()
-        fragmentVM.showKeyboard(et)
+        showKeyboard(et)
     }
 }

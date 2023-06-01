@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
+import by.ssrlab.birdvoice.helpers.*
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 
 class RegisterFragment: BaseLaunchFragment() {
@@ -27,14 +28,14 @@ class RegisterFragment: BaseLaunchFragment() {
         animVM.registerDefineElementsVisibility(binding)
         animVM.registerObjectEnter(MainApp.appContext, binding)
 
-        binding.registerEmailInput.filters = fragmentVM.editTextFilters
-        binding.registerTelephoneInput.filters = fragmentVM.editTextFilters
-        binding.registerPasswordInput.filters = fragmentVM.editTextFilters
+        binding.registerEmailInput.filters = editTextFilters
+        binding.registerTelephoneInput.filters = editTextFilters
+        binding.registerPasswordInput.filters = editTextFilters
 
         if (launchVM.boolPopBack) {
             launchVM.showArrow()
         }
-        binding.registerBird.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
+        binding.registerBird.animation.setAnimationListener(createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction({ animVM.registerObjectOut(MainApp.appContext, binding) }){
                     launchVM.hideArrow()
@@ -52,9 +53,9 @@ class RegisterFragment: BaseLaunchFragment() {
             }
         })
 
-        fragmentVM.controlPopBack(launchVM, true)
+        controlPopBack(launchVM, true)
 
-        binding.registerShowPasswordButton.setOnClickListener { fragmentVM.setPasswordShowButtonAction(binding.registerPasswordInput, binding.registerShowPasswordButton) }
+        binding.registerShowPasswordButton.setOnClickListener { setPasswordShowButtonAction(binding.registerPasswordInput, binding.registerShowPasswordButton) }
 
         return binding.root
     }
@@ -70,22 +71,22 @@ class RegisterFragment: BaseLaunchFragment() {
 
         setEditTextListeners()
 
-        errorValue += fragmentVM.checkTextInput(binding.registerEmailInput.text, binding.registerEmailErrorMessage, resources)
-        errorValue += fragmentVM.checkTextInput(binding.registerTelephoneInput.text, binding.registerTelephoneErrorMessage, resources)
-        errorValue += fragmentVM.checkTextInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
+        errorValue += checkTextInput(binding.registerEmailInput.text, binding.registerEmailErrorMessage, resources)
+        errorValue += checkTextInput(binding.registerTelephoneInput.text, binding.registerTelephoneErrorMessage, resources)
+        errorValue += checkTextInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
 
         if (errorValue == 0) onSuccess()
     }
 
     private fun errorViewOut(checkEmail: Boolean = false, checkTelephone: Boolean = false, checkPassword: Boolean = false){
-        if (checkEmail) fragmentVM.checkErrorViewAvailability(binding.registerEmailErrorMessage)
-        if (checkTelephone) fragmentVM.checkErrorViewAvailability(binding.registerTelephoneErrorMessage)
-        if (checkPassword) fragmentVM.checkErrorViewAvailability(binding.registerPasswordErrorMessage)
+        if (checkEmail) checkErrorViewAvailability(binding.registerEmailErrorMessage)
+        if (checkTelephone) checkErrorViewAvailability(binding.registerTelephoneErrorMessage)
+        if (checkPassword) checkErrorViewAvailability(binding.registerPasswordErrorMessage)
     }
 
     private fun setEditTextListeners(){
-        binding.registerEmailInput.addTextChangedListener(fragmentVM.createEditTextListener ({ errorViewOut(checkEmail = true) }, {}))
-        binding.registerTelephoneInput.addTextChangedListener(fragmentVM.createEditTextListener ({ errorViewOut(checkTelephone = true) }, {}))
-        binding.registerPasswordInput.addTextChangedListener(fragmentVM.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
+        binding.registerEmailInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkEmail = true) }, {}))
+        binding.registerTelephoneInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkTelephone = true) }, {}))
+        binding.registerPasswordInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
     }
 }

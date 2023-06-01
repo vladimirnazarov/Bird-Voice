@@ -1,17 +1,25 @@
 package by.ssrlab.birdvoice.main.fragments.record.record
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
+import by.ssrlab.birdvoice.helpers.createAnimationEndListener
+import by.ssrlab.birdvoice.helpers.recorder.AudioRecorder
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
+import java.io.File
 
 class RecordFragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentRecordBinding
+    private val recorder by lazy { AudioRecorder() }
     private var pressedBool = true
 
     override fun onCreateView(
@@ -25,21 +33,8 @@ class RecordFragment: BaseMainFragment() {
         animVM.recDefineElementsVisibility(binding)
         animVM.recObjectEnter(MainApp.appContext, binding)
 
-        binding.recBird.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
-            binding.recRecordButtonIcon.setOnClickListener {
-                binding.recRecordButtonIcon.setImageResource(
-                    if (pressedBool) R.drawable.ic_rec_stop
-                    else R.drawable.ic_rec_start
-                )
-
-                if (!pressedBool){
-                    binding.recRecordButtonIcon.isClickable = false
-                    animVM.recObjectOut(MainApp.appContext, binding)
-                    mainVM.navigateToWithDelay(R.id.action_recordFragment_to_editRecordFragment)
-                }
-
-                pressedBool = !pressedBool
-            }
+        binding.recBird.animation.setAnimationListener(createAnimationEndListener {
+            binding.recRecordButtonIcon.setOnClickListener { buttonAction() }
         })
 
         activityMain.setPopBackCallback {
@@ -63,5 +58,40 @@ class RecordFragment: BaseMainFragment() {
                 binding.recRecordButtonIcon.isClickable = false
             })
         }
+    }
+
+    private fun startRecord(){
+        binding.recRecordButtonIcon.setImageResource(
+            if (pressedBool) R.drawable.ic_rec_stop
+            else R.drawable.ic_rec_start
+        )
+
+        if (!pressedBool){
+            recorder.stop()
+
+            binding.recRecordButtonIcon.isClickable = false
+            animVM.recObjectOut(MainApp.appContext, binding)
+            mainVM.navigateToWithDelay(R.id.action_recordFragment_to_editRecordFragment)
+        } else {
+            File(activityMain.cacheDir, "audio.mp3").also {
+                recorder.start(it)
+                mainVM.tempAudioFile = it
+            }
+        }
+
+        pressedBool = !pressedBool
+    }
+
+    private fun requestRecordPermission(){
+        ActivityCompat.requestPermissions(
+            activityMain,
+            arrayOf(Manifest.permission.RECORD_AUDIO),
+            1
+        )
+    }
+
+    private fun buttonAction(){
+        if (ContextCompat.checkSelfPermission(MainApp.appContext, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) startRecord()
+        else requestRecordPermission()
     }
 }

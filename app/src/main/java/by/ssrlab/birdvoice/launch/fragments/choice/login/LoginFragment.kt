@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
+import by.ssrlab.birdvoice.helpers.*
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 
 class LoginFragment: BaseLaunchFragment() {
@@ -23,13 +24,13 @@ class LoginFragment: BaseLaunchFragment() {
         animVM.loginDefineElementsVisibility(binding)
         animVM.loginObjectEnter(MainApp.appContext, binding)
 
-        binding.loginEmailInput.filters = fragmentVM.editTextFilters
-        binding.loginPasswordInput.filters = fragmentVM.editTextFilters
+        binding.loginEmailInput.filters = editTextFilters
+        binding.loginPasswordInput.filters = editTextFilters
 
         if (launchVM.boolPopBack) {
             launchVM.showArrow()
         }
-        binding.loginBird.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
+        binding.loginBird.animation.setAnimationListener(createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction({ animVM.loginObjectOut(MainApp.appContext, binding) }){
                     launchVM.hideArrow()
@@ -42,10 +43,10 @@ class LoginFragment: BaseLaunchFragment() {
             }
         })
 
-        fragmentVM.controlPopBack(launchVM, true)
+        controlPopBack(launchVM, true)
 
         binding.loginShowPasswordButton.setOnClickListener {
-            fragmentVM.setPasswordShowButtonAction(binding.loginPasswordInput, binding.loginShowPasswordButton)
+            setPasswordShowButtonAction(binding.loginPasswordInput, binding.loginShowPasswordButton)
         }
 
         return binding.root
@@ -60,17 +61,17 @@ class LoginFragment: BaseLaunchFragment() {
     private fun checkLogin(){
         setEditTextListeners()
 
-        fragmentVM.checkTextInput(binding.loginEmailInput.text, binding.loginEmailErrorMessage, resources)
-        fragmentVM.checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
+        checkTextInput(binding.loginEmailInput.text, binding.loginEmailErrorMessage, resources)
+        checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
     }
 
     private fun errorViewOut(checkLogin: Boolean = false, checkPassword: Boolean = false){
-        if (checkLogin) fragmentVM.checkErrorViewAvailability(binding.loginEmailErrorMessage)
-        if (checkPassword) fragmentVM.checkErrorViewAvailability(binding.loginPasswordErrorMessage)
+        if (checkLogin) checkErrorViewAvailability(binding.loginEmailErrorMessage)
+        if (checkPassword) checkErrorViewAvailability(binding.loginPasswordErrorMessage)
     }
 
     private fun setEditTextListeners(){
-        binding.loginEmailInput.addTextChangedListener(fragmentVM.createEditTextListener ({ errorViewOut(checkLogin = true) }, {}))
-        binding.loginPasswordInput.addTextChangedListener(fragmentVM.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
+        binding.loginEmailInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkLogin = true) }, {}))
+        binding.loginPasswordInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
     }
 }

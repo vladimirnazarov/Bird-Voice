@@ -62,14 +62,21 @@ class Recognition2Adapter(
 
         enterAnimation(binding.root)
 
-        binding.recognition2RvItemButton.setOnClickListener {
-            openView(viewArray.indexOf(binding))
-        }
-
         val pagerAdapter = RecognitionPagerAdapter(activity)
-        binding.recognition2RvItemOpenPager.apply {
-            adapter = pagerAdapter
-            currentItem = 0
+
+        binding.apply {
+            recognition2RvItemButton.setOnClickListener {
+                openView(viewArray.indexOf(binding))
+            }
+            recognition2RvItemOpenButton1.setOnClickListener {
+                closeViews()
+            }
+
+            recognition2RvItemOpenPager.apply {
+                adapter = pagerAdapter
+                currentItem = 0
+            }
+            recognition2RvItemOpenTabs.removeAllTabs()
         }
 
         TabLayoutMediator(binding.recognition2RvItemOpenTabs, binding.recognition2RvItemOpenPager){tab, position ->

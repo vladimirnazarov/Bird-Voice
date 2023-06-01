@@ -7,13 +7,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import by.ssrlab.birdvoice.helpers.AnimVM
 import by.ssrlab.birdvoice.main.MainActivity
-import by.ssrlab.birdvoice.main.vm.BaseMainFragmentVM
 import by.ssrlab.birdvoice.main.vm.MainVM
 
 open class BaseMainFragment: Fragment() {
 
     val mainVM: MainVM by activityViewModels()
-    val fragmentVM: BaseMainFragmentVM by activityViewModels()
     val animVM: AnimVM by activityViewModels()
     lateinit var activityMain: MainActivity
 

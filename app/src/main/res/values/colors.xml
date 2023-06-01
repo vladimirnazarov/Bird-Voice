@@ -19,6 +19,8 @@
     <color name="primary_button_push">#66A6A6D6</color>
     <color name="primary_concave_background">#F2F3F7</color>
     <color name="primary_tabs_unactivated">#E5E6EC</color>
+    <color name="primary_tabs_push">#66C3C3E4</color>
+    <color name="primary_tabs_white">#FFFFFF</color>
 
     <color name="secondary_title">#ACB6C9</color>
     <color name="secondary_text_blue">#7CA7F9</color>

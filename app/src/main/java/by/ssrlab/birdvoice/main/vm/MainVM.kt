@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import by.ssrlab.birdvoice.databinding.ActivityMainBinding
 import by.ssrlab.birdvoice.main.MainActivity
 import kotlinx.coroutines.*
+import java.io.File
 
 class MainVM: ViewModel() {
 
@@ -59,4 +60,7 @@ class MainVM: ViewModel() {
 
     //Adapter value to listen to
     val recognition2Value = MutableLiveData<Boolean>()
+
+    //AudioRecord
+    var tempAudioFile: File? = null
 }

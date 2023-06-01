@@ -8,6 +8,10 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
+import by.ssrlab.birdvoice.helpers.checkErrorViewAvailability
+import by.ssrlab.birdvoice.helpers.checkTextInput
+import by.ssrlab.birdvoice.helpers.createAnimationEndListener
+import by.ssrlab.birdvoice.helpers.createEditTextListener
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -34,7 +38,7 @@ class UserDataFragment : BaseLaunchFragment() {
 
         registerCropImage()
 
-        binding.userDataPhotoButton.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
+        binding.userDataPhotoButton.animation.setAnimationListener(createAnimationEndListener {
             launchVM.setArrowAction { navigationBackAction({ animVM.dataObjectOut(MainApp.appContext, binding) }, {}) }
 
             binding.userDataPhotoButton.setOnClickListener {
@@ -85,15 +89,15 @@ class UserDataFragment : BaseLaunchFragment() {
 
         setEditTextListener()
 
-        errorValue += fragmentVM.checkTextInput(binding.userDataNameInput.text, binding.userDataNameErrorMessage, resources)
+        errorValue += checkTextInput(binding.userDataNameInput.text, binding.userDataNameErrorMessage, resources)
         if (errorValue == 0) onSuccess()
     }
 
     private fun errorViewOut(){
-        fragmentVM.checkErrorViewAvailability(binding.userDataNameErrorMessage)
+        checkErrorViewAvailability(binding.userDataNameErrorMessage)
     }
 
     private fun setEditTextListener(){
-        binding.userDataNameInput.addTextChangedListener(fragmentVM.createEditTextListener({ errorViewOut() }, {}))
+        binding.userDataNameInput.addTextChangedListener(createEditTextListener({ errorViewOut() }, {}))
     }
 }

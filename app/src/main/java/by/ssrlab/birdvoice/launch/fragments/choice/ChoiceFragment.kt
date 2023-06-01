@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
+import by.ssrlab.birdvoice.helpers.createAnimationEndListener
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 
 class ChoiceFragment: BaseLaunchFragment() {
@@ -25,7 +26,7 @@ class ChoiceFragment: BaseLaunchFragment() {
         animVM.choiceDefineElementsVisibility(binding)
         animVM.choiceObjectEnter(MainApp.appContext, binding)
 
-        binding.choiceBird.animation.setAnimationListener(fragmentVM.createAnimationEndListener {
+        binding.choiceBird.animation.setAnimationListener(createAnimationEndListener {
             binding.choiceLoginButton.setOnClickListener {
                 animVM.choiceObjectOut(MainApp.appContext, binding)
                 binding.choiceLoginButton.isClickable = false

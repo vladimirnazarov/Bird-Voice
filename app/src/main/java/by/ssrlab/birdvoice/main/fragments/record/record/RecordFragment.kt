@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
@@ -19,7 +20,7 @@ import java.io.File
 class RecordFragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentRecordBinding
-    private val recorder by lazy { AudioRecorder() }
+    private val recorder: AudioRecorder by viewModels()
     private var pressedBool = true
 
     override fun onCreateView(
@@ -82,16 +83,19 @@ class RecordFragment: BaseMainFragment() {
         pressedBool = !pressedBool
     }
 
-    private fun requestRecordPermission(){
-        ActivityCompat.requestPermissions(
-            activityMain,
-            arrayOf(Manifest.permission.RECORD_AUDIO),
-            1
-        )
+    private fun requestRecordPermission(onSuccess: () -> Unit){
+        while (ContextCompat.checkSelfPermission(MainApp.appContext, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                activityMain,
+                arrayOf(Manifest.permission.RECORD_AUDIO),
+                1
+            )
+        }
+        onSuccess()
     }
 
     private fun buttonAction(){
         if (ContextCompat.checkSelfPermission(MainApp.appContext, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) startRecord()
-        else requestRecordPermission()
+        else requestRecordPermission({ startRecord() })
     }
 }

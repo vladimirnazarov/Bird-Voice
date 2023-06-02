@@ -2,11 +2,12 @@ package by.ssrlab.birdvoice.helpers.recorder
 
 import android.media.MediaRecorder
 import android.os.Build
+import androidx.lifecycle.ViewModel
 import by.ssrlab.birdvoice.app.MainApp
 import java.io.File
 import java.io.FileOutputStream
 
-class AudioRecorder: AudioRecorderInterface {
+class AudioRecorder: ViewModel(), AudioRecorderInterface {
 
     private var recorder: MediaRecorder? = null
 

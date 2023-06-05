@@ -8,7 +8,6 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.Recognition2RvItemBinding
-import by.ssrlab.birdvoice.helpers.RecognitionPagerAdapter
 import by.ssrlab.birdvoice.main.MainActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
 import com.google.android.material.tabs.TabLayoutMediator
@@ -88,10 +87,9 @@ class Recognition2Adapter(
     }
 
     override fun getItemCount(): Int{
-
-        for (i in 0..5) isOpenArray.add(false)
-
-        return 5
+        val count = 5
+        for (i in 0..count) isOpenArray.add(false)
+        return count
     }
 
     override fun onBindViewHolder(holder: Recognition2Holder, position: Int) {

@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.main.fragments.record.recognition
+package by.ssrlab.birdvoice.main.fragments.recognition.recognition
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import by.ssrlab.birdvoice.databinding.FragmentRecognition2Binding
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import by.ssrlab.birdvoice.main.rv.Recognition2Adapter
 
-class RecognitionFragment2: BaseMainFragment() {
+class  Recognition2Fragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentRecognition2Binding
 

@@ -54,12 +54,13 @@ class MainVM: ViewModel() {
         }
     }
     private var navUpAnimLambda = {}
-    fun setNavUpAnimLambda(anim: () -> Unit){
+    fun setNavUpLambda(anim: () -> Unit){
         navUpAnimLambda = anim
     }
 
     //Adapter value to listen to
     val recognition2Value = MutableLiveData<Boolean>()
+    val collectionValue = MutableLiveData<Boolean>()
 
     //AudioRecord
     var tempAudioFile: File? = null

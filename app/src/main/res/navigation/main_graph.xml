@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/informPage"
-        android:name="by.ssrlab.birdvoice.main.fragments.record.InformPageFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.recognition.InformPageFragment"
         android:label="InformPage" >
         <action
             android:id="@+id/action_informPage_to_recordFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/recordFragment"
-        android:name="by.ssrlab.birdvoice.main.fragments.record.record.RecordFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.recognition.record.RecordFragment"
         android:label="RecordFragment" >
         <action
             android:id="@+id/action_recordFragment_to_editRecordFragment"
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/recognitionFragment1"
-        android:name="by.ssrlab.birdvoice.main.fragments.record.recognition.RecognitionFragment1"
+        android:name="by.ssrlab.birdvoice.main.fragments.recognition.recognition.Recognition1Fragment"
         android:label="RecognitionFragment1" >
         <action
             android:id="@+id/action_recognitionFragment1_to_recognitionFragment2"
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/editRecordFragment"
-        android:name="by.ssrlab.birdvoice.main.fragments.record.record.EditRecordFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.recognition.record.EditRecordFragment"
         android:label="EditRecordFragment" >
         <action
             android:id="@+id/action_editRecordFragment_to_recognitionFragment1"
@@ -38,6 +38,6 @@
     </fragment>
     <fragment
         android:id="@+id/recognitionFragment2"
-        android:name="by.ssrlab.birdvoice.main.fragments.record.recognition.RecognitionFragment2"
+        android:name="by.ssrlab.birdvoice.main.fragments.recognition.recognition.Recognition2Fragment"
         android:label="RecognitionFragment2" />
 </navigation>

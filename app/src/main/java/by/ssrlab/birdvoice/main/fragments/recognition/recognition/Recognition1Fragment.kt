@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.main.fragments.record.recognition
+package by.ssrlab.birdvoice.main.fragments.recognition.recognition
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class RecognitionFragment1: BaseMainFragment() {
+class Recognition1Fragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentRecognition1Binding
     private var breakableMarker = false

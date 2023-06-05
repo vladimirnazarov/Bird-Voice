@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.main.fragments.record.record
+package by.ssrlab.birdvoice.main.fragments.recognition.record
 
 import android.Manifest
 import android.content.pm.PackageManager

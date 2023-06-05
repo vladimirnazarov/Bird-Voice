@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.main.fragments.record
+package by.ssrlab.birdvoice.main.fragments.recognition
 
 import android.os.Bundle
 import android.view.LayoutInflater

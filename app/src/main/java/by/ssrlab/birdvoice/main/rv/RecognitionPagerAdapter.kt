@@ -1,10 +1,10 @@
-package by.ssrlab.birdvoice.helpers
+package by.ssrlab.birdvoice.main.rv
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import by.ssrlab.birdvoice.main.fragments.record.recognition.tabs.Tab1Fragment
-import by.ssrlab.birdvoice.main.fragments.record.recognition.tabs.Tab2Fragment
+import by.ssrlab.birdvoice.main.fragments.recognition.recognition.tabs.RecognitionTab1
+import by.ssrlab.birdvoice.main.fragments.recognition.recognition.tabs.RecognitionTab2
 
 class RecognitionPagerAdapter(fragment: FragmentActivity): FragmentStateAdapter(fragment) {
 
@@ -13,11 +13,11 @@ class RecognitionPagerAdapter(fragment: FragmentActivity): FragmentStateAdapter(
     override fun createFragment(position: Int): Fragment {
         return when (position){
 
-            0 -> Tab1Fragment()
+            0 -> RecognitionTab1()
 
-            1 -> Tab2Fragment()
+            1 -> RecognitionTab2()
 
-            else -> Tab1Fragment()
+            else -> RecognitionTab1()
         }
     }
 }

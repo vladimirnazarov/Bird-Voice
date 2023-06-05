@@ -42,8 +42,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setPopBackCallback(anim: () -> Unit){
-        mainVM.setNavUpAnimLambda(anim)
+    fun setPopBackCallback(func: () -> Unit){
+        mainVM.setNavUpLambda(func)
         onBackPressedDispatcher.addCallback(this, mainVM.onMapBackPressedCallback)
     }
 

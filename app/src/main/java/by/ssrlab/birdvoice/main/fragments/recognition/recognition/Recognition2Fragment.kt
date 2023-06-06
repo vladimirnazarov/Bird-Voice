@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRecognition2Binding
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import by.ssrlab.birdvoice.main.rv.Recognition2Adapter
 
 class  Recognition2Fragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentRecognition2Binding
+    override var arrayOfViews = arrayListOf<ViewObject>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +46,7 @@ class  Recognition2Fragment: BaseMainFragment() {
 
         mainVM.setToolbarTitle("Recognition results")
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
-            navigationBackAction({}){ mainVM.recognition2Value.value = true }
+            navigationBackAction { mainVM.recognition2Value.value = true }
         }
     }
 }

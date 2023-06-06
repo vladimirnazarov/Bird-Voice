@@ -8,12 +8,13 @@ import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
-import by.ssrlab.birdvoice.helpers.*
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 
 class RegisterFragment: BaseLaunchFragment() {
 
     private lateinit var binding: FragmentRegisterBinding
+    override lateinit var arrayOfViews: ArrayList<ViewObject>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,22 +23,42 @@ class RegisterFragment: BaseLaunchFragment() {
     ): View {
 
         binding = FragmentRegisterBinding.inflate(layoutInflater)
+        binding.apply {
+            arrayOfViews = arrayListOf(
+                ViewObject(registerBird),
+                ViewObject(registerBottomLeftCloud, "lc2"),
+                ViewObject(registerTopRightCloud, "rc1"),
+                ViewObject(registerBottomRightCloud, "rc2"),
+                ViewObject(registerNewAccountText),
+                ViewObject(registerSignUpText),
+                ViewObject(registerEmailTitle),
+                ViewObject(registerEmailInput),
+                ViewObject(registerTelephoneTitle),
+                ViewObject(registerTelephoneInput),
+                ViewObject(registerPasswordTitle),
+                ViewObject(registerPasswordInput),
+                ViewObject(registerShowPasswordButton),
+                ViewObject(registerPrivacyPolicy),
+                ViewObject(registerCreateButton)
+            )
 
-        binding.registerPrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
+            registerPrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
 
-        animVM.registerDefineElementsVisibility(binding)
-        animVM.registerObjectEnter(MainApp.appContext, binding)
+            registerEmailInput.filters = helpFunctions.editTextFilters
+            registerTelephoneInput.filters = helpFunctions.editTextFilters
+            registerPasswordInput.filters = helpFunctions.editTextFilters
+        }
 
-        binding.registerEmailInput.filters = editTextFilters
-        binding.registerTelephoneInput.filters = editTextFilters
-        binding.registerPasswordInput.filters = editTextFilters
+        animationUtils.commonDefineObjectsVisibility(arrayOfViews)
+        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
 
         if (launchVM.boolPopBack) {
             launchVM.showArrow()
         }
-        binding.registerBird.animation.setAnimationListener(createAnimationEndListener {
+        binding.registerBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
-                navigationBackAction({ animVM.registerObjectOut(MainApp.appContext, binding) }){
+                navigationBackAction {
+                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                     launchVM.hideArrow()
                     errorViewOut(checkEmail = true, checkTelephone = true, checkPassword = true)
                 }
@@ -45,7 +66,7 @@ class RegisterFragment: BaseLaunchFragment() {
 
             binding.registerCreateButton.setOnClickListener {
                 checkRegister {
-                    animVM.registerObjectOut(MainApp.appContext, binding)
+                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                     launchVM.navigateToWithDelay(R.id.action_registerFragment_to_codeFragment)
                     binding.registerCreateButton.isClickable = false
                     launchVM.activityBinding?.launcherArrowBack?.isClickable = false
@@ -53,9 +74,9 @@ class RegisterFragment: BaseLaunchFragment() {
             }
         })
 
-        controlPopBack(launchVM, true)
+        helpFunctions.controlPopBack(launchVM, true)
 
-        binding.registerShowPasswordButton.setOnClickListener { setPasswordShowButtonAction(binding.registerPasswordInput, binding.registerShowPasswordButton) }
+        binding.registerShowPasswordButton.setOnClickListener { helpFunctions.setPasswordShowButtonAction(binding.registerPasswordInput, binding.registerShowPasswordButton) }
 
         return binding.root
     }
@@ -63,7 +84,7 @@ class RegisterFragment: BaseLaunchFragment() {
     override fun onResume() {
         super.onResume()
 
-        activityLaunch.setPopBackCallback { animVM.registerObjectOut(MainApp.appContext, binding) }
+        activityLaunch.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
     }
 
     private fun checkRegister(onSuccess: () -> Unit){
@@ -71,22 +92,22 @@ class RegisterFragment: BaseLaunchFragment() {
 
         setEditTextListeners()
 
-        errorValue += checkTextInput(binding.registerEmailInput.text, binding.registerEmailErrorMessage, resources)
-        errorValue += checkTextInput(binding.registerTelephoneInput.text, binding.registerTelephoneErrorMessage, resources)
-        errorValue += checkTextInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
+        errorValue += helpFunctions.checkTextInput(binding.registerEmailInput.text, binding.registerEmailErrorMessage, resources)
+        errorValue += helpFunctions.checkTextInput(binding.registerTelephoneInput.text, binding.registerTelephoneErrorMessage, resources)
+        errorValue += helpFunctions.checkTextInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
 
         if (errorValue == 0) onSuccess()
     }
 
     private fun errorViewOut(checkEmail: Boolean = false, checkTelephone: Boolean = false, checkPassword: Boolean = false){
-        if (checkEmail) checkErrorViewAvailability(binding.registerEmailErrorMessage)
-        if (checkTelephone) checkErrorViewAvailability(binding.registerTelephoneErrorMessage)
-        if (checkPassword) checkErrorViewAvailability(binding.registerPasswordErrorMessage)
+        if (checkEmail) helpFunctions.checkErrorViewAvailability(binding.registerEmailErrorMessage)
+        if (checkTelephone) helpFunctions.checkErrorViewAvailability(binding.registerTelephoneErrorMessage)
+        if (checkPassword) helpFunctions.checkErrorViewAvailability(binding.registerPasswordErrorMessage)
     }
 
     private fun setEditTextListeners(){
-        binding.registerEmailInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkEmail = true) }, {}))
-        binding.registerTelephoneInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkTelephone = true) }, {}))
-        binding.registerPasswordInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
+        binding.registerEmailInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkEmail = true) }, {}))
+        binding.registerTelephoneInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkTelephone = true) }, {}))
+        binding.registerPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
     }
 }

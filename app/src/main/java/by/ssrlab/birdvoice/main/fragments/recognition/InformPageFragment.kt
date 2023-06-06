@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentInformPageBinding
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import by.ssrlab.birdvoice.main.rv.InformAdapter
 
 class InformPageFragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentInformPageBinding
+    override var arrayOfViews = arrayListOf<ViewObject>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

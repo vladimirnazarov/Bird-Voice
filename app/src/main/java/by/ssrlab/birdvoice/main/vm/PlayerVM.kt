@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModel
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentEditRecordBinding
-import by.ssrlab.birdvoice.helpers.convertToTimerMode
-import by.ssrlab.birdvoice.helpers.createSeekBarProgressListener
+import by.ssrlab.birdvoice.helpers.HelpFunctions
 import com.airbnb.lottie.LottieDrawable
 import kotlinx.coroutines.*
 
@@ -22,6 +21,7 @@ class PlayerVM: ViewModel() {
     private var mediaPlayer: MediaPlayer? = null
 
     private var binding: FragmentEditRecordBinding? = null
+    private val helpFunctions = HelpFunctions()
 
     fun initializeMediaPlayer(uri: Uri){
 
@@ -108,7 +108,7 @@ class PlayerVM: ViewModel() {
     private suspend fun initProgressListener(mediaPlayer: MediaPlayer){
         while (mpStatus == "pause") {
             binding!!.apply {
-                editRecTimer.text = convertToTimerMode(mediaPlayer.currentPosition)
+                editRecTimer.text = helpFunctions.convertToTimerMode(mediaPlayer.currentPosition)
                 editRecAudioProgress.progress = mediaPlayer.currentPosition
             }
             delay(250)
@@ -122,7 +122,7 @@ class PlayerVM: ViewModel() {
                     binding!!.apply {
                         editRecPlayButton.setImageResource(R.drawable.ic_play_button)
                         editRecAudioProgress.progress = 0
-                        editRecTimer.text = convertToTimerMode(mediaPlayer.currentPosition)
+                        editRecTimer.text = helpFunctions.convertToTimerMode(mediaPlayer.currentPosition)
                         editRecWaveAnimation.apply {
                             pauseAnimation()
                             cancelAnimation()
@@ -134,9 +134,9 @@ class PlayerVM: ViewModel() {
     }
 
     private fun listenProgress(mediaPlayer: MediaPlayer){
-        binding!!.editRecAudioProgress.setOnSeekBarChangeListener(createSeekBarProgressListener {
+        binding!!.editRecAudioProgress.setOnSeekBarChangeListener(helpFunctions.createSeekBarProgressListener {
             mediaPlayer.seekTo(it)
-            binding!!.editRecTimer.text = convertToTimerMode(mediaPlayer.currentPosition)
+            binding!!.editRecTimer.text = helpFunctions.convertToTimerMode(mediaPlayer.currentPosition)
         })
     }
 

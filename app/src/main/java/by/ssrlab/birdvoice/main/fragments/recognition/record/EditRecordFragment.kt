@@ -9,13 +9,15 @@ import androidx.fragment.app.viewModels
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentEditRecordBinding
-import by.ssrlab.birdvoice.helpers.createAnimationEndListener
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import by.ssrlab.birdvoice.main.vm.PlayerVM
 
 class EditRecordFragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentEditRecordBinding
+    override lateinit var arrayOfViews: ArrayList<ViewObject>
+
     private val playerVM: PlayerVM by viewModels()
     private var isPlaying = false
 
@@ -30,27 +32,44 @@ class EditRecordFragment: BaseMainFragment() {
             playerVM.saveBinding(binding)
         } else binding = playerVM.getBinding()
 
-        animVM.editRecDefineElementsVisibility(binding)
-        animVM.editRecordObjectEnter(MainApp.appContext, binding)
+        binding.apply {
+            arrayOfViews = arrayListOf(
+                ViewObject(editRecConcaveTimeHolder),
+                ViewObject(editRecConcaveDateHolder),
+                ViewObject(editRecConcavePlaceHolder),
+                ViewObject(editRecConcaveWaveHolder),
+                ViewObject(editRecTopHolder),
+                ViewObject(editRecBottomHolder),
+                ViewObject(editRecPlayButton),
+                ViewObject(editRecTimer),
+                ViewObject(editRecAudioProgress),
+                ViewObject(editRecLoadButton),
+                ViewObject(editRecShareButton),
+                ViewObject(editRecStartButton)
+            )
+        }
 
-        binding.editRecTopHolder.animation.setAnimationListener(createAnimationEndListener {
+        animationUtils.commonDefineObjectsVisibility(arrayOfViews)
+        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+
+        binding.editRecTopHolder.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             binding.editRecStartButton.setOnClickListener {
                 binding.editRecWaveAnimation.apply {
                     if (isPlaying){
                         pauseAnimation()
                         isPlaying = !isPlaying
-                        animVM.editRecordObjectOut(MainApp.appContext, binding)
+                        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                         mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1)
 
                     } else {
-                        animVM.editRecordObjectOut(MainApp.appContext, binding)
+                        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                         mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1)
                     }
                 }
             }
         })
 
-        activityMain.setPopBackCallback { animVM.editRecordObjectOut(MainApp.appContext, binding) }
+        activityMain.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
 
         return binding.root
     }
@@ -66,17 +85,15 @@ class EditRecordFragment: BaseMainFragment() {
 
         mainVM.setToolbarTitle("Listen to your record")
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
-            navigationBackAction({ animVM.editRecordObjectOut(MainApp.appContext, binding) }, {})
+            navigationBackAction { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
         }
     }
 
     private fun setupPlayer() {
-        mainVM.tempAudioFile.apply {
-            if (this != null) {
-                playerVM.initializeMediaPlayer(this.toUri())
+        if (mainVM.tempAudioFile != null) {
+            playerVM.initializeMediaPlayer(mainVM.tempAudioFile!!.toUri())
 
-                binding.editRecPlayButton.setOnClickListener { playerVM.playAudio() }
-            }
+            binding.editRecPlayButton.setOnClickListener { playerVM.playAudio() }
         }
     }
 }

@@ -8,10 +8,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
-import by.ssrlab.birdvoice.helpers.checkErrorViewAvailability
-import by.ssrlab.birdvoice.helpers.checkTextInput
-import by.ssrlab.birdvoice.helpers.createAnimationEndListener
-import by.ssrlab.birdvoice.helpers.createEditTextListener
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -24,6 +21,7 @@ class UserDataFragment : BaseLaunchFragment() {
 
     private lateinit var binding: FragmentUserDataBinding
     private lateinit var cropImage: ActivityResultLauncher<CropImageContractOptions>
+    override lateinit var arrayOfViews: ArrayList<ViewObject>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,19 +30,29 @@ class UserDataFragment : BaseLaunchFragment() {
     ): View {
 
         binding = FragmentUserDataBinding.inflate(layoutInflater)
+        binding.apply {
+            arrayOfViews = arrayListOf(
+                ViewObject(userDataPhotoButton),
+                ViewObject(userDataApproveButton),
+                ViewObject(userDataNameInput),
+                ViewObject(userDataNameTitle),
+                ViewObject(userDataPhotoLabel)
+            )
+        }
 
-        animVM.dataDefineElementsVisibility(binding)
-        animVM.dataObjectEnter(MainApp.appContext, binding)
+        animationUtils.commonDefineObjectsVisibility(arrayOfViews)
+        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
 
         registerCropImage()
 
-        binding.userDataPhotoButton.animation.setAnimationListener(createAnimationEndListener {
-            launchVM.setArrowAction { navigationBackAction({ animVM.dataObjectOut(MainApp.appContext, binding) }, {}) }
-
-            binding.userDataPhotoButton.setOnClickListener {
-                pickPhoto()
+        binding.userDataPhotoButton.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
+            launchVM.setArrowAction {
+                navigationBackAction {
+                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                }
             }
 
+            binding.userDataPhotoButton.setOnClickListener { pickPhoto() }
             binding.userDataApproveButton.setOnClickListener {
                 checkName {
                     Toast.makeText(MainApp.appContext, "Everything is fine!", Toast.LENGTH_SHORT).show()
@@ -58,7 +66,7 @@ class UserDataFragment : BaseLaunchFragment() {
     override fun onResume() {
         super.onResume()
 
-        activityLaunch.setPopBackCallback { animVM.dataObjectOut(MainApp.appContext, binding) }
+        activityLaunch.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
     }
 
     private fun pickPhoto(){
@@ -89,15 +97,15 @@ class UserDataFragment : BaseLaunchFragment() {
 
         setEditTextListener()
 
-        errorValue += checkTextInput(binding.userDataNameInput.text, binding.userDataNameErrorMessage, resources)
+        errorValue += helpFunctions.checkTextInput(binding.userDataNameInput.text, binding.userDataNameErrorMessage, resources)
         if (errorValue == 0) onSuccess()
     }
 
     private fun errorViewOut(){
-        checkErrorViewAvailability(binding.userDataNameErrorMessage)
+        helpFunctions.checkErrorViewAvailability(binding.userDataNameErrorMessage)
     }
 
     private fun setEditTextListener(){
-        binding.userDataNameInput.addTextChangedListener(createEditTextListener({ errorViewOut() }, {}))
+        binding.userDataNameInput.addTextChangedListener(helpFunctions.createEditTextListener({ errorViewOut() }, {}))
     }
 }

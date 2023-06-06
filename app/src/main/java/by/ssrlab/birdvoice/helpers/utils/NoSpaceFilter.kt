@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.helpers
+package by.ssrlab.birdvoice.helpers.utils
 
 import android.text.InputFilter
 import android.text.Spanned

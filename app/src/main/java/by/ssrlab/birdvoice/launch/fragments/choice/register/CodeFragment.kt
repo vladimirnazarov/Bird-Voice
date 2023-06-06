@@ -9,12 +9,13 @@ import android.widget.EditText
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
-import by.ssrlab.birdvoice.helpers.*
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 
 class CodeFragment: BaseLaunchFragment() {
 
     private lateinit var binding: FragmentCodeConfirmationBinding
+    override lateinit var arrayOfViews: ArrayList<ViewObject>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,20 +24,36 @@ class CodeFragment: BaseLaunchFragment() {
     ): View {
 
         binding = FragmentCodeConfirmationBinding.inflate(layoutInflater)
+        binding.apply {
+            arrayOfViews = arrayListOf(
+                ViewObject(codeBird),
+                ViewObject(codeBottomLeftCloud, "lc1"),
+                ViewObject(codeBottomRightCloud, "rc1"),
+                ViewObject(codeTopLeftCloud, "lc2"),
+                ViewObject(codeEnter1),
+                ViewObject(codeEnter2),
+                ViewObject(codeEnter3),
+                ViewObject(codeEnter4),
+                ViewObject(codeCodeTitle),
+                ViewObject(codeLoginButton),
+                ViewObject(codeSendAgain)
+            )
+        }
 
-        animVM.codeDefineElementsVisibility(binding)
-        animVM.codeObjectEnter(MainApp.appContext, binding)
+        animationUtils.commonDefineObjectsVisibility(arrayOfViews)
+        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
 
-        binding.codeBird.animation.setAnimationListener(createAnimationEndListener {
+        binding.codeBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
-                navigationBackAction({ animVM.codeObjectOut(MainApp.appContext, binding) }){
+                navigationBackAction {
+                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                     errorViewOut()
                 }
             }
 
             binding.codeLoginButton.setOnClickListener {
                 checkCode {
-                    animVM.codeObjectOut(MainApp.appContext, binding)
+                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                     launchVM.navigateToWithDelay(R.id.action_codeFragment_to_userDataFragment)
                     binding.codeLoginButton.isClickable = false
                     launchVM.activityBinding?.launcherArrowBack?.isClickable = false
@@ -46,7 +63,7 @@ class CodeFragment: BaseLaunchFragment() {
             setEditTextListeners()
         })
 
-        controlPopBack(launchVM, false)
+        helpFunctions.controlPopBack(launchVM, false)
 
         return binding.root
     }
@@ -54,7 +71,7 @@ class CodeFragment: BaseLaunchFragment() {
     override fun onResume() {
         super.onResume()
 
-        activityLaunch.setPopBackCallback { animVM.codeObjectOut(MainApp.appContext, binding) }
+        activityLaunch.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
     }
 
     private fun checkCode(onSuccess: () -> Unit){
@@ -70,7 +87,7 @@ class CodeFragment: BaseLaunchFragment() {
     }
 
     private fun errorViewOut(){
-        checkErrorViewAvailability(binding.codeCodeErrorMessage)
+        helpFunctions.checkErrorViewAvailability(binding.codeCodeErrorMessage)
     }
 
     private fun setEditTextListeners(){
@@ -79,15 +96,15 @@ class CodeFragment: BaseLaunchFragment() {
         val etArray = arrayOf(binding.codeEnter1, binding.codeEnter2, binding.codeEnter3, binding.codeEnter4)
 
         etArray.forEachIndexed { index, appCompatEditText ->
-            appCompatEditText.filters = editTextFilters
-            appCompatEditText.addTextChangedListener(createEditTextListener({ errorViewOut() }, {
+            appCompatEditText.filters = helpFunctions.editTextFilters
+            appCompatEditText.addTextChangedListener(helpFunctions.createEditTextListener({ errorViewOut() }, {
                     if (it?.length == 1) {
                     if (index < etArray.size - 1) {
                         etArray[index + 1].text?.clear()
                         requestFocus(etArray[index + 1])
                     }
                     else {
-                        hideKeyboard(view, MainApp.appContext)
+                        helpFunctions.hideKeyboard(view, MainApp.appContext)
                         binding.codeEnter4.clearFocus()
                     }
                 }
@@ -97,6 +114,6 @@ class CodeFragment: BaseLaunchFragment() {
 
     private fun requestFocus(et: EditText){
         et.requestFocus()
-        showKeyboard(et)
+        helpFunctions.showKeyboard(et)
     }
 }

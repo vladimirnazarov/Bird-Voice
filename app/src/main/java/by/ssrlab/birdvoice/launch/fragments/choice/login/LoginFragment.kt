@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
-import by.ssrlab.birdvoice.helpers.*
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 
 class LoginFragment: BaseLaunchFragment() {
 
     private lateinit var binding: FragmentLoginBinding
+    override lateinit var arrayOfViews: ArrayList<ViewObject>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,19 +21,38 @@ class LoginFragment: BaseLaunchFragment() {
     ): View {
 
         binding = FragmentLoginBinding.inflate(layoutInflater)
+        binding.apply {
+            arrayOfViews = arrayListOf(
+                ViewObject(loginWelcomeText),
+                ViewObject(loginBottomLeftCloud, "lc1"),
+                ViewObject(loginBottomRightCloud, "rc2"),
+                ViewObject(loginTopRightCloud, "rc1"),
+                ViewObject(loginBird),
+                ViewObject(loginEmailTitle),
+                ViewObject(loginEmailInput),
+                ViewObject(loginPasswordTitle),
+                ViewObject(loginPasswordInput),
+                ViewObject(loginShowPasswordButton),
+                ViewObject(loginForgotPassword),
+                ViewObject(loginRememberMe),
+                ViewObject(loginSignInText),
+                ViewObject(loginSignInButton)
+            )
+        }
 
-        animVM.loginDefineElementsVisibility(binding)
-        animVM.loginObjectEnter(MainApp.appContext, binding)
+        animationUtils.commonDefineObjectsVisibility(arrayOfViews)
+        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
 
-        binding.loginEmailInput.filters = editTextFilters
-        binding.loginPasswordInput.filters = editTextFilters
+        binding.loginEmailInput.filters = helpFunctions.editTextFilters
+        binding.loginPasswordInput.filters = helpFunctions.editTextFilters
 
         if (launchVM.boolPopBack) {
             launchVM.showArrow()
         }
-        binding.loginBird.animation.setAnimationListener(createAnimationEndListener {
+        binding.loginBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
-                navigationBackAction({ animVM.loginObjectOut(MainApp.appContext, binding) }){
+                navigationBackAction {
+                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                     launchVM.hideArrow()
                     errorViewOut(checkLogin = true, checkPassword = true)
                 }
@@ -43,10 +63,10 @@ class LoginFragment: BaseLaunchFragment() {
             }
         })
 
-        controlPopBack(launchVM, true)
+        helpFunctions.controlPopBack(launchVM, true)
 
         binding.loginShowPasswordButton.setOnClickListener {
-            setPasswordShowButtonAction(binding.loginPasswordInput, binding.loginShowPasswordButton)
+            helpFunctions.setPasswordShowButtonAction(binding.loginPasswordInput, binding.loginShowPasswordButton)
         }
 
         return binding.root
@@ -55,23 +75,23 @@ class LoginFragment: BaseLaunchFragment() {
     override fun onResume() {
         super.onResume()
 
-        activityLaunch.setPopBackCallback { animVM.loginObjectOut(MainApp.appContext, binding) }
+        activityLaunch.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
     }
 
     private fun checkLogin(){
         setEditTextListeners()
 
-        checkTextInput(binding.loginEmailInput.text, binding.loginEmailErrorMessage, resources)
-        checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
+        helpFunctions.checkTextInput(binding.loginEmailInput.text, binding.loginEmailErrorMessage, resources)
+        helpFunctions.checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
     }
 
     private fun errorViewOut(checkLogin: Boolean = false, checkPassword: Boolean = false){
-        if (checkLogin) checkErrorViewAvailability(binding.loginEmailErrorMessage)
-        if (checkPassword) checkErrorViewAvailability(binding.loginPasswordErrorMessage)
+        if (checkLogin) helpFunctions.checkErrorViewAvailability(binding.loginEmailErrorMessage)
+        if (checkPassword) helpFunctions.checkErrorViewAvailability(binding.loginPasswordErrorMessage)
     }
 
     private fun setEditTextListeners(){
-        binding.loginEmailInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkLogin = true) }, {}))
-        binding.loginPasswordInput.addTextChangedListener(createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
+        binding.loginEmailInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkLogin = true) }, {}))
+        binding.loginPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
     }
 }

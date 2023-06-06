@@ -5,14 +5,19 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
-import by.ssrlab.birdvoice.helpers.AnimVM
+import by.ssrlab.birdvoice.helpers.HelpFunctions
+import by.ssrlab.birdvoice.helpers.utils.AnimationUtils
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.MainActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
 
-open class BaseMainFragment: Fragment() {
+abstract class BaseMainFragment: Fragment() {
 
     val mainVM: MainVM by activityViewModels()
-    val animVM: AnimVM by activityViewModels()
+    val animationUtils = AnimationUtils()
+    val helpFunctions = HelpFunctions()
+
+    abstract var arrayOfViews: ArrayList<ViewObject>
     lateinit var activityMain: MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +32,8 @@ open class BaseMainFragment: Fragment() {
         mainVM.setNavController(requireView().findNavController())
     }
 
-    fun navigationBackAction(animFun: () -> Unit, otherFun: () -> Unit){
+    fun navigationBackAction(action: () -> Unit){
         mainVM.navigateUpWithDelay()
-        animFun()
-        otherFun()
+        action()
     }
 }

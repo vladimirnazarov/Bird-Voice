@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRecognition1Binding
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 class Recognition1Fragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentRecognition1Binding
+    override lateinit var arrayOfViews: ArrayList<ViewObject>
     private var breakableMarker = false
 
     override fun onCreateView(
@@ -23,12 +25,22 @@ class Recognition1Fragment: BaseMainFragment() {
     ): View {
 
         binding = FragmentRecognition1Binding.inflate(layoutInflater)
+        binding.apply {
+            arrayOfViews = arrayListOf(
+                ViewObject(recognitionBird),
+                ViewObject(recognitionText),
+                ViewObject(recognitionPlatform),
+                ViewObject(recognitionBottomLeftCloud, "lc1"),
+                ViewObject(recognitionTopLeftCloud, "lc2"),
+                ViewObject(recognitionTopRightCloud, "rc1")
+            )
+        }
 
-        animVM.recognition1DefineElementsVisibility(binding)
-        animVM.recognition1ObjectEnter(MainApp.appContext, binding)
+        animationUtils.commonDefineObjectsVisibility(arrayOfViews)
+        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
 
         activityMain.setPopBackCallback {
-            animVM.recognition1ObjectOut(MainApp.appContext, binding)
+            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
             breakableMarker = true
             binding.recognitionDots.visibility = View.INVISIBLE
         }
@@ -42,7 +54,8 @@ class Recognition1Fragment: BaseMainFragment() {
         mainVM.getScope().launch { toolbarTitleAnimation() }
         mainVM.setToolbarTitle("Recognition service")
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
-            navigationBackAction({ animVM.recognition1ObjectOut(MainApp.appContext, binding) }){
+            navigationBackAction {
+                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                 breakableMarker = true
                 binding.recognitionDots.visibility = View.INVISIBLE
             }
@@ -53,7 +66,7 @@ class Recognition1Fragment: BaseMainFragment() {
         mainVM.getScope().launch {
             delay(5000)
             if (!breakableMarker) {
-                animVM.recognition1ObjectOut(MainApp.appContext, binding)
+                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                 mainVM.navigateToWithDelay(R.id.action_recognitionFragment1_to_recognitionFragment2)
                 binding.recognitionDots.visibility = View.INVISIBLE
             }

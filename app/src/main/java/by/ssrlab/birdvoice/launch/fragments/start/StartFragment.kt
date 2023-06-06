@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.FragmentStartBinding
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 import kotlinx.coroutines.*
 
 class StartFragment: BaseLaunchFragment() {
 
     private lateinit var binding: FragmentStartBinding
+    override var arrayOfViews = arrayListOf<ViewObject>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

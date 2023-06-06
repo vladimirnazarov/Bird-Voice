@@ -31,7 +31,7 @@ class InformAdapter(private val context: Context, private val mainVM: MainVM) : 
         viewArray.add(view)
 
         view.visibility = View.INVISIBLE
-        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_in))
+        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_enter))
         view.visibility = View.VISIBLE
 
         return InformHolder(view)

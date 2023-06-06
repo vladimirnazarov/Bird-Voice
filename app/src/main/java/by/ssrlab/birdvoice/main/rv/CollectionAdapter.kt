@@ -64,7 +64,7 @@ class CollectionAdapter(
 
     private fun enterAnimation(view: View){
         view.visibility = View.INVISIBLE
-        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_in))
+        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_enter))
         view.visibility = View.VISIBLE
     }
 
@@ -116,7 +116,7 @@ class CollectionAdapter(
     }
 
     private fun closureViewAnimation(view: View, close: Boolean = false){
-        val alphaInAnimation = AnimationUtils.loadAnimation(context, R.anim.common_alpha_in)
+        val alphaInAnimation = AnimationUtils.loadAnimation(context, R.anim.common_alpha_enter)
         val alphaOutAnimation = AnimationUtils.loadAnimation(context, R.anim.common_alpha_out)
 
         if (close){

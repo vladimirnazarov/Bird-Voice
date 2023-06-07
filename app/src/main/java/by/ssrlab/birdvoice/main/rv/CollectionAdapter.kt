@@ -51,6 +51,9 @@ class CollectionAdapter(
     }
 
     override fun onBindViewHolder(holder: CollectionAdapter.CollectionHolder, position: Int) {
+        val itemNumber = (position + 1).toString()
+        holder.binding.collectionItemNumber.text = itemNumber
+
         mainVM.collectionValue.observe(activity) {
             if (it == true) {
                 for (i in viewArray) {

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_graph"
-    app:startDestination="@id/informPage">
+    app:startDestination="@id/collectionFragment">
 
     <fragment
         android:id="@+id/informPage"
@@ -40,4 +40,8 @@
         android:id="@+id/recognitionFragment2"
         android:name="by.ssrlab.birdvoice.main.fragments.recognition.recognition.Recognition2Fragment"
         android:label="RecognitionFragment2" />
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.collection.CollectionFragment"
+        android:label="CollectionFragment" />
 </navigation>

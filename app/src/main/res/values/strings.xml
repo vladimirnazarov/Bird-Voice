@@ -54,7 +54,7 @@
     <string name="date_plug">15/08/22</string>
     <string name="place">Place</string>
     <string name="place_plug">Belarus, Minsk, Moskovsky district</string>
-    <string name="timer_plug">00:00</string>
+    <string name="timer_plug">0:00</string>
     <string name="edit_rec_description">Select the fragment to be recognized from the proposed audio recording, click on the screen of the stereogram</string>
     <string name="edit_rec_start">Start</string>
 
@@ -76,6 +76,9 @@
     <string name="data_display_areas">Data display areas</string>
     <string name="general_information">General Information</string>
     <string name="scientific_information">Scientific Information</string>
+
+    <!--  Collection  -->
     <string name="collection_number_plug">1</string>
     <string name="more">More</string>
+    <string name="map">Map</string>
 </resources>

@@ -246,7 +246,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:visibility="gone"
 
@@ -259,7 +258,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginStart="16dp"
 
             android:fontFamily="@font/roboto"
             android:textAllCaps="false"
@@ -272,7 +271,6 @@
             app:cornerRadius="12dp"
             app:rippleColor="@color/primary_button_push"
 
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/collection_rv_item_open_button_holder" />
 

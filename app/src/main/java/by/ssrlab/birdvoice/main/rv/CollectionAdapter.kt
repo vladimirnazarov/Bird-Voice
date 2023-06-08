@@ -10,6 +10,7 @@ import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.CollectionRvItemBinding
 import by.ssrlab.birdvoice.main.MainActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
+import com.google.android.material.tabs.TabLayoutMediator
 
 class CollectionAdapter(
     private val context: Context,
@@ -41,6 +42,29 @@ class CollectionAdapter(
 
         enterAnimation(binding.root)
 
+        val pagerAdapter = CollectionPagerAdapter(activity)
+
+        binding.apply {
+            collectionRvItemButton.setOnClickListener {
+                openView(viewArray.indexOf(binding))
+            }
+
+            collectionRvItemOpenButton.setOnClickListener {
+                closeViews()
+            }
+
+            collectionRvItemOpenPager.apply {
+                adapter = pagerAdapter
+                currentItem = 0
+            }
+            collectionRvItemOpenTabs.removeAllTabs()
+        }
+
+        TabLayoutMediator(binding.collectionRvItemOpenTabs, binding.collectionRvItemOpenPager){ tab, position ->
+            if (position == 0) tab.text = tab1Text
+            else if (position == 1) tab.text = tab2Text
+        }.attach()
+
         return CollectionHolder(binding)
     }
 
@@ -54,10 +78,22 @@ class CollectionAdapter(
         val itemNumber = (position + 1).toString()
         holder.binding.collectionItemNumber.text = itemNumber
 
-        mainVM.collectionValue.observe(activity) {
-            if (it == true) {
+        mainVM.collectionObservable1.observe(activity) {
+            if (it) {
                 for (i in viewArray) {
                     outAnimation(i.root)
+                }
+            }
+        }
+
+        mainVM.collectionObservable2.observe(activity){
+            if (it){
+                for (i in isOpenArray){
+                    if (i) {
+                        mainVM.navigateToWithDelay(R.id.mapFragment)
+                        mainVM.collectionObservable1.value = true
+                        mainVM.testMapTitle = viewArray[isOpenArray.indexOf(i)].collectionItemNumber.text as String
+                    }
                 }
             }
         }

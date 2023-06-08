@@ -23,6 +23,12 @@ class MainVM: ViewModel() {
         }
     }
 
+    //Fragment elements
+    val recognition2Value = MutableLiveData<Boolean>()
+    val collectionObservable1 = MutableLiveData<Boolean>()
+    val collectionObservable2 = MutableLiveData<Boolean>()
+    var testMapTitle = ""
+
     //NavController set
     private lateinit var navController: NavController
     fun setNavController(controller: NavController){
@@ -57,10 +63,6 @@ class MainVM: ViewModel() {
     fun setNavUpLambda(anim: () -> Unit){
         navUpAnimLambda = anim
     }
-
-    //Adapter value to listen to
-    val recognition2Value = MutableLiveData<Boolean>()
-    val collectionValue = MutableLiveData<Boolean>()
 
     //AudioRecord
     var tempAudioFile: File? = null

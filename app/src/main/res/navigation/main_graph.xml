@@ -43,5 +43,11 @@
     <fragment
         android:id="@+id/collectionFragment"
         android:name="by.ssrlab.birdvoice.main.fragments.collection.CollectionFragment"
-        android:label="CollectionFragment" />
+        android:label="CollectionFragment" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.collection.MapFragment"
+        android:label="MapFragment" />
 </navigation>

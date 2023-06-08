@@ -25,8 +25,6 @@ class CollectionFragment: BaseMainFragment() {
 
         binding = FragmentCollectionBinding.inflate(layoutInflater)
 
-        activityMain.setPopBackCallback { mainVM.collectionValue.value = true }
-
         return binding.root
     }
 
@@ -43,5 +41,15 @@ class CollectionFragment: BaseMainFragment() {
                 resources.getString(R.string.scientific_information)
             )
         }
+
+        mainVM.setToolbarTitle("Collection")
+        activityMain.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
+//        mainVM.collectionObservable2.observe(activityMain){
+//            if (it) {
+//                mainVM.collectionObservable1.value = true
+//                mainVM.navigateToWithDelay(R.id.action_collectionFragment_to_mapFragment)
+//            }
+//        }
     }
 }

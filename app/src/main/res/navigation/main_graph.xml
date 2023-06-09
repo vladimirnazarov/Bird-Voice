@@ -45,6 +45,9 @@
         android:name="by.ssrlab.birdvoice.main.fragments.collection.CollectionFragment"
         android:label="CollectionFragment" >
 
+        <action
+            android:id="@+id/action_collectionFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"

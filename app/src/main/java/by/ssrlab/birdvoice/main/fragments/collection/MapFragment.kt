@@ -29,8 +29,7 @@ class MapFragment: BaseMainFragment() {
             )
 
             mapTestBirdId.text = mainVM.testMapTitle
-            mainVM.collectionObservable1.value = false
-            mainVM.collectionObservable2.value = false
+            mainVM.collectionObservable.value = false
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)

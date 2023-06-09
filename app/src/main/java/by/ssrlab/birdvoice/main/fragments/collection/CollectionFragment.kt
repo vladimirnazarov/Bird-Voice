@@ -17,6 +17,11 @@ class CollectionFragment: BaseMainFragment() {
     private lateinit var binding: FragmentCollectionBinding
     override var arrayOfViews = arrayListOf<ViewObject>()
 
+    private val navFunc = {
+        mainVM.collectionObservable.value = true
+        mainVM.navigateToWithDelay(R.id.action_collectionFragment_to_mapFragment)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +42,7 @@ class CollectionFragment: BaseMainFragment() {
                 MainApp.appContext,
                 mainVM,
                 activityMain,
+                navFunc,
                 resources.getString(R.string.general_information),
                 resources.getString(R.string.scientific_information)
             )
@@ -44,12 +50,5 @@ class CollectionFragment: BaseMainFragment() {
 
         mainVM.setToolbarTitle("Collection")
         activityMain.supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
-//        mainVM.collectionObservable2.observe(activityMain){
-//            if (it) {
-//                mainVM.collectionObservable1.value = true
-//                mainVM.navigateToWithDelay(R.id.action_collectionFragment_to_mapFragment)
-//            }
-//        }
     }
 }

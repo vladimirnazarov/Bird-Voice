@@ -26,4 +26,6 @@
     <color name="secondary_text_blue">#7CA7F9</color>
 
     <color name="sub_text">#75000000</color>
+
+    <color name="dialog_text">#00379C</color>
 </resources>

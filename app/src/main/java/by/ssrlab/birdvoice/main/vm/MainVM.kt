@@ -25,8 +25,7 @@ class MainVM: ViewModel() {
 
     //Fragment elements
     val recognition2Value = MutableLiveData<Boolean>()
-    val collectionObservable1 = MutableLiveData<Boolean>()
-    val collectionObservable2 = MutableLiveData<Boolean>()
+    val collectionObservable = MutableLiveData<Boolean>()
     var testMapTitle = ""
 
     //NavController set

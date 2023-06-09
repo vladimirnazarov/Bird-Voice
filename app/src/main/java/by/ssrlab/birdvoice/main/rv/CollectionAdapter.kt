@@ -16,6 +16,7 @@ class CollectionAdapter(
     private val context: Context,
     private val mainVM: MainVM,
     private val activity: MainActivity,
+    private val func: () -> Unit,
     private val tab1Text: String,
     private val tab2Text: String
 ): RecyclerView.Adapter<CollectionAdapter.CollectionHolder>() {
@@ -49,6 +50,9 @@ class CollectionAdapter(
                 openView(viewArray.indexOf(binding))
             }
 
+            collectionRvItemOpenMapButton.setOnClickListener { func() }
+
+
             collectionRvItemOpenButton.setOnClickListener {
                 closeViews()
             }
@@ -69,7 +73,7 @@ class CollectionAdapter(
     }
 
     override fun getItemCount(): Int{
-        val count = 5
+        val count = 6
         for (i in 0..count) isOpenArray.add(false)
         return count
     }
@@ -78,21 +82,14 @@ class CollectionAdapter(
         val itemNumber = (position + 1).toString()
         holder.binding.collectionItemNumber.text = itemNumber
 
-        mainVM.collectionObservable1.observe(activity) {
+        mainVM.collectionObservable.observe(activity) {
             if (it) {
                 for (i in viewArray) {
                     outAnimation(i.root)
                 }
-            }
-        }
-
-        mainVM.collectionObservable2.observe(activity){
-            if (it){
                 for (i in isOpenArray){
                     if (i) {
-                        mainVM.navigateToWithDelay(R.id.mapFragment)
-                        mainVM.collectionObservable1.value = true
-                        mainVM.testMapTitle = viewArray[isOpenArray.indexOf(i)].collectionItemNumber.text as String
+                        mainVM.testMapTitle = viewArray[isOpenArray.indexOf(true)].collectionItemNumber.text as String
                     }
                 }
             }
@@ -121,10 +118,10 @@ class CollectionAdapter(
             closureViewAnimation(this.collectionRvItemOpenPager)
             closureViewAnimation(this.collectionRvItemOpenTabs)
             closureViewAnimation(this.collectionRvItemView2)
+            closureViewAnimation(this.collectionRvItemOpenMapButton)
 
             closureViewAnimation(this.collectionRvItemButton, true)
             closureViewAnimation(this.collectionRvItemImage, true)
-            closureViewAnimation(this.collectionFavouriteHeart, true)
             closureViewAnimation(this.collectionItemNumber, true)
             closureViewAnimation(this.collectionItemDelete, true)
             closureViewAnimation(this.collectionRvItemView1, true)
@@ -141,10 +138,10 @@ class CollectionAdapter(
                 closureViewAnimation(this.collectionRvItemOpenPager, true)
                 closureViewAnimation(this.collectionRvItemOpenTabs, true)
                 closureViewAnimation(this.collectionRvItemView2, true)
+                closureViewAnimation(this.collectionRvItemOpenMapButton, true)
 
                 closureViewAnimation(this.collectionRvItemButton)
                 closureViewAnimation(this.collectionRvItemImage)
-                closureViewAnimation(this.collectionFavouriteHeart)
                 closureViewAnimation(this.collectionItemNumber)
                 closureViewAnimation(this.collectionItemDelete)
                 closureViewAnimation(this.collectionRvItemView1)

@@ -81,4 +81,11 @@
     <string name="collection_number_plug">1</string>
     <string name="more">More</string>
     <string name="map">Map</string>
+
+    <!--  Dialog  -->
+    <string name="dialog_1_header">Removing bird!</string>
+    <string name="dialog_1_text">Are you sure you want to delete the record from the collection?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="dialog_2_text">The bird has been removed</string>
 </resources>

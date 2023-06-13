@@ -88,4 +88,10 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="dialog_2_text">The bird has been removed</string>
+
+    <!--  Feedback  -->
+    <string name="feedback_title">Feedback</string>
+    <string name="send">Send</string>
+    <string name="thanks">Thanks!</string>
+    <string name="feedback_congrats_text">Thank you for your assistance in the development of the Bird Voice application, we appreciate every feedback and constantly improve our services and improve their accuracy!</string>
 </resources>

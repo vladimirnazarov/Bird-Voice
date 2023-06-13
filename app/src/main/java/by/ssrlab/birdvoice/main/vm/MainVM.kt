@@ -27,6 +27,7 @@ class MainVM: ViewModel() {
     val recognition2Value = MutableLiveData<Boolean>()
     val collectionObservable = MutableLiveData<Boolean>()
     var testMapTitle = ""
+    var feedbackValue = 0
 
     //NavController set
     private lateinit var navController: NavController

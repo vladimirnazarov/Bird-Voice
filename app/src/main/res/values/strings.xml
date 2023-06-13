@@ -94,4 +94,14 @@
     <string name="send">Send</string>
     <string name="thanks">Thanks!</string>
     <string name="feedback_congrats_text">Thank you for your assistance in the development of the Bird Voice application, we appreciate every feedback and constantly improve our services and improve their accuracy!</string>
+
+    <!--  Drawer  -->
+    <string name="settings">Settings</string>
+    <string name="language">Language</string>
+    <string name="instruction">Instruction</string>
+    <string name="feedback">Feedback</string>
+
+    <!--  Bottom nav  -->
+    <string name="recording">Recording</string>
+    <string name="collection">Collection</string>
 </resources>

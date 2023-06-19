@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.main.rv
+package by.ssrlab.birdvoice.launch.rv
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -46,7 +46,7 @@ class InformAdapter(private val context: Context, private val mainVM: MainVM) : 
                     i.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
                     i.visibility = View.INVISIBLE
                 }
-                mainVM.navigateToWithDelay(R.id.action_informPage_to_recordFragment)
+                //Intent to main activity
             }
         }
     }

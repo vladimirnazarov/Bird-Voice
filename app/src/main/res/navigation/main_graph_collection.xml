@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_graph_collection"
+    app:startDestination="@id/collectionFragment">
+
+    <fragment
+        android:id="@+id/collectionFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.collection.CollectionFragment"
+        android:label="CollectionFragment" >
+        <action
+            android:id="@+id/action_collectionFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.collection.MapFragment"
+        android:label="MapFragment" />
+</navigation>

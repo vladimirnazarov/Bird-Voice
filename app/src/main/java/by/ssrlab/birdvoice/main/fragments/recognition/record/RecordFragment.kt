@@ -50,12 +50,7 @@ class RecordFragment: BaseMainFragment() {
             binding.recRecordButtonIcon.setOnClickListener { buttonAction() }
         })
 
-        activityMain.setPopBackCallback {
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-            binding.recRecordButtonIcon.setImageResource(R.drawable.ic_rec_start)
-            pressedBool = true
-            binding.recRecordButtonIcon.isClickable = false
-        }
+        activityMain.deletePopBackCallback()
 
         return binding.root
     }
@@ -64,13 +59,8 @@ class RecordFragment: BaseMainFragment() {
         super.onResume()
 
         mainVM.setToolbarTitle("Record your environment")
-        activityMain.setToolbarAction(R.drawable.ic_arrow_back){
-            navigationBackAction{
-                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-                binding.recRecordButtonIcon.setImageResource(R.drawable.ic_rec_start)
-                pressedBool = true
-                binding.recRecordButtonIcon.isClickable = false
-            }
+        activityMain.setToolbarAction(R.drawable.ic_menu){
+            activityMain.openDrawer()
         }
     }
 

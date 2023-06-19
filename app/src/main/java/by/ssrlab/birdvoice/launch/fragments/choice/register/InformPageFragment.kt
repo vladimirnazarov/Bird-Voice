@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.main.fragments.recognition
+package by.ssrlab.birdvoice.launch.fragments.choice.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentInformPageBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
-import by.ssrlab.birdvoice.main.rv.InformAdapter
+import by.ssrlab.birdvoice.launch.rv.InformAdapter
 
 class InformPageFragment: BaseMainFragment() {
 
@@ -24,13 +24,13 @@ class InformPageFragment: BaseMainFragment() {
 
         binding = FragmentInformPageBinding.inflate(layoutInflater)
 
+        activityMain.setPopBackCallback{}
+
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-
-        activityMain.deletePopBackCallback()
 
         binding.informRv.apply {
             layoutManager = LinearLayoutManager(MainApp.appContext)

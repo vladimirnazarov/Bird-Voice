@@ -29,7 +29,7 @@ abstract class BaseMainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainVM.setNavController(requireView().findNavController())
+//        mainVM.setRecController(requireView().findNavController())
     }
 
     fun navigationBackAction(action: () -> Unit){

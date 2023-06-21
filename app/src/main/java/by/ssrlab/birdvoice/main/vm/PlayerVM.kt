@@ -8,6 +8,7 @@ import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentEditRecordBinding
 import by.ssrlab.birdvoice.helpers.HelpFunctions
+import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import com.airbnb.lottie.LottieDrawable
 import kotlinx.coroutines.*
 
@@ -15,6 +16,8 @@ class PlayerVM: ViewModel() {
 
     private var mpStatus = "play"
     private var viewModelPlayerStatus = 0
+    private var rotationValue = 0
+    private var arrayOfViews: ArrayList<ViewObject>? = null
 
     private val mediaJob = Job()
     private val mediaScope = CoroutineScope(Dispatchers.Main + mediaJob)
@@ -23,7 +26,7 @@ class PlayerVM: ViewModel() {
     private var binding: FragmentEditRecordBinding? = null
     private val helpFunctions = HelpFunctions()
 
-    fun initializeMediaPlayer(uri: Uri){
+    fun initializeMediaPlayer(uri: Uri, binding: FragmentEditRecordBinding){
 
         if (viewModelPlayerStatus == 0) {
 
@@ -33,7 +36,9 @@ class PlayerVM: ViewModel() {
             mediaPlayer!!.setDataSource(MainApp.appContext, uri)
             mediaPlayer!!.prepare()
 
-            binding!!.apply {
+            this.binding = binding
+
+            binding.apply {
                 editRecAudioProgress.max = mediaPlayer!!.duration
                 editRecAudioProgress.progress = 0
                 editRecPlayButton.setImageResource(R.drawable.ic_play_button)
@@ -45,13 +50,13 @@ class PlayerVM: ViewModel() {
         }
     }
 
-    fun playAudio(){
+    fun playAudio(binding: FragmentEditRecordBinding){
         mediaScope.launch {
             when (mpStatus) {
 
                 "pause" -> {
                     mediaPlayer!!.pause()
-                    binding!!.apply {
+                    binding.apply {
                         editRecPlayButton.setImageResource(R.drawable.ic_play_button)
                         editRecWaveAnimation.pauseAnimation()
                     }
@@ -59,20 +64,20 @@ class PlayerVM: ViewModel() {
                 }
                 "continue" -> {
                     mediaPlayer!!.start()
-                    binding!!.apply {
+                    binding.apply {
                         editRecPlayButton.setImageResource(R.drawable.ic_pause_button)
                         editRecWaveAnimation.playAnimation()
                     }
                     mpStatus = "pause"
-                    mediaScope.launch { initProgressListener(mediaPlayer!!) }
+                    mediaScope.launch { initProgressListener(mediaPlayer!!, binding) }
                 }
                 "play" -> {
                     try {
                         mediaPlayer!!.start()
 
-                        mediaScope.launch { initProgressListener(mediaPlayer!!) }
+                        mediaScope.launch { initProgressListener(mediaPlayer!!, binding) }
 
-                        binding!!.apply {
+                        binding.apply {
                             editRecPlayButton.setImageResource(R.drawable.ic_pause_button)
                             editRecWaveAnimation.apply {
                                 playAnimation()
@@ -91,7 +96,7 @@ class PlayerVM: ViewModel() {
         }
     }
 
-    private fun mpStop(){
+    private fun mpStop(binding: FragmentEditRecordBinding){
         mpStatus = "stop"
 
         if (mediaPlayer?.isPlaying == true){
@@ -99,27 +104,27 @@ class PlayerVM: ViewModel() {
             mediaPlayer!!.release()
         } else mediaPlayer?.release()
 
-        binding!!.editRecWaveAnimation.apply {
+        binding.editRecWaveAnimation.apply {
             pauseAnimation()
             cancelAnimation()
         }
     }
 
-    private suspend fun initProgressListener(mediaPlayer: MediaPlayer){
+    private suspend fun initProgressListener(mediaPlayer: MediaPlayer, binding: FragmentEditRecordBinding){
         while (mpStatus == "pause") {
-            binding!!.apply {
+            binding.apply {
                 editRecTimer.text = helpFunctions.convertToTimerMode(mediaPlayer.currentPosition)
                 editRecAudioProgress.progress = mediaPlayer.currentPosition
             }
             delay(250)
 
-            binding!!.editRecAudioProgress.apply {
+            binding.editRecAudioProgress.apply {
                 if (progress == max) {
                     mpStatus = "play"
                     delay(250)
 
                     mediaPlayer.seekTo(0)
-                    binding!!.apply {
+                    binding.apply {
                         editRecPlayButton.setImageResource(R.drawable.ic_play_button)
                         editRecAudioProgress.progress = 0
                         editRecTimer.text = helpFunctions.convertToTimerMode(mediaPlayer.currentPosition)
@@ -140,6 +145,23 @@ class PlayerVM: ViewModel() {
         })
     }
 
+    fun clear() {
+        binding?.let { mpStop(it) }
+
+        mpStatus = "play"
+        viewModelPlayerStatus = 0
+        arrayOfViews = null
+        mediaPlayer = null
+        binding = null
+    }
+    fun saveRotationValue(value: Int){
+        rotationValue = value
+    }
+    fun getRotationValue() = rotationValue
+
+    fun saveArrayOfViews(arrayOfViews: ArrayList<ViewObject>){ this.arrayOfViews = arrayOfViews }
+    fun getArrayOfViews() = arrayOfViews
+
     fun saveBinding(b: FragmentEditRecordBinding){
         binding = b
     }
@@ -149,6 +171,6 @@ class PlayerVM: ViewModel() {
     override fun onCleared() {
         super.onCleared()
 
-        mpStop()
+        binding?.let { mpStop(it) }
     }
 }

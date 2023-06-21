@@ -1,10 +1,8 @@
 package by.ssrlab.birdvoice.main.fragments
 
 import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import by.ssrlab.birdvoice.helpers.HelpFunctions
 import by.ssrlab.birdvoice.helpers.utils.AnimationUtils
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
@@ -24,12 +22,6 @@ abstract class BaseMainFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         activityMain = activity as MainActivity
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        mainVM.setRecController(requireView().findNavController())
     }
 
     fun navigationBackAction(action: () -> Unit){

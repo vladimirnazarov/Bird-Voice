@@ -49,6 +49,6 @@ class CollectionFragment: BaseMainFragment() {
         }
 
         mainVM.setToolbarTitle("Collection")
-        activityMain.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        activityMain.setToolbarAction(R.drawable.ic_menu){ activityMain.openDrawer() }
     }
 }

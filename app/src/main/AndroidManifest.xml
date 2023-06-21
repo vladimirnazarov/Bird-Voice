@@ -10,6 +10,7 @@
 
     <application
         android:name=".app.MainApp"
+        android:configChanges="screenSize|orientation|screenLayout|navigation"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

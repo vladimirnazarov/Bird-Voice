@@ -21,6 +21,13 @@ class EditRecordFragment: BaseMainFragment() {
     private val playerVM: PlayerVM by viewModels()
     private var isPlaying = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (playerVM.getRotationValue() != resources.configuration.orientation) playerVM.saveRotationValue(resources.configuration.orientation)
+        else playerVM.clear()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,24 +36,29 @@ class EditRecordFragment: BaseMainFragment() {
 
         if (playerVM.checkIfBindingSaved()) {
             binding = FragmentEditRecordBinding.inflate(layoutInflater)
-            playerVM.saveBinding(binding)
-        } else binding = playerVM.getBinding()
 
-        binding.apply {
-            arrayOfViews = arrayListOf(
-                ViewObject(editRecConcaveTimeHolder),
-                ViewObject(editRecConcaveDateHolder),
-                ViewObject(editRecConcavePlaceHolder),
-                ViewObject(editRecConcaveWaveHolder),
-                ViewObject(editRecTopHolder),
-                ViewObject(editRecBottomHolder),
-                ViewObject(editRecPlayButton),
-                ViewObject(editRecTimer),
-                ViewObject(editRecAudioProgress),
-                ViewObject(editRecLoadButton),
-                ViewObject(editRecShareButton),
-                ViewObject(editRecStartButton)
-            )
+            binding.apply {
+                arrayOfViews = arrayListOf(
+                    ViewObject(editRecConcaveTimeHolder),
+                    ViewObject(editRecConcaveDateHolder),
+                    ViewObject(editRecConcavePlaceHolder),
+                    ViewObject(editRecConcaveWaveHolder),
+                    ViewObject(editRecTopHolder),
+                    ViewObject(editRecBottomHolder),
+                    ViewObject(editRecPlayButton),
+                    ViewObject(editRecTimer),
+                    ViewObject(editRecAudioProgress),
+                    ViewObject(editRecLoadButton),
+                    ViewObject(editRecShareButton),
+                    ViewObject(editRecStartButton)
+                )
+            }
+
+            playerVM.saveArrayOfViews(arrayOfViews)
+        }
+        else {
+            binding = playerVM.getBinding()
+            arrayOfViews = playerVM.getArrayOfViews()!!
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
@@ -85,15 +97,25 @@ class EditRecordFragment: BaseMainFragment() {
 
         mainVM.setToolbarTitle("Listen to your record")
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
-            navigationBackAction { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
+            navigationBackAction {
+                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        playerVM.saveBinding(binding)
+        if (playerVM.getRotationValue() != resources.configuration.orientation) playerVM.saveRotationValue(resources.configuration.orientation)
+        else playerVM.clear()
     }
 
     private fun setupPlayer() {
         if (mainVM.tempAudioFile != null) {
-            playerVM.initializeMediaPlayer(mainVM.tempAudioFile!!.toUri())
+            playerVM.initializeMediaPlayer(mainVM.tempAudioFile!!.toUri(), binding)
 
-            binding.editRecPlayButton.setOnClickListener { playerVM.playAudio() }
+            binding.editRecPlayButton.setOnClickListener { playerVM.playAudio(binding) }
         }
     }
 }

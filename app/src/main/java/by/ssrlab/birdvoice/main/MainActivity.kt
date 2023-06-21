@@ -2,12 +2,13 @@ package by.ssrlab.birdvoice.main
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.ActivityMainBinding
 import by.ssrlab.birdvoice.main.vm.MainVM
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawer: DrawerLayout
     private lateinit var bottomNav: BottomNavigationView
+    private lateinit var navController: NavController
 
     private val mainVM: MainVM by viewModels()
 
@@ -29,48 +31,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding.apply {
             drawer = mainDrawerLayout
+
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
+            navController = navHostFragment.navController
+            mainVM.setNavController(navController)
+
             bottomNav = mainBottomNavigationView
+            bottomNav.setupWithNavController(navController)
+
             mainVM.activityBinding = this
 
-            mainVM.setRecController(mainContainerRecord.findNavController())
-            mainVM.setColController(mainContainerCollection.findNavController())
-            mainVM.setNavController()
-        }
-        setContentView(binding.root)
-
-        setSupportActionBar(binding.mainToolbar)
-        mainVM.setToolbarTitleObserver(binding.mainToolbar, this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        bottomNav.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.record_nav -> {
-                    if (mainVM.getActiveScreen() != "record"){
-                        mainVM.switchNavController()
-                        binding.apply {
-                            mainContainerRecord.visibility = View.VISIBLE
-                            mainContainerCollection.visibility = View.GONE
-                        }
-                        mainVM.setActiveScreen("record")
-                    }
-                    true
-                }
-                R.id.collection_nav -> {
-                    if (mainVM.getActiveScreen() != "collection"){
-                        mainVM.switchNavController()
-                        binding.apply {
-                            mainContainerRecord.visibility = View.GONE
-                            mainContainerCollection.visibility = View.VISIBLE
-                        }
-                        mainVM.setActiveScreen("collection")
-                    }
-                    true
-                }
-                else -> true
-            }
+            setContentView(root)
+            setSupportActionBar(mainToolbar)
+            mainVM.setToolbarTitleObserver(mainToolbar, this@MainActivity)
         }
     }
 

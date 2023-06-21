@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/record_nav"
+        android:id="@+id/main_graph_record"
         android:icon="@drawable/ic_bottom_mic"
         android:title="@string/recording"/>
 
     <item
-        android:id="@+id/collection_nav"
+        android:id="@+id/main_graph_collection"
         android:icon="@drawable/ic_bottom_folder"
         android:title="@string/collection"/>
 

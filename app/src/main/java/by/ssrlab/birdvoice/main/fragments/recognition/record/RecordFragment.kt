@@ -59,9 +59,7 @@ class RecordFragment: BaseMainFragment() {
         super.onResume()
 
         mainVM.setToolbarTitle("Record your environment")
-        activityMain.setToolbarAction(R.drawable.ic_menu){
-            activityMain.openDrawer()
-        }
+        activityMain.setToolbarAction(R.drawable.ic_menu){ activityMain.openDrawer() }
     }
 
     private fun startRecord(){

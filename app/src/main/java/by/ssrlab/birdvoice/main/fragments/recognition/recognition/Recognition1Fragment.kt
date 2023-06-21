@@ -73,6 +73,12 @@ class Recognition1Fragment: BaseMainFragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        breakableMarker = true
+    }
+
     private suspend fun toolbarTitleAnimation(){
         val dotArray = arrayListOf("", ".", "..", "...")
         var i = 0

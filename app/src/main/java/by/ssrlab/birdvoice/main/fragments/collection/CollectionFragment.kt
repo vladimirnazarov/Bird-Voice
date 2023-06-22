@@ -30,6 +30,8 @@ class CollectionFragment: BaseMainFragment() {
 
         binding = FragmentCollectionBinding.inflate(layoutInflater)
 
+        mainVM.setToolbarTitle("Collection")
+
         return binding.root
     }
 
@@ -48,7 +50,6 @@ class CollectionFragment: BaseMainFragment() {
             )
         }
 
-        mainVM.setToolbarTitle("Collection")
         activityMain.setToolbarAction(R.drawable.ic_menu){ activityMain.openDrawer() }
     }
 }

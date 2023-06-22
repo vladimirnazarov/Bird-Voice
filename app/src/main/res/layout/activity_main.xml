@@ -73,6 +73,7 @@
             app:itemIconTint="@drawable/nav_item_color_selected"
             app:itemTextColor="@drawable/nav_item_color_selected"
 
+            android:visibility="gone"
             style="@style/BottomNavTheme"
             android:background="@drawable/background_bottom_nav"
 
@@ -218,7 +219,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/drawer_button_instagram"
+                android:id="@+id/drawer_button_instagram_holder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -227,13 +228,14 @@
 
                 android:layout_marginBottom="8dp"
 
-                app:layout_constraintEnd_toStartOf="@+id/drawer_button_messenger"
+                app:layout_constraintEnd_toStartOf="@+id/drawer_button_whatsapp_holder"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
+                    android:id="@+id/drawer_button_instagram"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
@@ -250,19 +252,20 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/drawer_button_messenger"
+                android:id="@+id/drawer_button_whatsapp_holder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:background="@drawable/rv_image_button_background"
                 android:elevation="2dp"
 
-                app:layout_constraintEnd_toStartOf="@+id/draw_button_twitter"
+                app:layout_constraintEnd_toStartOf="@+id/drawer_button_twitter_holder"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/drawer_button_instagram"
+                app:layout_constraintStart_toEndOf="@+id/drawer_button_instagram_holder"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
+                    android:id="@+id/drawer_button_whatsapp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
@@ -279,7 +282,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/draw_button_twitter"
+                android:id="@+id/drawer_button_twitter_holder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -288,10 +291,11 @@
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/drawer_button_messenger"
+                app:layout_constraintStart_toEndOf="@+id/drawer_button_whatsapp_holder"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
+                    android:id="@+id/drawer_button_twitter"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 

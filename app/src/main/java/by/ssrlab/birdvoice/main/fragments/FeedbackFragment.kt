@@ -65,6 +65,8 @@ class FeedbackFragment: BaseMainFragment() {
                 animationUtils.commonObjectAppear(MainApp.appContext, shownArray)
                 mainVM.feedbackValue = 0
             }
+
+            activityMain.showBottomNav()
         }
 
         return binding.root
@@ -81,21 +83,33 @@ class FeedbackFragment: BaseMainFragment() {
                     animationUtils.commonObjectAppear(MainApp.appContext, shownArray)
                     mainVM.feedbackValue = 0
                 }
+
+                activityMain.showBottomNav()
             }
         }
 
-        binding.feedbackInput.addTextChangedListener(helpFunctions.createEditTextListener({}){
-            if (it?.isNotEmpty() == true){
-                binding.feedbackSendButton.isClickable = true
-                mainVM.feedbackValue = 1
-                binding.feedbackSendButton.setOnClickListener {
-                    animationUtils.commonObjectAppear(MainApp.appContext, toHideArray)
-                    animationUtils.commonObjectAppear(MainApp.appContext, toShowArray, true)
-                }
-            } else {
-                binding.feedbackSendButton.isClickable = false
-                mainVM.feedbackValue = 0
+        binding.feedbackSendButton.setOnClickListener {
+            checkInput()
+
+            if (binding.feedbackErrorMessage.visibility == View.INVISIBLE) {
+                helpFunctions.hideKeyboard(view, MainApp.appContext)
+
+                animationUtils.commonObjectAppear(MainApp.appContext, toHideArray)
+                animationUtils.commonObjectAppear(MainApp.appContext, toShowArray, true)
             }
+        }
+
+        binding.feedbackInput.addTextChangedListener(helpFunctions.createEditTextListener({ errorViewOut() }){
+            if (it?.isNotEmpty() == true) mainVM.feedbackValue = 1
+            else mainVM.feedbackValue = 0
         })
+    }
+
+    private fun checkInput(){
+        helpFunctions.checkTextInput(binding.feedbackInput.text, binding.feedbackErrorMessage, resources)
+    }
+
+    private fun errorViewOut(){
+        helpFunctions.checkErrorViewAvailability(binding.feedbackErrorMessage)
     }
 }

@@ -16,4 +16,8 @@
         android:id="@+id/mapFragment"
         android:name="by.ssrlab.birdvoice.main.fragments.collection.MapFragment"
         android:label="MapFragment" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.FeedbackFragment"
+        android:label="FeedbackFragment" />
 </navigation>

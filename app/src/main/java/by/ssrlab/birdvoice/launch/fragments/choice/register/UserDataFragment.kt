@@ -1,11 +1,15 @@
 package by.ssrlab.birdvoice.launch.fragments.choice.register
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
@@ -69,13 +73,26 @@ class UserDataFragment : BaseLaunchFragment() {
         activityLaunch.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
     }
 
+    private fun requestCameraPermission(onSuccess: () -> Unit){
+        while (ContextCompat.checkSelfPermission(MainApp.appContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                activityLaunch,
+                arrayOf(Manifest.permission.CAMERA),
+                1
+            )
+        }
+        onSuccess()
+    }
+
     private fun pickPhoto(){
-        cropImage.launch(
-            options {
-                setAspectRatio(1, 1)
-                setCropShape(CropImageView.CropShape.OVAL)
-            }
-        )
+        requestCameraPermission {
+            cropImage.launch(
+                options {
+                    setAspectRatio(1, 1)
+                    setCropShape(CropImageView.CropShape.OVAL)
+                }
+            )
+        }
     }
 
     private fun registerCropImage(){

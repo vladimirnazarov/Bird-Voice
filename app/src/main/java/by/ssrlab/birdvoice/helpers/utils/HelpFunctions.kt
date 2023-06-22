@@ -121,8 +121,7 @@ class HelpFunctions {
     }
 
     fun showKeyboard(view: View) {
-        val imm =
-            MainApp.appContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm = MainApp.appContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 

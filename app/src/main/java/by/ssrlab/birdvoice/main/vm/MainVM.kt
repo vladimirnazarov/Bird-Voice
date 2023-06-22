@@ -13,9 +13,6 @@ class MainVM: ViewModel() {
 
     //Activity elements
     var activityBinding: ActivityMainBinding? = null
-    private var activeScreen = "record"
-    fun setActiveScreen(value: String){ activeScreen = value }
-    fun getActiveScreen() = activeScreen
     private val toolbarTitle = MutableLiveData<String>()
     fun setToolbarTitle(title: String){
         toolbarTitle.value = title
@@ -33,16 +30,8 @@ class MainVM: ViewModel() {
     var feedbackValue = 0
 
     //NavController set
-    private lateinit var recordController: NavController
-    private lateinit var collectionController: NavController
     private lateinit var navController: NavController
-    fun switchNavController(){
-        navController = if (navController == recordController) collectionController
-        else recordController
-    }
-    fun setNavController(){ navController = recordController }
-    fun setRecController(controller: NavController){ recordController = controller }
-    fun setColController(controller: NavController){ collectionController = controller }
+    fun setNavController(controller: NavController){ navController = controller }
     fun navigateToWithDelay(address: Int){
         scope.launch {
             delay(600)

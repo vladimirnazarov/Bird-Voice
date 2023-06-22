@@ -2,6 +2,9 @@ package by.ssrlab.birdvoice.main
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -10,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import by.ssrlab.birdvoice.R
+import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.ActivityMainBinding
 import by.ssrlab.birdvoice.main.vm.MainVM
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -38,12 +42,39 @@ class MainActivity : AppCompatActivity() {
 
             bottomNav = mainBottomNavigationView
             bottomNav.setupWithNavController(navController)
+            showBottomNav()
 
             mainVM.activityBinding = this
 
             setContentView(root)
             setSupportActionBar(mainToolbar)
             mainVM.setToolbarTitleObserver(mainToolbar, this@MainActivity)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        binding.apply {
+            drawerButtonLanguage.setOnClickListener { Toast.makeText(this@MainActivity, "Language", Toast.LENGTH_SHORT).show() }
+
+            drawerButtonInstruction.setOnClickListener {
+                navController.navigate(R.id.informPageFragment)
+                hideBottomNav()
+                closeDrawer()
+            }
+
+            drawerButtonFeedback.setOnClickListener {
+                navController.navigate(R.id.feedbackFragment)
+                hideBottomNav()
+                closeDrawer()
+            }
+
+            drawerButtonInstagram.setOnClickListener { Toast.makeText(this@MainActivity, "Instagram", Toast.LENGTH_SHORT).show() }
+
+            drawerButtonWhatsapp.setOnClickListener { Toast.makeText(this@MainActivity, "WhatsApp", Toast.LENGTH_SHORT).show() }
+
+            drawerButtonTwitter.setOnClickListener { Toast.makeText(this@MainActivity, "Twitter", Toast.LENGTH_SHORT).show() }
         }
     }
 
@@ -74,7 +105,25 @@ class MainActivity : AppCompatActivity() {
         if (mainVM.onMapBackPressedCallback.isEnabled) mainVM.onMapBackPressedCallback.remove()
     }
 
+    fun hideBottomNav(){
+        if (bottomNav.visibility == View.VISIBLE){
+            bottomNav.startAnimation(AnimationUtils.loadAnimation(MainApp.appContext, R.anim.nav_bottom_view_out))
+            bottomNav.visibility = View.GONE
+        }
+    }
+
+    fun showBottomNav(){
+        if (bottomNav.visibility == View.GONE){
+            bottomNav.startAnimation(AnimationUtils.loadAnimation(MainApp.appContext, R.anim.nav_bottom_view_enter))
+            bottomNav.visibility = View.VISIBLE
+        }
+    }
+
     fun openDrawer(){
         drawer.openDrawer(GravityCompat.START)
+    }
+
+    private fun closeDrawer(){
+        drawer.closeDrawer(GravityCompat.START)
     }
 }

@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.launch.rv
+package by.ssrlab.birdvoice.main.rv
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.main.vm.MainVM
 import com.google.android.material.button.MaterialButton
 
-class InformAdapter(private val context: Context, private val mainVM: MainVM) : RecyclerView.Adapter<InformAdapter.InformHolder>() {
+class InformAdapter(private val context: Context, private val navFun: () -> Unit) : RecyclerView.Adapter<InformAdapter.InformHolder>() {
 
     private val viewArray = arrayListOf<View>()
 
@@ -42,11 +41,8 @@ class InformAdapter(private val context: Context, private val mainVM: MainVM) : 
     override fun onBindViewHolder(holder: InformHolder, position: Int) {
         if (position == 4){
             holder.itemView.findViewById<MaterialButton>(R.id.inform_rv_item_5_try_button).setOnClickListener {
-                for (i in viewArray) {
-                    i.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
-                    i.visibility = View.INVISIBLE
-                }
-                //Intent to main activity
+                animOut()
+                navFun()
             }
         }
     }
@@ -59,5 +55,12 @@ class InformAdapter(private val context: Context, private val mainVM: MainVM) : 
         const val ITEM_TYPE_3 = 2
         const val ITEM_TYPE_4 = 3
         const val ITEM_TYPE_5 = 4
+    }
+
+    fun animOut(){
+        for (i in viewArray) {
+            i.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
+            i.visibility = View.INVISIBLE
+        }
     }
 }

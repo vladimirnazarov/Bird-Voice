@@ -7,12 +7,6 @@
     app:startDestination="@id/logoFragment">
 
     <fragment
-        android:id="@+id/informPage"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.InformPageFragment"
-        android:label="InformPage">
-
-    </fragment>
-    <fragment
         android:id="@+id/logoFragment"
         android:name="by.ssrlab.birdvoice.launch.fragments.start.StartFragment"
         android:label="LogoFragment" >
@@ -57,10 +51,6 @@
     <fragment
         android:id="@+id/userDataFragment"
         android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.UserDataFragment"
-        android:label="UserDataFragment" >
-        <action
-            android:id="@+id/action_userDataFragment_to_informPage"
-            app:destination="@id/informPage" />
-    </fragment>
+        android:label="UserDataFragment" />
 
 </navigation>

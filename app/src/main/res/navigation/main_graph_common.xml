@@ -7,4 +7,14 @@
 
     <include app:graph="@navigation/main_graph_record" />
     <include app:graph="@navigation/main_graph_collection" />
+    <fragment
+        android:id="@+id/informPageFragment"
+        android:name="by.ssrlab.birdvoice.main.fragments.InformPageFragment"
+        android:label="InformPageFragment" >
+        <action
+            android:id="@+id/action_informPageFragment_to_main_graph_record"
+            app:destination="@id/main_graph_record"
+            app:popUpTo="@navigation/main_graph_record"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

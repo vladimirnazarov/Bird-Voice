@@ -44,11 +44,13 @@ class RecordFragment: BaseMainFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        if (activityMain.getRegValue() == 0) {
+            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
 
-        binding.recBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
-            binding.recRecordButtonIcon.setOnClickListener { buttonAction() }
-        })
+            binding.recBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
+                binding.recRecordButtonIcon.setOnClickListener { buttonAction() }
+            })
+        }
 
         activityMain.deletePopBackCallback()
 
@@ -60,6 +62,11 @@ class RecordFragment: BaseMainFragment() {
 
         mainVM.setToolbarTitle("Record your environment")
         activityMain.setToolbarAction(R.drawable.ic_menu){ activityMain.openDrawer() }
+
+        if (activityMain.getRegValue() == 1){
+            mainVM.navigateToWithDelay(R.id.informPageFragment)
+            activityMain.hideBottomNav()
+        }
     }
 
     private fun startRecord(){

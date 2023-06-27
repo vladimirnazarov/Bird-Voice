@@ -49,6 +49,8 @@ class LaunchActivity : AppCompatActivity() {
     fun moveToMainActivity(token: Int = 0) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.putExtra("userRegisterToken", token)
         startActivity(intent)
     }
 }

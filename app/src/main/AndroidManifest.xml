@@ -26,6 +26,7 @@
 
         <activity
             android:name=".launch.LaunchActivity"
+            android:excludeFromRecents="true"
             android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.BirdVoice.Launcher"
@@ -46,6 +47,7 @@
         <activity
             android:name=".main.MainActivity"
             android:theme="@style/Theme.BirdVoice"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" >
 
             <intent-filter>

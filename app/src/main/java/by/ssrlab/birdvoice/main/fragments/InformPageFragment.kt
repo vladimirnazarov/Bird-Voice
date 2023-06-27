@@ -25,7 +25,7 @@ class InformPageFragment: BaseMainFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        informAdapter = InformAdapter(MainApp.appContext, navFun)
+        informAdapter = InformAdapter(activityMain, MainApp.appContext, navFun)
     }
 
     override fun onCreateView(
@@ -35,11 +35,6 @@ class InformPageFragment: BaseMainFragment() {
     ): View {
 
         binding = FragmentInformPageBinding.inflate(layoutInflater)
-
-        activityMain.setPopBackCallback{
-            informAdapter.animOut()
-            activityMain.showBottomNav()
-        }
 
         return binding.root
     }
@@ -52,12 +47,20 @@ class InformPageFragment: BaseMainFragment() {
             adapter = informAdapter
         }
 
-        mainVM.setToolbarTitle("How it works?")
+        activityMain.setPopBackCallback{
+            informAdapter.animOut()
+            activityMain.showBottomNav()
+            activityMain.setRegValue(0)
+        }
+
         activityMain.setToolbarAction(R.drawable.ic_arrow_back) {
             navigationBackAction {
                 informAdapter.animOut()
                 activityMain.showBottomNav()
+                activityMain.setRegValue(0)
             }
         }
+
+        mainVM.setToolbarTitle("How it works?")
     }
 }

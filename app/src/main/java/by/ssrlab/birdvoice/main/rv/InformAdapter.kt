@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import by.ssrlab.birdvoice.R
+import by.ssrlab.birdvoice.main.MainActivity
 import com.google.android.material.button.MaterialButton
 
-class InformAdapter(private val context: Context, private val navFun: () -> Unit) : RecyclerView.Adapter<InformAdapter.InformHolder>() {
+class InformAdapter(private val activity: MainActivity, private val context: Context, private val navFun: () -> Unit) : RecyclerView.Adapter<InformAdapter.InformHolder>() {
 
     private val viewArray = arrayListOf<View>()
 
@@ -42,6 +43,7 @@ class InformAdapter(private val context: Context, private val navFun: () -> Unit
         if (position == 4){
             holder.itemView.findViewById<MaterialButton>(R.id.inform_rv_item_5_try_button).setOnClickListener {
                 animOut()
+                activity.setRegValue(0)
                 navFun()
             }
         }

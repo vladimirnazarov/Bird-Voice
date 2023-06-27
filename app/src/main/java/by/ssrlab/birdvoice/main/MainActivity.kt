@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawer: DrawerLayout
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var navController: NavController
+    private var regValue = 0
 
     private val mainVM: MainVM by viewModels()
 
@@ -50,6 +51,8 @@ class MainActivity : AppCompatActivity() {
             setSupportActionBar(mainToolbar)
             mainVM.setToolbarTitleObserver(mainToolbar, this@MainActivity)
         }
+
+        regValue = intent.getIntExtra("userRegisterToken", 1)
     }
 
     override fun onResume() {
@@ -125,5 +128,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun closeDrawer(){
         drawer.closeDrawer(GravityCompat.START)
+    }
+
+    fun getRegValue() = regValue
+
+    fun setRegValue(value: Int){
+        regValue = value
     }
 }

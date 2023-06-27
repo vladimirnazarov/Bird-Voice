@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -59,7 +58,7 @@ class UserDataFragment : BaseLaunchFragment() {
             binding.userDataPhotoButton.setOnClickListener { pickPhoto() }
             binding.userDataApproveButton.setOnClickListener {
                 checkName {
-                    Toast.makeText(MainApp.appContext, "Everything is fine!", Toast.LENGTH_SHORT).show()
+                    activityLaunch.moveToMainActivity(1)
                 }
             }
         })

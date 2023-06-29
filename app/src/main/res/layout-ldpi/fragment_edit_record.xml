@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:ignore="ContentDescription"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_rec_top_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/primary_concave_background"
+        android:elevation="8dp"
+        android:translationZ="8dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/edit_rec_concave_time_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/ic_concave_data_holder_small"
+
+            android:layout_marginTop="10dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/edit_rec_concave_date_holder"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:id="@+id/edit_rec_concave_time_title_holder"
+                android:layout_width="45dp"
+                android:layout_height="20dp"
+
+                android:layout_marginStart="12dp"
+                android:layout_marginVertical="8dp"
+
+                android:background="@drawable/rv_item_shape_1"
+                android:elevation="4dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/edit_rec_concave_time_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/time"
+                    android:textColor="@color/primary_text_blue"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/edit_rec_concave_time_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/roboto"
+                android:text="@string/time_plug"
+                android:textColor="@color/primary_text_blue"
+                android:textSize="12sp"
+                android:textStyle="bold"
+
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_rec_concave_time_title_holder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/edit_rec_concave_place_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/ic_concave_data_holder_big"
+
+            android:layout_marginVertical="12dp"
+            android:layout_marginHorizontal="12dp"
+
+            app:layout_constraintTop_toBottomOf="@id/edit_rec_concave_date_holder"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/edit_rec_concave_date_holder"
+            app:layout_constraintStart_toStartOf="@+id/edit_rec_concave_time_holder">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/ic_concave_data_holder_big"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/edit_rec_concave_place_title_holder"
+                android:layout_width="45dp"
+                android:layout_height="20dp"
+
+                android:layout_marginStart="12dp"
+
+                android:background="@drawable/rv_item_shape_1"
+                android:elevation="4dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/edit_rec_concave_place_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/place"
+                    android:textColor="@color/primary_text_blue"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/edit_rec_concave_place_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/roboto"
+                android:text="@string/place_plug"
+                android:textColor="@color/primary_text_blue"
+                android:textSize="13sp"
+                android:textStyle="bold"
+
+                android:layout_marginHorizontal="12dp"
+                android:gravity="center"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_rec_concave_place_title_holder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/edit_rec_concave_date_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/ic_concave_data_holder_small"
+
+            android:layout_marginTop="10dp"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/edit_rec_concave_time_holder">
+
+            <LinearLayout
+                android:id="@+id/edit_rec_concave_date_title_holder"
+                android:layout_width="45dp"
+                android:layout_height="20dp"
+
+                android:layout_marginStart="12dp"
+                android:layout_marginVertical="8dp"
+
+                android:background="@drawable/rv_item_shape_1"
+                android:elevation="4dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/edit_rec_concave_date_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/date"
+                    android:textColor="@color/primary_text_blue"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/edit_rec_concave_date_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/roboto"
+                android:text="@string/date_plug"
+                android:textColor="@color/primary_text_blue"
+                android:textSize="12sp"
+                android:textStyle="bold"
+
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/edit_rec_concave_date_title_holder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_rec_concave_wave_holder"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+
+        android:background="@color/white"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_rec_top_holder">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/edit_rec_wave_animation"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            app:lottie_rawRes="@raw/wave_animation"
+            app:lottie_repeatMode="reverse"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/edit_rec_bottom_holder"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        android:background="@color/primary_concave_background"
+        android:elevation="8dp"
+
+
+        app:layout_constraintTop_toBottomOf="@id/edit_rec_concave_wave_holder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/edit_rec_play_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:scaleX="0.85"
+            android:scaleY="0.85"
+
+            android:src="@drawable/ic_play_button"
+            android:background="@drawable/ripple_rounded"
+            android:elevation="4dp"
+
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="2dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/edit_rec_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/timer_plug"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/primary_text_blue"
+
+            android:layout_marginStart="4dp"
+
+            app:layout_constraintTop_toTopOf="@id/edit_rec_play_button"
+            app:layout_constraintBottom_toBottomOf="@id/edit_rec_play_button"
+            app:layout_constraintStart_toEndOf="@id/edit_rec_play_button"/>
+
+        <ImageButton
+            android:id="@+id/edit_rec_share_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+
+            android:src="@drawable/ic_share_button"
+            android:background="@drawable/ripple_rounded"
+            android:elevation="4dp"
+
+            android:layout_marginEnd="6dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/edit_rec_play_button"
+            app:layout_constraintBottom_toBottomOf="@id/edit_rec_play_button"/>
+
+        <ImageButton
+            android:id="@+id/edit_rec_load_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+
+            android:src="@drawable/ic_download_button"
+            android:background="@drawable/ripple_rounded"
+            android:elevation="4dp"
+
+            android:layout_marginEnd="4dp"
+
+            app:layout_constraintEnd_toStartOf="@id/edit_rec_share_button"
+            app:layout_constraintTop_toTopOf="@id/edit_rec_play_button"
+            app:layout_constraintBottom_toBottomOf="@id/edit_rec_play_button"/>
+
+        <SeekBar
+            android:id="@+id/edit_rec_audio_progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="4dp"
+
+            app:layout_constraintStart_toEndOf="@id/edit_rec_timer"
+            app:layout_constraintEnd_toStartOf="@id/edit_rec_load_button"
+            app:layout_constraintTop_toTopOf="@id/edit_rec_play_button"
+            app:layout_constraintBottom_toBottomOf="@id/edit_rec_play_button"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/edit_rec_start_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            android:text="@string/edit_rec_start"
+            android:textAllCaps="false"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/primary_text_blue"
+            android:textSize="14sp"
+
+            android:backgroundTint="@color/white"
+
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+
+            android:clickable="false"
+
+            app:cornerRadius="32dp"
+            app:rippleColor="@color/primary_button_push"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_rec_play_button"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

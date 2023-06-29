@@ -53,13 +53,13 @@ class RegisterFragment: BaseLaunchFragment() {
         animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
 
         if (launchVM.boolPopBack) {
-            launchVM.showArrow()
+            launchVM.showTop()
         }
         binding.registerBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction {
                     animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-                    launchVM.hideArrow()
+                    launchVM.hideTop()
                     errorViewOut(checkEmail = true, checkTelephone = true, checkPassword = true)
                 }
             }

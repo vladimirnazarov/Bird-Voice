@@ -16,15 +16,19 @@ class LaunchVM: ViewModel() {
     var boolPopBack = true
     var boolArrowHide = false
     var activityBinding: ActivityLaunchBinding? = null
-    fun showArrow(){
+    fun showTop(){
         val arrowAnim = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_left_obj_enter)
-        activityBinding?.launcherArrowBack?.startAnimation(arrowAnim)
-        activityBinding?.launcherArrowBack?.visibility = View.VISIBLE
+        activityBinding?.apply {
+            launcherArrowBack.startAnimation(arrowAnim)
+            launcherArrowBack.visibility = View.VISIBLE
+        }
     }
-    fun hideArrow(){
+    fun hideTop(){
         val arrowAnim = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_left_obj_out)
-        activityBinding?.launcherArrowBack?.startAnimation(arrowAnim)
-        activityBinding?.launcherArrowBack?.visibility = View.INVISIBLE
+        activityBinding?.apply {
+            launcherArrowBack.startAnimation(arrowAnim)
+            launcherArrowBack.visibility = View.INVISIBLE
+        }
     }
     fun setArrowAction(action: () -> Unit){
         activityBinding?.launcherArrowBack?.setOnClickListener {
@@ -63,7 +67,7 @@ class LaunchVM: ViewModel() {
     val onMapBackPressedCallback = object : OnBackPressedCallback(true){
         override fun handleOnBackPressed() {
             if (activityBinding != null && boolArrowHide){
-                hideArrow()
+                hideTop()
             }
             navUpAnimLambda()
             navigateUpWithDelay()

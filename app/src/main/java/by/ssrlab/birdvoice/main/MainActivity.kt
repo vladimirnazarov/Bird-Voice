@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawer: DrawerLayout
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var navController: NavController
+    private var regValue = 0
 
     private val mainVM: MainVM by viewModels()
 
@@ -50,32 +51,14 @@ class MainActivity : AppCompatActivity() {
             setSupportActionBar(mainToolbar)
             mainVM.setToolbarTitleObserver(mainToolbar, this@MainActivity)
         }
+
+        regValue = intent.getIntExtra("userRegisterToken", 1)
     }
 
     override fun onResume() {
         super.onResume()
 
-        binding.apply {
-            drawerButtonLanguage.setOnClickListener { Toast.makeText(this@MainActivity, "Language", Toast.LENGTH_SHORT).show() }
-
-            drawerButtonInstruction.setOnClickListener {
-                navController.navigate(R.id.informPageFragment)
-                hideBottomNav()
-                closeDrawer()
-            }
-
-            drawerButtonFeedback.setOnClickListener {
-                navController.navigate(R.id.feedbackFragment)
-                hideBottomNav()
-                closeDrawer()
-            }
-
-            drawerButtonInstagram.setOnClickListener { Toast.makeText(this@MainActivity, "Instagram", Toast.LENGTH_SHORT).show() }
-
-            drawerButtonWhatsapp.setOnClickListener { Toast.makeText(this@MainActivity, "WhatsApp", Toast.LENGTH_SHORT).show() }
-
-            drawerButtonTwitter.setOnClickListener { Toast.makeText(this@MainActivity, "Twitter", Toast.LENGTH_SHORT).show() }
-        }
+        setupDrawer()
     }
 
     fun setToolbarAction(icon: Int, action: () -> Unit){
@@ -125,5 +108,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun closeDrawer(){
         drawer.closeDrawer(GravityCompat.START)
+    }
+
+    fun getRegValue() = regValue
+
+    fun setRegValue(value: Int){
+        regValue = value
+    }
+
+    fun setupDrawer(){
+        binding.apply {
+            drawerButtonLanguage.setOnClickListener { Toast.makeText(this@MainActivity, "Language", Toast.LENGTH_SHORT).show() }
+
+            drawerButtonInstruction.setOnClickListener {
+                navController.navigate(R.id.informPageFragment)
+                hideBottomNav()
+                closeDrawer()
+            }
+
+            drawerButtonFeedback.setOnClickListener {
+                navController.navigate(R.id.feedbackFragment)
+                hideBottomNav()
+                closeDrawer()
+            }
+
+            drawerButtonInstagram.setOnClickListener { Toast.makeText(this@MainActivity, "Instagram", Toast.LENGTH_SHORT).show() }
+
+            drawerButtonWhatsapp.setOnClickListener { Toast.makeText(this@MainActivity, "WhatsApp", Toast.LENGTH_SHORT).show() }
+
+            drawerButtonTwitter.setOnClickListener { Toast.makeText(this@MainActivity, "Twitter", Toast.LENGTH_SHORT).show() }
+        }
     }
 }

@@ -59,7 +59,9 @@ class LoginFragment: BaseLaunchFragment() {
             }
 
             binding.loginSignInButton.setOnClickListener {
-                checkLogin()
+                checkLogin{
+                    activityLaunch.moveToMainActivity()
+                }
             }
         })
 
@@ -78,11 +80,14 @@ class LoginFragment: BaseLaunchFragment() {
         activityLaunch.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
     }
 
-    private fun checkLogin(){
+    private fun checkLogin(onSuccess: () -> Unit){
+        var errorValue = 0
+
         setEditTextListeners()
 
-        helpFunctions.checkTextInput(binding.loginEmailInput.text, binding.loginEmailErrorMessage, resources)
-        helpFunctions.checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
+        errorValue += helpFunctions.checkTextInput(binding.loginEmailInput.text, binding.loginEmailErrorMessage, resources)
+        errorValue += helpFunctions.checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
+        if (errorValue == 0) onSuccess()
     }
 
     private fun errorViewOut(checkLogin: Boolean = false, checkPassword: Boolean = false){

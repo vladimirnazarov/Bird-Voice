@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:ignore="ContentDescription"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/recognition_top_right_cloud"
+        android:layout_width="80dp"
+        android:layout_height="75dp"
+
+        android:src="@drawable/recognition_cloud_top_right"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/recognition_top_left_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/recognition_cloud_top_left"
+
+        android:layout_marginTop="4dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/recognition_top_right_cloud"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/recognition_bottom_left_cloud"
+        android:layout_width="100dp"
+        android:layout_height="95dp"
+
+        android:src="@drawable/recognition_cloud_bottom_left"
+
+        android:layout_marginTop="12dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recognition_top_left_cloud"/>
+
+    <ImageView
+        android:id="@+id/recognition_bird"
+        android:layout_width="200dp"
+        android:layout_height="180dp"
+
+        android:src="@drawable/recognition_bird"
+
+        app:layout_constraintVertical_bias="0.40"
+        android:elevation="4dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/recognition_platform"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+
+        android:layout_marginTop="18dp"
+
+        android:src="@drawable/recognition_platform"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/recognition_bird"
+        app:layout_constraintVertical_bias="0.497" />
+
+    <TextView
+        android:id="@+id/recognition_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:text="@string/in_the_process_please_wait_a_bit"
+        android:textColor="@color/primary_text_blue"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+
+        android:layout_marginTop="48dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recognition_bird"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/recognition_dots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textStyle="bold"
+        android:textColor="@color/primary_text_blue"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+
+        app:layout_constraintStart_toEndOf="@id/recognition_text"
+        app:layout_constraintTop_toTopOf="@id/recognition_text"
+        app:layout_constraintBottom_toBottomOf="@id/recognition_text"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

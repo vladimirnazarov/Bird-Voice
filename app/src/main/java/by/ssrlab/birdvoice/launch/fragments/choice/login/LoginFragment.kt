@@ -47,13 +47,13 @@ class LoginFragment: BaseLaunchFragment() {
         binding.loginPasswordInput.filters = helpFunctions.editTextFilters
 
         if (launchVM.boolPopBack) {
-            launchVM.showArrow()
+            launchVM.showTop()
         }
         binding.loginBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction {
                     animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-                    launchVM.hideArrow()
+                    launchVM.hideTop()
                     errorViewOut(checkLogin = true, checkPassword = true)
                 }
             }

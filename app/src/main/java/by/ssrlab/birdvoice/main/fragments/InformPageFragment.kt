@@ -18,6 +18,7 @@ class InformPageFragment: BaseMainFragment() {
 
     private val navFun = {
         mainVM.navigateToWithDelay(R.id.action_informPageFragment_to_main_graph_record)
+        activityMain.showBottomNav()
     }
 
     override var arrayOfViews = arrayListOf<ViewObject>()

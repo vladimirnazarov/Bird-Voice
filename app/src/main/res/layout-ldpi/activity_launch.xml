@@ -13,19 +13,19 @@
 
     <ImageButton
         android:id="@+id/launcher_arrow_back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
 
-        android:src="@drawable/ic_arrow_back"
+        android:layout_marginStart="16dp"
 
+        android:layout_marginTop="12dp"
         android:background="@drawable/ripple_rounded"
-        android:visibility="invisible"
 
         android:clickable="false"
 
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"
         android:padding="8dp"
+        android:src="@drawable/ic_arrow_back"
+        android:visibility="invisible"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

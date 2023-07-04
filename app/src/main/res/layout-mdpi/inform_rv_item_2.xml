@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:background="@drawable/rv_item_shape_2"
+    android:elevation="4dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginHorizontal="12dp"
+    tools:ignore="ContentDescription"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/inform_rv_item_2_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/recording_of_a_bird_singing"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="15sp"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/inform_rv_item_2_rec_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        android:background="@drawable/rv_image_button_background"
+        android:elevation="8dp"
+
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
+
+        app:layout_constraintStart_toStartOf="@id/inform_rv_item_2_title"
+        app:layout_constraintTop_toBottomOf="@id/inform_rv_item_2_title">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/ic_mic_small"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/inform_rv_item_2_stop_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+
+        android:background="@drawable/rv_image_button_background"
+        android:elevation="8dp"
+
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="8dp"
+
+        app:layout_constraintStart_toEndOf="@id/inform_rv_item_2_rec_img"
+        app:layout_constraintTop_toBottomOf="@id/inform_rv_item_2_title">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/ic_stop_small"
+            android:padding="20dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/inform_rv_item_2_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="@string/inform_rv_item_2_description"
+        android:textColor="@color/primary_text_blue"
+        android:fontFamily="@font/roboto"
+        android:textSize="14sp"
+
+        android:layout_margin="16dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inform_rv_item_2_rec_img"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

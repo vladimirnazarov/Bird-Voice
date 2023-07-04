@@ -84,7 +84,10 @@ class RegisterFragment: BaseLaunchFragment() {
     override fun onResume() {
         super.onResume()
 
-        activityLaunch.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
+        activityLaunch.setPopBackCallback {
+            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            errorViewOut(checkEmail = true, checkTelephone = true, checkPassword = true)
+        }
     }
 
     private fun checkRegister(onSuccess: () -> Unit){

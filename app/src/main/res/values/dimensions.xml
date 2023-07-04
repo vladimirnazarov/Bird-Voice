@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Error text -->
+    <dimen name="error_ldpi">11sp</dimen>
+    <dimen name="error_mdpi">11sp</dimen>
+</resources>

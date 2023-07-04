@@ -65,7 +65,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/main_bottom_navigation_view"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
 
             app:menu="@menu/bottom_menu"
             app:elevation="4dp"
@@ -362,6 +362,7 @@
             android:layout_height="wrap_content"
 
             android:src="@drawable/drawer_cloud_bottom_left"
+            android:visibility="gone"
 
             android:layout_marginBottom="24dp"
 

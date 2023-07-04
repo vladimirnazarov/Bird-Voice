@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         regValue = value
     }
 
-    fun setupDrawer(){
+    private fun setupDrawer(){
         binding.apply {
             drawerButtonLanguage.setOnClickListener { Toast.makeText(this@MainActivity, "Language", Toast.LENGTH_SHORT).show() }
 

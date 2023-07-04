@@ -52,6 +52,7 @@ class UserDataFragment : BaseLaunchFragment() {
             launchVM.setArrowAction {
                 navigationBackAction {
                     animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    errorViewOut()
                 }
             }
 
@@ -69,7 +70,10 @@ class UserDataFragment : BaseLaunchFragment() {
     override fun onResume() {
         super.onResume()
 
-        activityLaunch.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
+        activityLaunch.setPopBackCallback {
+            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            errorViewOut()
+        }
     }
 
     private fun requestCameraPermission(onSuccess: () -> Unit){

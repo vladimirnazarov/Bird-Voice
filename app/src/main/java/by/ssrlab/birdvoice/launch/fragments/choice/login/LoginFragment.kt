@@ -77,7 +77,10 @@ class LoginFragment: BaseLaunchFragment() {
     override fun onResume() {
         super.onResume()
 
-        activityLaunch.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
+        activityLaunch.setPopBackCallback {
+            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            errorViewOut(checkLogin = true, checkPassword = true)
+        }
     }
 
     private fun checkLogin(onSuccess: () -> Unit){

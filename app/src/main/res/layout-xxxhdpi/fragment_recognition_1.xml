@@ -53,7 +53,7 @@
 
         android:src="@drawable/recognition_bird"
 
-        app:layout_constraintVertical_bias="0.40"
+        app:layout_constraintVertical_bias="0.50"
         android:elevation="4dp"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -64,9 +64,7 @@
     <ImageView
         android:id="@+id/recognition_platform"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-
-        android:layout_marginTop="18dp"
+        android:layout_height="200dp"
 
         android:src="@drawable/recognition_platform"
 

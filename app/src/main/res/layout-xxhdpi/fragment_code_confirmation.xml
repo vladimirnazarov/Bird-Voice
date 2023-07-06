@@ -1,6 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/code_top_left_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/code_cloud_top_left"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/code_bird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/code_bird"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/code_top_left_cloud" />
+
+    <ImageView
+        android:id="@+id/code_bottom_left_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/code_cloud_bottom_left"
+
+        app:layout_constraintBottom_toBottomOf="@id/code_bird"
+        app:layout_constraintEnd_toEndOf="@id/code_top_left_cloud"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/code_bird"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <ImageView
+        android:id="@+id/code_bottom_right_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="16dp"
+
+        android:src="@drawable/code_cloud_bottom_right"
+
+        app:layout_constraintBottom_toBottomOf="@id/code_bird"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/code_bird" />
+
+    <TextView
+        android:id="@+id/code_code_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/code"
+
+        android:textColor="@color/primary_text_blue"
+        android:textSize="18sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/code_bird" />
+
+    <TextView
+        android:id="@+id/code_code_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textSize="14sp"
+        android:textColor="@color/primary_red"
+        android:fontFamily="@font/roboto"
+
+        android:layout_marginTop="6dp"
+        android:visibility="invisible"
+
+        app:layout_constraintEnd_toEndOf="@id/code_enter_4"
+        app:layout_constraintTop_toBottomOf="@id/code_enter_4"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/code_enter_1"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/background_launcher_edittext"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="8dp"
+        android:elevation="4dp"
+        android:padding="16dp"
+
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="18sp"
+        android:inputType="number"
+
+        android:lines="1"
+        android:maxLength="1"
+        android:maxLines="1"
+        android:gravity="center"
+
+        app:layout_constraintTop_toBottomOf="@id/code_code_title"
+        app:layout_constraintEnd_toStartOf="@+id/code_enter_2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="440dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/code_enter_2"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/background_launcher_edittext"
+        android:layout_marginTop="4dp"
+        android:elevation="4dp"
+        android:padding="16dp"
+
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="18sp"
+        android:inputType="number"
+
+        android:lines="1"
+        android:maxLength="1"
+        android:maxLines="1"
+        android:gravity="center"
+
+        app:layout_constraintTop_toBottomOf="@id/code_code_title"
+        app:layout_constraintEnd_toStartOf="@+id/code_enter_3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/code_enter_1"
+        tools:layout_editor_absoluteY="440dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/code_enter_4"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/background_launcher_edittext"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="4dp"
+        android:padding="16dp"
+
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="18sp"
+        android:inputType="number"
+
+        android:lines="1"
+        android:maxLength="1"
+        android:maxLines="1"
+        android:gravity="center"
+
+        app:layout_constraintTop_toBottomOf="@id/code_code_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/code_enter_3"
+        tools:layout_editor_absoluteY="440dp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/code_enter_3"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/background_launcher_edittext"
+        android:layout_marginTop="4dp"
+        android:elevation="4dp"
+        android:padding="16dp"
+
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="18sp"
+        android:inputType="number"
+
+        android:lines="1"
+        android:maxLength="1"
+        android:maxLines="1"
+        android:gravity="center"
+
+        app:layout_constraintTop_toBottomOf="@id/code_code_title"
+        app:layout_constraintEnd_toStartOf="@+id/code_enter_4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/code_enter_2"
+        tools:layout_editor_absoluteY="440dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/code_login_button"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+
+        android:text="@string/log_in"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="16sp"
+
+        android:clickable="false"
+
+        android:backgroundTint="@color/white"
+
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="48dp"
+
+        app:cornerRadius="32dp"
+        app:rippleColor="@color/primary_button_push"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/code_code_error_message"/>
+
+    <TextView
+        android:id="@+id/code_send_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+
+        android:text="@string/send_again"
+        android:textColor="@color/sub_text"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+
+        app:layout_constraintTop_toBottomOf="@id/code_login_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

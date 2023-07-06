@@ -53,7 +53,7 @@
 
         android:src="@drawable/recognition_bird"
 
-        app:layout_constraintVertical_bias="0.50"
+        app:layout_constraintVertical_bias="0.4"
         android:elevation="4dp"
 
         app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
 
+        android:layout_marginTop="24dp"
+
         android:src="@drawable/recognition_platform"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +75,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/recognition_bird"
-        app:layout_constraintVertical_bias="0.497" />
+        app:layout_constraintVertical_bias="0.6" />
 
     <TextView
         android:id="@+id/recognition_text"
@@ -84,9 +86,9 @@
         android:text="@string/in_the_process_please_wait_a_bit"
         android:textColor="@color/primary_text_blue"
         android:fontFamily="@font/roboto"
-        android:textSize="18sp"
+        android:textSize="15sp"
 
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="24dp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recognition_bird"
@@ -100,7 +102,7 @@
         android:textStyle="bold"
         android:textColor="@color/primary_text_blue"
         android:fontFamily="@font/roboto"
-        android:textSize="18sp"
+        android:textSize="16sp"
 
         app:layout_constraintStart_toEndOf="@id/recognition_text"
         app:layout_constraintTop_toTopOf="@id/recognition_text"

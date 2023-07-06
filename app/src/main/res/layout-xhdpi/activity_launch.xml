@@ -13,8 +13,8 @@
 
     <ImageButton
         android:id="@+id/launcher_arrow_back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
 
         android:src="@drawable/ic_arrow_back"
 
@@ -23,7 +23,7 @@
 
         android:clickable="false"
 
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:padding="8dp"
 

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:ignore="ContentDescription"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/feedback_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/feedback_title"
+        android:textSize="24sp"
+        android:textColor="@color/primary_text_blue"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/feedback_1_bird"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/feedback_1_bird"
+        android:elevation="5dp"
+
+        app:layout_constraintTop_toTopOf="@id/feedback_title"
+        app:layout_constraintStart_toEndOf="@id/feedback_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/feedback_input"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+
+        android:background="@drawable/background_launcher_edittext"
+        android:elevation="4dp"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="top|start"
+        android:paddingVertical="18dp"
+        android:paddingHorizontal="22dp"
+
+        android:textSize="15sp"
+        android:textColor="@color/primary_text_blue"
+        android:fontFamily="@font/roboto"
+
+        android:maxLength="250"
+        android:ems="15"
+
+        app:layout_constraintTop_toBottomOf="@id/feedback_1_bird"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/feedback_error_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:text="@string/this_field_must_be_not_empty"
+        android:textSize="13sp"
+        android:textColor="@color/primary_red"
+        android:fontFamily="@font/roboto"
+
+        android:visibility="invisible"
+
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="12dp"
+
+        app:layout_constraintTop_toBottomOf="@id/feedback_input"
+        app:layout_constraintStart_toStartOf="@id/feedback_input"
+        app:layout_constraintEnd_toEndOf="@id/feedback_input"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/feedback_send_button"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        android:text="@string/send"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/primary_text_blue"
+        android:textSize="15sp"
+
+        android:backgroundTint="@color/white"
+
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="12dp"
+
+        android:clickable="false"
+
+        app:cornerRadius="32dp"
+        app:rippleColor="@color/primary_button_push"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feedback_error_message"/>
+
+    <ImageView
+        android:id="@+id/feedback_bottom_left_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/feedback_cloud_bottom_left"
+
+
+        app:layout_constraintTop_toBottomOf="@id/feedback_input"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/feedback_bottom_right_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/feedback_cloud_bottom_right"
+
+        android:layout_marginTop="8dp"
+
+        app:layout_constraintTop_toBottomOf="@id/feedback_send_button"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/feedback_top_right_cloud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/feedback_cloud_top_right"
+
+        android:layout_marginTop="16dp"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/feedback_2_bird"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/feedback_2_bird"
+
+        android:visibility="gone"
+
+        android:layout_marginTop="12dp"
+
+        app:layout_constraintTop_toTopOf="@id/feedback_top_right_cloud"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/feedback_congrats_holder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:visibility="gone"
+
+        android:background="@drawable/rv_item_shape_2"
+        android:layout_marginHorizontal="16dp"
+        android:elevation="6dp"
+
+        app:layout_constraintTop_toBottomOf="@id/feedback_2_bird"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/feedback_congrats_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/thanks"
+            android:textStyle="bold"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/primary_text_blue"
+            android:textSize="18sp"
+
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/feedback_congrats_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/feedback_congrats_text"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/primary_text_blue"
+            android:textSize="16sp"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginHorizontal="24dp"
+
+            app:layout_constraintTop_toBottomOf="@id/feedback_congrats_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:textSize="@dimen/error_mdpi"
+                android:textSize="@dimen/error_ldpi"
                 android:textColor="@color/primary_red"
                 android:fontFamily="@font/roboto"
 
@@ -129,6 +129,65 @@
                 app:layout_constraintTop_toBottomOf="@id/register_email_title"/>
 
             <TextView
+                android:id="@+id/register_telephone_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="@string/telephone_number"
+                android:textColor="@color/primary_text_blue"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto"
+
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="24dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/register_email_input"/>
+
+            <TextView
+                android:id="@+id/register_telephone_error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/error_ldpi"
+                android:textColor="@color/primary_red"
+                android:fontFamily="@font/roboto"
+
+                android:visibility="invisible"
+
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="2dp"
+                android:elevation="6dp"
+
+                app:layout_constraintEnd_toEndOf="@id/register_telephone_input"
+                app:layout_constraintTop_toBottomOf="@id/register_telephone_input"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/register_telephone_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/background_launcher_edittext"
+                android:elevation="4dp"
+                android:layout_marginTop="2dp"
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="14dp"
+
+                android:textSize="14sp"
+                android:textColor="@color/primary_text_blue"
+                android:fontFamily="@font/roboto"
+                android:inputType="phone"
+
+                android:lines="1"
+                android:maxLines="1"
+                android:maxLength="28"
+
+                app:layout_constraintStart_toStartOf="@id/register_telephone_title"
+                app:layout_constraintEnd_toEndOf="@id/register_telephone_title"
+                app:layout_constraintTop_toBottomOf="@id/register_telephone_title"/>
+
+            <TextView
                 android:id="@+id/register_password_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -143,14 +202,14 @@
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/register_email_input"/>
+                app:layout_constraintTop_toBottomOf="@id/register_telephone_input"/>
 
             <TextView
                 android:id="@+id/register_password_error_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:textSize="@dimen/error_mdpi"
+                android:textSize="@dimen/error_ldpi"
                 android:textColor="@color/primary_red"
                 android:fontFamily="@font/roboto"
 
@@ -260,7 +319,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
 
-                android:text="@string/next"
+                android:text="@string/create"
                 android:textAllCaps="false"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/primary_text_blue"

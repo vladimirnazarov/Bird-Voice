@@ -37,7 +37,7 @@
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/codeFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.CodeFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.old.CodeFragment"
         android:label="CodeFragment" >
         <action
             android:id="@+id/action_codeFragment_to_userDataFragment"
@@ -45,11 +45,11 @@
     </fragment>
     <fragment
         android:id="@+id/userDataFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.UserDataFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.old.UserDataFragment"
         android:label="UserDataFragment" />
     <fragment
         android:id="@+id/registerFragmentOld"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.RegisterFragmentOld"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.old.RegisterFragmentOld"
         android:label="RegisterFragmentOld" >
         <action
             android:id="@+id/action_registerFragmentOld_to_codeFragment"
@@ -58,6 +58,14 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_additionalFragment"
+            app:destination="@id/additionalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/additionalFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.AdditionalFragment"
+        android:label="AdditionalFragment" />
 
 </navigation>

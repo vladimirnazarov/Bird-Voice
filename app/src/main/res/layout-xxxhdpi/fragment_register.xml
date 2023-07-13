@@ -234,25 +234,6 @@
                 app:layout_constraintTop_toTopOf="@id/register_bottom_left_cloud"
                 app:layout_constraintBottom_toBottomOf="@id/register_bottom_left_cloud"/>
 
-            <TextView
-                android:id="@+id/register_privacy_policy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:text="@string/by_continuing_you_agree_to_our_privacy_policy"
-                android:textColor="@color/primary_text_blue"
-                android:fontFamily="@font/roboto"
-                android:textSize="16sp"
-                android:textColorLink="@color/primary_text_blue"
-                android:linksClickable="true"
-
-                android:gravity="center"
-                android:layout_marginHorizontal="16dp"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/register_bottom_left_cloud" />
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/register_create_button"
                 android:layout_width="match_parent"
@@ -271,15 +252,12 @@
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="12dp"
 
-                app:icon="@drawable/ic_button_bird"
-                app:iconGravity="textEnd"
-
                 app:cornerRadius="32dp"
                 app:rippleColor="@color/primary_button_push"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/register_privacy_policy"/>
+                app:layout_constraintTop_toBottomOf="@id/register_bottom_left_cloud"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

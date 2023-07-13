@@ -3,30 +3,36 @@
     <string name="app_name">Bird Voice</string>
 
     <!-- Error information -->
-    <string name="this_field_must_be_not_empty">This field must be not empty</string>
-    <string name="please_enter_the_code">Please, enter the code</string>
-    <string name="space_is_not_allowed">Space is not allowed here</string>
+    <string name="this_field_must_be_not_empty">Гэтае поле не павінна быць пустым</string>
+    <string name="please_enter_the_code">Калі ласка, увядзіце код</string>
+    <string name="space_is_not_allowed">Прабел тут не дапускаецца</string>
 
     <!-- Choice -->
-    <string name="launcher_app_name">bird voice</string>
-    <string name="log_in">Log In</string>
-    <string name="new_account">New account</string>
+    <string name="launcher_app_name">голас птушкі</string>
+    <string name="log_in">Увайсці</string>
+    <string name="new_account">Новы ўліковы запіс</string>
 
     <!--  Login  -->
-    <string name="welcome_back">Welcome back!</string>
-    <string name="sign_in_to_continue">Sign in to continue</string>
-    <string name="sign_up_to_continue">Sign up to continue</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="remember_me">Remember me</string>
-    <string name="forgot_password">Forgot password?</string>
-    <string name="sign_in">Sign In</string>
+    <string name="welcome_back">З вяртаннем!</string>
+    <string name="sign_in_to_continue">Увайдзіце, каб працягнуць</string>
+    <string name="sign_up_to_continue">Зарэгіструйцеся, каб працягнуць</string>
+    <string name="email">Пошта</string>
+    <string name="password">Пароль</string>
+    <string name="remember_me">Запомніць мяне</string>
+    <string name="forgot_password">Забылі пароль?</string>
+    <string name="sign_in">Увайсці</string>
 
     <!--  Register  -->
     <string name="telephone_number">Telephone number</string>
-    <string name="by_continuing_you_agree_to_our_privacy_policy">By continuing, you agree to our <a href="http://google.com">Privacy Policy</a>.</string>
     <string name="create">Create</string>
     <string name="next">Continue</string>
+
+    <!--  Additional  -->
+    <string name="by_continuing_you_agree_to_our_privacy_policy">By continuing, you agree to our <a href="http://google.com">Privacy Policy</a>.</string>
+    <string name="additional_information">Additional information</string>
+    <string name="username">Username</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
 
     <!--  Code confirmation  -->
     <string name="code">Enter code here:</string>

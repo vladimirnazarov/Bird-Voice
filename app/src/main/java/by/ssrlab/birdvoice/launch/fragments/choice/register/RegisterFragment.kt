@@ -1,10 +1,10 @@
 package by.ssrlab.birdvoice.launch.fragments.choice.register
 
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
@@ -35,11 +35,8 @@ class RegisterFragment: BaseLaunchFragment() {
                 ViewObject(registerPasswordTitle),
                 ViewObject(registerPasswordInput),
                 ViewObject(registerShowPasswordButton),
-                ViewObject(registerPrivacyPolicy),
                 ViewObject(registerCreateButton)
             )
-
-            registerPrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
 
             registerEmailInput.filters = helpFunctions.editTextFilters
             registerPasswordInput.filters = helpFunctions.editTextFilters
@@ -63,6 +60,7 @@ class RegisterFragment: BaseLaunchFragment() {
             binding.registerCreateButton.setOnClickListener {
                 checkRegister {
                     animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    launchVM.navigateToWithDelay(R.id.action_registerFragment_to_additionalFragment)
                     binding.registerCreateButton.isClickable = false
                     launchVM.activityBinding?.launcherArrowBack?.isClickable = false
                 }

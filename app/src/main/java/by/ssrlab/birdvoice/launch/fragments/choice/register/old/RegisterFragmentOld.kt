@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.launch.fragments.choice.register
+package by.ssrlab.birdvoice.launch.fragments.choice.register.old
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod

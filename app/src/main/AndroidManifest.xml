@@ -10,6 +10,7 @@
 
     <application
         android:name=".app.MainApp"
+        android:usesCleartextTraffic="true"
         android:configChanges="screenSize|orientation|screenLayout|navigation"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

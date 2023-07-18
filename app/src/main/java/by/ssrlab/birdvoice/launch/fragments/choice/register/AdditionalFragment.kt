@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.ssrlab.birdvoice.app.MainApp
+import by.ssrlab.birdvoice.client.RegistrationClient
 import by.ssrlab.birdvoice.databinding.FragmentAdditionalBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
+import kotlinx.coroutines.launch
 
 class AdditionalFragment: BaseLaunchFragment() {
 
@@ -26,8 +28,8 @@ class AdditionalFragment: BaseLaunchFragment() {
         binding.apply {
             arrayOfViews = arrayListOf(
                 ViewObject(additionalInformationText),
-                ViewObject(additionalUsernameTitle),
-                ViewObject(additionalUsernameInput),
+                ViewObject(additionalEmailTitle),
+                ViewObject(additionalEmailInput),
                 ViewObject(additionalFirstnameTitle),
                 ViewObject(additionalFirstnameInput),
                 ViewObject(additionalLastnameTitle),
@@ -41,7 +43,7 @@ class AdditionalFragment: BaseLaunchFragment() {
 
             additionalPrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
 
-            additionalUsernameInput.filters = helpFunctions.editTextFilters
+            additionalEmailInput.filters = helpFunctions.editTextFilters
             additionalFirstnameInput.filters = helpFunctions.editTextFilters
             additionalLastnameInput.filters = helpFunctions.editTextFilters
         }
@@ -53,7 +55,7 @@ class AdditionalFragment: BaseLaunchFragment() {
             launchVM.setArrowAction {
                 navigationBackAction {
                     animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-                    errorViewOut(checkUserName = true, checkFirstName = true, checkLastName = true)
+                    errorViewOut(checkEmail = true, checkFirstName = true, checkLastName = true)
                     launchVM.activityBinding?.launcherArrowBack?.isClickable = false
                 }
             }
@@ -61,9 +63,17 @@ class AdditionalFragment: BaseLaunchFragment() {
 
         binding.additionalCreateButton.setOnClickListener {
             checkAdditional {
-                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-                Toast.makeText(MainApp.appContext, "Everything is fine!", Toast.LENGTH_SHORT).show()
-                binding.additionalCreateButton.isClickable = false
+                RegistrationClient.post(launchVM.getUsername(), launchVM.getPassword(), binding.additionalFirstnameInput.text!!, binding.additionalLastnameInput.text!!, binding.additionalEmailInput.text!!, {
+                        launchVM.getScope().launch {
+                            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                            Toast.makeText(MainApp.appContext, "Everything is fine!", Toast.LENGTH_SHORT).show()
+                            binding.additionalCreateButton.isClickable = false
+                        }
+                    }, {
+                        launchVM.getScope().launch { Toast.makeText(activityLaunch, "Username taken", Toast.LENGTH_SHORT).show() }
+                    },
+                    activityLaunch
+                )
             }
         }
 
@@ -75,7 +85,7 @@ class AdditionalFragment: BaseLaunchFragment() {
 
         activityLaunch.setPopBackCallback {
             animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-            errorViewOut(checkUserName = true, checkFirstName = true, checkLastName = true)
+            errorViewOut(checkEmail = true, checkFirstName = true, checkLastName = true)
         }
     }
 
@@ -84,21 +94,21 @@ class AdditionalFragment: BaseLaunchFragment() {
 
         setEditTextListeners()
 
-        errorValue += helpFunctions.checkTextInput(binding.additionalUsernameInput.text, binding.additionalUsernameErrorMessage, resources)
+        errorValue += helpFunctions.checkTextInput(binding.additionalEmailInput.text, binding.additionalEmailErrorMessage, resources)
         errorValue += helpFunctions.checkTextInput(binding.additionalFirstnameInput.text, binding.additionalFirstnameErrorMessage, resources)
         errorValue += helpFunctions.checkTextInput(binding.additionalLastnameInput.text, binding.additionalLastnameErrorMessage, resources)
 
         if (errorValue == 0) onSuccess()
     }
 
-    private fun errorViewOut(checkUserName: Boolean = false, checkFirstName: Boolean = false, checkLastName: Boolean = false) {
-        if (checkUserName) helpFunctions.checkErrorViewAvailability(binding.additionalUsernameErrorMessage)
+    private fun errorViewOut(checkEmail: Boolean = false, checkFirstName: Boolean = false, checkLastName: Boolean = false) {
+        if (checkEmail) helpFunctions.checkErrorViewAvailability(binding.additionalEmailErrorMessage)
         if (checkFirstName) helpFunctions.checkErrorViewAvailability(binding.additionalFirstnameErrorMessage)
         if (checkLastName) helpFunctions.checkErrorViewAvailability(binding.additionalLastnameErrorMessage)
     }
 
     private fun setEditTextListeners(){
-        binding.additionalUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener({ errorViewOut(checkUserName = true) }, {}))
+        binding.additionalEmailInput.addTextChangedListener(helpFunctions.createEditTextListener({ errorViewOut(checkEmail = true) }, {}))
         binding.additionalFirstnameInput.addTextChangedListener(helpFunctions.createEditTextListener({ errorViewOut(checkFirstName = true) }, {}))
         binding.additionalLastnameInput.addTextChangedListener(helpFunctions.createEditTextListener({ errorViewOut(checkLastName = true) }, {}))
     }

@@ -22,6 +22,8 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
 
+        <item name="android:autofilledHighlight">@android:color/transparent</item>
+
     </style>
 
 </resources>

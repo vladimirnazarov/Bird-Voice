@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.app.MainApp
+import by.ssrlab.birdvoice.client.LoginClient
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -28,8 +29,8 @@ class LoginFragment: BaseLaunchFragment() {
                 ViewObject(loginBottomRightCloud, "rc2"),
                 ViewObject(loginTopRightCloud, "rc1"),
                 ViewObject(loginBird),
-                ViewObject(loginEmailTitle),
-                ViewObject(loginEmailInput),
+                ViewObject(loginUsernameTitle),
+                ViewObject(loginUsernameInput),
                 ViewObject(loginPasswordTitle),
                 ViewObject(loginPasswordInput),
                 ViewObject(loginShowPasswordButton),
@@ -43,7 +44,7 @@ class LoginFragment: BaseLaunchFragment() {
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
         animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
 
-        binding.loginEmailInput.filters = helpFunctions.editTextFilters
+        binding.loginUsernameInput.filters = helpFunctions.editTextFilters
         binding.loginPasswordInput.filters = helpFunctions.editTextFilters
 
         if (launchVM.boolPopBack) {
@@ -60,7 +61,12 @@ class LoginFragment: BaseLaunchFragment() {
 
             binding.loginSignInButton.setOnClickListener {
                 checkLogin{
-                    activityLaunch.moveToMainActivity()
+//                    activityLaunch.moveToMainActivity()
+                    LoginClient.post(binding.loginUsernameInput.text!!, binding.loginPasswordInput.text!!, {
+
+                    }, {
+
+                    }, activityLaunch)
                 }
             }
         })
@@ -88,18 +94,18 @@ class LoginFragment: BaseLaunchFragment() {
 
         setEditTextListeners()
 
-        errorValue += helpFunctions.checkTextInput(binding.loginEmailInput.text, binding.loginEmailErrorMessage, resources)
+        errorValue += helpFunctions.checkTextInput(binding.loginUsernameInput.text, binding.loginUsernameErrorMessage, resources)
         errorValue += helpFunctions.checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
         if (errorValue == 0) onSuccess()
     }
 
     private fun errorViewOut(checkLogin: Boolean = false, checkPassword: Boolean = false){
-        if (checkLogin) helpFunctions.checkErrorViewAvailability(binding.loginEmailErrorMessage)
+        if (checkLogin) helpFunctions.checkErrorViewAvailability(binding.loginUsernameErrorMessage)
         if (checkPassword) helpFunctions.checkErrorViewAvailability(binding.loginPasswordErrorMessage)
     }
 
     private fun setEditTextListeners(){
-        binding.loginEmailInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkLogin = true) }, {}))
+        binding.loginUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkLogin = true) }, {}))
         binding.loginPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
     }
 }

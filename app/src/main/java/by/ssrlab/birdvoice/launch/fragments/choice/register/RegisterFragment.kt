@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
+import by.ssrlab.birdvoice.client.CheckUsernameClient
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
+import kotlinx.coroutines.launch
 
 class RegisterFragment: BaseLaunchFragment() {
 
@@ -30,15 +33,15 @@ class RegisterFragment: BaseLaunchFragment() {
                 ViewObject(registerBottomRightCloud, "rc2"),
                 ViewObject(registerNewAccountText),
                 ViewObject(registerSignUpText),
-                ViewObject(registerEmailTitle),
-                ViewObject(registerEmailInput),
+                ViewObject(registerUsernameTitle),
+                ViewObject(registerUsernameInput),
                 ViewObject(registerPasswordTitle),
                 ViewObject(registerPasswordInput),
                 ViewObject(registerShowPasswordButton),
                 ViewObject(registerCreateButton)
             )
 
-            registerEmailInput.filters = helpFunctions.editTextFilters
+            registerUsernameInput.filters = helpFunctions.editTextFilters
             registerPasswordInput.filters = helpFunctions.editTextFilters
         }
 
@@ -53,16 +56,23 @@ class RegisterFragment: BaseLaunchFragment() {
                 navigationBackAction {
                     animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
                     launchVM.hideTop()
-                    errorViewOut(checkEmail = true, checkPassword = true)
+                    errorViewOut(checkUsername = true, checkPassword = true)
                 }
             }
 
             binding.registerCreateButton.setOnClickListener {
                 checkRegister {
-                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-                    launchVM.navigateToWithDelay(R.id.action_registerFragment_to_additionalFragment)
-                    binding.registerCreateButton.isClickable = false
-                    launchVM.activityBinding?.launcherArrowBack?.isClickable = false
+                    CheckUsernameClient.post(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!, {
+                        launchVM.getScope().launch {
+                            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                            launchVM.navigateToWithDelay(R.id.action_registerFragment_to_additionalFragment)
+                            binding.registerCreateButton.isClickable = false
+                            launchVM.activityBinding?.launcherArrowBack?.isClickable = false
+                            launchVM.setUsernameAndPassword(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!)
+                        }
+                    }, {
+                        launchVM.getScope().launch { Toast.makeText(activityLaunch, "Username taken", Toast.LENGTH_SHORT).show() }
+                    }, activityLaunch)
                 }
             }
         })
@@ -79,7 +89,7 @@ class RegisterFragment: BaseLaunchFragment() {
 
         activityLaunch.setPopBackCallback {
             animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-            errorViewOut(checkEmail = true, checkPassword = true)
+            errorViewOut(checkUsername = true, checkPassword = true)
         }
     }
 
@@ -88,19 +98,19 @@ class RegisterFragment: BaseLaunchFragment() {
 
         setEditTextListeners()
 
-        errorValue += helpFunctions.checkTextInput(binding.registerEmailInput.text, binding.registerEmailErrorMessage, resources)
+        errorValue += helpFunctions.checkTextInput(binding.registerUsernameInput.text, binding.registerUsernameErrorMessage, resources)
         errorValue += helpFunctions.checkTextInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
 
         if (errorValue == 0) onSuccess()
     }
 
-    private fun errorViewOut(checkEmail: Boolean = false, checkPassword: Boolean = false){
-        if (checkEmail) helpFunctions.checkErrorViewAvailability(binding.registerEmailErrorMessage)
+    private fun errorViewOut(checkUsername: Boolean = false, checkPassword: Boolean = false){
+        if (checkUsername) helpFunctions.checkErrorViewAvailability(binding.registerUsernameErrorMessage)
         if (checkPassword) helpFunctions.checkErrorViewAvailability(binding.registerPasswordErrorMessage)
     }
 
     private fun setEditTextListeners(){
-        binding.registerEmailInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkEmail = true) }, {}))
+        binding.registerUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkUsername = true) }, {}))
         binding.registerPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
     }
 }

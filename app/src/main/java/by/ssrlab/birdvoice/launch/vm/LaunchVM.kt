@@ -1,5 +1,6 @@
 package by.ssrlab.birdvoice.launch.vm
 
+import android.text.Editable
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
@@ -77,4 +78,14 @@ class LaunchVM: ViewModel() {
     fun setNavUpAnimLambda(anim: () -> Unit){
         navUpAnimLambda = anim
     }
+
+//  Registration
+    private var username: Editable? = null
+    private var password: Editable? = null
+    fun setUsernameAndPassword(username: Editable, password: Editable) {
+        this.username = username
+        this.password = password
+    }
+    fun getUsername() = username!!
+    fun getPassword() = password!!
 }

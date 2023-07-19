@@ -8,23 +8,24 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
-object RegistrationClient {
+object CheckUsernameClient {
 
-    private var registrationClient: OkHttpClient? = null
+    private var checkUsernameClient: OkHttpClient? = null
 
-    fun post(userName: Editable, password: Editable, firstName: Editable, lastName: Editable, email: Editable, onSuccess: () -> Unit, onFailure: () -> Unit, context: Context) {
+    fun post(userName: Editable, password: Editable, onSuccess: () -> Unit, onFailure: () -> Unit, context: Context) {
 
-        if (registrationClient == null) registrationClient = OkHttpClient.Builder().build()
+        if (checkUsernameClient == null) checkUsernameClient = OkHttpClient.Builder().build()
 
         val mediaType = "application/json".toMediaType()
-        val body = "{\"username\":\"$userName\",\"password\":\"$password\",\"first_name\":\"$firstName\",\"last_name\":\"$lastName\",\"email\":\"$email\"}".toRequestBody(mediaType)
+        val body =
+            "{\"username\":\"$userName\",\"password\":\"$password\"}".toRequestBody(mediaType)
         val request = Request.Builder()
-            .url("https://bird-sounds-database.ssrlab.by/api/user-create/")
+            .url("https://bird-sounds-database.ssrlab.by/api/check-user/")
             .post(body)
             .addHeader("Content-Type", "application/json")
             .build()
 
-        registrationClient!!.newCall(request).enqueue(object : Callback{
+        checkUsernameClient!!.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
             }
@@ -32,7 +33,7 @@ object RegistrationClient {
             override fun onResponse(call: Call, response: Response) {
                 response.use {
                     val jsonObject = response.message
-                    if (jsonObject == "Created") onSuccess()
+                    if (jsonObject == "OK") onSuccess()
                     else onFailure()
                 }
             }

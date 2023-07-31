@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.client.LoginClient
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
@@ -61,12 +63,13 @@ class LoginFragment: BaseLaunchFragment() {
 
             binding.loginSignInButton.setOnClickListener {
                 checkLogin{
-//                    activityLaunch.moveToMainActivity()
                     LoginClient.post(binding.loginUsernameInput.text!!, binding.loginPasswordInput.text!!, {
-
+                        if (binding.loginRememberMe.isChecked) activityLaunch.getLoginManager().saveToken(it)
+                        activityLaunch.runOnUiThread { activityLaunch.moveToMainActivity(recognitionToken = it) }
                     }, {
-
-                    }, activityLaunch)
+                        activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, activityLaunch.resources.getText(R.string.fail_to_login), Toast.LENGTH_SHORT).show() }
+                    },
+                        activityLaunch)
                 }
             }
         })

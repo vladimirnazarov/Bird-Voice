@@ -13,7 +13,7 @@ object LoginClient {
 
     private var loginClient: OkHttpClient? = null
 
-    fun post(username: Editable, password: Editable, onSuccess: () -> Unit, onFailure: () -> Unit, context: Context) {
+    fun post(username: Editable, password: Editable, onSuccess: (String) -> Unit, onFailure: () -> Unit, context: Context) {
 
         if (loginClient == null) loginClient = OkHttpClient.Builder().build()
 
@@ -34,9 +34,7 @@ object LoginClient {
                 response.use {
                     val responseBody = response.body?.string()
                     val jObject = responseBody?.let { it1 -> JSONObject(it1) }
-                    println(jObject?.getString("message"))
-                    println(jObject?.getJSONObject("token")?.getString("access"))
-                    if (jObject?.getString("message") == "Login successfull") onSuccess()
+                    if (jObject?.getString("message") == "Login successfull") onSuccess(jObject.getJSONObject("token").getString("access"))
                     else onFailure()
                 }
             }

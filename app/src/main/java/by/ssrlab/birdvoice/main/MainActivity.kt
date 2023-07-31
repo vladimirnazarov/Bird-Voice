@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var navController: NavController
     private var regValue = 0
+    private var recognitionToken = ""
 
     private val mainVM: MainVM by viewModels()
 
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         regValue = intent.getIntExtra("userRegisterToken", 1)
+        recognitionToken = intent.getStringExtra("token").toString()
     }
 
     override fun onResume() {

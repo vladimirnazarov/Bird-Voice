@@ -111,4 +111,6 @@
     <!--  Bottom nav  -->
     <string name="recording">Запіс</string>
     <string name="collection">Калекцыя</string>
+
+    <string name="fail_to_login">Немагчыма ўвайсці</string>
 </resources>

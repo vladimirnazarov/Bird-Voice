@@ -111,4 +111,6 @@
     <!--  Bottom nav  -->
     <string name="recording">Recording</string>
     <string name="collection">Collection</string>
+
+    <string name="fail_to_login">Failed to login</string>
 </resources>

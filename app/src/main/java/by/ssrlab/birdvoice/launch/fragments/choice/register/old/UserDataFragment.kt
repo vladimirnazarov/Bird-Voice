@@ -59,7 +59,7 @@ class UserDataFragment : BaseLaunchFragment() {
             binding.userDataPhotoButton.setOnClickListener { pickPhoto() }
             binding.userDataApproveButton.setOnClickListener {
                 checkName {
-                    activityLaunch.moveToMainActivity(1)
+//                    activityLaunch.moveToMainActivity(1)
                 }
             }
         })

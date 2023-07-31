@@ -111,4 +111,6 @@
     <!--  Bottom nav  -->
     <string name="recording">Запись</string>
     <string name="collection">Коллекция</string>
+
+    <string name="fail_to_login">Невозможно войти</string>
 </resources>

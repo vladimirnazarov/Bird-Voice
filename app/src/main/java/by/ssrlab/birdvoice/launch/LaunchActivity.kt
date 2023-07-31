@@ -7,7 +7,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.ActivityLaunchBinding
+import by.ssrlab.birdvoice.helpers.utils.LoginManager
 import by.ssrlab.birdvoice.launch.vm.LaunchVM
 import by.ssrlab.birdvoice.main.MainActivity
 
@@ -16,6 +18,7 @@ class LaunchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLaunchBinding
     private lateinit var controller: WindowInsetsControllerCompat
+    private lateinit var loginManager: LoginManager
     private val launchVM: LaunchVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +27,8 @@ class LaunchActivity : AppCompatActivity() {
         binding = ActivityLaunchBinding.inflate(layoutInflater)
         launchVM.activityBinding = binding
         setContentView(binding.root)
+
+        loginManager = LoginManager(MainApp.appContext)
 
         controller = WindowInsetsControllerCompat(window, window.decorView)
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
@@ -46,11 +51,14 @@ class LaunchActivity : AppCompatActivity() {
         if (launchVM.onMapBackPressedCallback.isEnabled) launchVM.onMapBackPressedCallback.remove()
     }
 
-    fun moveToMainActivity(token: Int = 0) {
+    fun moveToMainActivity(regOrLogToken: Int = 0, recognitionToken: String) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        intent.putExtra("userRegisterToken", token)
+        intent.putExtra("userRegisterToken", regOrLogToken)
+        intent.putExtra("token", recognitionToken)
         startActivity(intent)
     }
+
+    fun getLoginManager() = loginManager
 }

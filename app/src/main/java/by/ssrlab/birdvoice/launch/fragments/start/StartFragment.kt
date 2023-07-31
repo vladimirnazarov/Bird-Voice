@@ -37,7 +37,15 @@ class StartFragment: BaseLaunchFragment() {
                 alpha(0f)
 
                 withEndAction {
-                    launchVM.navigate(R.id.action_logoFragment_to_choiceFragment)
+                    activityLaunch.apply {
+                        if (getLoginManager().isTokenValid()) {
+                            runOnUiThread {
+                                moveToMainActivity(recognitionToken = getLoginManager().getToken())
+                            }
+                        } else {
+                            launchVM.navigate(R.id.action_logoFragment_to_choiceFragment)
+                        }
+                    }
                 }
             }
         }

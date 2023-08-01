@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
+import by.ssrlab.birdvoice.client.LoginClient
 import by.ssrlab.birdvoice.client.RegistrationClient
 import by.ssrlab.birdvoice.databinding.FragmentAdditionalBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
-import kotlinx.coroutines.launch
 
 class AdditionalFragment: BaseLaunchFragment() {
 
@@ -64,14 +65,27 @@ class AdditionalFragment: BaseLaunchFragment() {
         binding.additionalCreateButton.setOnClickListener {
             checkAdditional {
                 RegistrationClient.post(launchVM.getUsername(), launchVM.getPassword(), binding.additionalFirstnameInput.text!!, binding.additionalLastnameInput.text!!, binding.additionalEmailInput.text!!, {
-                        launchVM.getScope().launch {
+
+                    //OnSuccess
+                    LoginClient.post(launchVM.getUsername(), launchVM.getPassword(), {
+                        activityLaunch.runOnUiThread {
+                            activityLaunch.moveToMainActivity(recognitionToken = it)
                             animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
-                            Toast.makeText(MainApp.appContext, "Everything is fine!", Toast.LENGTH_SHORT).show()
                             binding.additionalCreateButton.isClickable = false
                         }
                     }, {
-                        launchVM.getScope().launch { Toast.makeText(activityLaunch, "Username taken", Toast.LENGTH_SHORT).show() }
+                        activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, activityLaunch.resources.getText(
+                            R.string.fail_to_login), Toast.LENGTH_SHORT).show() }
                     },
+                        activityLaunch)
+                    },
+
+                    //OnFailure
+                    {
+                        activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, "Username taken", Toast.LENGTH_SHORT).show() }
+                    },
+
+                    //Activity
                     activityLaunch
                 )
             }

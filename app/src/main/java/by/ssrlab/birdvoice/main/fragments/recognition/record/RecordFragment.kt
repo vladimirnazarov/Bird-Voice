@@ -84,7 +84,7 @@ class RecordFragment: BaseMainFragment() {
         } else {
             File(activityMain.cacheDir, "audio.mp3").also {
                 recorder.start(it)
-                mainVM.tempAudioFile = it
+                mainVM.setAudioFile(it)
             }
         }
 

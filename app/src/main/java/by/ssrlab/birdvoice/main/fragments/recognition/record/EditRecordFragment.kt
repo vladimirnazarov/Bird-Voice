@@ -48,8 +48,6 @@ class EditRecordFragment: BaseMainFragment() {
                     ViewObject(editRecPlayButton),
                     ViewObject(editRecTimer),
                     ViewObject(editRecAudioProgress),
-                    ViewObject(editRecLoadButton),
-                    ViewObject(editRecShareButton),
                     ViewObject(editRecStartButton)
                 )
             }
@@ -101,6 +99,10 @@ class EditRecordFragment: BaseMainFragment() {
                 animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
             }
         }
+
+        binding.editRecConcaveTimeValue.text = helpFunctions.getCurrentTime()
+        binding.editRecConcaveDateValue.text = helpFunctions.getCurrentDate()
+        binding.editRecConcavePlaceValue.text = resources.getText(R.string.belarus)
     }
 
     override fun onStop() {
@@ -112,8 +114,8 @@ class EditRecordFragment: BaseMainFragment() {
     }
 
     private fun setupPlayer() {
-        if (mainVM.tempAudioFile != null) {
-            playerVM.initializeMediaPlayer(mainVM.tempAudioFile!!.toUri(), binding)
+        if (mainVM.getAudioFile() != null) {
+            playerVM.initializeMediaPlayer(mainVM.getAudioFile()!!.toUri(), binding)
 
             binding.editRecPlayButton.setOnClickListener { playerVM.playAudio(binding) }
         }

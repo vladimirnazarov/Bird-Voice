@@ -55,6 +55,8 @@ class MainActivity : AppCompatActivity() {
 
         regValue = intent.getIntExtra("userRegisterToken", 1)
         recognitionToken = intent.getStringExtra("token").toString()
+
+        mainVM.setToken(recognitionToken)
     }
 
     override fun onResume() {

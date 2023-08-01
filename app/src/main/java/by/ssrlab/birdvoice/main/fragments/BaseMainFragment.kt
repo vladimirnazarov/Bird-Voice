@@ -3,7 +3,7 @@ package by.ssrlab.birdvoice.main.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import by.ssrlab.birdvoice.helpers.HelpFunctions
+import by.ssrlab.birdvoice.helpers.utils.HelpFunctions
 import by.ssrlab.birdvoice.helpers.utils.AnimationUtils
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.MainActivity

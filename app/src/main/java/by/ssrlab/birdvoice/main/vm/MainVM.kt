@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import by.ssrlab.birdvoice.databinding.ActivityMainBinding
+import by.ssrlab.birdvoice.db.objects.RecognizedBird
 import by.ssrlab.birdvoice.main.MainActivity
 import kotlinx.coroutines.*
 import java.io.File
@@ -63,5 +64,17 @@ class MainVM: ViewModel() {
     }
 
     //AudioRecord
-    var tempAudioFile: File? = null
+    private var tempAudioFile: File? = null
+    fun getAudioFile() = tempAudioFile
+    fun setAudioFile(file: File) { tempAudioFile = file }
+
+    //Token
+    private var token: String = ""
+    fun getToken() = token
+    fun setToken(token: String) { this.token = token }
+
+    //Results
+    private var listOfResults: ArrayList<RecognizedBird> = arrayListOf()
+    fun getResults() = listOfResults
+    fun setList(list: ArrayList<RecognizedBird>) { listOfResults = list }
 }

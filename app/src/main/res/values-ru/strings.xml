@@ -113,4 +113,6 @@
     <string name="collection">Коллекция</string>
 
     <string name="fail_to_login">Невозможно войти</string>
+    <string name="belarus">Беларусь</string>
+    <string name="sec">с</string>
 </resources>

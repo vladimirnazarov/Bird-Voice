@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.helpers
+package by.ssrlab.birdvoice.helpers.utils
 
 import android.content.Context
 import android.content.res.Resources
@@ -18,8 +18,9 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
-import by.ssrlab.birdvoice.helpers.utils.NoSpaceFilter
 import by.ssrlab.birdvoice.launch.vm.LaunchVM
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HelpFunctions {
 
@@ -128,5 +129,17 @@ class HelpFunctions {
     fun hideKeyboard(view: View?, context: Context) {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    fun getCurrentTime(): String {
+        val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+        val currentTime = Date()
+        return dateFormat.format(currentTime)
+    }
+
+    fun getCurrentDate(): String {
+        val dateFormat = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
+        val currentDate = Date()
+        return dateFormat.format(currentDate)
     }
 }

@@ -39,8 +39,6 @@ class  Recognition2Fragment: BaseMainFragment() {
                 MainApp.appContext,
                 mainVM,
                 activityMain,
-                resources.getString(R.string.general_information),
-                resources.getString(R.string.scientific_information)
             )
         }
 

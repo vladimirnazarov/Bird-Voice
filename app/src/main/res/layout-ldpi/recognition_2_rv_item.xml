@@ -65,98 +65,36 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
 
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+
             android:src="@drawable/ic_bird_card_1_large"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/recognition_2_rv_item_percent"
-            app:layout_constraintTop_toBottomOf="@id/recognition_2_rv_item_title_container" />
-
-        <ImageView
-            android:id="@+id/recognition_2_rv_item_percent"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-
-            android:src="@drawable/ic_80_percent_large"
-
-            android:layout_marginStart="6dp"
-
-            app:layout_constraintBottom_toBottomOf="@id/recognition_2_rv_item_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/recognition_2_rv_item_image" />
+            app:layout_constraintTop_toBottomOf="@id/recognition_2_rv_item_title_container" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/recognition_2_rv_item_button"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:text="@string/recognition_1_dots"
+            android:text="@string/add_to_collection"
             android:textColor="@color/primary_text_blue"
             android:textSize="14sp"
+            android:textAllCaps="false"
 
             app:cornerRadius="32dp"
             app:rippleColor="@color/primary_button_push"
             app:backgroundTint="@color/white"
 
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="6dp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recognition_2_rv_item_image" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/recognition_2_rv_item_open_image_holder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:visibility="gone"
-
-            android:layout_marginTop="4dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recognition_2_rv_item_title_container">
-
-            <ImageView
-                android:id="@+id/recognition_2_rv_item_open_image_1"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-
-                android:src="@drawable/ic_rv_image_bird_1"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/recognition_2_rv_item_open_image_2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/recognition_2_rv_item_open_image_2"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-
-                android:src="@drawable/ic_rv_image_bird_2"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/recognition_2_rv_item_open_image_3"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/recognition_2_rv_item_open_image_1" />
-
-            <ImageView
-                android:id="@+id/recognition_2_rv_item_open_image_3"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-
-                android:src="@drawable/ic_rv_image_bird_3"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/recognition_2_rv_item_open_image_2" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/recognition_2_rv_item_open_pager"
@@ -170,7 +108,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginHorizontal="4dp"
 
-            app:layout_constraintTop_toBottomOf="@id/recognition_2_rv_item_open_image_holder"
+            app:layout_constraintTop_toBottomOf="@id/recognition_2_rv_item_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

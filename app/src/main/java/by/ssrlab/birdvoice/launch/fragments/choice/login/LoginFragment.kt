@@ -36,7 +36,6 @@ class LoginFragment: BaseLaunchFragment() {
                 ViewObject(loginPasswordTitle),
                 ViewObject(loginPasswordInput),
                 ViewObject(loginShowPasswordButton),
-                ViewObject(loginForgotPassword),
                 ViewObject(loginRememberMe),
                 ViewObject(loginSignInText),
                 ViewObject(loginSignInButton)

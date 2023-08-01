@@ -5,23 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.Recognition2RvItemBinding
 import by.ssrlab.birdvoice.main.MainActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
-import com.google.android.material.tabs.TabLayoutMediator
+import coil.load
+import coil.transform.RoundedCornersTransformation
 
 class Recognition2Adapter(
     private val context: Context,
     private val mainVM: MainVM,
     private val activity: MainActivity,
-    private val tab1Text: String,
-    private val tab2Text: String
     ) : RecyclerView.Adapter<Recognition2Adapter.Recognition2Holder>() {
 
     private val viewArray = arrayListOf<Recognition2RvItemBinding>()
-    private val isOpenArray = arrayListOf<Boolean>()
 
     inner class Recognition2Holder(val binding: Recognition2RvItemBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -29,80 +28,33 @@ class Recognition2Adapter(
         val binding = Recognition2RvItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         viewArray.add(binding)
-        val viewImg = binding.recognition2RvItemImage
-        val viewPrc = binding.recognition2RvItemPercent
-
-        when(viewType){
-            1 -> {
-                viewPrc.setImageResource(R.drawable.ic_80_percent_large)
-                viewImg.setImageResource(R.drawable.ic_bird_card_2_large)
-            }
-            2 -> {
-                viewPrc.setImageResource(R.drawable.ic_60_percent_large)
-                viewImg.setImageResource(R.drawable.ic_bird_card_3_large)
-            }
-            3 -> {
-                viewPrc.setImageResource(R.drawable.ic_60_percent_large)
-                viewImg.setImageResource(R.drawable.ic_bird_card_1_large)
-            }
-            4 -> {
-                viewPrc.setImageResource(R.drawable.ic_30_percent_large)
-                viewImg.setImageResource(R.drawable.ic_bird_card_2_large)
-            }
-            5 -> {
-                viewPrc.setImageResource(R.drawable.ic_30_percent_large)
-                viewImg.setImageResource(R.drawable.ic_bird_card_3_large)
-            }
-            else -> {
-                viewPrc.setImageResource(R.drawable.ic_30_percent_large)
-                viewImg.setImageResource(R.drawable.ic_bird_card_1_large)
-            }
-        }
-
         enterAnimation(binding.root)
-
-        val pagerAdapter = RecognitionPagerAdapter(activity)
-
-        binding.apply {
-            recognition2RvItemButton.setOnClickListener {
-                openView(viewArray.indexOf(binding))
-            }
-            recognition2RvItemOpenButton1.setOnClickListener {
-                closeViews()
-            }
-
-            recognition2RvItemOpenPager.apply {
-                adapter = pagerAdapter
-                currentItem = 0
-            }
-            recognition2RvItemOpenTabs.removeAllTabs()
-        }
-
-        TabLayoutMediator(binding.recognition2RvItemOpenTabs, binding.recognition2RvItemOpenPager){tab, position ->
-            if (position == 0) tab.text = tab1Text
-            else if (position == 1) tab.text = tab2Text
-        }.attach()
 
         return Recognition2Holder(binding)
     }
 
-    override fun getItemCount(): Int{
-        val count = 5
-        for (i in 0..count) isOpenArray.add(false)
-        return count
-    }
+    override fun getItemCount(): Int = mainVM.getResults().size
 
     override fun onBindViewHolder(holder: Recognition2Holder, position: Int) {
-        mainVM.recognition2Value.observe(activity) {
-            if (it == true) {
-                for (i in viewArray) {
-                    outAnimation(i.root)
-                }
+
+        holder.binding.apply {
+            recognition2RvItemButton.setOnClickListener {
+                Toast.makeText(context, "Will be soon", Toast.LENGTH_SHORT).show()
             }
+
+            recognition2RvItemImage.load(mainVM.getResults()[position].image) {
+                crossfade(true)
+                transformations(RoundedCornersTransformation(16f))
+            }
+
+            val title = "${mainVM.getResults()[position].name} (${mainVM.getResults()[position].startTime}-${mainVM.getResults()[position].endTime} ${activity.resources.getText(R.string.sec)})"
+            recognition2RvItemTitle.text = title
+        }
+
+        mainVM.recognition2Value.observe(activity) {
+            if (it == true) for (i in viewArray) outAnimation(i.root)
         }
     }
-
-    override fun getItemViewType(position: Int): Int = position + 1
 
     private fun enterAnimation(view: View){
         view.visibility = View.INVISIBLE
@@ -113,56 +65,5 @@ class Recognition2Adapter(
     private fun outAnimation(view: View){
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
         view.visibility = View.INVISIBLE
-    }
-
-    private fun openView(id: Int){
-        closeViews()
-
-        viewArray[id].apply {
-            closureViewAnimation(this.recognition2RvItemOpenImageHolder)
-            closureViewAnimation(this.recognition2RvItemOpenButtonHolder)
-            closureViewAnimation(this.recognition2RvItemOpenPager)
-            closureViewAnimation(this.recognition2RvItemOpenTabs)
-            closureViewAnimation(this.recognition2RvItemView2)
-
-            closureViewAnimation(this.recognition2RvItemButton, true)
-            closureViewAnimation(this.recognition2RvItemImage, true)
-            closureViewAnimation(this.recognition2RvItemPercent, true)
-            closureViewAnimation(this.recognition2RvItemView1, true)
-        }
-
-        isOpenArray[id] = true
-    }
-
-    private fun closeViews(){
-        for (i in isOpenArray.indices) if (isOpenArray[i]) {
-            viewArray[i].apply {
-                closureViewAnimation(this.recognition2RvItemOpenImageHolder, true)
-                closureViewAnimation(this.recognition2RvItemOpenButtonHolder, true)
-                closureViewAnimation(this.recognition2RvItemOpenPager, true)
-                closureViewAnimation(this.recognition2RvItemOpenTabs, true)
-                closureViewAnimation(this.recognition2RvItemView2, true)
-
-                closureViewAnimation(this.recognition2RvItemButton)
-                closureViewAnimation(this.recognition2RvItemImage)
-                closureViewAnimation(this.recognition2RvItemPercent)
-                closureViewAnimation(this.recognition2RvItemView1)
-            }
-
-            isOpenArray[i] = false
-        }
-    }
-
-    private fun closureViewAnimation(view: View, close: Boolean = false){
-        val alphaInAnimation = AnimationUtils.loadAnimation(context, R.anim.common_alpha_enter)
-        val alphaOutAnimation = AnimationUtils.loadAnimation(context, R.anim.common_alpha_out)
-
-        if (close){
-            view.startAnimation(alphaOutAnimation)
-            view.visibility = View.GONE
-        } else {
-            view.startAnimation(alphaInAnimation)
-            view.visibility = View.VISIBLE
-        }
     }
 }

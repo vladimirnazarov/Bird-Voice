@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentEditRecordBinding
-import by.ssrlab.birdvoice.helpers.HelpFunctions
+import by.ssrlab.birdvoice.helpers.utils.HelpFunctions
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import com.airbnb.lottie.LottieDrawable
 import kotlinx.coroutines.*

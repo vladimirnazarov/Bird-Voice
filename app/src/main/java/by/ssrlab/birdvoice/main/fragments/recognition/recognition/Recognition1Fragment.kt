@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
+import by.ssrlab.birdvoice.client.RecognitionClient
 import by.ssrlab.birdvoice.databinding.FragmentRecognition1Binding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
@@ -60,6 +62,12 @@ class Recognition1Fragment: BaseMainFragment() {
                 binding.recognitionDots.visibility = View.INVISIBLE
             }
         }
+
+        mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getToken(), it, 0, { list ->
+            mainVM.setList(list)
+        }) { string ->
+            activityMain.runOnUiThread { Toast.makeText(activityMain, string, Toast.LENGTH_SHORT).show() }
+        }}
 
         mainVM.recognition2Value.value = false
 

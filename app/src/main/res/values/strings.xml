@@ -113,4 +113,6 @@
     <string name="collection">Collection</string>
 
     <string name="fail_to_login">Failed to login</string>
+    <string name="belarus">Belarus</string>
+    <string name="sec">sec</string>
 </resources>

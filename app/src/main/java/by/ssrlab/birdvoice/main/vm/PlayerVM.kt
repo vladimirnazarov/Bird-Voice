@@ -24,16 +24,20 @@ class PlayerVM: ViewModel() {
     private var mediaPlayer: MediaPlayer? = null
 
     private var binding: FragmentEditRecordBinding? = null
-    private val helpFunctions = HelpFunctions()
+    private lateinit var helpFunctions : HelpFunctions
+    private lateinit var mainApp: MainApp
 
-    fun initializeMediaPlayer(uri: Uri, binding: FragmentEditRecordBinding){
+    fun initializeMediaPlayer(uri: Uri, binding: FragmentEditRecordBinding, mainApp: MainApp){
+
+        this.mainApp = mainApp
+        helpFunctions = HelpFunctions(mainApp)
 
         if (viewModelPlayerStatus == 0) {
 
             mpStatus = "play"
 
             mediaPlayer = MediaPlayer()
-            mediaPlayer!!.setDataSource(MainApp.appContext, uri)
+            mediaPlayer!!.setDataSource(this.mainApp.getContext(), uri)
             mediaPlayer!!.prepare()
 
             this.binding = binding
@@ -89,7 +93,7 @@ class PlayerVM: ViewModel() {
                         mpStatus = "pause"
 
                     } catch (e: Exception){
-                        Toast.makeText(MainApp.appContext, "Player error: ${e.message.toString()}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mainApp.getContext(), "Player error: ${e.message.toString()}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

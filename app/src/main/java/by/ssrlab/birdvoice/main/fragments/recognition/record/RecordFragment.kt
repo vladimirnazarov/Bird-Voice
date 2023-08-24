@@ -10,7 +10,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
 import by.ssrlab.birdvoice.helpers.recorder.AudioRecorder
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
@@ -32,6 +31,9 @@ class RecordFragment: BaseMainFragment() {
     ): View {
 
         binding = FragmentRecordBinding.inflate(layoutInflater)
+
+        recorder.setMainApp(activityMain.getApp())
+
         binding.apply {
             arrayOfViews = arrayListOf(
                 ViewObject(recBird),
@@ -45,7 +47,7 @@ class RecordFragment: BaseMainFragment() {
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
         if (activityMain.getRegValue() == 0) {
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+            animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
 
             binding.recBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
                 binding.recRecordButtonIcon.setOnClickListener { buttonAction() }
@@ -60,7 +62,7 @@ class RecordFragment: BaseMainFragment() {
     override fun onResume() {
         super.onResume()
 
-        mainVM.setToolbarTitle("Record your environment")
+        mainVM.setToolbarTitle(resources.getString(R.string.record_your_environment))
         activityMain.setToolbarAction(R.drawable.ic_menu){ activityMain.openDrawer() }
 
         if (activityMain.getRegValue() == 1){
@@ -79,7 +81,7 @@ class RecordFragment: BaseMainFragment() {
             recorder.stop()
 
             binding.recRecordButtonIcon.isClickable = false
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
             mainVM.navigateToWithDelay(R.id.action_recordFragment_to_editRecordFragment)
         } else {
             File(activityMain.cacheDir, "audio.mp3").also {
@@ -92,7 +94,7 @@ class RecordFragment: BaseMainFragment() {
     }
 
     private fun requestRecordPermission(onSuccess: () -> Unit){
-        while (ContextCompat.checkSelfPermission(MainApp.appContext, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+        while (ContextCompat.checkSelfPermission(activityMain.getApp().getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                 activityMain,
                 arrayOf(Manifest.permission.RECORD_AUDIO),
@@ -103,7 +105,7 @@ class RecordFragment: BaseMainFragment() {
     }
 
     private fun buttonAction(){
-        if (ContextCompat.checkSelfPermission(MainApp.appContext, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) startRecord()
+        if (ContextCompat.checkSelfPermission(activityMain.getApp().getContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) startRecord()
         else requestRecordPermission { startRecord() }
     }
 }

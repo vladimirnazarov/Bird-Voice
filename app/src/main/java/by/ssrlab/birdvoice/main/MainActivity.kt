@@ -1,8 +1,15 @@
 package by.ssrlab.birdvoice.main
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -15,8 +22,10 @@ import androidx.navigation.ui.setupWithNavController
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.ActivityMainBinding
+import by.ssrlab.birdvoice.databinding.DialogLanguageBinding
 import by.ssrlab.birdvoice.main.vm.MainVM
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,9 +33,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawer: DrawerLayout
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var navController: NavController
+
     private var regValue = 0
     private var recognitionToken = ""
 
+    private val mainApp = MainApp()
     private val mainVM: MainVM by viewModels()
 
     private var homeCallback = {}
@@ -35,6 +46,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        mainApp.setContext(this@MainActivity)
+        loadPreferences()
+
         binding.apply {
             drawer = mainDrawerLayout
 
@@ -43,6 +58,7 @@ class MainActivity : AppCompatActivity() {
             mainVM.setNavController(navController)
 
             bottomNav = mainBottomNavigationView
+            bottomNav.inflateMenu(R.menu.bottom_menu)
             bottomNav.setupWithNavController(navController)
             showBottomNav()
 
@@ -63,6 +79,36 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         setupDrawer()
+    }
+
+    @Suppress("DEPRECATION")
+    private fun loadPreferences() {
+        val sharedPreferences = getSharedPreferences(mainApp.constPreferences, MODE_PRIVATE)
+        val locale = sharedPreferences.getString(mainApp.constLocale, "en")
+        locale?.let { Locale(it) }?.let { mainApp.setLocale(it) }
+
+        val config = mainApp.getContext().resources.configuration
+        config.setLocale(Locale(locale!!))
+        Locale.setDefault(Locale(locale))
+
+        mainApp.getContext().resources.updateConfiguration(config, resources.displayMetrics)
+        mainApp.setLocaleInt(locale)
+
+        binding.apply {
+            drawerButtonLanguage.setText(R.string.language)
+            drawerButtonFeedback.setText(R.string.feedback)
+            drawerButtonInstruction.setText(R.string.instruction)
+        }
+    }
+
+    private fun savePreferences(locale: String) {
+        val sharedPreferences = getSharedPreferences(mainApp.constPreferences, MODE_PRIVATE) ?: return
+        with (sharedPreferences.edit()) {
+            putString(mainApp.constLocale, locale)
+            apply()
+        }
+
+        recreate()
     }
 
     fun setToolbarAction(icon: Int, action: () -> Unit){
@@ -94,14 +140,14 @@ class MainActivity : AppCompatActivity() {
 
     fun hideBottomNav(){
         if (bottomNav.visibility == View.VISIBLE){
-            bottomNav.startAnimation(AnimationUtils.loadAnimation(MainApp.appContext, R.anim.nav_bottom_view_out))
+            bottomNav.startAnimation(AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.nav_bottom_view_out))
             bottomNav.visibility = View.GONE
         }
     }
 
     fun showBottomNav(){
         if (bottomNav.visibility == View.GONE){
-            bottomNav.startAnimation(AnimationUtils.loadAnimation(MainApp.appContext, R.anim.nav_bottom_view_enter))
+            bottomNav.startAnimation(AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.nav_bottom_view_enter))
             bottomNav.visibility = View.VISIBLE
         }
     }
@@ -122,7 +168,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupDrawer(){
         binding.apply {
-            drawerButtonLanguage.setOnClickListener { Toast.makeText(this@MainActivity, "Language", Toast.LENGTH_SHORT).show() }
+            drawerButtonLanguage.setOnClickListener { initLangDialog() }
 
             drawerButtonInstruction.setOnClickListener {
                 navController.navigate(R.id.informPageFragment)
@@ -143,4 +189,44 @@ class MainActivity : AppCompatActivity() {
             drawerButtonTwitter.setOnClickListener { Toast.makeText(this@MainActivity, "Twitter", Toast.LENGTH_SHORT).show() }
         }
     }
+
+    @Suppress("DEPRECATION")
+    private fun initLangDialog() {
+        val displayMetrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+        val width = displayMetrics.widthPixels
+
+        val dialog = Dialog(this@MainActivity)
+        val dialogBinding = DialogLanguageBinding.inflate(LayoutInflater.from(this@MainActivity))
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(dialogBinding.root)
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(true)
+
+        val layoutParams = WindowManager.LayoutParams()
+        layoutParams.copyFrom(dialog.window!!.attributes)
+        layoutParams.width = width - (width/5)
+        dialog.window?.attributes = layoutParams
+
+        dialogBinding.apply {
+            dialogLangButtonEn.setOnClickListener {
+                dialog.dismiss()
+                closeDrawer()
+                savePreferences("en") }
+            dialogLangButtonBy.setOnClickListener {
+                dialog.dismiss()
+                closeDrawer()
+                savePreferences("be") }
+            dialogLangButtonRu.setOnClickListener {
+                dialog.dismiss()
+                closeDrawer()
+                savePreferences("ru") }
+        }
+
+        dialog.show()
+    }
+
+    fun getApp() = mainApp
 }

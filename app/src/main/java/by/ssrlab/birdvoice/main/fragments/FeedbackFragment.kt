@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentFeedbackBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 
@@ -57,12 +56,12 @@ class FeedbackFragment: BaseMainFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
 
         activityMain.setPopBackCallback {
-            if (mainVM.feedbackValue == 0) animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            if (mainVM.feedbackValue == 0) animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
             else {
-                animationUtils.commonObjectAppear(MainApp.appContext, shownArray)
+                animationUtils.commonObjectAppear(activityMain.getApp().getContext(), shownArray)
                 mainVM.feedbackValue = 0
             }
 
@@ -75,12 +74,12 @@ class FeedbackFragment: BaseMainFragment() {
     override fun onResume() {
         super.onResume()
 
-        mainVM.setToolbarTitle("Feedback")
+        mainVM.setToolbarTitle(resources.getString(R.string.feedback_title))
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
             navigationBackAction {
-                if (mainVM.feedbackValue == 0) animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                if (mainVM.feedbackValue == 0) animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                 else {
-                    animationUtils.commonObjectAppear(MainApp.appContext, shownArray)
+                    animationUtils.commonObjectAppear(activityMain.getApp().getContext(), shownArray)
                     mainVM.feedbackValue = 0
                 }
 
@@ -92,10 +91,10 @@ class FeedbackFragment: BaseMainFragment() {
             checkInput()
 
             if (binding.feedbackErrorMessage.visibility == View.INVISIBLE) {
-                helpFunctions.hideKeyboard(view, MainApp.appContext)
+                helpFunctions.hideKeyboard(view, activityMain.getApp().getContext())
 
-                animationUtils.commonObjectAppear(MainApp.appContext, toHideArray)
-                animationUtils.commonObjectAppear(MainApp.appContext, toShowArray, true)
+                animationUtils.commonObjectAppear(activityMain.getApp().getContext(), toHideArray)
+                animationUtils.commonObjectAppear(activityMain.getApp().getContext(), toShowArray, true)
             }
         }
 

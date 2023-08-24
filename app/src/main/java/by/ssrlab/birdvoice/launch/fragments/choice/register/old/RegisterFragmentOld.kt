@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRegisterOldBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -50,7 +49,7 @@ class RegisterFragmentOld: BaseLaunchFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews, true)
 
         if (launchVM.boolPopBack) {
             launchVM.showTop()
@@ -58,7 +57,7 @@ class RegisterFragmentOld: BaseLaunchFragment() {
         binding.registerBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction {
-                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                     launchVM.hideTop()
                     errorViewOut(checkEmail = true, checkTelephone = true, checkPassword = true)
                 }
@@ -66,7 +65,7 @@ class RegisterFragmentOld: BaseLaunchFragment() {
 
             binding.registerCreateButton.setOnClickListener {
                 checkRegister {
-                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                     launchVM.navigateToWithDelay(R.id.action_registerFragmentOld_to_codeFragment)
                     binding.registerCreateButton.isClickable = false
                     launchVM.activityBinding?.launcherArrowBack?.isClickable = false
@@ -85,7 +84,7 @@ class RegisterFragmentOld: BaseLaunchFragment() {
         super.onResume()
 
         activityLaunch.setPopBackCallback {
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
             errorViewOut(checkEmail = true, checkTelephone = true, checkPassword = true)
         }
     }

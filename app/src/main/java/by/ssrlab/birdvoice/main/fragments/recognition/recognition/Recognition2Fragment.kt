@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentRecognition2Binding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
@@ -34,15 +33,15 @@ class  Recognition2Fragment: BaseMainFragment() {
         super.onResume()
 
         binding.recognition2Rv.apply {
-            layoutManager = LinearLayoutManager(MainApp.appContext)
+            layoutManager = LinearLayoutManager(activityMain.getApp().getContext())
             adapter = Recognition2Adapter(
-                MainApp.appContext,
+                activityMain.getApp().getContext(),
                 mainVM,
                 activityMain,
             )
         }
 
-        mainVM.setToolbarTitle("Recognition results")
+        mainVM.setToolbarTitle(resources.getString(R.string.recognition_results))
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
             navigationBackAction { mainVM.recognition2Value.value = true }
         }

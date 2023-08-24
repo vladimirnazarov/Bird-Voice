@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.client.RecognitionClient
 import by.ssrlab.birdvoice.databinding.FragmentRecognition1Binding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
@@ -39,10 +38,10 @@ class Recognition1Fragment: BaseMainFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
 
         activityMain.setPopBackCallback {
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
             breakableMarker = true
             binding.recognitionDots.visibility = View.INVISIBLE
         }
@@ -54,10 +53,10 @@ class Recognition1Fragment: BaseMainFragment() {
         super.onResume()
 
         mainVM.getScope().launch { toolbarTitleAnimation() }
-        mainVM.setToolbarTitle("Recognition service")
+        mainVM.setToolbarTitle(resources.getString(R.string.recognition_service))
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
             navigationBackAction {
-                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                 breakableMarker = true
                 binding.recognitionDots.visibility = View.INVISIBLE
             }
@@ -74,7 +73,7 @@ class Recognition1Fragment: BaseMainFragment() {
         mainVM.getScope().launch {
             delay(5000)
             if (!breakableMarker) {
-                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                 mainVM.navigateToWithDelay(R.id.action_recognitionFragment1_to_recognitionFragment2)
                 binding.recognitionDots.visibility = View.INVISIBLE
             }

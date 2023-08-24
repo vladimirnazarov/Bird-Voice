@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.EditText
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentCodeConfirmationBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -41,19 +40,19 @@ class CodeFragment: BaseLaunchFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews, true)
 
         binding.codeBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction {
-                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                     errorViewOut()
                 }
             }
 
             binding.codeLoginButton.setOnClickListener {
                 checkCode {
-                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                     launchVM.navigateToWithDelay(R.id.action_codeFragment_to_userDataFragment)
                     binding.codeLoginButton.isClickable = false
                     launchVM.activityBinding?.launcherArrowBack?.isClickable = false
@@ -72,13 +71,13 @@ class CodeFragment: BaseLaunchFragment() {
         super.onResume()
 
         activityLaunch.setPopBackCallback {
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
             errorViewOut()
         }
     }
 
     private fun checkCode(onSuccess: () -> Unit){
-        val errorAnim = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_error_message_animation)
+        val errorAnim = AnimationUtils.loadAnimation(activityLaunch.getApp().getContext(), R.anim.common_error_message_animation)
 
         if (binding.codeEnter1.text?.isNotEmpty() == true && binding.codeEnter2.text?.isNotEmpty() == true && binding.codeEnter3.text?.isNotEmpty() == true && binding.codeEnter4.text?.isNotEmpty() == true){
             onSuccess()
@@ -107,7 +106,7 @@ class CodeFragment: BaseLaunchFragment() {
                         requestFocus(etArray[index + 1])
                     }
                     else {
-                        helpFunctions.hideKeyboard(view, MainApp.appContext)
+                        helpFunctions.hideKeyboard(view, activityLaunch.getApp().getContext())
                         binding.codeEnter4.clearFocus()
                     }
                 }

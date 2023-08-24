@@ -13,19 +13,22 @@ import kotlinx.coroutines.*
 
 class LaunchVM: ViewModel() {
 
+    private lateinit var mainApp: MainApp
+    fun setMainApp(app: MainApp) { mainApp = app }
+
     //Activity Elements
     var boolPopBack = true
     var boolArrowHide = false
     var activityBinding: ActivityLaunchBinding? = null
     fun showTop(){
-        val arrowAnim = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_left_obj_enter)
+        val arrowAnim = AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.common_left_obj_enter)
         activityBinding?.apply {
             launcherArrowBack.startAnimation(arrowAnim)
             launcherArrowBack.visibility = View.VISIBLE
         }
     }
     fun hideTop(){
-        val arrowAnim = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_left_obj_out)
+        val arrowAnim = AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.common_left_obj_out)
         activityBinding?.apply {
             launcherArrowBack.startAnimation(arrowAnim)
             launcherArrowBack.visibility = View.INVISIBLE

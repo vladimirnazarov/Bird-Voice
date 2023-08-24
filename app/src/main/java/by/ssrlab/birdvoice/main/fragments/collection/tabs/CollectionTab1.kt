@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import by.ssrlab.birdvoice.databinding.RvTab1Binding
 
-class CollectionTab1(): Fragment() {
+class CollectionTab1: Fragment() {
 
     private lateinit var binding: RvTab1Binding
 

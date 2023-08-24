@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.client.LoginClient
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
@@ -43,7 +42,7 @@ class LoginFragment: BaseLaunchFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews, true)
 
         binding.loginUsernameInput.filters = helpFunctions.editTextFilters
         binding.loginPasswordInput.filters = helpFunctions.editTextFilters
@@ -54,7 +53,7 @@ class LoginFragment: BaseLaunchFragment() {
         binding.loginBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction {
-                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                     launchVM.hideTop()
                     errorViewOut(checkLogin = true, checkPassword = true)
                 }
@@ -86,7 +85,7 @@ class LoginFragment: BaseLaunchFragment() {
         super.onResume()
 
         activityLaunch.setPopBackCallback {
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
             errorViewOut(checkLogin = true, checkPassword = true)
         }
     }

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -35,17 +34,17 @@ class ChoiceFragment : BaseLaunchFragment() {
 
         activityLaunch.showStatusBar()
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews, true)
 
         binding.choiceBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             binding.choiceLoginButton.setOnClickListener {
-                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                 binding.choiceLoginButton.isClickable = false
                 launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_loginFragment)
             }
 
             binding.choiceRegisterButton.setOnClickListener {
-                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                 binding.choiceRegisterButton.isClickable = false
                 launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_registerFragment)
             }

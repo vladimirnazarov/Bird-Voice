@@ -95,6 +95,7 @@
     <string name="no">Нет</string>
     <string name="yes">Да</string>
     <string name="dialog_2_text">Птица была удалена</string>
+    <string name="choose_language">Выберите язык</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Обратная связь</string>
@@ -115,4 +116,14 @@
     <string name="fail_to_login">Невозможно войти</string>
     <string name="belarus">Беларусь</string>
     <string name="sec">с</string>
+    <string name="lang_by">Беларуская</string>
+    <string name="lang_ru">Русский</string>
+    <string name="lang_en">English</string>
+
+    <!--  Screen titles  -->
+    <string name="record_your_environment">Запишите своё окружение</string>
+    <string name="listen_to_your_record">Прослушайте свою запись</string>
+    <string name="recognition_service">Сервис распознавания</string>
+    <string name="recognition_results">Результаты распознавания</string>
+    <string name="how_it_works">Как это работает?</string>
 </resources>

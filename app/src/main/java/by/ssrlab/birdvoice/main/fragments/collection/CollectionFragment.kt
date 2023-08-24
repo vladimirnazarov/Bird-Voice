@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentCollectionBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
@@ -39,9 +38,9 @@ class CollectionFragment: BaseMainFragment() {
         super.onResume()
 
         binding.collectionRv.apply {
-            layoutManager = LinearLayoutManager(MainApp.appContext)
+            layoutManager = LinearLayoutManager(activityMain.getApp().getContext())
             adapter = CollectionAdapter(
-                MainApp.appContext,
+                activityMain.getApp().getContext(),
                 mainVM,
                 activityMain,
                 navFunc,

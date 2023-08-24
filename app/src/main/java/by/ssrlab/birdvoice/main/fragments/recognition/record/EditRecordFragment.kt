@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentEditRecordBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
@@ -60,7 +59,7 @@ class EditRecordFragment: BaseMainFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
 
         binding.editRecTopHolder.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             binding.editRecStartButton.setOnClickListener {
@@ -68,18 +67,18 @@ class EditRecordFragment: BaseMainFragment() {
                     if (isPlaying){
                         pauseAnimation()
                         isPlaying = !isPlaying
-                        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                        animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                         mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1)
 
                     } else {
-                        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                        animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                         mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1)
                     }
                 }
             }
         })
 
-        activityMain.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
+        activityMain.setPopBackCallback { animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews) }
 
         return binding.root
     }
@@ -93,10 +92,10 @@ class EditRecordFragment: BaseMainFragment() {
     override fun onResume() {
         super.onResume()
 
-        mainVM.setToolbarTitle("Listen to your record")
+        mainVM.setToolbarTitle(resources.getString(R.string.listen_to_your_record))
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
             navigationBackAction {
-                animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
             }
         }
 
@@ -115,7 +114,7 @@ class EditRecordFragment: BaseMainFragment() {
 
     private fun setupPlayer() {
         if (mainVM.getAudioFile() != null) {
-            playerVM.initializeMediaPlayer(mainVM.getAudioFile()!!.toUri(), binding)
+            playerVM.initializeMediaPlayer(mainVM.getAudioFile()!!.toUri(), binding, activityMain.getApp())
 
             binding.editRecPlayButton.setOnClickListener { playerVM.playAudio(binding) }
         }

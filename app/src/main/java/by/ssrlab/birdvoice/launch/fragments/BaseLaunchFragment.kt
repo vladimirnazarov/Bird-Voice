@@ -15,7 +15,7 @@ abstract class BaseLaunchFragment: Fragment() {
 
     val launchVM: LaunchVM by activityViewModels()
     val animationUtils = AnimationUtils()
-    val helpFunctions = HelpFunctions()
+    lateinit var helpFunctions: HelpFunctions
 
     abstract var arrayOfViews: ArrayList<ViewObject>
     lateinit var activityLaunch: LaunchActivity
@@ -28,6 +28,9 @@ abstract class BaseLaunchFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        helpFunctions = HelpFunctions(activityLaunch.getApp())
+        launchVM.setMainApp(activityLaunch.getApp())
 
         launchVM.setNavController(view.findNavController())
     }

@@ -12,6 +12,7 @@ import by.ssrlab.birdvoice.databinding.ActivityLaunchBinding
 import by.ssrlab.birdvoice.helpers.utils.LoginManager
 import by.ssrlab.birdvoice.launch.vm.LaunchVM
 import by.ssrlab.birdvoice.main.MainActivity
+import java.util.*
 
 @SuppressLint("CustomSplashScreen")
 class LaunchActivity : AppCompatActivity() {
@@ -19,19 +20,39 @@ class LaunchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLaunchBinding
     private lateinit var controller: WindowInsetsControllerCompat
     private lateinit var loginManager: LoginManager
+
+    private lateinit var mainApp: MainApp
     private val launchVM: LaunchVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLaunchBinding.inflate(layoutInflater)
+
+        mainApp = MainApp()
+        mainApp.setContext(this@LaunchActivity)
+        loadPreferences()
+
         launchVM.activityBinding = binding
         setContentView(binding.root)
 
-        loginManager = LoginManager(MainApp.appContext)
+        loginManager = LoginManager(mainApp.getContext())
 
         controller = WindowInsetsControllerCompat(window, window.decorView)
         controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
+
+    @Suppress("DEPRECATION")
+    private fun loadPreferences() {
+        val sharedPreferences = getSharedPreferences(mainApp.constPreferences, MODE_PRIVATE)
+        val locale = sharedPreferences.getString(mainApp.constLocale, "en")
+        locale?.let { Locale(it) }?.let { mainApp.setLocale(it) }
+
+        val config = mainApp.getContext().resources.configuration
+        config.setLocale(Locale(locale!!))
+        Locale.setDefault(Locale(locale))
+
+        mainApp.getContext().resources.updateConfiguration(config, resources.displayMetrics)
     }
 
     fun hideStatusBar(){
@@ -61,4 +82,5 @@ class LaunchActivity : AppCompatActivity() {
     }
 
     fun getLoginManager() = loginManager
+    fun getApp() = mainApp
 }

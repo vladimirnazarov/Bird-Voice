@@ -10,10 +10,14 @@ import java.io.FileOutputStream
 class AudioRecorder : ViewModel(), AudioRecorderInterface {
 
     private var recorder: MediaRecorder? = null
+    private lateinit var mainApp: MainApp
 
+    fun setMainApp(app: MainApp) { mainApp = app }
+
+    @Suppress("DEPRECATION")
     private fun createRecorder(): MediaRecorder {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            MediaRecorder(MainApp.appContext)
+            MediaRecorder(mainApp.getContext())
         } else MediaRecorder()
     }
 

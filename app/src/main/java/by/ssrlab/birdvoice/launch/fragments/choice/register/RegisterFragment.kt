@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.client.CheckUsernameClient
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
@@ -46,7 +45,7 @@ class RegisterFragment: BaseLaunchFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews, true)
 
         if (launchVM.boolPopBack) {
             launchVM.showTop()
@@ -54,7 +53,7 @@ class RegisterFragment: BaseLaunchFragment() {
         binding.registerBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction {
-                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                     launchVM.hideTop()
                     errorViewOut(checkUsername = true, checkPassword = true)
                 }
@@ -64,7 +63,7 @@ class RegisterFragment: BaseLaunchFragment() {
                 checkRegister {
                     CheckUsernameClient.post(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!, {
                         launchVM.getScope().launch {
-                            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                             launchVM.navigateToWithDelay(R.id.action_registerFragment_to_additionalFragment)
                             binding.registerCreateButton.isClickable = false
                             launchVM.activityBinding?.launcherArrowBack?.isClickable = false
@@ -88,7 +87,7 @@ class RegisterFragment: BaseLaunchFragment() {
         super.onResume()
 
         activityLaunch.setPopBackCallback {
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
             errorViewOut(checkUsername = true, checkPassword = true)
         }
     }

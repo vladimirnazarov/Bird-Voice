@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.client.LoginClient
 import by.ssrlab.birdvoice.client.RegistrationClient
 import by.ssrlab.birdvoice.databinding.FragmentAdditionalBinding
@@ -50,12 +49,12 @@ class AdditionalFragment: BaseLaunchFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews, true)
 
         binding.additionalBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction {
-                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                     errorViewOut(checkEmail = true, checkFirstName = true, checkLastName = true)
                     launchVM.activityBinding?.launcherArrowBack?.isClickable = false
                 }
@@ -70,7 +69,7 @@ class AdditionalFragment: BaseLaunchFragment() {
                     LoginClient.post(launchVM.getUsername(), launchVM.getPassword(), {
                         activityLaunch.runOnUiThread {
                             activityLaunch.moveToMainActivity(recognitionToken = it)
-                            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                             binding.additionalCreateButton.isClickable = false
                         }
                     }, {
@@ -98,7 +97,7 @@ class AdditionalFragment: BaseLaunchFragment() {
         super.onResume()
 
         activityLaunch.setPopBackCallback {
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
             errorViewOut(checkEmail = true, checkFirstName = true, checkLastName = true)
         }
     }

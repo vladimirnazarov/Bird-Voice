@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentMapBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
@@ -33,9 +32,9 @@ class MapFragment: BaseMainFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
 
-        activityMain.setPopBackCallback { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
+        activityMain.setPopBackCallback { animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews) }
 
         return binding.root
     }
@@ -45,7 +44,7 @@ class MapFragment: BaseMainFragment() {
 
         mainVM.setToolbarTitle("Map")
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
-            navigationBackAction { animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews) }
+            navigationBackAction { animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews) }
         }
     }
 }

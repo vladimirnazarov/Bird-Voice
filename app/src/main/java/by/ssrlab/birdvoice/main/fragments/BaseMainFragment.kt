@@ -13,7 +13,7 @@ abstract class BaseMainFragment: Fragment() {
 
     val mainVM: MainVM by activityViewModels()
     val animationUtils = AnimationUtils()
-    val helpFunctions = HelpFunctions()
+    lateinit var helpFunctions : HelpFunctions
 
     abstract var arrayOfViews: ArrayList<ViewObject>
     lateinit var activityMain: MainActivity
@@ -22,6 +22,7 @@ abstract class BaseMainFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         activityMain = activity as MainActivity
+        helpFunctions = HelpFunctions(activityMain.getApp())
     }
 
     fun navigationBackAction(action: () -> Unit){

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentInformPageBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.rv.InformAdapter
@@ -26,7 +25,7 @@ class InformPageFragment: BaseMainFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        informAdapter = InformAdapter(activityMain, MainApp.appContext, navFun)
+        informAdapter = InformAdapter(activityMain, activityMain.getApp().getContext(), navFun)
     }
 
     override fun onCreateView(
@@ -44,7 +43,7 @@ class InformPageFragment: BaseMainFragment() {
         super.onResume()
 
         binding.informRv.apply {
-            layoutManager = LinearLayoutManager(MainApp.appContext)
+            layoutManager = LinearLayoutManager(activityMain.getApp().getContext())
             adapter = informAdapter
         }
 
@@ -62,6 +61,6 @@ class InformPageFragment: BaseMainFragment() {
             }
         }
 
-        mainVM.setToolbarTitle("How it works?")
+        mainVM.setToolbarTitle(resources.getString(R.string.how_it_works))
     }
 }

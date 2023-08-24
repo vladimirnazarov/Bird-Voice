@@ -6,7 +6,7 @@ import android.widget.Toast
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 
-class NoSpaceFilter: InputFilter {
+class NoSpaceFilter(private val mainApp: MainApp) : InputFilter {
     override fun filter(
         source: CharSequence?,
         start: Int,
@@ -19,7 +19,7 @@ class NoSpaceFilter: InputFilter {
         for (i in start until end) {
             val c = source?.get(i)
             if (c == ' ') {
-                Toast.makeText(MainApp.appContext, MainApp.appContext.getString(R.string.space_is_not_allowed), Toast.LENGTH_SHORT).show()
+                Toast.makeText(mainApp.getContext(), mainApp.getContext().getString(R.string.space_is_not_allowed), Toast.LENGTH_SHORT).show()
                 return ""
             }
         }

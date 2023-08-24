@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentUserDataBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -44,14 +43,14 @@ class UserDataFragment : BaseLaunchFragment() {
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
-        animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews, true)
+        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews, true)
 
         registerCropImage()
 
         binding.userDataPhotoButton.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction {
-                    animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                     errorViewOut()
                 }
             }
@@ -71,13 +70,13 @@ class UserDataFragment : BaseLaunchFragment() {
         super.onResume()
 
         activityLaunch.setPopBackCallback {
-            animationUtils.commonObjectAppear(MainApp.appContext, arrayOfViews)
+            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
             errorViewOut()
         }
     }
 
     private fun requestCameraPermission(onSuccess: () -> Unit){
-        while (ContextCompat.checkSelfPermission(MainApp.appContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        while (ContextCompat.checkSelfPermission(activityLaunch.getApp().getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                 activityLaunch,
                 arrayOf(Manifest.permission.CAMERA),

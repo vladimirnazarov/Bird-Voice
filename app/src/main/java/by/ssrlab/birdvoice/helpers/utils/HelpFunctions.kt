@@ -22,9 +22,9 @@ import by.ssrlab.birdvoice.launch.vm.LaunchVM
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HelpFunctions {
+class HelpFunctions(private val mainApp: MainApp) {
 
-    val editTextFilters = arrayOf<InputFilter>(NoSpaceFilter())
+    val editTextFilters = arrayOf<InputFilter>(NoSpaceFilter(mainApp))
 
     fun controlPopBack(launchVM: LaunchVM, bool: Boolean) {
         launchVM.boolPopBack = bool
@@ -46,7 +46,7 @@ class HelpFunctions {
 
     fun checkErrorViewAvailability(errorView: TextView) {
         val errorAlphaOut =
-            AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_alpha_out)
+            AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.common_alpha_out)
         if (errorView.visibility == View.VISIBLE) {
             errorView.startAnimation(errorAlphaOut)
             errorView.visibility = View.INVISIBLE
@@ -112,7 +112,7 @@ class HelpFunctions {
         errorText: String = resources.getString(R.string.this_field_must_be_not_empty)
     ): Int {
         val errorAnim =
-            AnimationUtils.loadAnimation(MainApp.appContext, R.anim.common_error_message_animation)
+            AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.common_error_message_animation)
         return if (checkableText?.isEmpty() == true) {
             errorView.text = errorText
             errorView.startAnimation(errorAnim)
@@ -122,7 +122,7 @@ class HelpFunctions {
     }
 
     fun showKeyboard(view: View) {
-        val imm = MainApp.appContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm = mainApp.getContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 

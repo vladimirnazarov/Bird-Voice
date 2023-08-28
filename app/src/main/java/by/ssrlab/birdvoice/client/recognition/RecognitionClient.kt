@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.client
+package by.ssrlab.birdvoice.client.recognition
 
 import by.ssrlab.birdvoice.db.objects.RecognizedBird
 import okhttp3.*

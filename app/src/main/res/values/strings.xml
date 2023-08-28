@@ -96,6 +96,7 @@
     <string name="yes">Yes</string>
     <string name="dialog_2_text">The bird has been removed</string>
     <string name="choose_language">Choose language</string>
+    <string name="are_you_sure_you_want_to_log_out">Are you sure you want to log out?</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Feedback</string>
@@ -108,6 +109,7 @@
     <string name="language">Language</string>
     <string name="instruction">Instruction</string>
     <string name="feedback">Feedback</string>
+    <string name="log_out">Log out</string>
 
     <!--  Bottom nav  -->
     <string name="recording">Recording</string>
@@ -126,8 +128,4 @@
     <string name="recognition_service">Recognition service</string>
     <string name="recognition_results">Recognition results</string>
     <string name="how_it_works">How it works?</string>
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
-<!--    <string name=""></string>-->
 </resources>

@@ -53,7 +53,7 @@ class LoginManager(context: Context) {
 
     private fun getLastLoginDate() = sharedPreferences.getString(KEY_LAST_LOGIN_DATE, "") ?: ""
 
-    private fun removeToken() {
+    fun removeToken() {
         val editor = sharedPreferences.edit()
         editor.remove(KEY_TOKEN)
         editor.remove(KEY_LAST_LOGIN_DATE)

@@ -96,6 +96,7 @@
     <string name="yes">Так</string>
     <string name="dialog_2_text">Птушка была выдалена</string>
     <string name="choose_language">Абярыце мову</string>
+    <string name="are_you_sure_you_want_to_log_out">Вы ўпэўнены, што жадаеце выйсці?</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Зваротная сувязь</string>
@@ -108,6 +109,7 @@
     <string name="language">Мова</string>
     <string name="instruction">Як карыстацца</string>
     <string name="feedback">Зваротная сувязь</string>
+    <string name="log_out">Выйсці</string>
 
     <!--  Bottom nav  -->
     <string name="recording">Запіс</string>

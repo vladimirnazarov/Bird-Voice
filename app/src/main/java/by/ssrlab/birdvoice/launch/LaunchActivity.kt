@@ -21,7 +21,7 @@ class LaunchActivity : AppCompatActivity() {
     private lateinit var controller: WindowInsetsControllerCompat
     private lateinit var loginManager: LoginManager
 
-    private lateinit var mainApp: MainApp
+    private val mainApp = MainApp()
     private val launchVM: LaunchVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,6 @@ class LaunchActivity : AppCompatActivity() {
 
         binding = ActivityLaunchBinding.inflate(layoutInflater)
 
-        mainApp = MainApp()
         mainApp.setContext(this@LaunchActivity)
         loadPreferences()
 

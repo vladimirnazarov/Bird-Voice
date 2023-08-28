@@ -37,7 +37,7 @@ class  Recognition2Fragment: BaseMainFragment() {
             adapter = Recognition2Adapter(
                 activityMain.getApp().getContext(),
                 mainVM,
-                activityMain,
+                activityMain
             )
         }
 

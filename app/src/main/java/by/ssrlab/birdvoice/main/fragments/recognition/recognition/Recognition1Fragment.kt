@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.client.RecognitionClient
+import by.ssrlab.birdvoice.client.recognition.RecognitionClient
 import by.ssrlab.birdvoice.databinding.FragmentRecognition1Binding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment

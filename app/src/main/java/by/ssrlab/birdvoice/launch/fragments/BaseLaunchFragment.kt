@@ -24,12 +24,12 @@ abstract class BaseLaunchFragment: Fragment() {
         super.onCreate(savedInstanceState)
 
         activityLaunch = (activity as LaunchActivity)
+        helpFunctions = HelpFunctions(activityLaunch.getApp())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        helpFunctions = HelpFunctions(activityLaunch.getApp())
         launchVM.setMainApp(activityLaunch.getApp())
 
         launchVM.setNavController(view.findNavController())

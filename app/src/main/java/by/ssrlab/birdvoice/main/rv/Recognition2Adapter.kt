@@ -1,26 +1,24 @@
 package by.ssrlab.birdvoice.main.rv
 
-import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.util.DisplayMetrics
 import android.view.*
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.databinding.DialogImageFullBinding
 import by.ssrlab.birdvoice.databinding.Recognition2RvItemBinding
+import by.ssrlab.birdvoice.db.objects.CollectionBird
 import by.ssrlab.birdvoice.main.MainActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class Recognition2Adapter(
     private val context: Context,
     private val mainVM: MainVM,
-    private val activity: MainActivity
+    private val activity: MainActivity,
+    private val coroutineScope: CoroutineScope
     ) : RecyclerView.Adapter<Recognition2Adapter.Recognition2Holder>() {
 
     private val viewArray = arrayListOf<Recognition2RvItemBinding>()
@@ -42,16 +40,18 @@ class Recognition2Adapter(
 
         holder.binding.apply {
             recognition2RvItemButton.setOnClickListener {
-                Toast.makeText(context, "Will be soon", Toast.LENGTH_SHORT).show()
+                coroutineScope.launch {
+                    val databaseObject = CollectionBird(
+                        mainVM.getResults()[position].name,
+                        mainVM.getResults()[position].image
+                    )
+                    activity.getCollectionDao().insert(databaseObject)
+                }
             }
 
             recognition2RvItemImage.load(mainVM.getResults()[position].image) {
                 crossfade(true)
                 transformations(RoundedCornersTransformation(16f))
-            }
-
-            recognition2RvItemImage.setOnClickListener {
-                initImageDialog(mainVM.getResults()[position].image)
             }
 
             val title = "${mainVM.getResults()[position].name} (${mainVM.getResults()[position].startTime}-${mainVM.getResults()[position].endTime} ${activity.resources.getText(R.string.sec)})"
@@ -72,32 +72,5 @@ class Recognition2Adapter(
     private fun outAnimation(view: View){
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
         view.visibility = View.INVISIBLE
-    }
-
-    @Suppress("DEPRECATION")
-    private fun initImageDialog(image: String) {
-        val displayMetrics = DisplayMetrics()
-        activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
-
-        val width = displayMetrics.widthPixels
-
-        val dialog = Dialog(activity)
-        val dialogBinding = DialogImageFullBinding.inflate(LayoutInflater.from(activity))
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(dialogBinding.root)
-
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setCancelable(true)
-
-        val layoutParams = WindowManager.LayoutParams()
-        layoutParams.copyFrom(dialog.window!!.attributes)
-        layoutParams.width = width
-        dialog.window?.attributes = layoutParams
-
-        dialogBinding.dialogImage.load(image) {
-            crossfade(true)
-        }
-
-        dialog.show()
     }
 }

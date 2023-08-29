@@ -28,9 +28,9 @@ class MainApp : Application() {
 
     fun setLocaleInt(locale: String) {
         when (locale) {
-            "ru" -> localeInt = 1
-            "be" -> localeInt = 2
-            "en" -> localeInt = 3
+            "be" -> localeInt = 1
+            "en" -> localeInt = 2
+            "ru" -> localeInt = 3
         }
     }
 

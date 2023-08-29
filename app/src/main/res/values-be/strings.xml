@@ -33,6 +33,7 @@
     <string name="username">Нікнэйм</string>
     <string name="first_name">Імя</string>
     <string name="last_name">Фамілія</string>
+    <string name="model_isnt_loaded">Моўная мадэль яшчэ не загружана</string>
 
     <!--  Code confirmation  -->
     <string name="code">Увядзіце код тут:</string>

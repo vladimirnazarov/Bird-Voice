@@ -33,6 +33,7 @@
     <string name="username">Никнейм</string>
     <string name="first_name">Имя</string>
     <string name="last_name">Фамилия</string>
+    <string name="model_isnt_loaded">Языковая модель ещё загружена</string>
 
     <!--  Code confirmation  -->
     <string name="code">Введите код сюда:</string>

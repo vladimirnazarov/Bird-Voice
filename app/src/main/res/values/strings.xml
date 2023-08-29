@@ -33,6 +33,7 @@
     <string name="username">Username</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="model_isnt_loaded">Language model isn\'t loaded yet</string>
 
     <!--  Code confirmation  -->
     <string name="code">Enter code here:</string>

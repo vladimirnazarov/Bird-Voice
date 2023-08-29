@@ -62,7 +62,7 @@ class Recognition1Fragment: BaseMainFragment() {
             }
         }
 
-        mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getToken(), it, 0, { list ->
+        mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getToken(), it, activityMain.getApp().getLocaleInt(), { list ->
             mainVM.setList(list)
         }) { string ->
             activityMain.runOnUiThread { Toast.makeText(activityMain, string, Toast.LENGTH_SHORT).show() }

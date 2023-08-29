@@ -10,10 +10,14 @@ import by.ssrlab.birdvoice.databinding.FragmentRecognition2Binding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import by.ssrlab.birdvoice.main.rv.Recognition2Adapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 
 class  Recognition2Fragment: BaseMainFragment() {
 
     private lateinit var binding: FragmentRecognition2Binding
+    private val scope = CoroutineScope(Dispatchers.IO + Job())
     override var arrayOfViews = arrayListOf<ViewObject>()
 
     override fun onCreateView(
@@ -37,7 +41,8 @@ class  Recognition2Fragment: BaseMainFragment() {
             adapter = Recognition2Adapter(
                 activityMain.getApp().getContext(),
                 mainVM,
-                activityMain
+                activityMain,
+                scope
             )
         }
 

@@ -16,11 +16,14 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.room.Room
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.ActivityMainBinding
 import by.ssrlab.birdvoice.databinding.DialogLanguageBinding
 import by.ssrlab.birdvoice.databinding.DialogLogOutBinding
+import by.ssrlab.birdvoice.db.CollectionDao
+import by.ssrlab.birdvoice.db.CollectionDatabase
 import by.ssrlab.birdvoice.helpers.utils.LoginManager
 import by.ssrlab.birdvoice.launch.LaunchActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
@@ -33,6 +36,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawer: DrawerLayout
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var navController: NavController
+
+    private lateinit var collectionDao: CollectionDao
 
     private var regValue = 0
     private var recognitionToken = ""
@@ -50,9 +55,11 @@ class MainActivity : AppCompatActivity() {
 
         mainApp.setContext(this@MainActivity)
         loadPreferences()
+        initDb()
 
         binding.apply {
             drawer = mainDrawerLayout
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
             navController = navHostFragment.navController
@@ -114,6 +121,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         recreate()
+    }
+
+    private fun initDb() {
+        val db = Room.databaseBuilder(mainApp.getContext(), CollectionDatabase::class.java, "birds_collection")
+            .fallbackToDestructiveMigration()
+            .build()
+        collectionDao = db.collectionDao()
     }
 
     fun setToolbarAction(icon: Int, action: () -> Unit){
@@ -262,4 +276,5 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun getApp() = mainApp
+    fun getCollectionDao() = collectionDao
 }

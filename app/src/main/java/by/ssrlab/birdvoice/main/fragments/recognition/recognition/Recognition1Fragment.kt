@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.client.RecognitionClient
+import by.ssrlab.birdvoice.client.recognition.RecognitionClient
 import by.ssrlab.birdvoice.databinding.FragmentRecognition1Binding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
@@ -62,7 +62,7 @@ class Recognition1Fragment: BaseMainFragment() {
             }
         }
 
-        mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getToken(), it, 0, { list ->
+        mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getToken(), it, activityMain.getApp().getLocaleInt(), { list ->
             mainVM.setList(list)
         }) { string ->
             activityMain.runOnUiThread { Toast.makeText(activityMain, string, Toast.LENGTH_SHORT).show() }

@@ -33,6 +33,7 @@
     <string name="username">Никнейм</string>
     <string name="first_name">Имя</string>
     <string name="last_name">Фамилия</string>
+    <string name="model_isnt_loaded">Языковая модель ещё загружена</string>
 
     <!--  Code confirmation  -->
     <string name="code">Введите код сюда:</string>
@@ -96,6 +97,7 @@
     <string name="yes">Да</string>
     <string name="dialog_2_text">Птица была удалена</string>
     <string name="choose_language">Выберите язык</string>
+    <string name="are_you_sure_you_want_to_log_out">Вы уверены, что хотите выйти?</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Обратная связь</string>
@@ -108,6 +110,7 @@
     <string name="language">Язык</string>
     <string name="instruction">Как пользоваться</string>
     <string name="feedback">Обратная связь</string>
+    <string name="log_out">Выйти</string>
 
     <!--  Bottom nav  -->
     <string name="recording">Запись</string>

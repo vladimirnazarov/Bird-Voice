@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.client
+package by.ssrlab.birdvoice.client.recognition
 
 import by.ssrlab.birdvoice.db.objects.RecognizedBird
 import okhttp3.*
@@ -49,10 +49,10 @@ object RecognitionClient {
                             val timeArray = birdInfoArray[1] as JSONArray
 
                             val recognizedBird = RecognizedBird(
-                                birdInfoArray[0] as String,
-                                key,
-                                timeArray.getString(0),
-                                timeArray.getString(1)
+                                image = birdInfoArray[0] as String,
+                                name = key,
+                                startTime = timeArray.getString(0),
+                                endTime = timeArray.getString(1)
                             )
 
                             arrayOfResults.add(recognizedBird)

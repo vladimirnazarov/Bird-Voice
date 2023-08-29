@@ -16,7 +16,7 @@ import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import java.io.File
 
-class RecordFragment: BaseMainFragment() {
+class RecordFragment : BaseMainFragment() {
 
     private lateinit var binding: FragmentRecordBinding
     override lateinit var arrayOfViews: ArrayList<ViewObject>
@@ -47,7 +47,11 @@ class RecordFragment: BaseMainFragment() {
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
         if (activityMain.getRegValue() == 0) {
-            animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
+            animationUtils.commonObjectAppear(
+                activityMain.getApp().getContext(),
+                arrayOfViews,
+                true
+            )
 
             binding.recBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
                 binding.recRecordButtonIcon.setOnClickListener { buttonAction() }
@@ -63,21 +67,30 @@ class RecordFragment: BaseMainFragment() {
         super.onResume()
 
         mainVM.setToolbarTitle(resources.getString(R.string.record_your_environment))
-        activityMain.setToolbarAction(R.drawable.ic_menu){ activityMain.openDrawer() }
+        activityMain.setToolbarAction(R.drawable.ic_menu) { activityMain.openDrawer() }
 
-        if (activityMain.getRegValue() == 1){
+        if (activityMain.getRegValue() == 1) {
             mainVM.navigateToWithDelay(R.id.informPageFragment)
             activityMain.hideBottomNav()
         }
     }
 
-    private fun startRecord(){
+    override fun onStop() {
+        super.onStop()
+
+        if (!pressedBool) {
+            recorder.stop()
+            pressedBool = !pressedBool
+        }
+    }
+
+    private fun startRecord() {
         binding.recRecordButtonIcon.setImageResource(
             if (pressedBool) R.drawable.ic_rec_stop
             else R.drawable.ic_rec_start
         )
 
-        if (!pressedBool){
+        if (!pressedBool) {
             recorder.stop()
 
             binding.recRecordButtonIcon.isClickable = false
@@ -93,8 +106,12 @@ class RecordFragment: BaseMainFragment() {
         pressedBool = !pressedBool
     }
 
-    private fun requestRecordPermission(onSuccess: () -> Unit){
-        while (ContextCompat.checkSelfPermission(activityMain.getApp().getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+    private fun requestRecordPermission(onSuccess: () -> Unit) {
+        while (ContextCompat.checkSelfPermission(
+                activityMain.getApp().getContext(),
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(
                 activityMain,
                 arrayOf(Manifest.permission.RECORD_AUDIO),
@@ -104,8 +121,12 @@ class RecordFragment: BaseMainFragment() {
         onSuccess()
     }
 
-    private fun buttonAction(){
-        if (ContextCompat.checkSelfPermission(activityMain.getApp().getContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) startRecord()
+    private fun buttonAction() {
+        if (ContextCompat.checkSelfPermission(
+                activityMain.getApp().getContext(),
+                Manifest.permission.RECORD_AUDIO
+            ) == PackageManager.PERMISSION_GRANTED
+        ) startRecord()
         else requestRecordPermission { startRecord() }
     }
 }

@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.client
+package by.ssrlab.birdvoice.client.loginization
 
 import android.content.Context
 import android.text.Editable

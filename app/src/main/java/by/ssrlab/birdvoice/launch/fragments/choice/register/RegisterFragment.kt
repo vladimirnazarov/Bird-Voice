@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.client.CheckUsernameClient
+import by.ssrlab.birdvoice.client.loginization.CheckUsernameClient
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment

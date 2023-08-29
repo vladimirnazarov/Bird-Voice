@@ -1,23 +1,24 @@
 package by.ssrlab.birdvoice.main.rv
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.Recognition2RvItemBinding
+import by.ssrlab.birdvoice.db.objects.CollectionBird
 import by.ssrlab.birdvoice.main.MainActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class Recognition2Adapter(
     private val context: Context,
     private val mainVM: MainVM,
     private val activity: MainActivity,
+    private val coroutineScope: CoroutineScope
     ) : RecyclerView.Adapter<Recognition2Adapter.Recognition2Holder>() {
 
     private val viewArray = arrayListOf<Recognition2RvItemBinding>()
@@ -39,7 +40,13 @@ class Recognition2Adapter(
 
         holder.binding.apply {
             recognition2RvItemButton.setOnClickListener {
-                Toast.makeText(context, "Will be soon", Toast.LENGTH_SHORT).show()
+                coroutineScope.launch {
+                    val databaseObject = CollectionBird(
+                        mainVM.getResults()[position].name,
+                        mainVM.getResults()[position].image
+                    )
+                    activity.getCollectionDao().insert(databaseObject)
+                }
             }
 
             recognition2RvItemImage.load(mainVM.getResults()[position].image) {

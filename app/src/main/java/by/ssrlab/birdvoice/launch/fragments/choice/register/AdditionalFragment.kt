@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.client.LoginClient
-import by.ssrlab.birdvoice.client.RegistrationClient
+import by.ssrlab.birdvoice.client.loginization.LoginClient
+import by.ssrlab.birdvoice.client.loginization.RegistrationClient
 import by.ssrlab.birdvoice.databinding.FragmentAdditionalBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment

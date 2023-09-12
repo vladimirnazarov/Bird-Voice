@@ -30,13 +30,13 @@ class CollectionFragment: BaseMainFragment() {
 
         binding = FragmentCollectionBinding.inflate(layoutInflater)
 
-        mainVM.setToolbarTitle(resources.getString(R.string.collection))
-
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
+
+        mainVM.setToolbarTitle(resources.getString(R.string.collection))
 
         scope.launch {
             val list = activityMain.getCollectionDao().getCollection() as ArrayList

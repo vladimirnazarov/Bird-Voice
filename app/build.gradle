@@ -6,16 +6,16 @@ plugins {
 
 android {
     namespace 'by.ssrlab.birdvoice'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         viewBinding.enabled = true
 
         applicationId "by.ssrlab.birdvoice"
         minSdk 26
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        targetSdk 34
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

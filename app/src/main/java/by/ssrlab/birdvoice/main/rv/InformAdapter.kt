@@ -1,6 +1,5 @@
 package by.ssrlab.birdvoice.main.rv
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.main.MainActivity
 import com.google.android.material.button.MaterialButton
 
-class InformAdapter(private val activity: MainActivity, private val context: Context, private val navFun: () -> Unit) : RecyclerView.Adapter<InformAdapter.InformHolder>() {
+class InformAdapter(private val activity: MainActivity, private val navFun: () -> Unit) : RecyclerView.Adapter<InformAdapter.InformHolder>() {
 
     private val viewArray = arrayListOf<View>()
 
@@ -31,7 +30,7 @@ class InformAdapter(private val activity: MainActivity, private val context: Con
         viewArray.add(view)
 
         view.visibility = View.INVISIBLE
-        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_enter))
+        view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.common_alpha_enter))
         view.visibility = View.VISIBLE
 
         return InformHolder(view)
@@ -61,7 +60,7 @@ class InformAdapter(private val activity: MainActivity, private val context: Con
 
     fun animOut(){
         for (i in viewArray) {
-            i.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
+            i.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.common_alpha_out))
             i.visibility = View.INVISIBLE
         }
     }

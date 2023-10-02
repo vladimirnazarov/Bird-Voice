@@ -14,6 +14,8 @@ import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
 import by.ssrlab.birdvoice.helpers.recorder.AudioRecorder
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 
 class RecordFragment : BaseMainFragment() {
@@ -66,7 +68,10 @@ class RecordFragment : BaseMainFragment() {
     override fun onResume() {
         super.onResume()
 
-        mainVM.setToolbarTitle(resources.getString(R.string.record_your_environment))
+        mainVM.getScope().launch {
+            delay(200)
+            mainVM.setToolbarTitle(resources.getString(R.string.record_your_environment))
+        }
         activityMain.setToolbarAction(R.drawable.ic_menu) { activityMain.openDrawer() }
 
         if (activityMain.getRegValue() == 1) {

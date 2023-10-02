@@ -1,8 +1,6 @@
 package by.ssrlab.birdvoice.client.loginization
 
-import android.content.Context
 import android.text.Editable
-import android.widget.Toast
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -12,7 +10,7 @@ object RegistrationClient {
 
     private var registrationClient: OkHttpClient? = null
 
-    fun post(userName: Editable, password: Editable, firstName: Editable, lastName: Editable, email: Editable, onSuccess: () -> Unit, onFailure: () -> Unit, context: Context) {
+    fun post(userName: Editable, password: Editable, firstName: Editable, lastName: Editable, email: Editable, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
 
         if (registrationClient == null) registrationClient = OkHttpClient.Builder().build()
 
@@ -26,14 +24,14 @@ object RegistrationClient {
 
         registrationClient!!.newCall(request).enqueue(object : Callback{
             override fun onFailure(call: Call, e: IOException) {
-                Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
+                onFailure(e.message!!)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
                     val jsonObject = response.message
                     if (jsonObject == "Created") onSuccess()
-                    else onFailure()
+                    else onFailure(jsonObject)
                 }
             }
         })

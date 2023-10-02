@@ -25,7 +25,7 @@ class InformPageFragment: BaseMainFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        informAdapter = InformAdapter(activityMain, activityMain.getApp().getContext(), navFun)
+        informAdapter = InformAdapter(activityMain, navFun)
     }
 
     override fun onCreateView(

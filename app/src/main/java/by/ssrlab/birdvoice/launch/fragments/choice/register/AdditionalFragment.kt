@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.client.loginization.LoginClient
 import by.ssrlab.birdvoice.client.loginization.RegistrationClient
 import by.ssrlab.birdvoice.databinding.FragmentAdditionalBinding
@@ -73,19 +72,15 @@ class AdditionalFragment: BaseLaunchFragment() {
                             binding.additionalCreateButton.isClickable = false
                         }
                     }, {
-                        activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, activityLaunch.resources.getText(
-                            R.string.fail_to_login), Toast.LENGTH_SHORT).show() }
-                    },
-                        activityLaunch)
+                        activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() }
+                    })
+
                     },
 
                     //OnFailure
                     {
-                        activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, "Username taken", Toast.LENGTH_SHORT).show() }
-                    },
-
-                    //Activity
-                    activityLaunch
+                        activityLaunch.runOnUiThread { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
+                    }
                 )
             }
         }

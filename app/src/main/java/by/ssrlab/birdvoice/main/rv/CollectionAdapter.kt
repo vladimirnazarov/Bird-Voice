@@ -43,6 +43,9 @@ class CollectionAdapter(
                 crossfade(true)
                 transformations(RoundedCornersTransformation(16f))
             }
+
+            collectionRvItemDate.text = list[position].date
+            collectionRvItemTime.text = list[position].time
             collectionItemDelete.setOnClickListener { initDeletionDialog(list[position], position) }
         }
     }

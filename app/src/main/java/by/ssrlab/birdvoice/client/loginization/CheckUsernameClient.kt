@@ -36,7 +36,7 @@ object CheckUsernameClient {
                     val message = jsonObject?.getString("message")
 
                     if (message == "OK") onSuccess()
-                    else message?.let { it1 -> onFailure(it1) }
+                    else responseBody?.let { it1 -> onFailure(it1) }
                 }
             }
         })

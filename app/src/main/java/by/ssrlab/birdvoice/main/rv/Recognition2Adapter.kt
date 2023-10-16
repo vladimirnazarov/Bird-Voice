@@ -13,6 +13,8 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class Recognition2Adapter(
     private val context: Context,
@@ -41,11 +43,13 @@ class Recognition2Adapter(
         holder.binding.apply {
             recognition2RvItemButton.setOnClickListener {
                 coroutineScope.launch {
-                    val databaseObject = CollectionBird(
-                        mainVM.getResults()[position].name,
-                        mainVM.getResults()[position].image
-                    )
-                    activity.getCollectionDao().insert(databaseObject)
+                    getCurrentDate { date, time ->
+                        val databaseObject = CollectionBird(
+                            mainVM.getResults()[position].name,
+                            mainVM.getResults()[position].image,
+                            date, time)
+                        activity.getCollectionDao().insert(databaseObject)
+                    }
                 }
             }
 
@@ -72,5 +76,17 @@ class Recognition2Adapter(
     private fun outAnimation(view: View){
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
         view.visibility = View.INVISIBLE
+    }
+
+    private fun getCurrentDate(onSuccess: (String, String) -> Unit) {
+        val currentDateTime = LocalDateTime.now()
+
+        val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val formattedDate = currentDateTime.format(dateFormatter)
+
+        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+        val formattedTime = currentDateTime.format(timeFormatter)
+
+        onSuccess(formattedDate, formattedTime)
     }
 }

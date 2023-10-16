@@ -1,8 +1,6 @@
 package by.ssrlab.birdvoice.client.loginization
 
-import android.content.Context
 import android.text.Editable
-import android.widget.Toast
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -13,7 +11,7 @@ object LoginClient {
 
     private var loginClient: OkHttpClient? = null
 
-    fun post(username: Editable, password: Editable, onSuccess: (String) -> Unit, onFailure: () -> Unit, context: Context) {
+    fun post(username: Editable, password: Editable, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
 
         if (loginClient == null) loginClient = OkHttpClient.Builder().build()
 
@@ -27,7 +25,7 @@ object LoginClient {
 
         loginClient!!.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
+                onFailure(e.message!!)
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -35,7 +33,7 @@ object LoginClient {
                     val responseBody = response.body?.string()
                     val jObject = responseBody?.let { it1 -> JSONObject(it1) }
                     if (jObject?.getString("message") == "Login successfull") onSuccess(jObject.getJSONObject("token").getString("access"))
-                    else onFailure()
+                    else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
                 }
             }
         })

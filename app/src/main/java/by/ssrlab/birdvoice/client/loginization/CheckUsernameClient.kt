@@ -1,18 +1,17 @@
 package by.ssrlab.birdvoice.client.loginization
 
-import android.content.Context
 import android.text.Editable
-import android.widget.Toast
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import java.io.IOException
 
 object CheckUsernameClient {
 
     private var checkUsernameClient: OkHttpClient? = null
 
-    fun post(userName: Editable, password: Editable, onSuccess: () -> Unit, onFailure: () -> Unit, context: Context) {
+    fun post(userName: Editable, password: Editable, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
 
         if (checkUsernameClient == null) checkUsernameClient = OkHttpClient.Builder().build()
 
@@ -27,14 +26,17 @@ object CheckUsernameClient {
 
         checkUsernameClient!!.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Toast.makeText(context, e.message.toString(), Toast.LENGTH_SHORT).show()
+                onFailure(e.message!!)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    val jsonObject = response.message
-                    if (jsonObject == "OK") onSuccess()
-                    else onFailure()
+                    val responseBody = response.body?.string()
+                    val jsonObject = responseBody?.let { it1 -> JSONObject(it1) }
+                    val message = jsonObject?.getString("message")
+
+                    if (message == "OK") onSuccess()
+                    else responseBody?.let { it1 -> onFailure(it1) }
                 }
             }
         })

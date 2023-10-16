@@ -70,8 +70,8 @@ class RegisterFragment: BaseLaunchFragment() {
                             launchVM.setUsernameAndPassword(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!)
                         }
                     }, {
-                        launchVM.getScope().launch { Toast.makeText(activityLaunch, "Username taken", Toast.LENGTH_SHORT).show() }
-                    }, activityLaunch)
+                        activityLaunch.runOnUiThread { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
+                    })
                 }
             }
         })

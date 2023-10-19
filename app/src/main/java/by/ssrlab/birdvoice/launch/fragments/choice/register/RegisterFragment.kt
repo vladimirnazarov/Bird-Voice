@@ -10,6 +10,7 @@ import by.ssrlab.birdvoice.client.loginization.CheckUsernameClient
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class RegisterFragment: BaseLaunchFragment() {
@@ -63,6 +64,7 @@ class RegisterFragment: BaseLaunchFragment() {
                 checkRegister {
                     CheckUsernameClient.post(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!, {
                         launchVM.getScope().launch {
+                            delay(200)
                             animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                             launchVM.navigateToWithDelay(R.id.action_registerFragment_to_additionalFragment)
                             binding.registerCreateButton.isClickable = false

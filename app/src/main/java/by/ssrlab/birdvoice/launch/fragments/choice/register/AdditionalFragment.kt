@@ -11,6 +11,8 @@ import by.ssrlab.birdvoice.client.loginization.RegistrationClient
 import by.ssrlab.birdvoice.databinding.FragmentAdditionalBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AdditionalFragment: BaseLaunchFragment() {
 
@@ -66,7 +68,8 @@ class AdditionalFragment: BaseLaunchFragment() {
 
                     //OnSuccess
                     LoginClient.post(launchVM.getUsername(), launchVM.getPassword(), {
-                        activityLaunch.runOnUiThread {
+                        launchVM.getScope().launch {
+                            delay(200)
                             activityLaunch.moveToMainActivity(recognitionToken = it)
                             animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                             binding.additionalCreateButton.isClickable = false

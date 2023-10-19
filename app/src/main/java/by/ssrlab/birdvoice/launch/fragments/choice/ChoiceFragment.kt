@@ -8,6 +8,8 @@ import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.FragmentChoiceBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ChoiceFragment : BaseLaunchFragment() {
 
@@ -38,15 +40,19 @@ class ChoiceFragment : BaseLaunchFragment() {
 
         binding.choiceBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             binding.choiceLoginButton.setOnClickListener {
-                animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
-                binding.choiceLoginButton.isClickable = false
-                launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_loginFragment)
+                launchVM.getScope().launch {
+                    delay(200)
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
+                    binding.choiceLoginButton.isClickable = false
+                    launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_loginFragment)
+                }
             }
 
             binding.choiceRegisterButton.setOnClickListener {
-                animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
-                binding.choiceRegisterButton.isClickable = false
-                launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_registerFragment)
+                launchVM.getScope().launch {
+                    animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
+                    binding.choiceRegisterButton.isClickable = false
+                    launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_registerFragment) }
             }
         })
 

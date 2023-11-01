@@ -62,24 +62,18 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
 
+        style="@style/LauncherButton"
         android:text="@string/new_account"
-        android:textAllCaps="false"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/primary_text_blue"
-        android:textSize="16sp"
-
-        android:backgroundTint="@color/white"
+        android:textSize="18sp"
 
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="100dp"
 
-        app:icon="@drawable/ic_button_bird"
-        app:iconGravity="textEnd"
+        app:icon="@drawable/ic_bird"
 
         android:clickable="false"
 
         app:cornerRadius="32dp"
-        app:rippleColor="@color/primary_button_push"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,24 +84,18 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
 
+        style="@style/LauncherButton"
         android:text="@string/log_in"
-        android:textAllCaps="false"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/primary_text_blue"
-        android:textSize="16sp"
-
-        android:backgroundTint="@color/white"
+        android:textSize="18sp"
 
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
 
-        app:icon="@drawable/ic_button_bird_home"
-        app:iconGravity="textEnd"
+        app:icon="@drawable/ic_birdhouse"
 
         android:clickable="false"
 
         app:cornerRadius="32dp"
-        app:rippleColor="@color/primary_button_push"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

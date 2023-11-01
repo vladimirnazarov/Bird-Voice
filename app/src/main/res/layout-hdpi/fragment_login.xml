@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/login_top_right_cloud"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
             android:src="@drawable/login_cloud_top_right"
 
@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/login_bottom_left_cloud"
-            android:layout_width="70dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
             android:src="@drawable/login_cloud_bottom_left"
 
@@ -36,20 +36,23 @@
 
         <ImageView
             android:id="@+id/login_bottom_right_cloud"
-            android:layout_width="60dp"
-            android:layout_height="110dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
             android:src="@drawable/login_cloud_bottom_right"
 
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="42dp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_top_right_cloud"/>
 
         <ImageView
             android:id="@+id/login_bird"
-            android:layout_width="200dp"
-            android:layout_height="160dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:scaleX="0.85"
+            android:scaleY="0.85"
 
             android:src="@drawable/login_bird"
 
@@ -63,13 +66,14 @@
             android:layout_height="wrap_content"
 
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:paddingHorizontal="8dp"
 
             android:fontFamily="@font/roboto"
             android:text="@string/welcome_back"
-            android:textColor="@color/primary_text_blue"
-            android:textSize="24sp"
+            android:textColor="@color/primary_blue"
+            android:textStyle="bold"
+            android:textSize="30sp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,12 +84,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="6dp"
             android:paddingHorizontal="8dp"
 
             android:text="@string/sign_in_to_continue"
-            android:textSize="13sp"
-            android:textColor="@color/primary_text_blue"
+            android:textSize="15sp"
+            android:textColor="@color/primary_blue"
             android:fontFamily="@font/roboto"
 
             app:layout_constraintStart_toStartOf="@id/login_welcome_text"
@@ -97,9 +101,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="@string/username"
-            android:textColor="@color/primary_text_blue"
-            android:textSize="14sp"
+            android:text="@string/email"
+            android:textColor="@color/primary_blue"
+            android:textSize="15sp"
             android:fontFamily="@font/roboto"
 
             android:layout_marginHorizontal="24dp"
@@ -113,18 +117,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:textSize="@dimen/error_mdpi"
-            android:textColor="@color/primary_red"
-            android:fontFamily="@font/roboto"
-
-            android:visibility="invisible"
-
-            android:layout_marginEnd="12dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:elevation="6dp"
 
-            app:layout_constraintEnd_toEndOf="@id/login_username_input"
-            app:layout_constraintTop_toBottomOf="@id/login_username_input"/>
+            android:fontFamily="@font/roboto"
+
+            android:textColor="@color/primary_red"
+            android:textSize="11sp"
+            android:visibility="invisible"
+
+            app:layout_constraintStart_toStartOf="@id/login_username_input"
+            app:layout_constraintTop_toBottomOf="@id/login_username_input" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/login_username_input"
@@ -134,11 +137,11 @@
             android:background="@drawable/background_launcher_edittext"
             android:elevation="4dp"
             android:layout_marginTop="4dp"
-            android:paddingVertical="12dp"
-            android:paddingHorizontal="14dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="22dp"
 
-            android:textSize="14sp"
-            android:textColor="@color/primary_text_blue"
+            android:textSize="18sp"
+            android:textColor="@color/primary_blue"
             android:fontFamily="@font/roboto"
 
             android:lines="1"
@@ -155,11 +158,11 @@
             android:layout_height="wrap_content"
 
             android:text="@string/password"
-            android:textColor="@color/primary_text_blue"
-            android:textSize="14sp"
+            android:textColor="@color/primary_blue"
+            android:textSize="15sp"
             android:fontFamily="@font/roboto"
 
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:layout_marginHorizontal="24dp"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -174,11 +177,11 @@
             android:background="@drawable/background_launcher_edittext"
             android:elevation="4dp"
             android:layout_marginTop="4dp"
-            android:paddingVertical="12dp"
-            android:paddingHorizontal="14dp"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="22dp"
 
-            android:textSize="14sp"
-            android:textColor="@color/primary_text_blue"
+            android:textSize="18sp"
+            android:textColor="@color/primary_blue"
             android:fontFamily="@font/roboto"
             android:inputType="textPassword"
 
@@ -196,10 +199,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:scaleX="0.85"
-            android:scaleY="0.85"
-
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/ripple_rounded"
             android:padding="8dp"
             android:elevation="4dp"
@@ -215,17 +215,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:textSize="@dimen/error_mdpi"
+            android:textSize="11sp"
             android:textColor="@color/primary_red"
             android:fontFamily="@font/roboto"
 
             android:visibility="invisible"
 
-            android:layout_marginEnd="12dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
+
             android:elevation="6dp"
 
-            app:layout_constraintEnd_toEndOf="@id/login_password_input"
+            app:layout_constraintStart_toStartOf="@id/login_password_input"
             app:layout_constraintTop_toBottomOf="@id/login_password_input"/>
 
         <com.google.android.material.checkbox.MaterialCheckBox
@@ -234,13 +234,13 @@
             android:layout_height="wrap_content"
 
             android:text="@string/remember_me"
-            android:textColor="@color/primary_text_blue"
-            android:textSize="13sp"
+            android:textColor="@color/primary_blue"
+            android:textSize="14sp"
             android:fontFamily="@font/roboto"
 
             app:buttonTint="@color/primary_button_blue"
 
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
 
             app:layout_constraintStart_toStartOf="@id/login_password_title"
             app:layout_constraintTop_toBottomOf="@id/login_password_input"/>
@@ -255,7 +255,7 @@
             android:text="@string/forgot_password"
             android:textColor="@color/secondary_text_blue"
             android:fontFamily="@font/roboto"
-            android:textSize="13sp"
+            android:textSize="16sp"
 
             app:layout_constraintTop_toTopOf="@id/login_remember_me"
             app:layout_constraintBottom_toBottomOf="@id/login_remember_me"
@@ -264,35 +264,71 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_sign_in_button"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="80dp"
 
+            style="@style/LauncherButton"
             android:text="@string/sign_in"
-            android:textAllCaps="false"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/primary_text_blue"
-            android:textSize="14sp"
-
-            app:iconSize="25dp"
-
-            android:backgroundTint="@color/white"
+            android:textSize="16sp"
 
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
 
-            app:icon="@drawable/ic_button_bird_home"
-            app:iconGravity="textEnd"
+            app:icon="@drawable/ic_birdhouse"
 
             android:clickable="false"
 
             app:cornerRadius="32dp"
-            app:rippleColor="@color/primary_button_push"
-
-            android:layout_marginBottom="16dp"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_remember_me"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+
+            app:layout_constraintTop_toBottomOf="@id/login_sign_in_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/login_dont_have"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/dont_have"
+                android:textColor="@color/primary_blue"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/login_dont_have_additional"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/login_dont_have_additional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="@string/dont_have_additional"
+                android:textColor="@color/primary_blue"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto"
+
+                android:clickable="true"
+                android:focusable="true"
+
+                app:layout_constraintStart_toEndOf="@id/login_dont_have"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

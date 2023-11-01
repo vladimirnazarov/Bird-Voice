@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.client.loginization.LoginClient
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
@@ -93,6 +96,21 @@ class LoginFragment: BaseLaunchFragment() {
 
         errorValue += helpFunctions.checkTextInput(binding.loginUsernameInput.text, binding.loginUsernameErrorMessage, resources)
         errorValue += helpFunctions.checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
+
+        if (binding.loginUsernameInput.text!!.isNotEmpty()) {
+            val emailRegex = Regex("..*@[a-zA-Z][a-zA-Z][a-zA-Z]*\\.[a-zA-Z][a-zA-Z][a-zA-Z]*")
+            val errorAnim = AnimationUtils.loadAnimation(activityLaunch, R.anim.common_error_message_animation)
+            if (!emailRegex.matches(binding.loginUsernameInput.text!!)) {
+                binding.apply {
+                    loginUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_red))
+                    loginUsernameErrorMessage.text = resources.getText(R.string.email_error_valid)
+                    loginUsernameErrorMessage.startAnimation(errorAnim)
+                    loginUsernameErrorMessage.visibility = View.VISIBLE
+                }
+                errorValue += 1
+            }
+        }
+
         if (errorValue == 0) onSuccess()
     }
 
@@ -102,7 +120,9 @@ class LoginFragment: BaseLaunchFragment() {
     }
 
     private fun setEditTextListeners(){
-        binding.loginUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkLogin = true) }, {}))
+        binding.loginUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener ({
+            errorViewOut(checkLogin = true)
+            binding.loginUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
         binding.loginPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
     }
 }

@@ -26,4 +26,19 @@
 
     </style>
 
+    <style name="LauncherButton" parent="Widget.Material3.Button">
+
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+
+        <item name="android:backgroundTint">@color/button_primary</item>
+        <item name="iconTint">@color/white</item>
+        <item name="iconGravity">textEnd</item>
+
+        <item name="rippleColor">@color/button_ripple</item>
+
+    </style>
+
 </resources>

@@ -24,10 +24,6 @@
         tools:targetApi="33">
 
         <activity
-            android:name="com.canhub.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
-
-        <activity
             android:name=".launch.LaunchActivity"
             android:excludeFromRecents="true"
             android:windowSoftInputMode="adjustPan"

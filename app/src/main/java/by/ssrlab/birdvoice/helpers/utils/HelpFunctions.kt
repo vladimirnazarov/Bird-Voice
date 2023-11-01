@@ -111,19 +111,13 @@ class HelpFunctions(private val mainApp: MainApp) {
         resources: Resources,
         errorText: String = resources.getString(R.string.this_field_must_be_not_empty)
     ): Int {
-        val errorAnim =
-            AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.common_error_message_animation)
+        val errorAnim = AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.common_error_message_animation)
         return if (checkableText?.isEmpty() == true) {
             errorView.text = errorText
             errorView.startAnimation(errorAnim)
             errorView.visibility = View.VISIBLE
             1
         } else 0
-    }
-
-    fun showKeyboard(view: View) {
-        val imm = mainApp.getContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 
     fun hideKeyboard(view: View?, context: Context) {

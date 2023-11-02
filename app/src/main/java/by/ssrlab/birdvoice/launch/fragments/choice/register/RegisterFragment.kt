@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.client.loginization.CheckUsernameClient
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class RegisterFragment: BaseLaunchFragment() {
@@ -63,8 +66,9 @@ class RegisterFragment: BaseLaunchFragment() {
                 checkRegister {
                     CheckUsernameClient.post(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!, {
                         launchVM.getScope().launch {
+                            delay(200)
                             animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
-                            launchVM.navigateToWithDelay(R.id.action_registerFragment_to_additionalFragment)
+//                            launchVM.navigateToWithDelay(R.id.action_registerFragment_to_additionalFragment)
                             binding.registerCreateButton.isClickable = false
                             launchVM.activityBinding?.launcherArrowBack?.isClickable = false
                             launchVM.setUsernameAndPassword(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!)
@@ -100,6 +104,20 @@ class RegisterFragment: BaseLaunchFragment() {
         errorValue += helpFunctions.checkTextInput(binding.registerUsernameInput.text, binding.registerUsernameErrorMessage, resources)
         errorValue += helpFunctions.checkTextInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
 
+        if (binding.registerUsernameInput.text!!.isNotEmpty()) {
+            val emailRegex = Regex("..*@[a-zA-Z][a-zA-Z][a-zA-Z]*\\.[a-zA-Z][a-zA-Z][a-zA-Z]*")
+            val errorAnim = AnimationUtils.loadAnimation(activityLaunch, R.anim.common_error_message_animation)
+            if (!emailRegex.matches(binding.registerUsernameInput.text!!)) {
+                binding.apply {
+                    registerUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_red))
+                    registerUsernameErrorMessage.text = resources.getText(R.string.email_error_valid)
+                    registerUsernameErrorMessage.startAnimation(errorAnim)
+                    registerUsernameErrorMessage.visibility = View.VISIBLE
+                }
+                errorValue += 1
+            }
+        }
+
         if (errorValue == 0) onSuccess()
     }
 
@@ -109,7 +127,35 @@ class RegisterFragment: BaseLaunchFragment() {
     }
 
     private fun setEditTextListeners(){
-        binding.registerUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkUsername = true) }, {}))
+        binding.registerUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener ({
+            errorViewOut(checkUsername = true)
+            binding.registerUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
         binding.registerPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
     }
+
+//    binding.additionalCreateButton.setOnClickListener {
+//        checkAdditional {
+//            RegistrationClient.post(launchVM.getUsername(), launchVM.getPassword(), binding.additionalFirstnameInput.text!!, binding.additionalLastnameInput.text!!, binding.additionalEmailInput.text!!, {
+//
+//                //OnSuccess
+//                LoginClient.post(launchVM.getUsername(), launchVM.getPassword(), {
+//                    launchVM.getScope().launch {
+//                        delay(200)
+//                        activityLaunch.moveToMainActivity(recognitionToken = it)
+//                        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
+//                        binding.additionalCreateButton.isClickable = false
+//                    }
+//                }, {
+//                    activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() }
+//                })
+//
+//            },
+//
+//                //OnFailure
+//                {
+//                    activityLaunch.runOnUiThread { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
+//                }
+//            )
+//        }
+//    }
 }

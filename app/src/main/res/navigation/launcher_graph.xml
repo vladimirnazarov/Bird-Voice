@@ -25,9 +25,6 @@
             android:id="@+id/action_choiceFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_choiceFragment_to_registerFragmentOld"
-            app:destination="@id/registerFragmentOld" />
-        <action
             android:id="@+id/action_choiceFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
     </fragment>
@@ -36,36 +33,8 @@
         android:name="by.ssrlab.birdvoice.launch.fragments.choice.login.LoginFragment"
         android:label="LoginFragment" />
     <fragment
-        android:id="@+id/codeFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.old.CodeFragment"
-        android:label="CodeFragment" >
-        <action
-            android:id="@+id/action_codeFragment_to_userDataFragment"
-            app:destination="@id/userDataFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/userDataFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.old.UserDataFragment"
-        android:label="UserDataFragment" />
-    <fragment
-        android:id="@+id/registerFragmentOld"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.old.RegisterFragmentOld"
-        android:label="RegisterFragmentOld" >
-        <action
-            android:id="@+id/action_registerFragmentOld_to_codeFragment"
-            app:destination="@id/codeFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/registerFragment"
         android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.RegisterFragment"
-        android:label="RegisterFragment" >
-        <action
-            android:id="@+id/action_registerFragment_to_additionalFragment"
-            app:destination="@id/additionalFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/additionalFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.AdditionalFragment"
-        android:label="AdditionalFragment" />
+        android:label="RegisterFragment" />
 
 </navigation>

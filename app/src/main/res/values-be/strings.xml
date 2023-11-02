@@ -21,6 +21,11 @@
     <string name="remember_me">Запомніць мяне</string>
     <string name="forgot_password">Забылі пароль?</string>
     <string name="sign_in">Увайсці</string>
+    <string name="dont_have">Няма акаўнта? </string>
+    <string name="dont_have_additional"> <u>Зарэгістравацца</u></string>
+
+    <!--  Errors  -->
+    <string name="email_error_valid">Enter valid email</string>
 
     <!--  Register  -->
     <string name="telephone_number">Нумар тэлефона</string>

@@ -21,6 +21,11 @@
     <string name="remember_me">Запомнить меня</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="sign_in">Войти</string>
+    <string name="dont_have">Нет аккаунта? </string>
+    <string name="dont_have_additional"> <u>Зарегистрироваться</u></string>
+
+    <!--  Errors  -->
+    <string name="email_error_valid">Enter valid email</string>
 
     <!--  Register  -->
     <string name="telephone_number">Номер телефона</string>

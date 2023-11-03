@@ -1,16 +1,19 @@
 package by.ssrlab.birdvoice.main
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -29,6 +32,8 @@ import by.ssrlab.birdvoice.launch.LaunchActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
+
+// - refactor or move to vm
 
 class MainActivity : AppCompatActivity() {
 
@@ -91,11 +96,21 @@ class MainActivity : AppCompatActivity() {
         setupDrawer()
     }
 
+    //
     @Suppress("DEPRECATION")
     private fun loadPreferences() {
         val sharedPreferences = getSharedPreferences(mainApp.constPreferences, MODE_PRIVATE)
         val locale = sharedPreferences.getString(mainApp.constLocale, "en")
         locale?.let { Locale(it) }?.let { mainApp.setLocale(it) }
+
+        val count = sharedPreferences.getInt(mainApp.constLaunches, 0)
+        if (count > 3) {
+            getLocationPermission()
+            with (sharedPreferences.edit()) {
+                putInt(mainApp.constLocale, 0)
+                apply()
+            }
+        }
 
         val config = mainApp.getContext().resources.configuration
         config.setLocale(Locale(locale!!))
@@ -123,6 +138,7 @@ class MainActivity : AppCompatActivity() {
         recreate()
     }
 
+    //
     private fun initDb() {
         val db = Room.databaseBuilder(mainApp.getContext(), CollectionDatabase::class.java, "birds_collection")
             .fallbackToDestructiveMigration()
@@ -130,6 +146,7 @@ class MainActivity : AppCompatActivity() {
         collectionDao = db.collectionDao()
     }
 
+    //
     fun setToolbarAction(icon: Int, action: () -> Unit){
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
@@ -138,6 +155,7 @@ class MainActivity : AppCompatActivity() {
         homeCallback = action
     }
 
+    //
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             android.R.id.home -> {
@@ -148,15 +166,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //
     fun setPopBackCallback(func: () -> Unit){
         mainVM.setNavUpLambda(func)
         onBackPressedDispatcher.addCallback(this, mainVM.onMapBackPressedCallback)
     }
 
+    //
     fun deletePopBackCallback(){
         if (mainVM.onMapBackPressedCallback.isEnabled) mainVM.onMapBackPressedCallback.remove()
     }
 
+    //
     fun hideBottomNav(){
         if (bottomNav.visibility == View.VISIBLE){
             bottomNav.startAnimation(AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.nav_bottom_view_out))
@@ -164,6 +185,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //
     fun showBottomNav(){
         if (bottomNav.visibility == View.GONE){
             bottomNav.startAnimation(AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.nav_bottom_view_enter))
@@ -171,10 +193,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //
     fun openDrawer(){
         drawer.openDrawer(GravityCompat.START)
     }
 
+    //
     private fun closeDrawer(){
         drawer.closeDrawer(GravityCompat.START)
     }
@@ -185,6 +209,7 @@ class MainActivity : AppCompatActivity() {
         regValue = value
     }
 
+    //
     private fun setupDrawer(){
         binding.apply {
             drawerButtonLanguage.setOnClickListener {
@@ -237,15 +262,10 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-
-            drawerButtonInstagram.setOnClickListener { Toast.makeText(this@MainActivity, "Instagram", Toast.LENGTH_SHORT).show() }
-
-            drawerButtonWhatsapp.setOnClickListener { Toast.makeText(this@MainActivity, "WhatsApp", Toast.LENGTH_SHORT).show() }
-
-            drawerButtonTwitter.setOnClickListener { Toast.makeText(this@MainActivity, "Twitter", Toast.LENGTH_SHORT).show() }
         }
     }
 
+    //
     @Suppress("DEPRECATION")
     private fun initDialog(dialogBindingAction: (Dialog) -> Unit) {
         val displayMetrics = DisplayMetrics()
@@ -268,11 +288,19 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    //
     private fun intentBack() {
         val intent = Intent(this@MainActivity, LaunchActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
+    }
+
+    /**
+     * Add related text
+     */
+    private fun getLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 1)
     }
 
     fun getApp() = mainApp

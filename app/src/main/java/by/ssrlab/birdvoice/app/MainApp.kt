@@ -9,6 +9,7 @@ class MainApp : Application() {
 
     val constPreferences = "preferences"
     val constLocale = "locale"
+    val constLaunches = "launches"
 
     private var locale = Locale("en")
     private val config = Configuration()

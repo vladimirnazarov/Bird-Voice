@@ -1,13 +1,8 @@
 package by.ssrlab.birdvoice.main
 
 import android.Manifest
-import android.app.Dialog
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
@@ -23,17 +18,12 @@ import androidx.room.Room
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.ActivityMainBinding
-import by.ssrlab.birdvoice.databinding.DialogLanguageBinding
-import by.ssrlab.birdvoice.databinding.DialogLogOutBinding
 import by.ssrlab.birdvoice.db.CollectionDao
 import by.ssrlab.birdvoice.db.CollectionDatabase
 import by.ssrlab.birdvoice.helpers.utils.LoginManager
-import by.ssrlab.birdvoice.launch.LaunchActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
-
-// - refactor or move to vm
 
 class MainActivity : AppCompatActivity() {
 
@@ -66,14 +56,8 @@ class MainActivity : AppCompatActivity() {
             drawer = mainDrawerLayout
             drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
-            navController = navHostFragment.navController
-            mainVM.setNavController(navController)
-
-            bottomNav = mainBottomNavigationView
-            bottomNav.inflateMenu(R.menu.bottom_menu)
-            bottomNav.setupWithNavController(navController)
-            showBottomNav()
+            initNavController()
+            initBottomNav()
 
             mainVM.activityBinding = this
 
@@ -93,10 +77,9 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        setupDrawer()
+        mainVM.setupDrawer(binding, this@MainActivity)
     }
 
-    //
     @Suppress("DEPRECATION")
     private fun loadPreferences() {
         val sharedPreferences = getSharedPreferences(mainApp.constPreferences, MODE_PRIVATE)
@@ -128,17 +111,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun savePreferences(locale: String) {
-        val sharedPreferences = getSharedPreferences(mainApp.constPreferences, MODE_PRIVATE) ?: return
-        with (sharedPreferences.edit()) {
-            putString(mainApp.constLocale, locale)
-            apply()
-        }
-
-        recreate()
-    }
-
-    //
     private fun initDb() {
         val db = Room.databaseBuilder(mainApp.getContext(), CollectionDatabase::class.java, "birds_collection")
             .fallbackToDestructiveMigration()
@@ -146,7 +118,6 @@ class MainActivity : AppCompatActivity() {
         collectionDao = db.collectionDao()
     }
 
-    //
     fun setToolbarAction(icon: Int, action: () -> Unit){
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
@@ -155,7 +126,6 @@ class MainActivity : AppCompatActivity() {
         homeCallback = action
     }
 
-    //
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             android.R.id.home -> {
@@ -166,42 +136,44 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //
     fun setPopBackCallback(func: () -> Unit){
         mainVM.setNavUpLambda(func)
         onBackPressedDispatcher.addCallback(this, mainVM.onMapBackPressedCallback)
     }
 
-    //
-    fun deletePopBackCallback(){
-        if (mainVM.onMapBackPressedCallback.isEnabled) mainVM.onMapBackPressedCallback.remove()
+    fun deletePopBackCallback() { if (mainVM.onMapBackPressedCallback.isEnabled) mainVM.onMapBackPressedCallback.remove() }
+
+    private fun initNavController() {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
+        navController = navHostFragment.navController
+        mainVM.setNavController(navController)
     }
 
-    //
-    fun hideBottomNav(){
+    private fun initBottomNav() {
+        binding.apply {
+            bottomNav = mainBottomNavigationView
+            bottomNav.inflateMenu(R.menu.bottom_menu)
+            bottomNav.setupWithNavController(navController)
+            showBottomNav()
+        }
+    }
+
+    fun hideBottomNav() {
         if (bottomNav.visibility == View.VISIBLE){
             bottomNav.startAnimation(AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.nav_bottom_view_out))
             bottomNav.visibility = View.GONE
         }
     }
 
-    //
-    fun showBottomNav(){
+    fun showBottomNav() {
         if (bottomNav.visibility == View.GONE){
             bottomNav.startAnimation(AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.nav_bottom_view_enter))
             bottomNav.visibility = View.VISIBLE
         }
     }
 
-    //
-    fun openDrawer(){
-        drawer.openDrawer(GravityCompat.START)
-    }
-
-    //
-    private fun closeDrawer(){
-        drawer.closeDrawer(GravityCompat.START)
-    }
+    fun openDrawer() { drawer.openDrawer(GravityCompat.START) }
+    fun closeDrawer() { drawer.closeDrawer(GravityCompat.START) }
 
     fun getRegValue() = regValue
 
@@ -209,100 +181,18 @@ class MainActivity : AppCompatActivity() {
         regValue = value
     }
 
-    //
-    private fun setupDrawer(){
-        binding.apply {
-            drawerButtonLanguage.setOnClickListener {
-                initDialog { dialog ->
-                    val dialogBinding = DialogLanguageBinding.inflate(LayoutInflater.from(this@MainActivity))
-                    dialog.setContentView(dialogBinding.root)
-
-                    dialogBinding.apply {
-                        dialogLangButtonEn.setOnClickListener {
-                            dialog.dismiss()
-                            closeDrawer()
-                            savePreferences("en") }
-                        dialogLangButtonBy.setOnClickListener {
-                            dialog.dismiss()
-                            closeDrawer()
-                            savePreferences("be") }
-                        dialogLangButtonRu.setOnClickListener {
-                            dialog.dismiss()
-                            closeDrawer()
-                            savePreferences("ru") }
-                    }
-                }
-            }
-
-            drawerButtonInstruction.setOnClickListener {
-                navController.navigate(R.id.informPageFragment)
-                hideBottomNav()
-                closeDrawer()
-            }
-
-            drawerButtonFeedback.setOnClickListener {
-                navController.navigate(R.id.feedbackFragment)
-                hideBottomNav()
-                closeDrawer()
-            }
-
-            drawerButtonLogOut.setOnClickListener {
-                initDialog { dialog ->
-                    val dialogBinding = DialogLogOutBinding.inflate(LayoutInflater.from(this@MainActivity))
-                    dialog.setContentView(dialogBinding.root)
-                    dialogBinding.apply {
-                        dialogLogOutNo.setOnClickListener { dialog.dismiss() }
-                        dialogLogOutYes.setOnClickListener {
-                            dialog.dismiss()
-                            closeDrawer()
-
-                            loginManager.removeToken()
-                            intentBack()
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    //
-    @Suppress("DEPRECATION")
-    private fun initDialog(dialogBindingAction: (Dialog) -> Unit) {
-        val displayMetrics = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-
-        val width = displayMetrics.widthPixels
-
-        val dialog = Dialog(this@MainActivity)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialogBindingAction(dialog)
-
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setCancelable(true)
-
-        val layoutParams = WindowManager.LayoutParams()
-        layoutParams.copyFrom(dialog.window!!.attributes)
-        layoutParams.width = width - (width/5)
-        dialog.window?.attributes = layoutParams
-
-        dialog.show()
-    }
-
-    //
-    private fun intentBack() {
-        val intent = Intent(this@MainActivity, LaunchActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-    }
-
     /**
      * Add related text
      */
     private fun getLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 1)
+        if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(
+                this@MainActivity,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                1)
     }
 
     fun getApp() = mainApp
     fun getCollectionDao() = collectionDao
+    fun getLoginManager() = loginManager
 }

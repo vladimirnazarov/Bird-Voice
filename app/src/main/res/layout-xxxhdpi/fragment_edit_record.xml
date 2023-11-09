@@ -69,8 +69,8 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="@string/time"
-                    android:textColor="@color/primary_text_blue"
-                    android:textSize="16sp" />
+                    android:textColor="@color/primary_blue"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -81,9 +81,8 @@
 
                 android:fontFamily="@font/roboto"
                 android:text="@string/time_plug"
-                android:textColor="@color/primary_text_blue"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                android:textColor="@color/primary_blue"
+                android:textSize="16sp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -139,8 +138,8 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="@string/place"
-                    android:textColor="@color/primary_text_blue"
-                    android:textSize="16sp" />
+                    android:textColor="@color/primary_blue"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -151,9 +150,8 @@
 
                 android:fontFamily="@font/roboto"
                 android:text="@string/place_plug"
-                android:textColor="@color/primary_text_blue"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                android:textColor="@color/primary_blue"
+                android:textSize="16sp"
 
                 android:layout_marginHorizontal="4dp"
                 android:gravity="center"
@@ -212,8 +210,8 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
                     android:text="@string/date"
-                    android:textColor="@color/primary_text_blue"
-                    android:textSize="16sp" />
+                    android:textColor="@color/primary_blue"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -224,9 +222,8 @@
 
                 android:fontFamily="@font/roboto"
                 android:text="@string/date_plug"
-                android:textColor="@color/primary_text_blue"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                android:textColor="@color/primary_blue"
+                android:textSize="16sp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -284,6 +281,7 @@
 
             android:src="@drawable/ic_play_button"
             android:background="@drawable/ripple_rounded"
+
             android:elevation="4dp"
 
             android:layout_marginTop="8dp"
@@ -298,35 +296,15 @@
             android:layout_height="wrap_content"
 
             android:text="@string/timer_plug"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/primary_text_blue"
+            android:textSize="14sp"
+            android:textColor="@color/primary_blue"
 
-            android:layout_marginEnd="8dp"
+            android:layout_marginHorizontal="4dp"
 
+            app:layout_constraintEnd_toStartOf="@id/edit_rec_audio_progress"
             app:layout_constraintTop_toTopOf="@id/edit_rec_play_button"
             app:layout_constraintBottom_toBottomOf="@id/edit_rec_play_button"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <ImageButton
-            android:id="@+id/edit_rec_share_button"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-
-            android:visibility="gone"
-
-            android:scaleX="0.85"
-            android:scaleY="0.85"
-
-            android:src="@drawable/ic_share_button"
-            android:background="@drawable/ripple_rounded"
-            android:elevation="4dp"
-
-            android:layout_marginEnd="6dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/edit_rec_play_button"
-            app:layout_constraintBottom_toBottomOf="@id/edit_rec_play_button"/>
+            app:layout_constraintStart_toEndOf="@id/edit_rec_play_button"/>
 
         <ImageButton
             android:id="@+id/edit_rec_load_button"
@@ -344,7 +322,7 @@
 
             android:layout_marginEnd="4dp"
 
-            app:layout_constraintEnd_toStartOf="@id/edit_rec_share_button"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/edit_rec_play_button"
             app:layout_constraintBottom_toBottomOf="@id/edit_rec_play_button"/>
 
@@ -355,35 +333,30 @@
 
             android:layout_marginHorizontal="8dp"
 
-            app:layout_constraintStart_toEndOf="@id/edit_rec_play_button"
-            app:layout_constraintEnd_toStartOf="@id/edit_rec_timer"
+            app:layout_constraintStart_toEndOf="@id/edit_rec_timer"
+            app:layout_constraintEnd_toStartOf="@id/edit_rec_load_button"
             app:layout_constraintTop_toTopOf="@id/edit_rec_play_button"
             app:layout_constraintBottom_toBottomOf="@id/edit_rec_play_button"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/edit_rec_start_button"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
 
+            style="@style/MainButton"
             android:text="@string/edit_rec_start"
-            android:textAllCaps="false"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/primary_text_blue"
-            android:textSize="16sp"
+            android:textSize="18sp"
 
-            android:backgroundTint="@color/white"
+            app:cornerRadius="32dp"
 
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
 
             android:clickable="false"
 
-            app:cornerRadius="32dp"
-            app:rippleColor="@color/primary_button_push"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_rec_play_button"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

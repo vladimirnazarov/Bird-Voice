@@ -69,7 +69,7 @@
     <string name="place_plug">Беларусь, Минск, Московский район</string>
     <string name="timer_plug">0:00</string>
     <string name="edit_rec_description">Выделите фрагмент для распознавания из предложенной аудиозаписи, нажмите на экран стереограммы</string>
-    <string name="edit_rec_start">Начать</string>
+    <string name="edit_rec_start">Начать распознавание</string>
 
     <!--  Recognition page 1  -->
     <string name="in_the_process_please_wait_a_bit">в процессе, пожалуйста, подождите немного</string>

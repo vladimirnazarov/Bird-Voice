@@ -69,7 +69,7 @@
     <string name="place_plug">Беларусь, Мінск, Маскоўскі раён</string>
     <string name="timer_plug">0:00</string>
     <string name="edit_rec_description">Вылучыце з прапанаванага аўдыязапісу фрагмент, які трэба распазнаць, націсніце на экран стэрэаграмы</string>
-    <string name="edit_rec_start">Пачаць</string>
+    <string name="edit_rec_start">Пачаць распазнаванне</string>
 
     <!--  Recognition page 1  -->
     <string name="in_the_process_please_wait_a_bit">у працэсе, калі ласка, пачакайце трохі</string>

@@ -27,7 +27,6 @@ class FeedbackFragment: BaseMainFragment() {
             arrayOfViews = arrayListOf(
                 ViewObject(feedback1Bird),
                 ViewObject(feedbackInput),
-                ViewObject(feedbackTitle),
                 ViewObject(feedbackSendButton),
                 ViewObject(feedbackBottomLeftCloud, "lc1"),
                 ViewObject(feedbackTopRightCloud, "rc2"),
@@ -35,7 +34,6 @@ class FeedbackFragment: BaseMainFragment() {
             )
 
             toHideArray = arrayListOf(
-                ViewObject(feedbackTitle),
                 ViewObject(feedbackInput),
                 ViewObject(feedback1Bird),
                 ViewObject(feedbackSendButton)

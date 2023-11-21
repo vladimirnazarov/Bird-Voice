@@ -9,7 +9,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/dialog_log_out_title"
+        android:id="@+id/dialog_common_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -17,7 +17,6 @@
         android:layout_marginTop="16dp"
 
         android:fontFamily="@font/roboto"
-        android:text="@string/log_out"
         android:textColor="@color/primary_blue"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -29,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dialog_log_out_desc"
+        android:id="@+id/dialog_common_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -37,17 +36,16 @@
         android:layout_marginTop="16dp"
 
         android:fontFamily="@font/roboto"
-        android:text="@string/are_you_sure_you_want_to_log_out"
         android:textColor="@color/secondary_text"
         android:textSize="14sp"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_log_out_title"
-        app:layout_constraintBottom_toTopOf="@id/dialog_log_out_yes"/>
+        app:layout_constraintTop_toBottomOf="@id/dialog_common_title"
+        app:layout_constraintBottom_toTopOf="@id/dialog_common_yes"/>
 
     <TextView
-        android:id="@+id/dialog_log_out_no"
+        android:id="@+id/dialog_common_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -57,7 +55,6 @@
         android:layout_marginEnd="16dp"
 
         android:fontFamily="@font/roboto"
-        android:text="@string/no"
         android:textColor="@color/primary_blue"
         android:textSize="14sp"
 
@@ -65,11 +62,11 @@
         android:paddingHorizontal="16dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/dialog_log_out_yes"
-        app:layout_constraintTop_toBottomOf="@id/dialog_log_out_desc" />
+        app:layout_constraintEnd_toStartOf="@+id/dialog_common_yes"
+        app:layout_constraintTop_toBottomOf="@id/dialog_common_body" />
 
     <TextView
-        android:id="@+id/dialog_log_out_yes"
+        android:id="@+id/dialog_common_yes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -78,7 +75,6 @@
         android:layout_marginEnd="32dp"
 
         android:fontFamily="@font/roboto"
-        android:text="@string/yes"
         android:textColor="@color/primary_blue"
         android:textSize="14sp"
 
@@ -87,6 +83,6 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_log_out_desc" />
+        app:layout_constraintTop_toBottomOf="@id/dialog_common_body" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

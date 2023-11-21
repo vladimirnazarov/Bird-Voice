@@ -1,5 +1,4 @@
-<vector android:autoMirrored="true" android:height="32dp"
-    android:tint="@color/primary_button_blue" android:viewportHeight="24"
-    android:viewportWidth="24" android:width="32dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:fillColor="@color/primary_button_blue" android:pathData="M20,11H7.83l5.59,-5.59L12,4l-8,8 8,8 1.41,-1.41L7.83,13H20v-2z"/>
+<vector android:height="24dp" android:viewportHeight="20"
+    android:viewportWidth="20" android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#1466FF" android:pathData="M0.833,9.902C0.833,10.146 0.941,10.371 1.136,10.557L7.621,17.031C7.816,17.217 8.021,17.305 8.255,17.305C8.734,17.305 9.115,16.953 9.115,16.465C9.115,16.23 9.027,15.996 8.871,15.85L6.683,13.623L2.816,10.098L2.611,10.576L5.755,10.771H18.109C18.617,10.771 18.968,10.41 18.968,9.902C18.968,9.395 18.617,9.033 18.109,9.033H5.755L2.611,9.229L2.816,9.717L6.683,6.182L8.871,3.955C9.027,3.799 9.115,3.574 9.115,3.34C9.115,2.852 8.734,2.5 8.255,2.5C8.021,2.5 7.816,2.578 7.601,2.793L1.136,9.248C0.941,9.434 0.833,9.658 0.833,9.902Z"/>
 </vector>

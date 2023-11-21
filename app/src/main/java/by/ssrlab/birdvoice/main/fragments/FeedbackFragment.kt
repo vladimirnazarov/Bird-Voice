@@ -75,7 +75,10 @@ class FeedbackFragment: BaseMainFragment() {
         mainVM.setToolbarTitle(resources.getString(R.string.feedback_title))
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
             navigationBackAction {
-                if (mainVM.feedbackValue == 0) animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
+                if (mainVM.feedbackValue == 0) {
+                    animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
+                    errorViewOut()
+                }
                 else {
                     animationUtils.commonObjectAppear(activityMain.getApp().getContext(), shownArray)
                     mainVM.feedbackValue = 0
@@ -96,17 +99,17 @@ class FeedbackFragment: BaseMainFragment() {
             }
         }
 
-        binding.feedbackInput.addTextChangedListener(helpFunctions.createEditTextListener({ errorViewOut() }){
+        binding.feedbackInput.addTextChangedListener(helpFunctions.createEditTextListener({ errorViewOut() }) {
             if (it?.isNotEmpty() == true) mainVM.feedbackValue = 1
             else mainVM.feedbackValue = 0
         })
     }
 
-    private fun checkInput(){
+    private fun checkInput() {
         helpFunctions.checkTextInput(binding.feedbackInput.text, binding.feedbackErrorMessage, resources)
     }
 
-    private fun errorViewOut(){
+    private fun errorViewOut() {
         helpFunctions.checkErrorViewAvailability(binding.feedbackErrorMessage)
     }
 }

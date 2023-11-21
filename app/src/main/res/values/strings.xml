@@ -94,6 +94,7 @@
     <string name="collection_number_plug">1</string>
     <string name="more">More</string>
     <string name="map">Map</string>
+    <string name="remove">Remove</string>
 
     <!--  Dialog  -->
     <string name="dialog_1_header">Removing bird!</string>
@@ -103,6 +104,10 @@
     <string name="dialog_2_text">The bird has been removed</string>
     <string name="choose_language">Choose language</string>
     <string name="are_you_sure_you_want_to_log_out">Are you sure you want to log out?</string>
+    <string name="dialog_er_title">Go back to the home screen?</string>
+    <string name="dialog_er_body">If you return to the home screen, the recording you made will not be saved. Complete the recognition or download the recording to your phone</string>
+    <string name="dialog_go_main">Go to main</string>
+    <string name="dialog_cancel">Cancel</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Feedback</string>

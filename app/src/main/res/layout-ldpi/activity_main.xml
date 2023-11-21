@@ -25,7 +25,6 @@
 
             app:titleTextColor="@color/primary_blue"
 
-            android:elevation="6dp"
             android:background="@color/primary_background_white"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +95,7 @@
         android:layout_width="300dp"
         android:layout_height="match_parent"
 
-        android:background="@color/white"
+        android:background="@color/primary_background_white"
         android:layout_gravity="start">
 
         <ImageView
@@ -133,12 +132,19 @@
 
             style="@style/MainButton"
 
+            android:textSize="16sp"
+            android:textColor="@color/white"
+
+            app:iconTint="@color/white"
+            app:iconSize="20dp"
+            app:iconGravity="textStart"
+
             app:icon="@drawable/ic_language"
 
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:paddingVertical="10dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/primary_blue"
 
             app:layout_constraintTop_toBottomOf="@id/drawer_settings_label"
             app:layout_constraintStart_toStartOf="parent"
@@ -151,12 +157,19 @@
 
             style="@style/MainButton"
 
+            android:textSize="16sp"
+            android:textColor="@color/white"
+
+            app:iconTint="@color/white"
+            app:iconSize="20dp"
+            app:iconGravity="textStart"
+
             app:icon="@drawable/ic_list"
 
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="4dp"
             android:paddingVertical="10dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/primary_blue"
 
             app:layout_constraintTop_toBottomOf="@id/drawer_button_language"
             app:layout_constraintStart_toStartOf="parent"
@@ -169,12 +182,19 @@
 
             style="@style/MainButton"
 
+            android:textSize="16sp"
+            android:textColor="@color/white"
+
+            app:iconTint="@color/white"
+            app:iconSize="20dp"
+            app:iconGravity="textStart"
+
             app:icon="@drawable/ic_feedback"
 
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="4dp"
             android:paddingVertical="10dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/primary_blue"
 
             app:layout_constraintTop_toBottomOf="@id/drawer_button_instruction"
             app:layout_constraintStart_toStartOf="parent"
@@ -205,12 +225,11 @@
             android:clickable="true"
             android:focusable="true"
 
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginStart="32dp"
 
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/drawer_bird"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <ImageView
             android:id="@+id/drawer_cloud_top_left"

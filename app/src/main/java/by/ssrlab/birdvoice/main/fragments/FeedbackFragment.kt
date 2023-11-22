@@ -105,6 +105,7 @@ class FeedbackFragment: BaseMainFragment() {
         })
     }
 
+
     private fun checkInput() {
         helpFunctions.checkTextInput(binding.feedbackInput.text, binding.feedbackErrorMessage, resources)
     }

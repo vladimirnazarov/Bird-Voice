@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.client.loginization.LoginClient
@@ -49,9 +47,7 @@ class LoginFragment: BaseLaunchFragment() {
         binding.loginUsernameInput.filters = helpFunctions.editTextFilters
         binding.loginPasswordInput.filters = helpFunctions.editTextFilters
 
-        if (launchVM.boolPopBack) {
-            launchVM.showTop()
-        }
+        if (launchVM.boolPopBack) launchVM.showTop()
         binding.loginBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {
             launchVM.setArrowAction {
                 navigationBackAction {
@@ -62,11 +58,11 @@ class LoginFragment: BaseLaunchFragment() {
             }
 
             binding.loginSignInButton.setOnClickListener {
-                checkLogin{
+                checkLogin {
                     LoginClient.post(binding.loginUsernameInput.text!!, binding.loginPasswordInput.text!!, {
                         if (binding.loginRememberMe.isChecked) activityLaunch.getLoginManager().saveToken(it)
                         activityLaunch.runOnUiThread { activityLaunch.moveToMainActivity(recognitionToken = it) }
-                    }, { activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() } })
+                    }, { helpFunctions.checkLoginInput(binding.loginUsernameInput, binding.loginUsernameErrorMessage, it, activityLaunch, binding) })
                 }
             }
         })
@@ -94,22 +90,8 @@ class LoginFragment: BaseLaunchFragment() {
 
         setEditTextListeners()
 
-        errorValue += helpFunctions.checkTextInput(binding.loginUsernameInput.text, binding.loginUsernameErrorMessage, resources)
-        errorValue += helpFunctions.checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
-
-        if (binding.loginUsernameInput.text!!.isNotEmpty()) {
-            val emailRegex = Regex("..*@[a-zA-Z][a-zA-Z][a-zA-Z]*\\.[a-zA-Z][a-zA-Z][a-zA-Z]*")
-            val errorAnim = AnimationUtils.loadAnimation(activityLaunch, R.anim.common_error_message_animation)
-            if (!emailRegex.matches(binding.loginUsernameInput.text!!)) {
-                binding.apply {
-                    loginUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_red))
-                    loginUsernameErrorMessage.text = resources.getText(R.string.email_error_valid)
-                    loginUsernameErrorMessage.startAnimation(errorAnim)
-                    loginUsernameErrorMessage.visibility = View.VISIBLE
-                }
-                errorValue += 1
-            }
-        }
+        errorValue += helpFunctions.checkLoginInput(binding.loginUsernameInput, binding.loginUsernameErrorMessage, activity = activityLaunch, binding = binding)
+        errorValue += helpFunctions.checkPasswordInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
 
         if (errorValue == 0) onSuccess()
     }
@@ -123,6 +105,8 @@ class LoginFragment: BaseLaunchFragment() {
         binding.loginUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener ({
             errorViewOut(checkLogin = true)
             binding.loginUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
-        binding.loginPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
+        binding.loginPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({
+            errorViewOut(checkPassword = true)
+            binding.loginUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
     }
 }

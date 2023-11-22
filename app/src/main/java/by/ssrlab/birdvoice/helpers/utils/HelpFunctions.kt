@@ -16,8 +16,13 @@ import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
+import androidx.viewbinding.ViewBinding
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.app.MainApp
+import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
+import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
+import by.ssrlab.birdvoice.launch.LaunchActivity
 import by.ssrlab.birdvoice.launch.vm.LaunchVM
 import java.text.SimpleDateFormat
 import java.util.*
@@ -105,7 +110,92 @@ class HelpFunctions(private val mainApp: MainApp) {
         }
     }
 
-    fun checkTextInput(
+    fun checkLoginInput(
+        checkableView: AppCompatEditText,
+        errorView: TextView,
+        errorMessage: String? = null,
+        activity: LaunchActivity,
+        binding: ViewBinding
+    ) : Int {
+        val errorAnim = AnimationUtils.loadAnimation(activity, R.anim.common_error_message_animation)
+        val emailRegex = Regex("..*@[a-zA-Z][a-zA-Z][a-zA-Z]*\\.[a-zA-Z][a-zA-Z][a-zA-Z]*")
+
+        if (checkableView.text!!.isEmpty()) {
+            errorView.text = activity.resources.getText(R.string.this_field_must_be_not_empty)
+            errorView.startAnimation(errorAnim)
+            errorView.visibility = View.VISIBLE
+            return 1
+        } else if (errorMessage != null) {
+            if (binding is FragmentLoginBinding) {
+                activity.runOnUiThread {
+                    binding.apply {
+                        loginUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
+                        loginPasswordInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
+
+                        loginUsernameErrorMessage.text = errorMessage
+                        loginUsernameErrorMessage.startAnimation(errorAnim)
+                        loginUsernameErrorMessage.visibility = View.VISIBLE
+
+                        loginPasswordErrorMessage.text = errorMessage
+                        loginPasswordErrorMessage.startAnimation(errorAnim)
+                        loginPasswordErrorMessage.visibility = View.VISIBLE
+                    }
+                }
+            } else if (binding is FragmentRegisterBinding) {
+                activity.runOnUiThread {
+                    binding.apply {
+
+                        if (errorMessage == "Password should be at least 8 characters") {
+                            registerPasswordInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
+
+                            registerPasswordErrorMessage.text = errorMessage
+                            registerPasswordErrorMessage.startAnimation(errorAnim)
+                            registerPasswordErrorMessage.visibility = View.VISIBLE
+                        } else if (errorMessage == "Username already in use") {
+                            registerUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
+
+                            registerUsernameErrorMessage.text = errorMessage
+                            registerUsernameErrorMessage.startAnimation(errorAnim)
+                            registerUsernameErrorMessage.visibility = View.VISIBLE
+                        } else {
+                            registerUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
+                            registerPasswordInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
+
+                            registerUsernameErrorMessage.text = errorMessage
+                            registerUsernameErrorMessage.startAnimation(errorAnim)
+                            registerUsernameErrorMessage.visibility = View.VISIBLE
+
+                            registerPasswordErrorMessage.text = errorMessage
+                            registerPasswordErrorMessage.startAnimation(errorAnim)
+                            registerPasswordErrorMessage.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
+            return 1
+        } else if (checkableView.text!!.isNotEmpty()) {
+            if (!emailRegex.matches(checkableView.text!!)) {
+                if (binding is FragmentLoginBinding) {
+                    binding.apply {
+                        loginUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
+                        loginUsernameErrorMessage.text = activity.resources.getText(R.string.email_error_valid)
+                        loginUsernameErrorMessage.startAnimation(errorAnim)
+                        loginUsernameErrorMessage.visibility = View.VISIBLE
+                    }
+                } else if (binding is FragmentRegisterBinding) {
+                    binding.apply {
+                        registerUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
+                        registerUsernameErrorMessage.text = activity.resources.getText(R.string.email_error_valid)
+                        registerUsernameErrorMessage.startAnimation(errorAnim)
+                        registerUsernameErrorMessage.visibility = View.VISIBLE
+                    }
+                }
+                return 1
+            } else return 0
+        } else return 0
+    }
+
+    fun checkPasswordInput(
         checkableText: Editable?,
         errorView: TextView,
         resources: Resources,

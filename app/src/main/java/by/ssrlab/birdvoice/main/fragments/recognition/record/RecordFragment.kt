@@ -83,7 +83,6 @@ class RecordFragment : BaseMainFragment() {
     override fun onStop() {
         super.onStop()
 
-        println("stop")
         if (!pressedBool) {
             recorder.stop()
             pressedBool = !pressedBool

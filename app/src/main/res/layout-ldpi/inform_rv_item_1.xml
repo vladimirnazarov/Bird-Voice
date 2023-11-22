@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
 
         android:text="@string/inform_rv_item_1_description"
-        android:textColor="@color/primary_text_blue"
+        android:textColor="@color/primary_blue"
         android:fontFamily="@font/roboto"
         android:textSize="14sp"
 

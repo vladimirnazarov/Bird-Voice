@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
 
         android:text="@string/listen_your_recording"
-        android:textColor="@color/primary_text_blue"
+        android:textColor="@color/primary_blue"
         android:textSize="16sp"
         android:fontFamily="@font/roboto"
         android:textStyle="bold"
@@ -51,7 +51,7 @@
 
         android:text="@string/inform_rv_item_3_description"
         android:textSize="14sp"
-        android:textColor="@color/primary_text_blue"
+        android:textColor="@color/primary_blue"
         android:fontFamily="@font/roboto"
 
         android:layout_marginTop="16dp"

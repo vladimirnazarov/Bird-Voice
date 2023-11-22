@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
 
         android:text="@string/get_recognition_options"
-        android:textColor="@color/primary_text_blue"
+        android:textColor="@color/primary_blue"
         android:textSize="15sp"
         android:fontFamily="@font/roboto"
         android:textStyle="bold"
@@ -67,7 +67,7 @@
 
                 android:fontFamily="@font/roboto"
                 android:text="@string/common_blackbird"
-                android:textColor="@color/primary_text_blue"
+                android:textColor="@color/primary_blue"
                 android:textSize="5sp"
                 android:textStyle="bold"
 
@@ -85,11 +85,12 @@
             android:layout_width="80dp"
             android:layout_height="30dp"
 
-            android:layout_marginTop="2dp"
+            android:layout_marginVertical="2dp"
             android:src="@drawable/ic_bird_card_1_small"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/inform_rv_item_4_card_1_title_container" />
 
         <ImageView
@@ -104,18 +105,6 @@
             app:layout_constraintBottom_toBottomOf="@id/inform_rv_item_4_card_1_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/inform_rv_item_4_card_1_image" />
-
-        <ImageView
-            android:id="@+id/inform_rv_item_4_card_1_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginEnd="4dp"
-
-            android:src="@drawable/ic_rv_item_button_small"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inform_rv_item_4_card_1_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -155,7 +144,7 @@
 
                 android:fontFamily="@font/roboto"
                 android:text="@string/common_blackbird"
-                android:textColor="@color/primary_text_blue"
+                android:textColor="@color/primary_blue"
                 android:textSize="5sp"
                 android:textStyle="bold"
 
@@ -173,10 +162,11 @@
             android:layout_width="80dp"
             android:layout_height="30dp"
 
-            android:layout_marginTop="2dp"
+            android:layout_marginVertical="2dp"
             android:src="@drawable/ic_bird_card_2_small"
 
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/inform_rv_item_4_card_2_title_container" />
 
@@ -192,18 +182,6 @@
             app:layout_constraintBottom_toBottomOf="@id/inform_rv_item_4_card_2_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/inform_rv_item_4_card_2_image" />
-
-        <ImageView
-            android:id="@+id/inform_rv_item_4_card_2_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginEnd="4dp"
-
-            android:src="@drawable/ic_rv_item_button_small"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inform_rv_item_4_card_2_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -243,7 +221,7 @@
 
                 android:fontFamily="@font/roboto"
                 android:text="@string/common_blackbird"
-                android:textColor="@color/primary_text_blue"
+                android:textColor="@color/primary_blue"
                 android:textSize="5sp"
                 android:textStyle="bold"
 
@@ -261,10 +239,11 @@
             android:layout_width="80dp"
             android:layout_height="30dp"
 
-            android:layout_marginTop="2dp"
+            android:layout_marginVertical="2dp"
             android:src="@drawable/ic_bird_card_3_small"
 
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/inform_rv_item_4_card_3_title_container" />
 
@@ -281,18 +260,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/inform_rv_item_4_card_3_image" />
 
-        <ImageView
-            android:id="@+id/inform_rv_item_4_card_3_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginEnd="4dp"
-
-            android:src="@drawable/ic_rv_item_button_small"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inform_rv_item_4_card_3_image" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -302,7 +269,7 @@
 
         android:text="@string/inform_rv_item_4_description"
         android:textSize="14sp"
-        android:textColor="@color/primary_text_blue"
+        android:textColor="@color/primary_blue"
         android:fontFamily="@font/roboto"
 
         android:layout_marginTop="12dp"

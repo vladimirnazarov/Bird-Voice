@@ -47,6 +47,12 @@ class LaunchActivity : AppCompatActivity() {
         val locale = sharedPreferences.getString(mainApp.constLocale, "en")
         locale?.let { Locale(it) }?.let { mainApp.setLocale(it) }
 
+        val launchesCount = sharedPreferences.getInt(mainApp.constLaunches, 0)
+        with (sharedPreferences.edit()) {
+            putInt(mainApp.constLaunches, (launchesCount + 1))
+            apply()
+        }
+
         val config = mainApp.getContext().resources.configuration
         config.setLocale(Locale(locale!!))
         Locale.setDefault(Locale(locale))

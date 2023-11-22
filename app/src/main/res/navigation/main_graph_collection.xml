@@ -7,21 +7,9 @@
     <fragment
         android:id="@+id/collectionFragment"
         android:name="by.ssrlab.birdvoice.main.fragments.collection.CollectionFragment"
-        android:label="CollectionFragment" >
-        <action
-            android:id="@+id/action_collectionFragment_to_mapFragment"
-            app:destination="@id/mapFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="by.ssrlab.birdvoice.main.fragments.collection.MapFragment"
-        android:label="MapFragment" />
+        android:label="CollectionFragment" />
     <fragment
         android:id="@+id/feedbackFragment"
         android:name="by.ssrlab.birdvoice.main.fragments.FeedbackFragment"
         android:label="FeedbackFragment" />
-    <fragment
-        android:id="@+id/plugFragment"
-        android:name="by.ssrlab.birdvoice.main.fragments.collection.PlugFragment"
-        android:label="PlugFragment" />
 </navigation>

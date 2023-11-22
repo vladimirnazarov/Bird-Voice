@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.FragmentEditRecordBinding
+import by.ssrlab.birdvoice.helpers.utils.DialogCommonInitiator
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import by.ssrlab.birdvoice.main.vm.PlayerVM
@@ -93,9 +95,18 @@ class EditRecordFragment: BaseMainFragment() {
         super.onResume()
 
         mainVM.setToolbarTitle(resources.getString(R.string.listen_to_your_record))
-        activityMain.setToolbarAction(R.drawable.ic_arrow_back){
-            navigationBackAction {
-                animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
+        activityMain.setToolbarAction(R.drawable.ic_arrow_back) {
+            val dialogEditRecordStringResources = arrayListOf(
+                ContextCompat.getString(activityMain, R.string.dialog_er_title),
+                ContextCompat.getString(activityMain, R.string.dialog_er_body),
+                ContextCompat.getString(activityMain, R.string.dialog_cancel),
+                ContextCompat.getString(activityMain, R.string.dialog_go_main)
+            )
+            DialogCommonInitiator().initCommonDialog(activityMain, dialogEditRecordStringResources) {
+                it.dismiss()
+                navigationBackAction {
+                    animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
+                }
             }
         }
 

@@ -1,14 +1,13 @@
 package by.ssrlab.birdvoice.launch.fragments.choice.register
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.client.loginization.CheckUsernameClient
+import by.ssrlab.birdvoice.client.loginization.RegistrationClient
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -40,11 +39,14 @@ class RegisterFragment: BaseLaunchFragment() {
                 ViewObject(registerPasswordTitle),
                 ViewObject(registerPasswordInput),
                 ViewObject(registerShowPasswordButton),
-                ViewObject(registerCreateButton)
+                ViewObject(registerCreateButton),
+                ViewObject(registerPrivacyPolicy)
             )
 
             registerUsernameInput.filters = helpFunctions.editTextFilters
             registerPasswordInput.filters = helpFunctions.editTextFilters
+
+            registerPrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
@@ -64,17 +66,17 @@ class RegisterFragment: BaseLaunchFragment() {
 
             binding.registerCreateButton.setOnClickListener {
                 checkRegister {
-                    CheckUsernameClient.post(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!, {
+                    RegistrationClient.post(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!, {
                         launchVM.getScope().launch {
                             delay(200)
-                            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
-//                            launchVM.navigateToWithDelay(R.id.action_registerFragment_to_additionalFragment)
-                            binding.registerCreateButton.isClickable = false
-                            launchVM.activityBinding?.launcherArrowBack?.isClickable = false
-                            launchVM.setUsernameAndPassword(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!)
+//                            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
+
+                            println("ok")
+//                            binding.registerCreateButton.isClickable = false
+//                            launchVM.activityBinding?.launcherArrowBack?.isClickable = false
                         }
                     }, {
-                        activityLaunch.runOnUiThread { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
+                        helpFunctions.checkLoginInput(binding.registerUsernameInput, binding.registerUsernameErrorMessage, it, activityLaunch, binding)
                     })
                 }
             }
@@ -101,22 +103,8 @@ class RegisterFragment: BaseLaunchFragment() {
 
         setEditTextListeners()
 
-        errorValue += helpFunctions.checkTextInput(binding.registerUsernameInput.text, binding.registerUsernameErrorMessage, resources)
-        errorValue += helpFunctions.checkTextInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
-
-        if (binding.registerUsernameInput.text!!.isNotEmpty()) {
-            val emailRegex = Regex("..*@[a-zA-Z][a-zA-Z][a-zA-Z]*\\.[a-zA-Z][a-zA-Z][a-zA-Z]*")
-            val errorAnim = AnimationUtils.loadAnimation(activityLaunch, R.anim.common_error_message_animation)
-            if (!emailRegex.matches(binding.registerUsernameInput.text!!)) {
-                binding.apply {
-                    registerUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_red))
-                    registerUsernameErrorMessage.text = resources.getText(R.string.email_error_valid)
-                    registerUsernameErrorMessage.startAnimation(errorAnim)
-                    registerUsernameErrorMessage.visibility = View.VISIBLE
-                }
-                errorValue += 1
-            }
-        }
+        errorValue += helpFunctions.checkLoginInput(binding.registerUsernameInput, binding.registerUsernameErrorMessage, activity = activityLaunch, binding = binding)
+        errorValue += helpFunctions.checkPasswordInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
 
         if (errorValue == 0) onSuccess()
     }
@@ -130,7 +118,9 @@ class RegisterFragment: BaseLaunchFragment() {
         binding.registerUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener ({
             errorViewOut(checkUsername = true)
             binding.registerUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
-        binding.registerPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
+        binding.registerPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({
+            errorViewOut(checkPassword = true)
+            binding.registerPasswordInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
     }
 
 //    binding.additionalCreateButton.setOnClickListener {

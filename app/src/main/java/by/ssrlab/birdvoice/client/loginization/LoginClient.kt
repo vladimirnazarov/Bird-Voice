@@ -11,9 +11,11 @@ object LoginClient {
 
     private var loginClient: OkHttpClient? = null
 
-    fun post(username: Editable, password: Editable, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
+    fun post(email: Editable, password: Editable, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
 
         if (loginClient == null) loginClient = OkHttpClient.Builder().build()
+
+        val username = email.toString().substringBefore("@")
 
         val mediaType = "application/json".toMediaType()
         val body = "{\"username\":\"$username\",\"password\":\"$password\"}".toRequestBody(mediaType)

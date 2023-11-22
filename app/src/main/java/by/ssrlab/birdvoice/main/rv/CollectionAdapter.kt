@@ -35,18 +35,14 @@ class CollectionAdapter(
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: CollectionAdapter.CollectionHolder, position: Int) {
-        val itemNumber = (position + 1).toString()
         holder.binding.apply {
-            collectionItemNumber.text = itemNumber
             collectionRvItemTitle.text = list[position].name
             collectionRvItemImage.load(list[position].image) {
                 crossfade(true)
                 transformations(RoundedCornersTransformation(16f))
             }
 
-            collectionRvItemDate.text = list[position].date
-            collectionRvItemTime.text = list[position].time
-            collectionItemDelete.setOnClickListener { initDeletionDialog(list[position], position) }
+            collectionRvItemDelete.setOnClickListener { initDeletionDialog(list[position], position) }
         }
     }
 

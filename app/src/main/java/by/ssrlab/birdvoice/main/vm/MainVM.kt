@@ -2,25 +2,25 @@ package by.ssrlab.birdvoice.main.vm
 
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
-import android.view.Window
-import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.ActivityMainBinding
 import by.ssrlab.birdvoice.databinding.DialogLanguageBinding
-import by.ssrlab.birdvoice.databinding.DialogLogOutBinding
 import by.ssrlab.birdvoice.db.objects.RecognizedBird
+import by.ssrlab.birdvoice.helpers.utils.DialogCommonInitiator
 import by.ssrlab.birdvoice.launch.LaunchActivity
 import by.ssrlab.birdvoice.main.MainActivity
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 
 class MainVM: ViewModel() {
@@ -37,32 +37,10 @@ class MainVM: ViewModel() {
         }
     }
 
-    @Suppress("DEPRECATION")
-    private fun initDialog(activity: MainActivity, dialogBindingAction: (Dialog) -> Unit) {
-        val displayMetrics = DisplayMetrics()
-        activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
-
-        val width = displayMetrics.widthPixels
-
-        val dialog = Dialog(activity)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialogBindingAction(dialog)
-
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setCancelable(true)
-
-        val layoutParams = WindowManager.LayoutParams()
-        layoutParams.copyFrom(dialog.window!!.attributes)
-        layoutParams.width = width - (width/5)
-        dialog.window?.attributes = layoutParams
-
-        dialog.show()
-    }
-
     fun setupDrawer(binding: ActivityMainBinding, activity: MainActivity) {
         binding.apply {
             drawerButtonLanguage.setOnClickListener {
-                initDialog(activity) { dialog ->
+                DialogCommonInitiator().initDialog(activity) { dialog ->
                     val dialogBinding = DialogLanguageBinding.inflate(LayoutInflater.from(activity))
                     dialog.setContentView(dialogBinding.root)
 
@@ -76,7 +54,21 @@ class MainVM: ViewModel() {
 
             drawerButtonInstruction.setOnClickListener { initDrawerButtonAction(R.id.informPageFragment, activity) }
             drawerButtonFeedback.setOnClickListener { initDrawerButtonAction(R.id.feedbackFragment, activity) }
-            drawerButtonLogOut.setOnClickListener { initDrawerLogoutDialog(activity) }
+            drawerButtonLogOut.setOnClickListener {
+                val dialogLogOutLanguageArray = arrayListOf(
+                    ContextCompat.getString(activity, R.string.log_out),
+                    ContextCompat.getString(activity, R.string.are_you_sure_you_want_to_log_out),
+                    ContextCompat.getString(activity, R.string.no),
+                    ContextCompat.getString(activity, R.string.yes)
+                )
+
+                DialogCommonInitiator().initCommonDialog(activity, dialogLogOutLanguageArray) {
+                    it.dismiss()
+                    activity.closeDrawer()
+                    activity.getLoginManager().removeToken()
+                    intentBack(activity)
+                }
+            }
         }
     }
 
@@ -89,24 +81,6 @@ class MainVM: ViewModel() {
         dialog.dismiss()
         activity.closeDrawer()
         savePreferences(language, activity)
-    }
-
-    private fun initDrawerLogoutDialog(activity: MainActivity) {
-        initDialog(activity) { dialog ->
-            val dialogBinding = DialogLogOutBinding.inflate(LayoutInflater.from(activity))
-            dialog.setContentView(dialogBinding.root)
-
-            dialogBinding.apply {
-                dialogLogOutNo.setOnClickListener { dialog.dismiss() }
-                dialogLogOutYes.setOnClickListener {
-                    dialog.dismiss()
-                    activity.closeDrawer()
-
-                    activity.getLoginManager().removeToken()
-                    intentBack(activity)
-                }
-            }
-        }
     }
 
     private fun intentBack(activity: MainActivity) {

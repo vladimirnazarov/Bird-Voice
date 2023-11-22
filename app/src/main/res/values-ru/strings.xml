@@ -94,6 +94,7 @@
     <string name="collection_number_plug">1</string>
     <string name="more">Больше</string>
     <string name="map">Карта</string>
+    <string name="remove">Удалить</string>
 
     <!--  Dialog  -->
     <string name="dialog_1_header">Удаление птицы!</string>
@@ -103,6 +104,10 @@
     <string name="dialog_2_text">Птица была удалена</string>
     <string name="choose_language">Выберите язык</string>
     <string name="are_you_sure_you_want_to_log_out">Вы уверены, что хотите выйти?</string>
+    <string name="dialog_er_title">Вернуться на главную страницу?</string>
+    <string name="dialog_er_body">Если Вы вернетесь на главную страницу, запись может не сохраниться. Закончите распознавание или сохраните аудио на Вашем девайсе</string>
+    <string name="dialog_go_main">На главную</string>
+    <string name="dialog_cancel">Отмена</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Обратная связь</string>

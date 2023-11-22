@@ -94,6 +94,7 @@
     <string name="collection_number_plug">1</string>
     <string name="more">Больш</string>
     <string name="map">Мапа</string>
+    <string name="remove">Выдаліць</string>
 
     <!--  Dialog  -->
     <string name="dialog_1_header">Выдаленне птушкі!</string>
@@ -103,6 +104,10 @@
     <string name="dialog_2_text">Птушка была выдалена</string>
     <string name="choose_language">Абярыце мову</string>
     <string name="are_you_sure_you_want_to_log_out">Вы ўпэўнены, што жадаеце выйсці?</string>
+    <string name="dialog_er_title">Вярнуцца да галоўнай старонкі?</string>
+    <string name="dialog_er_body">Калі Вы вярнецеся да галоўнай старонкі, запіс не захаваецца. Скончыце распазнаванне або захавайце запіс на Вашам тэлефоне</string>
+    <string name="dialog_go_main">На галоўную</string>
+    <string name="dialog_cancel">Адмена</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Зваротная сувязь</string>

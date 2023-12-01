@@ -8,7 +8,8 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
-import by.ssrlab.birdvoice.client.loginization.CheckUsernameClient
+import by.ssrlab.birdvoice.client.loginization.LoginClient
+import by.ssrlab.birdvoice.client.loginization.RegistrationClient
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -64,15 +65,17 @@ class RegisterFragment: BaseLaunchFragment() {
 
             binding.registerCreateButton.setOnClickListener {
                 checkRegister {
-                    CheckUsernameClient.post(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!, {
-                        launchVM.getScope().launch {
-                            delay(200)
-                            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
-//                            launchVM.navigateToWithDelay(R.id.action_registerFragment_to_additionalFragment)
-                            binding.registerCreateButton.isClickable = false
-                            launchVM.activityBinding?.launcherArrowBack?.isClickable = false
-                            launchVM.setUsernameAndPassword(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!)
-                        }
+                    RegistrationClient.post(binding.registerUsernameInput.text.toString(), binding.registerPasswordInput.text.toString(), {
+
+                        LoginClient.post(launchVM.getUsername().toString(), launchVM.getPassword().toString(), {
+                            launchVM.getScope().launch {
+                                delay(200)
+                                binding.registerCreateButton.isClickable = false
+                                launchVM.activityBinding?.launcherArrowBack?.isClickable = false
+                                launchVM.setUsernameAndPassword(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!)
+                                animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
+                                activityLaunch.moveToMainActivity(recognitionToken = it)
+                            } }, { activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() } })
                     }, {
                         activityLaunch.runOnUiThread { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
                     })
@@ -132,30 +135,4 @@ class RegisterFragment: BaseLaunchFragment() {
             binding.registerUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
         binding.registerPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
     }
-
-//    binding.additionalCreateButton.setOnClickListener {
-//        checkAdditional {
-//            RegistrationClient.post(launchVM.getUsername(), launchVM.getPassword(), binding.additionalFirstnameInput.text!!, binding.additionalLastnameInput.text!!, binding.additionalEmailInput.text!!, {
-//
-//                //OnSuccess
-//                LoginClient.post(launchVM.getUsername(), launchVM.getPassword(), {
-//                    launchVM.getScope().launch {
-//                        delay(200)
-//                        activityLaunch.moveToMainActivity(recognitionToken = it)
-//                        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
-//                        binding.additionalCreateButton.isClickable = false
-//                    }
-//                }, {
-//                    activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() }
-//                })
-//
-//            },
-//
-//                //OnFailure
-//                {
-//                    activityLaunch.runOnUiThread { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
-//                }
-//            )
-//        }
-//    }
 }

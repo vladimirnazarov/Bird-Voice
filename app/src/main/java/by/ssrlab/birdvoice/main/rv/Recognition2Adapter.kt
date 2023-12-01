@@ -3,6 +3,7 @@ package by.ssrlab.birdvoice.main.rv
 import android.content.Context
 import android.view.*
 import android.view.animation.AnimationUtils
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.Recognition2RvItemBinding
@@ -50,6 +51,12 @@ class Recognition2Adapter(
                             date, time)
                         activity.getCollectionDao().insert(databaseObject)
                     }
+                }
+
+                recognition2RvItemButton.apply {
+                    setIconResource(R.drawable.ic_added)
+                    text = ContextCompat.getString(activity, R.string.added)
+                    isClickable = false
                 }
             }
 

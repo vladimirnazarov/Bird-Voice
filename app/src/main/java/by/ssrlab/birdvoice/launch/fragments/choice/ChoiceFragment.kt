@@ -50,6 +50,7 @@ class ChoiceFragment : BaseLaunchFragment() {
 
             binding.choiceRegisterButton.setOnClickListener {
                 launchVM.getScope().launch {
+                    delay(200)
                     animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                     binding.choiceRegisterButton.isClickable = false
                     launchVM.navigateToWithDelay(R.id.action_choiceFragment_to_registerFragment) }

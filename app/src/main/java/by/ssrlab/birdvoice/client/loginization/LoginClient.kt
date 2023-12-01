@@ -1,9 +1,12 @@
 package by.ssrlab.birdvoice.client.loginization
 
-import android.text.Editable
-import okhttp3.*
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
 
@@ -11,12 +14,14 @@ object LoginClient {
 
     private var loginClient: OkHttpClient? = null
 
-    fun post(username: Editable, password: Editable, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
+    fun post(email: String, password: String, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
 
         if (loginClient == null) loginClient = OkHttpClient.Builder().build()
 
+        val nickname = email.substringBefore("@")
+
         val mediaType = "application/json".toMediaType()
-        val body = "{\"username\":\"$username\",\"password\":\"$password\"}".toRequestBody(mediaType)
+        val body = "{\"username\":\"$nickname\",\"password\":\"$password\"}".toRequestBody(mediaType)
         val request = Request.Builder()
             .url("https://bird-sounds-database.ssrlab.by/api/login-api/")
             .post(body)

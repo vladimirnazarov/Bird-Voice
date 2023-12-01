@@ -78,6 +78,7 @@
     <!--  Recognition page 2  -->
     <string name="already_in_collection">Ужо ў калекцыі</string>
     <string name="add_to_collection">Дадаць у калекцыю</string>
+    <string name="added">Дададзена</string>
 
     <!--  Tabs  -->
     <string name="tab_1_appearance">Знешні выгляд</string>

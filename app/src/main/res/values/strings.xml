@@ -78,6 +78,7 @@
     <!--  Recognition page 2  -->
     <string name="already_in_collection">Already in collection</string>
     <string name="add_to_collection">Add to collection</string>
+    <string name="added">Added</string>
 
     <!--  Tabs  -->
     <string name="tab_1_appearance">Appearance</string>

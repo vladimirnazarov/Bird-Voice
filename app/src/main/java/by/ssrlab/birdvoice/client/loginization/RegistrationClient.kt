@@ -1,21 +1,27 @@
 package by.ssrlab.birdvoice.client.loginization
 
-import android.text.Editable
-import okhttp3.*
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import org.json.JSONObject
 import java.io.IOException
 
 object RegistrationClient {
 
     private var registrationClient: OkHttpClient? = null
 
-    fun post(userName: Editable, password: Editable, firstName: Editable, lastName: Editable, email: Editable, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+    fun post(email: String, password: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
 
         if (registrationClient == null) registrationClient = OkHttpClient.Builder().build()
 
+        val nickname = email.substringBefore("@")
+
         val mediaType = "application/json".toMediaType()
-        val body = "{\"username\":\"$userName\",\"password\":\"$password\",\"first_name\":\"$firstName\",\"last_name\":\"$lastName\",\"email\":\"$email\"}".toRequestBody(mediaType)
+        val body = "{\"username\":\"$nickname\",\"password\":\"$password\",\"first_name\":\"null\",\"last_name\":\"null\",\"email\":\"$email\"}".toRequestBody(mediaType)
         val request = Request.Builder()
             .url("https://bird-sounds-database.ssrlab.by/api/user-create/")
             .post(body)
@@ -29,9 +35,10 @@ object RegistrationClient {
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    val jsonObject = response.message
-                    if (jsonObject == "Created") onSuccess()
-                    else onFailure(jsonObject)
+                    val responseBody = response.body?.string()
+                    val jObject = responseBody?.let { it1 -> JSONObject(it1) }
+                    if (jObject?.getString("message") == "Registration successful") onSuccess()
+                    else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
                 }
             }
         })

@@ -63,7 +63,7 @@ class LoginFragment: BaseLaunchFragment() {
 
             binding.loginSignInButton.setOnClickListener {
                 checkLogin{
-                    LoginClient.post(binding.loginUsernameInput.text!!, binding.loginPasswordInput.text!!, {
+                    LoginClient.post(binding.loginUsernameInput.text.toString(), binding.loginPasswordInput.text.toString(), {
                         if (binding.loginRememberMe.isChecked) activityLaunch.getLoginManager().saveToken(it)
                         activityLaunch.runOnUiThread { activityLaunch.moveToMainActivity(recognitionToken = it) }
                     }, { activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() } })
@@ -98,7 +98,7 @@ class LoginFragment: BaseLaunchFragment() {
         errorValue += helpFunctions.checkTextInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
 
         if (binding.loginUsernameInput.text!!.isNotEmpty()) {
-            val emailRegex = Regex("..*@[a-zA-Z][a-zA-Z][a-zA-Z]*\\.[a-zA-Z][a-zA-Z][a-zA-Z]*")
+            val emailRegex = Regex("^[a-zA-Z0-9][a-zA-Z0-9]*@[a-zA-Z][a-zA-Z]+\\.[a-zA-Z][a-zA-Z]+")
             val errorAnim = AnimationUtils.loadAnimation(activityLaunch, R.anim.common_error_message_animation)
             if (!emailRegex.matches(binding.loginUsernameInput.text!!)) {
                 binding.apply {

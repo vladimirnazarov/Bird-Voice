@@ -58,8 +58,8 @@ class LoginFragment: BaseLaunchFragment() {
             }
 
             binding.loginSignInButton.setOnClickListener {
-                checkLogin {
-                    LoginClient.post(binding.loginUsernameInput.text!!, binding.loginPasswordInput.text!!, {
+                checkLogin{
+                    LoginClient.post(binding.loginUsernameInput.text.toString(), binding.loginPasswordInput.text.toString(), {
                         if (binding.loginRememberMe.isChecked) activityLaunch.getLoginManager().saveToken(it)
                         activityLaunch.runOnUiThread { activityLaunch.moveToMainActivity(recognitionToken = it) }
                     }, { helpFunctions.checkLoginInput(binding.loginUsernameInput, binding.loginUsernameErrorMessage, it, activityLaunch, binding) })

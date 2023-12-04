@@ -283,55 +283,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_remember_me"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-
-            android:visibility="gone"
-
-            app:layout_constraintTop_toBottomOf="@id/login_sign_in_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:id="@+id/login_dont_have"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="@string/dont_have"
-                android:textColor="@color/primary_blue"
-                android:textSize="14sp"
-                android:fontFamily="@font/roboto"
-
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/login_dont_have_additional"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <TextView
-                android:id="@+id/login_dont_have_additional"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="@string/dont_have_additional"
-                android:textColor="@color/primary_blue"
-                android:textSize="14sp"
-                android:fontFamily="@font/roboto"
-
-                android:clickable="true"
-                android:focusable="true"
-
-                app:layout_constraintStart_toEndOf="@id/login_dont_have"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

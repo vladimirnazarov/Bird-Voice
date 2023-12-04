@@ -1,9 +1,12 @@
 package by.ssrlab.birdvoice.client.loginization
 
-import android.text.Editable
-import okhttp3.*
+import okhttp3.Call
+import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
 import org.json.JSONObject
 import java.io.IOException
 
@@ -11,14 +14,14 @@ object RegistrationClient {
 
     private var registrationClient: OkHttpClient? = null
 
-    fun post(email: Editable, password: Editable, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+    fun post(email: String, password: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
 
         if (registrationClient == null) registrationClient = OkHttpClient.Builder().build()
 
-        val username = email.toString().substringBefore("@")
+        val nickname = email.substringBefore("@")
 
         val mediaType = "application/json".toMediaType()
-        val body = "{\"username\":\"$username\",\"password\":\"$password\",\"first_name\":\"$username\",\"last_name\":\"$username\",\"email\":\"$email\"}".toRequestBody(mediaType)
+        val body = "{\"username\":\"$nickname\",\"password\":\"$password\",\"first_name\":\"null\",\"last_name\":\"null\",\"email\":\"$email\"}".toRequestBody(mediaType)
         val request = Request.Builder()
             .url("https://bird-sounds-database.ssrlab.by/api/user-create/")
             .post(body)

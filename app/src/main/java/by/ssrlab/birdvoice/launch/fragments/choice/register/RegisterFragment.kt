@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
+import by.ssrlab.birdvoice.client.loginization.LoginClient
 import by.ssrlab.birdvoice.client.loginization.RegistrationClient
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
@@ -66,15 +67,17 @@ class RegisterFragment: BaseLaunchFragment() {
 
             binding.registerCreateButton.setOnClickListener {
                 checkRegister {
-                    RegistrationClient.post(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!, {
-                        launchVM.getScope().launch {
-                            delay(200)
-//                            animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
+                    RegistrationClient.post(binding.registerUsernameInput.text.toString(), binding.registerPasswordInput.text.toString(), {
 
-                            println("ok")
-//                            binding.registerCreateButton.isClickable = false
-//                            launchVM.activityBinding?.launcherArrowBack?.isClickable = false
-                        }
+                        LoginClient.post(launchVM.getUsername().toString(), launchVM.getPassword().toString(), {
+                            launchVM.getScope().launch {
+                                delay(200)
+                                binding.registerCreateButton.isClickable = false
+                                launchVM.activityBinding?.launcherArrowBack?.isClickable = false
+                                launchVM.setUsernameAndPassword(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!)
+                                animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
+                                activityLaunch.moveToMainActivity(recognitionToken = it)
+                            } }, { activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() } })
                     }, {
                         helpFunctions.checkLoginInput(binding.registerUsernameInput, binding.registerUsernameErrorMessage, it, activityLaunch, binding)
                     })
@@ -122,30 +125,4 @@ class RegisterFragment: BaseLaunchFragment() {
             errorViewOut(checkPassword = true)
             binding.registerPasswordInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
     }
-
-//    binding.additionalCreateButton.setOnClickListener {
-//        checkAdditional {
-//            RegistrationClient.post(launchVM.getUsername(), launchVM.getPassword(), binding.additionalFirstnameInput.text!!, binding.additionalLastnameInput.text!!, binding.additionalEmailInput.text!!, {
-//
-//                //OnSuccess
-//                LoginClient.post(launchVM.getUsername(), launchVM.getPassword(), {
-//                    launchVM.getScope().launch {
-//                        delay(200)
-//                        activityLaunch.moveToMainActivity(recognitionToken = it)
-//                        animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
-//                        binding.additionalCreateButton.isClickable = false
-//                    }
-//                }, {
-//                    activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() }
-//                })
-//
-//            },
-//
-//                //OnFailure
-//                {
-//                    activityLaunch.runOnUiThread { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
-//                }
-//            )
-//        }
-//    }
 }

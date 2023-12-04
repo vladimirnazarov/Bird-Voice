@@ -17,7 +17,7 @@
     <string name="sign_in_to_continue">Log in to continue</string>
     <string name="sign_up_to_continue">Sign up to continue</string>
     <string name="email">Email</string>
-    <string name="password">Password (at least 6 symbols)</string>
+    <string name="password">Password (at least 8 symbols)</string>
     <string name="remember_me">Remember me</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="sign_in">Log In</string>

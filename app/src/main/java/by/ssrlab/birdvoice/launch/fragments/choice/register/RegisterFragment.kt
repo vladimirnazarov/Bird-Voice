@@ -1,11 +1,10 @@
 package by.ssrlab.birdvoice.launch.fragments.choice.register
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.client.loginization.LoginClient
@@ -41,11 +40,14 @@ class RegisterFragment: BaseLaunchFragment() {
                 ViewObject(registerPasswordTitle),
                 ViewObject(registerPasswordInput),
                 ViewObject(registerShowPasswordButton),
-                ViewObject(registerCreateButton)
+                ViewObject(registerCreateButton),
+                ViewObject(registerPrivacyPolicy)
             )
 
             registerUsernameInput.filters = helpFunctions.editTextFilters
             registerPasswordInput.filters = helpFunctions.editTextFilters
+
+            registerPrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
         }
 
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
@@ -77,7 +79,7 @@ class RegisterFragment: BaseLaunchFragment() {
                                 activityLaunch.moveToMainActivity(recognitionToken = it)
                             } }, { activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() } })
                     }, {
-                        activityLaunch.runOnUiThread { Toast.makeText(context, it, Toast.LENGTH_SHORT).show() }
+                        helpFunctions.checkLoginInput(binding.registerUsernameInput, binding.registerUsernameErrorMessage, it, activityLaunch, binding)
                     })
                 }
             }
@@ -104,22 +106,8 @@ class RegisterFragment: BaseLaunchFragment() {
 
         setEditTextListeners()
 
-        errorValue += helpFunctions.checkTextInput(binding.registerUsernameInput.text, binding.registerUsernameErrorMessage, resources)
-        errorValue += helpFunctions.checkTextInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
-
-        if (binding.registerUsernameInput.text!!.isNotEmpty()) {
-            val emailRegex = Regex("..*@[a-zA-Z][a-zA-Z][a-zA-Z]*\\.[a-zA-Z][a-zA-Z][a-zA-Z]*")
-            val errorAnim = AnimationUtils.loadAnimation(activityLaunch, R.anim.common_error_message_animation)
-            if (!emailRegex.matches(binding.registerUsernameInput.text!!)) {
-                binding.apply {
-                    registerUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_red))
-                    registerUsernameErrorMessage.text = resources.getText(R.string.email_error_valid)
-                    registerUsernameErrorMessage.startAnimation(errorAnim)
-                    registerUsernameErrorMessage.visibility = View.VISIBLE
-                }
-                errorValue += 1
-            }
-        }
+        errorValue += helpFunctions.checkLoginInput(binding.registerUsernameInput, binding.registerUsernameErrorMessage, activity = activityLaunch, binding = binding)
+        errorValue += helpFunctions.checkPasswordInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
 
         if (errorValue == 0) onSuccess()
     }
@@ -133,6 +121,8 @@ class RegisterFragment: BaseLaunchFragment() {
         binding.registerUsernameInput.addTextChangedListener(helpFunctions.createEditTextListener ({
             errorViewOut(checkUsername = true)
             binding.registerUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
-        binding.registerPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({ errorViewOut(checkPassword = true) }, {}))
+        binding.registerPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({
+            errorViewOut(checkPassword = true)
+            binding.registerPasswordInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
     }
 }

@@ -17,7 +17,7 @@
     <string name="sign_in_to_continue">Войдите, чтобы продолжить</string>
     <string name="sign_up_to_continue">Зарегистрируйтесь, чтобы продолжить</string>
     <string name="email">Электронная почта</string>
-    <string name="password">Пароль</string>
+    <string name="password">Пароль (минимум 8 символов)</string>
     <string name="remember_me">Запомнить меня</string>
     <string name="forgot_password">Забыли пароль?</string>
     <string name="sign_in">Войти</string>

@@ -264,7 +264,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_sign_in_button"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
 
             style="@style/LauncherButton"
             android:text="@string/sign_in"

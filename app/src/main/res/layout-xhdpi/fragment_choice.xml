@@ -89,7 +89,7 @@
         android:textSize="16sp"
 
         android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
 
         app:icon="@drawable/ic_birdhouse"
 

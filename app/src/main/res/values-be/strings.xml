@@ -17,7 +17,7 @@
     <string name="sign_in_to_continue">Увайдзіце, каб працягнуць</string>
     <string name="sign_up_to_continue">Зарэгіструйцеся, каб працягнуць</string>
     <string name="email">Пошта</string>
-    <string name="password">Пароль</string>
+    <string name="password">Пароль (мінімум 8 знакаў)</string>
     <string name="remember_me">Запомніць мяне</string>
     <string name="forgot_password">Забылі пароль?</string>
     <string name="sign_in">Увайсці</string>

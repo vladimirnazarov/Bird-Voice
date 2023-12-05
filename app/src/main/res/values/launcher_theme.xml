@@ -35,6 +35,7 @@
 
         <item name="android:backgroundTint">@color/button_primary</item>
         <item name="iconTint">@color/white</item>
+        <item name="iconSize">24dp</item>
         <item name="iconGravity">textEnd</item>
 
         <item name="rippleColor">@color/button_ripple</item>

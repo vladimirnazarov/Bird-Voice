@@ -60,7 +60,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/choice_register_button"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
 
         style="@style/LauncherButton"
         android:text="@string/new_account"
@@ -82,14 +82,14 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/choice_login_button"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
 
         style="@style/LauncherButton"
         android:text="@string/log_in"
         android:textSize="18sp"
 
         android:layout_marginHorizontal="24dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
 
         app:icon="@drawable/ic_birdhouse"
 

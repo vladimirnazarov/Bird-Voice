@@ -5,6 +5,7 @@ import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.client.loginization.LoginClient
@@ -69,12 +70,11 @@ class RegisterFragment: BaseLaunchFragment() {
                 checkRegister {
                     RegistrationClient.post(binding.registerUsernameInput.text.toString(), binding.registerPasswordInput.text.toString(), {
 
-                        LoginClient.post(launchVM.getUsername().toString(), launchVM.getPassword().toString(), {
+                        LoginClient.post(binding.registerUsernameInput.text.toString(), binding.registerPasswordInput.text.toString(), {
                             launchVM.getScope().launch {
                                 delay(200)
                                 binding.registerCreateButton.isClickable = false
                                 launchVM.activityBinding?.launcherArrowBack?.isClickable = false
-                                launchVM.setUsernameAndPassword(binding.registerUsernameInput.text!!, binding.registerPasswordInput.text!!)
                                 animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
                                 activityLaunch.moveToMainActivity(recognitionToken = it)
                             } }, { activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() } })

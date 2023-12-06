@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         if (count > 3) {
             getLocationPermission()
             with (sharedPreferences.edit()) {
-                putInt(mainApp.constLocale, 0)
+                putInt(mainApp.constLaunches, 0)
                 apply()
             }
         }

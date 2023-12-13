@@ -102,12 +102,12 @@ class EditRecordFragment: BaseMainFragment() {
                 ContextCompat.getString(activityMain, R.string.dialog_cancel),
                 ContextCompat.getString(activityMain, R.string.dialog_go_main)
             )
-            DialogCommonInitiator().initCommonDialog(activityMain, dialogEditRecordStringResources) {
+            DialogCommonInitiator().initCommonDialog(activityMain, dialogEditRecordStringResources, {
                 it.dismiss()
                 navigationBackAction {
                     animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                 }
-            }
+            })
         }
 
         binding.editRecConcaveTimeValue.text = helpFunctions.getCurrentTime()

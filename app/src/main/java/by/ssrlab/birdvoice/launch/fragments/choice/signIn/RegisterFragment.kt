@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.launch.fragments.choice.register
+package by.ssrlab.birdvoice.launch.fragments.choice.signIn
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
@@ -69,7 +69,7 @@ class RegisterFragment: BaseLaunchFragment() {
             binding.registerCreateButton.setOnClickListener {
                 checkRegister {
                     RegistrationClient.post(binding.registerUsernameInput.text.toString(), binding.registerPasswordInput.text.toString(), {
-
+                        //OnSuccess
                         LoginClient.post(binding.registerUsernameInput.text.toString(), binding.registerPasswordInput.text.toString(), {
                             launchVM.getScope().launch {
                                 delay(200)

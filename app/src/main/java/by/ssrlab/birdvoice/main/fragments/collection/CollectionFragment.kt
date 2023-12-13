@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.FragmentCollectionBinding
@@ -29,6 +30,20 @@ class CollectionFragment: BaseMainFragment() {
     ): View {
 
         binding = FragmentCollectionBinding.inflate(layoutInflater)
+        binding.apply {
+            arrayOfViews = arrayListOf(
+                ViewObject(collectionBird),
+                ViewObject(collectionText),
+                ViewObject(collectionTopRightCloud, "rc1"),
+                ViewObject(collectionTopLeftCloud, "lc2"),
+                ViewObject(collectionBottomLeftCloud, "lc1")
+            )
+        }
+
+        animationUtils.commonDefineObjectsVisibility(arrayOfViews)
+        animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
+
+        mainVM.setToolbarTitle(resources.getString(R.string.collection))
 
         return binding.root
     }
@@ -36,11 +51,20 @@ class CollectionFragment: BaseMainFragment() {
     override fun onResume() {
         super.onResume()
 
-        mainVM.setToolbarTitle(resources.getString(R.string.collection))
-
         scope.launch {
             val list = activityMain.getCollectionDao().getCollection() as ArrayList
             val reversedList = arrayListOf<CollectionBird>()
+
+            if (list != arrayListOf<CollectionBird>()) {
+                val alphaOutAnim = AnimationUtils.loadAnimation(activityMain, R.anim.common_alpha_out)
+                binding.apply {
+                    collectionBird.startAnimation(alphaOutAnim)
+                    collectionText.startAnimation(alphaOutAnim)
+
+                    collectionBird.visibility = View.GONE
+                    collectionText.visibility = View.GONE
+                }
+            }
 
             for (i in list.size - 1 downTo 0) reversedList.add(list[i])
 

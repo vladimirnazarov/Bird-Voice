@@ -34,7 +34,7 @@ class DialogCommonInitiator {
         dialog.show()
     }
 
-    fun initCommonDialog(activity: MainActivity, dialogTextResources: ArrayList<String>, action: (Dialog) -> Unit) {
+    fun initCommonDialog(activity: MainActivity, dialogTextResources: ArrayList<String>, action: (Dialog) -> Unit, onCancelled: (() -> Unit)? = null) {
         initDialog(activity) { dialog ->
             val dialogBinding = DialogLogOutBinding.inflate(LayoutInflater.from(activity))
             dialog.setContentView(dialogBinding.root)
@@ -46,7 +46,10 @@ class DialogCommonInitiator {
                 dialogCommonNo.text = dialogTextResources[2]
                 dialogCommonYes.text = dialogTextResources[3]
 
-                dialogCommonNo.setOnClickListener { dialog.dismiss() }
+                dialogCommonNo.setOnClickListener {
+                    if (onCancelled != null) onCancelled()
+                    dialog.dismiss()
+                }
                 dialogCommonYes.setOnClickListener { action(dialog) }
             }
         }

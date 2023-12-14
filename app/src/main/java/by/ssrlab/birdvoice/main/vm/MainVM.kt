@@ -62,12 +62,12 @@ class MainVM: ViewModel() {
                     ContextCompat.getString(activity, R.string.yes)
                 )
 
-                DialogCommonInitiator().initCommonDialog(activity, dialogLogOutLanguageArray) {
+                DialogCommonInitiator().initCommonDialog(activity, dialogLogOutLanguageArray, {
                     it.dismiss()
                     activity.closeDrawer()
                     activity.getLoginManager().removeToken()
                     intentBack(activity)
-                }
+                })
             }
         }
     }

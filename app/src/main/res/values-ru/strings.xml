@@ -40,15 +40,6 @@
     <string name="last_name">Фамилия</string>
     <string name="model_isnt_loaded">Языковая модель ещё загружена</string>
 
-    <!--  Code confirmation  -->
-    <string name="code">Введите код сюда:</string>
-    <string name="send_again">отправить снова</string>
-
-    <!--  User data  -->
-    <string name="photo">Фото</string>
-    <string name="name">Имя</string>
-    <string name="approve">Подтвердить</string>
-
     <!--  Inform page  -->
     <string name="inform_rv_item_1_description">Наш сервис, благодаря новой уникальной технологии, помогает распознавать и определять по звукам, воспроизводимым той или иной птицей, ее название, вид, семейство, среду обитания.</string>
     <string name="recording_of_a_bird_singing">Запись пения птицы</string>
@@ -72,7 +63,7 @@
     <string name="edit_rec_start">Начать распознавание</string>
 
     <!--  Recognition page 1  -->
-    <string name="in_the_process_please_wait_a_bit">в процессе, пожалуйста, подождите немного</string>
+    <string name="in_the_process_please_wait_a_bit" tools:ignore="TypographyEllipsis">Процесс распознавания... Подождите немного</string>
     <string name="recognition_1_dots" tools:ignore="TypographyEllipsis">...</string>
 
     <!--  Recognition page 2  -->
@@ -96,6 +87,7 @@
     <string name="more">Больше</string>
     <string name="map">Карта</string>
     <string name="remove">Удалить</string>
+    <string name="collection_text">Здесь будет ваша коллекция птиц</string>
 
     <!--  Dialog  -->
     <string name="dialog_1_header">Удаление птицы!</string>
@@ -109,6 +101,9 @@
     <string name="dialog_er_body">Если Вы вернетесь на главную страницу, запись может не сохраниться. Закончите распознавание или сохраните аудио на Вашем девайсе</string>
     <string name="dialog_go_main">На главную</string>
     <string name="dialog_cancel">Отмена</string>
+    <string name="dialog_r1_title">Остановить процесс распознавания?</string>
+    <string name="dialog_r1_body">Если распознавание остановлено, вы вернетесь на экран с вашей записью</string>
+    <string name="dialog_stop">Стоп</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Обратная связь</string>

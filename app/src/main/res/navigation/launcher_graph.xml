@@ -30,11 +30,11 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.login.LoginFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.signIn.LoginFragment"
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="by.ssrlab.birdvoice.launch.fragments.choice.register.RegisterFragment"
+        android:name="by.ssrlab.birdvoice.launch.fragments.choice.signIn.RegisterFragment"
         android:label="RegisterFragment" />
 
 </navigation>

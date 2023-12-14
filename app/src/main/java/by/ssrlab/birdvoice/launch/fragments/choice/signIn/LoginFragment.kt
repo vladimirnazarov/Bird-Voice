@@ -1,4 +1,4 @@
-package by.ssrlab.birdvoice.launch.fragments.choice.login
+package by.ssrlab.birdvoice.launch.fragments.choice.signIn
 
 import android.os.Bundle
 import android.view.LayoutInflater

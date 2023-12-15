@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.MutableLiveData
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.client.recognition.RecognitionClient
 import by.ssrlab.birdvoice.databinding.FragmentRecognition1Binding
@@ -19,8 +18,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
-import okhttp3.internal.wait
 
 class Recognition1Fragment: BaseMainFragment() {
 

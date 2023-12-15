@@ -118,7 +118,7 @@ class HelpFunctions(private val mainApp: MainApp) {
         binding: ViewBinding
     ) : Int {
         val errorAnim = AnimationUtils.loadAnimation(activity, R.anim.common_error_message_animation)
-        val emailRegex = Regex("..*@[a-zA-Z][a-zA-Z][a-zA-Z]*\\.[a-zA-Z][a-zA-Z][a-zA-Z]*")
+        val emailRegex = Regex(".+@[a-zA-Z][a-zA-Z]+\\.[a-zA-Z][a-zA-Z]+")
 
         if (checkableView.text!!.isEmpty()) {
             errorView.text = activity.resources.getText(R.string.this_field_must_be_not_empty)
@@ -128,46 +128,19 @@ class HelpFunctions(private val mainApp: MainApp) {
         } else if (errorMessage != null) {
             if (binding is FragmentLoginBinding) {
                 activity.runOnUiThread {
-                    binding.apply {
-                        loginUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
-                        loginPasswordInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
-
-                        loginUsernameErrorMessage.text = errorMessage
-                        loginUsernameErrorMessage.startAnimation(errorAnim)
-                        loginUsernameErrorMessage.visibility = View.VISIBLE
-
-                        loginPasswordErrorMessage.text = errorMessage
-                        loginPasswordErrorMessage.startAnimation(errorAnim)
-                        loginPasswordErrorMessage.visibility = View.VISIBLE
-                    }
+                    setErrorView(binding.loginUsernameInput, binding.loginUsernameErrorMessage, errorMessage, activity)
+                    setErrorView(binding.loginPasswordInput, binding.loginPasswordErrorMessage, errorMessage, activity)
                 }
             } else if (binding is FragmentRegisterBinding) {
                 activity.runOnUiThread {
-                    binding.apply {
-
-                        if (errorMessage == "Password should be at least 8 characters") {
-                            registerPasswordInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
-
-                            registerPasswordErrorMessage.text = errorMessage
-                            registerPasswordErrorMessage.startAnimation(errorAnim)
-                            registerPasswordErrorMessage.visibility = View.VISIBLE
-                        } else if (errorMessage == "Username already in use") {
-                            registerUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
-
-                            registerUsernameErrorMessage.text = errorMessage
-                            registerUsernameErrorMessage.startAnimation(errorAnim)
-                            registerUsernameErrorMessage.visibility = View.VISIBLE
-                        } else {
-                            registerUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
-                            registerPasswordInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
-
-                            registerUsernameErrorMessage.text = errorMessage
-                            registerUsernameErrorMessage.startAnimation(errorAnim)
-                            registerUsernameErrorMessage.visibility = View.VISIBLE
-
-                            registerPasswordErrorMessage.text = errorMessage
-                            registerPasswordErrorMessage.startAnimation(errorAnim)
-                            registerPasswordErrorMessage.visibility = View.VISIBLE
+                    when (errorMessage) {
+                        "Password should be at least 8 characters" ->
+                            setErrorView(binding.registerPasswordInput, binding.registerPasswordErrorMessage, errorMessage, activity)
+                        "Username already in use" ->
+                            setErrorView(binding.registerUsernameInput, binding.registerUsernameErrorMessage, errorMessage, activity)
+                        else -> {
+                            setErrorView(binding.registerUsernameInput, binding.registerUsernameErrorMessage, errorMessage, activity)
+                            setErrorView(binding.registerPasswordInput, binding.registerPasswordErrorMessage, errorMessage, activity)
                         }
                     }
                 }
@@ -175,32 +148,57 @@ class HelpFunctions(private val mainApp: MainApp) {
             return 1
         } else if (checkableView.text!!.isNotEmpty()) {
             if (!emailRegex.matches(checkableView.text!!)) {
-                if (binding is FragmentLoginBinding) {
-                    binding.apply {
-                        loginUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
-                        loginUsernameErrorMessage.text = activity.resources.getText(R.string.email_error_valid)
-                        loginUsernameErrorMessage.startAnimation(errorAnim)
-                        loginUsernameErrorMessage.visibility = View.VISIBLE
-                    }
-                } else if (binding is FragmentRegisterBinding) {
-                    binding.apply {
-                        registerUsernameInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
-                        registerUsernameErrorMessage.text = activity.resources.getText(R.string.email_error_valid)
-                        registerUsernameErrorMessage.startAnimation(errorAnim)
-                        registerUsernameErrorMessage.visibility = View.VISIBLE
-                    }
-                }
+                if (binding is FragmentLoginBinding)
+                    setErrorView(
+                        binding.loginUsernameInput,
+                        binding.loginUsernameErrorMessage,
+                        ContextCompat.getString(activity, R.string.email_error_valid),
+                        activity
+                    )
+                else if (binding is FragmentRegisterBinding)
+                    setErrorView(
+                        binding.registerUsernameInput,
+                        binding.registerUsernameErrorMessage,
+                        ContextCompat.getString(activity, R.string.email_error_valid),
+                        activity
+                    )
                 return 1
             } else return 0
         } else return 0
     }
 
     fun checkPasswordInput(
+        checkableView: AppCompatEditText,
+        errorView: TextView,
+        resources: Resources,
+        context: Context
+    ): Int {
+        val errorAnim = AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.common_error_message_animation)
+        return if (checkableView.text?.isEmpty() == true) {
+            val errorText = resources.getString(R.string.this_field_must_be_not_empty)
+
+            errorView.text = errorText
+            errorView.startAnimation(errorAnim)
+            errorView.visibility = View.VISIBLE
+            1
+        } else if (checkableView.text?.length!! < 8) {
+            val errorText = resources.getString(R.string.password_length_error)
+
+            errorView.text = errorText
+            errorView.startAnimation(errorAnim)
+            errorView.visibility = View.VISIBLE
+
+            checkableView.setTextColor(ContextCompat.getColor(context, R.color.primary_red))
+            1
+        } else 0
+    }
+
+    fun checkInput(
         checkableText: Editable?,
         errorView: TextView,
         resources: Resources,
         errorText: String = resources.getString(R.string.this_field_must_be_not_empty)
-    ): Int {
+    ) : Int {
         val errorAnim = AnimationUtils.loadAnimation(mainApp.getContext(), R.anim.common_error_message_animation)
         return if (checkableText?.isEmpty() == true) {
             errorView.text = errorText
@@ -208,6 +206,20 @@ class HelpFunctions(private val mainApp: MainApp) {
             errorView.visibility = View.VISIBLE
             1
         } else 0
+    }
+
+    private fun setErrorView(
+        errorInput: AppCompatEditText,
+        errorView: TextView,
+        errorMessage: String,
+        activity: LaunchActivity
+    ) {
+        errorInput.setTextColor(ContextCompat.getColor(activity, R.color.primary_red))
+        val errorAnim = AnimationUtils.loadAnimation(activity, R.anim.common_error_message_animation)
+
+        errorView.text = errorMessage
+        errorView.startAnimation(errorAnim)
+        errorView.visibility = View.VISIBLE
     }
 
     fun hideKeyboard(view: View?, context: Context) {

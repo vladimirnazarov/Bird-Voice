@@ -107,7 +107,7 @@ class FeedbackFragment: BaseMainFragment() {
 
 
     private fun checkInput() {
-        helpFunctions.checkPasswordInput(binding.feedbackInput.text, binding.feedbackErrorMessage, resources)
+        helpFunctions.checkInput(binding.feedbackInput.text, binding.feedbackErrorMessage, resources)
     }
 
     private fun errorViewOut() {

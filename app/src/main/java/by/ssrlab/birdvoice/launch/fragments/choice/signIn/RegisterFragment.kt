@@ -107,7 +107,7 @@ class RegisterFragment: BaseLaunchFragment() {
         setEditTextListeners()
 
         errorValue += helpFunctions.checkLoginInput(binding.registerUsernameInput, binding.registerUsernameErrorMessage, activity = activityLaunch, binding = binding)
-        errorValue += helpFunctions.checkPasswordInput(binding.registerPasswordInput.text, binding.registerPasswordErrorMessage, resources)
+        errorValue += helpFunctions.checkPasswordInput(binding.registerPasswordInput, binding.registerPasswordErrorMessage, resources, activityLaunch)
 
         if (errorValue == 0) onSuccess()
     }

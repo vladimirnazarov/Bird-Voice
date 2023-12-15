@@ -4,6 +4,7 @@
 
     <!-- Error information -->
     <string name="this_field_must_be_not_empty">Это поле не должно быть пустым</string>
+    <string name="password_length_error">Длина пароля должна быть 8 или более символов</string>
     <string name="please_enter_the_code">Пожалуйста, введите код</string>
     <string name="space_is_not_allowed">Пробел здесь недопустим</string>
 

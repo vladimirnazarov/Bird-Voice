@@ -115,7 +115,7 @@
 
             android:text="@string/dialog_1_text"
             android:textSize="16sp"
-            android:textColor="@color/dialog_text"
+            android:textColor="@color/primary_blue"
             android:fontFamily="@font/roboto"
             android:gravity="center"
 
@@ -145,7 +145,7 @@
                 android:backgroundTint="@color/white"
                 android:text="@string/no"
                 android:textAllCaps="false"
-                android:textColor="@color/primary_text_blue"
+                android:textColor="@color/primary_blue"
 
                 app:rippleColor="@color/primary_button_push"
                 app:cornerRadius="16dp"
@@ -165,7 +165,7 @@
                 android:backgroundTint="@color/white"
                 android:text="@string/yes"
                 android:textAllCaps="false"
-                android:textColor="@color/primary_text_blue"
+                android:textColor="@color/primary_blue"
 
                 app:cornerRadius="16dp"
                 app:rippleColor="@color/primary_button_push"
@@ -199,7 +199,7 @@
             android:layout_height="wrap_content"
 
             android:text="@string/dialog_2_text"
-            android:textColor="@color/primary_text_blue"
+            android:textColor="@color/primary_blue"
             android:textSize="18sp"
             android:gravity="center"
 

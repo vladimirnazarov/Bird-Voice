@@ -8,6 +8,4 @@ data class CollectionBird(
     @PrimaryKey
     val name: String,
     val image: String,
-    val date: String,
-    val time: String
 )

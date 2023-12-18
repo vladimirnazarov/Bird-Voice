@@ -32,8 +32,6 @@ class CollectionFragment: BaseMainFragment() {
         binding = FragmentCollectionBinding.inflate(layoutInflater)
         binding.apply {
             arrayOfViews = arrayListOf(
-                ViewObject(collectionBird),
-                ViewObject(collectionText),
                 ViewObject(collectionTopRightCloud, "rc1"),
                 ViewObject(collectionTopLeftCloud, "lc2"),
                 ViewObject(collectionBottomLeftCloud, "lc1")
@@ -55,14 +53,16 @@ class CollectionFragment: BaseMainFragment() {
             val list = activityMain.getCollectionDao().getCollection() as ArrayList
             val reversedList = arrayListOf<CollectionBird>()
 
-            if (list != arrayListOf<CollectionBird>()) {
-                val alphaOutAnim = AnimationUtils.loadAnimation(activityMain, R.anim.common_alpha_out)
+            if (list == arrayListOf<CollectionBird>()) {
+                val alphaInAnim = AnimationUtils.loadAnimation(activityMain, R.anim.common_alpha_enter)
                 binding.apply {
-                    collectionBird.startAnimation(alphaOutAnim)
-                    collectionText.startAnimation(alphaOutAnim)
+                    activityMain.runOnUiThread {
+                        collectionBird.startAnimation(alphaInAnim)
+                        collectionText.startAnimation(alphaInAnim)
 
-                    collectionBird.visibility = View.GONE
-                    collectionText.visibility = View.GONE
+                        collectionBird.visibility = View.VISIBLE
+                        collectionText.visibility = View.VISIBLE
+                    }
                 }
             }
 

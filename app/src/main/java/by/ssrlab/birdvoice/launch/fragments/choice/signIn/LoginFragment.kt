@@ -58,7 +58,7 @@ class LoginFragment: BaseLaunchFragment() {
             }
 
             binding.loginSignInButton.setOnClickListener {
-                checkLogin{
+                checkLogin {
                     LoginClient.post(binding.loginUsernameInput.text.toString(), binding.loginPasswordInput.text.toString(), {
                         if (binding.loginRememberMe.isChecked) activityLaunch.getLoginManager().saveToken(it)
                         activityLaunch.runOnUiThread { activityLaunch.moveToMainActivity(recognitionToken = it) }
@@ -91,7 +91,7 @@ class LoginFragment: BaseLaunchFragment() {
         setEditTextListeners()
 
         errorValue += helpFunctions.checkLoginInput(binding.loginUsernameInput, binding.loginUsernameErrorMessage, activity = activityLaunch, binding = binding)
-        errorValue += helpFunctions.checkPasswordInput(binding.loginPasswordInput.text, binding.loginPasswordErrorMessage, resources)
+        errorValue += helpFunctions.checkPasswordInput(binding.loginPasswordInput, binding.loginPasswordErrorMessage, resources, activityLaunch)
 
         if (errorValue == 0) onSuccess()
     }
@@ -107,6 +107,6 @@ class LoginFragment: BaseLaunchFragment() {
             binding.loginUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
         binding.loginPasswordInput.addTextChangedListener(helpFunctions.createEditTextListener ({
             errorViewOut(checkPassword = true)
-            binding.loginUsernameInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
+            binding.loginPasswordInput.setTextColor(ContextCompat.getColor(activityLaunch, R.color.primary_blue)) }, {}))
     }
 }

@@ -13,6 +13,7 @@ import by.ssrlab.birdvoice.main.rv.Recognition2Adapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class  Recognition2Fragment: BaseMainFragment() {
 
@@ -36,14 +37,19 @@ class  Recognition2Fragment: BaseMainFragment() {
     override fun onResume() {
         super.onResume()
 
-        binding.recognition2Rv.apply {
-            layoutManager = LinearLayoutManager(activityMain.getApp().getContext())
-            adapter = Recognition2Adapter(
-                activityMain.getApp().getContext(),
-                mainVM,
-                activityMain,
-                scope
-            )
+        scope.launch {
+            val list = activityMain.getCollectionDao().getCollection() as ArrayList
+
+            binding.recognition2Rv.apply {
+                layoutManager = LinearLayoutManager(activityMain.getApp().getContext())
+                adapter = Recognition2Adapter(
+                    activityMain.getApp().getContext(),
+                    mainVM,
+                    list,
+                    activityMain,
+                    scope
+                )
+            }
         }
 
         mainVM.setToolbarTitle(resources.getString(R.string.recognition_results))

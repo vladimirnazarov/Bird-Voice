@@ -1,7 +1,9 @@
 package by.ssrlab.birdvoice.main.rv
 
 import android.content.Context
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -14,12 +16,11 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class Recognition2Adapter(
     private val context: Context,
     private val mainVM: MainVM,
+    private val collectionList: ArrayList<CollectionBird>,
     private val activity: MainActivity,
     private val coroutineScope: CoroutineScope
     ) : RecyclerView.Adapter<Recognition2Adapter.Recognition2Holder>() {
@@ -40,19 +41,20 @@ class Recognition2Adapter(
     override fun getItemCount(): Int = mainVM.getResults().size
 
     override fun onBindViewHolder(holder: Recognition2Holder, position: Int) {
+        val databaseObject = CollectionBird(mainVM.getResults()[position].name, mainVM.getResults()[position].image)
 
         holder.binding.apply {
-            recognition2RvItemButton.setOnClickListener {
-                coroutineScope.launch {
-                    getCurrentDate { date, time ->
-                        val databaseObject = CollectionBird(
-                            mainVM.getResults()[position].name,
-                            mainVM.getResults()[position].image,
-                            date, time)
-                        activity.getCollectionDao().insert(databaseObject)
+            if (!collectionList.contains(databaseObject)) {
+                recognition2RvItemButton.setOnClickListener {
+                    coroutineScope.launch { activity.getCollectionDao().insert(databaseObject) }
+
+                    recognition2RvItemButton.apply {
+                        setIconResource(R.drawable.ic_added)
+                        text = ContextCompat.getString(activity, R.string.added)
+                        isClickable = false
                     }
                 }
-
+            } else {
                 recognition2RvItemButton.apply {
                     setIconResource(R.drawable.ic_added)
                     text = ContextCompat.getString(activity, R.string.added)
@@ -83,17 +85,5 @@ class Recognition2Adapter(
     private fun outAnimation(view: View){
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
         view.visibility = View.INVISIBLE
-    }
-
-    private fun getCurrentDate(onSuccess: (String, String) -> Unit) {
-        val currentDateTime = LocalDateTime.now()
-
-        val dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        val formattedDate = currentDateTime.format(dateFormatter)
-
-        val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-        val formattedTime = currentDateTime.format(timeFormatter)
-
-        onSuccess(formattedDate, formattedTime)
     }
 }

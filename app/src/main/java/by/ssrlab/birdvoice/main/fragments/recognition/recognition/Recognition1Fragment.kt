@@ -1,6 +1,7 @@
 package by.ssrlab.birdvoice.main.fragments.recognition.recognition
 
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.File
 
 class Recognition1Fragment: BaseMainFragment() {
 
@@ -29,6 +31,13 @@ class Recognition1Fragment: BaseMainFragment() {
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
     private var goNext = true
+    private var isAudioPicked = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        isAudioPicked = arguments?.getBoolean("picked_audio") ?: false
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,9 +62,7 @@ class Recognition1Fragment: BaseMainFragment() {
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
         animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
 
-        activityMain.setPopBackCallback {
-            initBackDialog()
-        }
+        activityMain.setPopBackCallback { initBackDialog() }
 
         return binding.root
     }
@@ -73,13 +80,13 @@ class Recognition1Fragment: BaseMainFragment() {
         recognizeAudio()
 
         mainVM.recognition2Value.value = false
-        navigateAction()
     }
 
     override fun onDestroy() {
         super.onDestroy()
 
         breakableMarker = true
+        goNext = false
     }
 
     private fun initBackDialog() {
@@ -100,16 +107,35 @@ class Recognition1Fragment: BaseMainFragment() {
     }
 
     private fun recognizeAudio() {
-        mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getToken(), it, activityMain.getApp().getLocaleInt(), { list ->
-            mainVM.setList(list)
-        }) { string ->
-            activityMain.runOnUiThread { Toast.makeText(activityMain, string, Toast.LENGTH_SHORT).show() }
-        }}
+        if (isAudioPicked) {
+            val inputStream = mainVM.getUri()?.let { activityMain.contentResolver.openInputStream(it) }
+            val file = File(activityMain.getExternalFilesDir(Environment.DIRECTORY_DCIM), "audio.mp3")
+            file.outputStream().use {
+                it.write(inputStream?.readBytes())
+                it.close()
+            }
+
+            RecognitionClient.post(mainVM.getToken(), file, activityMain.getApp().getLocaleInt(), { list ->
+                mainVM.setList(list)
+                navigateAction()
+            }) { string ->
+                activityMain.runOnUiThread { Toast.makeText(activityMain, string, Toast.LENGTH_SHORT).show() }
+                navigateAction()
+            }
+        } else {
+            mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getToken(), it, activityMain.getApp().getLocaleInt(), { list ->
+                mainVM.setList(list)
+                navigateAction()
+            }) { string ->
+                activityMain.runOnUiThread { Toast.makeText(activityMain, string, Toast.LENGTH_SHORT).show() }
+                navigateAction()
+            }}
+        }
     }
 
     private fun navigateAction() {
         scope.launch {
-            delay(5000)
+            delay(1000)
             if (goNext) {
                 animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                 binding.recognitionLoaderHolder.visibility = View.INVISIBLE

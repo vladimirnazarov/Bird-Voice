@@ -25,7 +25,8 @@ import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.launch.LaunchActivity
 import by.ssrlab.birdvoice.launch.vm.LaunchVM
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class HelpFunctions(private val mainApp: MainApp) {
 

@@ -2,6 +2,8 @@ package by.ssrlab.birdvoice.main.vm
 
 import android.app.Dialog
 import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -106,14 +108,20 @@ class MainVM: ViewModel() {
 
     //NavController set
     private lateinit var navController: NavController
-    fun setNavController(controller: NavController){ navController = controller }
-    fun navigateToWithDelay(address: Int){
+    fun setNavController(controller: NavController) { navController = controller }
+    fun navigateToWithDelay(address: Int) {
         scope.launch {
             delay(600)
             navController.navigate(address)
         }
     }
-    fun navigateUpWithDelay(){
+    fun navigateToWithDelay(address: Int, bundle: Bundle) {
+        scope.launch {
+            delay(600)
+            navController.navigate(address, bundle)
+        }
+    }
+    fun navigateUpWithDelay() {
         scope.launch {
             delay(600)
             navController.popBackStack()
@@ -141,6 +149,12 @@ class MainVM: ViewModel() {
     private var tempAudioFile: File? = null
     fun getAudioFile() = tempAudioFile
     fun setAudioFile(file: File) { tempAudioFile = file }
+
+    //AudioPick
+    val observableFileToken = MutableLiveData<Boolean>()
+    private var uri: Uri? = null
+    fun setUri(uri: Uri? = null) { this.uri = uri }
+    fun getUri() = uri
 
     //Token
     private var token: String = ""

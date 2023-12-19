@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
@@ -78,6 +79,17 @@ class RecordFragment : BaseMainFragment() {
             mainVM.navigateToWithDelay(R.id.informPageFragment)
             activityMain.hideBottomNav()
         }
+
+        activityMain.switchToolbarUploadVisibility(false)
+        mainVM.observableFileToken.observe(activityMain) {
+            if (it) {
+                binding.recRecordButtonIcon.isClickable = false
+                animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
+                mainVM.navigateToWithDelay(R.id.action_recordFragment_to_editRecordFragment, bundleOf(Pair("picked_audio", true)))
+
+                mainVM.observableFileToken.value = false
+            }
+        }
     }
 
     override fun onStop() {
@@ -89,6 +101,8 @@ class RecordFragment : BaseMainFragment() {
 
             binding.recRecordButtonIcon.setImageResource(R.drawable.ic_rec_start)
         }
+
+        activityMain.switchToolbarUploadVisibility()
     }
 
     private fun startRecord() {
@@ -114,7 +128,7 @@ class RecordFragment : BaseMainFragment() {
     }
 
     private fun requestRecordPermission(onSuccess: () -> Unit) {
-        while (ContextCompat.checkSelfPermission(
+        if (ContextCompat.checkSelfPermission(
                 activityMain.getApp().getContext(),
                 Manifest.permission.RECORD_AUDIO
             ) != PackageManager.PERMISSION_GRANTED
@@ -124,8 +138,7 @@ class RecordFragment : BaseMainFragment() {
                 arrayOf(Manifest.permission.RECORD_AUDIO),
                 1
             )
-        }
-        onSuccess()
+        } else onSuccess()
     }
 
     private fun buttonAction() {

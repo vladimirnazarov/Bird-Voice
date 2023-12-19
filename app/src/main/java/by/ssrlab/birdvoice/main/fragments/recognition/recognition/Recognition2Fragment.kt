@@ -41,14 +41,16 @@ class  Recognition2Fragment: BaseMainFragment() {
             val list = activityMain.getCollectionDao().getCollection() as ArrayList
 
             binding.recognition2Rv.apply {
-                layoutManager = LinearLayoutManager(activityMain.getApp().getContext())
-                adapter = Recognition2Adapter(
-                    activityMain.getApp().getContext(),
-                    mainVM,
-                    list,
-                    activityMain,
-                    scope
-                )
+                activityMain.runOnUiThread {
+                    layoutManager = LinearLayoutManager(activityMain.getApp().getContext())
+                    adapter = Recognition2Adapter(
+                        activityMain.getApp().getContext(),
+                        mainVM,
+                        list,
+                        activityMain,
+                        scope
+                    )
+                }
             }
         }
 

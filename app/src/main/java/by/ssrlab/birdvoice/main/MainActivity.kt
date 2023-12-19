@@ -1,10 +1,15 @@
 package by.ssrlab.birdvoice.main
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.*
+import android.view.MenuItem
+import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -23,7 +28,7 @@ import by.ssrlab.birdvoice.db.CollectionDatabase
 import by.ssrlab.birdvoice.helpers.utils.LoginManager
 import by.ssrlab.birdvoice.main.vm.MainVM
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.*
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginManager: LoginManager
 
     private var homeCallback = {}
+    private lateinit var launcher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +78,8 @@ class MainActivity : AppCompatActivity() {
         recognitionToken = intent.getStringExtra("token").toString()
 
         mainVM.setToken(recognitionToken)
+
+        registerActivityResultAction()
     }
 
     override fun onResume() {
@@ -124,6 +132,42 @@ class MainActivity : AppCompatActivity() {
             setHomeAsUpIndicator(icon)
         }
         homeCallback = action
+    }
+
+    private fun setToolbarUploadAction() {
+        binding.mainToolbarUploadIc.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "audio/*"
+            launcher.launch(intent)
+        }
+    }
+
+    private fun registerActivityResultAction() {
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                Activity.RESULT_OK -> {
+                    val uri = result.data?.data
+
+                    mainVM.setUri(uri)
+                    mainVM.observableFileToken.value = true
+                }
+            }
+        }
+    }
+
+    fun switchToolbarUploadVisibility(hide: Boolean = true) {
+        val alphaOutAnim = AnimationUtils.loadAnimation(this@MainActivity, R.anim.common_alpha_out)
+        val alphaEnterAnim = AnimationUtils.loadAnimation(this@MainActivity, R.anim.common_alpha_enter)
+        binding.mainToolbarUploadIc.apply {
+            visibility = if (hide) {
+                startAnimation(alphaOutAnim)
+                View.GONE
+            } else {
+                startAnimation(alphaEnterAnim)
+                setToolbarUploadAction()
+                View.VISIBLE
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -8,6 +8,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 object RecognitionClient {
 
@@ -15,7 +16,12 @@ object RecognitionClient {
 
     fun post(token: String, audioFile: File, language: Int, arrayAction: (ArrayList<RecognizedBird>) -> Unit, onFailure: (String) -> Unit) {
 
-        if (recognitionClient == null) recognitionClient = OkHttpClient.Builder().build()
+        if (recognitionClient == null) recognitionClient = OkHttpClient.Builder()
+            .callTimeout(3, TimeUnit.MINUTES)
+            .connectTimeout(3, TimeUnit.MINUTES)
+            .readTimeout(3, TimeUnit.MINUTES)
+            .writeTimeout(3, TimeUnit.MINUTES)
+            .build()
 
         val body = MultipartBody.Builder().setType(MultipartBody.FORM)
             .addFormDataPart("audio_file","audio_file", audioFile.asRequestBody("application/octet-stream".toMediaType()))

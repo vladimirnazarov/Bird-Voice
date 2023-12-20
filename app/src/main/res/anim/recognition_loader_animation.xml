@@ -9,6 +9,6 @@
         android:duration="1250"
         android:repeatCount="infinite"
         android:repeatMode="restart"
-        android:interpolator="@anim/linear_interpolator"/>
+        android:interpolator="@android:anim/linear_interpolator"/>
 
 </set>

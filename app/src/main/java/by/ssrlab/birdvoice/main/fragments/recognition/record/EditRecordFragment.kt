@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.FragmentEditRecordBinding
@@ -22,11 +23,15 @@ class EditRecordFragment: BaseMainFragment() {
     private val playerVM: PlayerVM by viewModels()
     private var isPlaying = false
 
+    private var isAudioPicked = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if (playerVM.getRotationValue() != resources.configuration.orientation) playerVM.saveRotationValue(resources.configuration.orientation)
         else playerVM.clear()
+
+        isAudioPicked = arguments?.getBoolean("picked_audio") ?: false
     }
 
     override fun onCreateView(
@@ -70,11 +75,10 @@ class EditRecordFragment: BaseMainFragment() {
                         pauseAnimation()
                         isPlaying = !isPlaying
                         animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
-                        mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1)
-
+                        mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1, bundleOf(Pair("picked_audio", isAudioPicked)))
                     } else {
                         animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
-                        mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1)
+                        mainVM.navigateToWithDelay(R.id.action_editRecordFragment_to_recognitionFragment1, bundleOf(Pair("picked_audio", isAudioPicked)))
                     }
                 }
             }
@@ -124,9 +128,11 @@ class EditRecordFragment: BaseMainFragment() {
     }
 
     private fun setupPlayer() {
-        if (mainVM.getAudioFile() != null) {
+        if (isAudioPicked) {
+            playerVM.initializeMediaPlayer(mainVM.getUri()!!, binding, activityMain.getApp())
+            binding.editRecPlayButton.setOnClickListener { playerVM.playAudio(binding) }
+        } else if (mainVM.getAudioFile() != null) {
             playerVM.initializeMediaPlayer(mainVM.getAudioFile()!!.toUri(), binding, activityMain.getApp())
-
             binding.editRecPlayButton.setOnClickListener { playerVM.playAudio(binding) }
         }
     }

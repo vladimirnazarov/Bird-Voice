@@ -2,12 +2,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Bird Voice</string>
 
-    <!-- Error information -->
-    <string name="this_field_must_be_not_empty">Это поле не должно быть пустым</string>
-    <string name="password_length_error">Длина пароля должна быть 8 или более символов</string>
-    <string name="please_enter_the_code">Пожалуйста, введите код</string>
-    <string name="space_is_not_allowed">Пробел здесь недопустим</string>
-
     <!-- Choice -->
     <string name="launcher_app_name">голос птицы</string>
     <string name="log_in">Войти</string>
@@ -27,6 +21,10 @@
 
     <!--  Errors  -->
     <string name="email_error_valid">Enter valid email</string>
+    <string name="this_field_must_be_not_empty">Это поле не должно быть пустым</string>
+    <string name="password_length_error">Длина пароля должна быть 8 или более символов</string>
+    <string name="please_enter_the_code">Пожалуйста, введите код</string>
+    <string name="space_is_not_allowed">Пробел здесь недопустим</string>
 
     <!--  Register  -->
     <string name="telephone_number">Номер телефона</string>
@@ -62,6 +60,7 @@
     <string name="timer_plug">0:00</string>
     <string name="edit_rec_description">Выделите фрагмент для распознавания из предложенной аудиозаписи, нажмите на экран стереограммы</string>
     <string name="edit_rec_start">Начать распознавание</string>
+    <string name="file_saved">Файл сохранен!</string>
 
     <!--  Recognition page 1  -->
     <string name="in_the_process_please_wait_a_bit" tools:ignore="TypographyEllipsis">Процесс распознавания... Подождите немного</string>

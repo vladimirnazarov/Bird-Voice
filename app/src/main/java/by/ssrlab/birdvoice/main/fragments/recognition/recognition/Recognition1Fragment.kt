@@ -109,7 +109,7 @@ class Recognition1Fragment: BaseMainFragment() {
     private fun recognizeAudio() {
         if (isAudioPicked) {
             val inputStream = mainVM.getUri()?.let { activityMain.contentResolver.openInputStream(it) }
-            val file = File(activityMain.getExternalFilesDir(Environment.DIRECTORY_DCIM), "audio.mp3")
+            val file = File(activityMain.getExternalFilesDir(Environment.DIRECTORY_DCIM), "bird_voice_recognition_temp_file.mp3")
             file.outputStream().use {
                 it.write(inputStream?.readBytes())
                 it.close()
@@ -117,9 +117,11 @@ class Recognition1Fragment: BaseMainFragment() {
 
             RecognitionClient.post(mainVM.getToken(), file, activityMain.getApp().getLocaleInt(), { list ->
                 mainVM.setList(list)
+                file.delete()
                 navigateAction()
             }) { string ->
                 activityMain.runOnUiThread { Toast.makeText(activityMain, string, Toast.LENGTH_SHORT).show() }
+                file.delete()
                 navigateAction()
             }
         } else {

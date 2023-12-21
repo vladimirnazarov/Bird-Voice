@@ -228,15 +228,20 @@ class HelpFunctions(private val mainApp: MainApp) {
         imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
-    fun getCurrentTime(): String {
+    fun getCurrentTime() : String {
         val dateFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
         val currentTime = Date()
         return dateFormat.format(currentTime)
     }
 
-    fun getCurrentDate(): String {
+    fun getCurrentDate() : String {
         val dateFormat = SimpleDateFormat("dd/MM/yy", Locale.getDefault())
         val currentDate = Date()
         return dateFormat.format(currentDate)
+    }
+
+    fun getAudioName() : String {
+        val currentDate = Date()
+        return "Bird Voice $currentDate.mp3"
     }
 }

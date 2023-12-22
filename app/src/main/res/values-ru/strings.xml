@@ -107,6 +107,7 @@
 
     <!--  Feedback  -->
     <string name="feedback_title">Обратная связь</string>
+    <string name="enter_your_feedback">Введите отзыв</string>
     <string name="send">Отправить</string>
     <string name="thanks">Спасибо!</string>
     <string name="feedback_congrats_text">Благодарим вас за помощь в развитии приложения Bird Voice, мы ценим каждый отзыв и постоянно совершенствуем наши сервисы и повышаем их точность!</string>

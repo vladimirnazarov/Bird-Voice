@@ -35,6 +35,9 @@
         android:paddingVertical="18dp"
         android:paddingHorizontal="22dp"
 
+        android:hint="@string/enter_your_feedback"
+        android:textColorHint="@color/hint_text"
+
         android:textSize="16sp"
         android:textColor="@color/primary_blue"
         android:fontFamily="@font/roboto"

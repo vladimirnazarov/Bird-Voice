@@ -14,13 +14,13 @@ import by.ssrlab.birdvoice.main.MainActivity
 import by.ssrlab.birdvoice.main.vm.MainVM
 import coil.load
 import coil.transform.RoundedCornersTransformation
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class Recognition2Adapter(
     private val context: Context,
     private val mainVM: MainVM,
-    private val collectionList: ArrayList<CollectionBird>,
     private val activity: MainActivity,
     private val coroutineScope: CoroutineScope
     ) : RecyclerView.Adapter<Recognition2Adapter.Recognition2Holder>() {
@@ -44,21 +44,18 @@ class Recognition2Adapter(
         val databaseObject = CollectionBird(mainVM.getResults()[position].name, mainVM.getResults()[position].image)
 
         holder.binding.apply {
-            if (!collectionList.contains(databaseObject)) {
-                recognition2RvItemButton.setOnClickListener {
-                    coroutineScope.launch { activity.getCollectionDao().insert(databaseObject) }
+            var collectionList: List<CollectionBird>
+            coroutineScope.launch {
+                collectionList = activity.getCollectionDao().getCollection()
 
-                    recognition2RvItemButton.apply {
-                        setIconResource(R.drawable.ic_added)
-                        text = ContextCompat.getString(activity, R.string.added)
-                        isClickable = false
+                activity.runOnUiThread {
+                    if (!collectionList.contains(databaseObject)) mainVM.mutableOfCollection.value = 1
+                    else mainVM.mutableOfCollection.value = 0
+
+                    mainVM.mutableOfCollection.observe(activity) {
+                        if (it == 1) addBirdAction(recognition2RvItemButton, databaseObject)
+                        else if (it == 0) removeBirdAction(recognition2RvItemButton, databaseObject)
                     }
-                }
-            } else {
-                recognition2RvItemButton.apply {
-                    setIconResource(R.drawable.ic_added)
-                    text = ContextCompat.getString(activity, R.string.added)
-                    isClickable = false
                 }
             }
 
@@ -85,5 +82,33 @@ class Recognition2Adapter(
     private fun outAnimation(view: View){
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.common_alpha_out))
         view.visibility = View.INVISIBLE
+    }
+
+    private fun addBirdAction(button: MaterialButton, databaseObject: CollectionBird) {
+        activity.runOnUiThread {
+            button.apply {
+                setIconResource(R.drawable.ic_plus)
+                text = ContextCompat.getString(activity, R.string.add_to_collection)
+
+                setOnClickListener {
+                    coroutineScope.launch { activity.getCollectionDao().insert(databaseObject) }
+                    mainVM.mutableOfCollection.value = 0
+                }
+            }
+        }
+    }
+
+    private fun removeBirdAction(button: MaterialButton, databaseObject: CollectionBird) {
+        activity.runOnUiThread {
+            button.apply {
+                setIconResource(R.drawable.ic_added)
+                text = ContextCompat.getString(activity, R.string.added)
+
+                setOnClickListener {
+                    coroutineScope.launch { activity.getCollectionDao().delete(databaseObject) }
+                    mainVM.mutableOfCollection.value = 1
+                }
+            }
+        }
     }
 }

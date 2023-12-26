@@ -69,6 +69,8 @@ class RecordFragment : BaseMainFragment() {
     override fun onResume() {
         super.onResume()
 
+        activityMain.showBottomNav()
+
         mainVM.getScope().launch {
             delay(200)
             mainVM.setToolbarTitle(resources.getString(R.string.record_your_environment))

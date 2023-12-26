@@ -46,23 +46,40 @@ class CollectionFragment: BaseMainFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+
+        activityMain.showBottomNav()
+
+        mainVM.isCollectionEmptyInt.observe(activityMain) {
+            if (it == 1) {
+                val alphaInAnim = AnimationUtils.loadAnimation(activityMain, R.anim.common_alpha_enter)
+                binding.apply {
+                    collectionBird.startAnimation(alphaInAnim)
+                    collectionText.startAnimation(alphaInAnim)
+
+                    collectionBird.visibility = View.VISIBLE
+                    collectionText.visibility = View.VISIBLE
+                }
+            } else if (it == 0) {
+                val alphaOutAnim = AnimationUtils.loadAnimation(activityMain, R.anim.common_alpha_enter)
+                binding.apply {
+                    collectionBird.startAnimation(alphaOutAnim)
+                    collectionText.startAnimation(alphaOutAnim)
+
+                    collectionBird.visibility = View.GONE
+                    collectionText.visibility = View.GONE
+                }
+            }
+        }
 
         scope.launch {
             val list = activityMain.getCollectionDao().getCollection() as ArrayList
             val reversedList = arrayListOf<CollectionBird>()
 
             if (list == arrayListOf<CollectionBird>()) {
-                val alphaInAnim = AnimationUtils.loadAnimation(activityMain, R.anim.common_alpha_enter)
-                binding.apply {
-                    activityMain.runOnUiThread {
-                        collectionBird.startAnimation(alphaInAnim)
-                        collectionText.startAnimation(alphaInAnim)
-
-                        collectionBird.visibility = View.VISIBLE
-                        collectionText.visibility = View.VISIBLE
-                    }
+                activityMain.runOnUiThread {
+                    mainVM.isCollectionEmptyInt.value = 1
                 }
             }
 
@@ -74,7 +91,8 @@ class CollectionFragment: BaseMainFragment() {
                     adapter = CollectionAdapter(
                         activityMain,
                         reversedList,
-                        scope
+                        scope,
+                        mainVM
                     )
                 }
             }

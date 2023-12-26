@@ -49,10 +49,10 @@ class Recognition2Adapter(
                 collectionList = activity.getCollectionDao().getCollection()
 
                 activity.runOnUiThread {
-                    if (!collectionList.contains(databaseObject)) mainVM.mutableOfCollection.value = 1
-                    else mainVM.mutableOfCollection.value = 0
+                    if (!collectionList.contains(databaseObject)) mainVM.isItemInCollectionInt.value = 1
+                    else mainVM.isItemInCollectionInt.value = 0
 
-                    mainVM.mutableOfCollection.observe(activity) {
+                    mainVM.isItemInCollectionInt.observe(activity) {
                         if (it == 1) addBirdAction(recognition2RvItemButton, databaseObject)
                         else if (it == 0) removeBirdAction(recognition2RvItemButton, databaseObject)
                     }
@@ -92,7 +92,8 @@ class Recognition2Adapter(
 
                 setOnClickListener {
                     coroutineScope.launch { activity.getCollectionDao().insert(databaseObject) }
-                    mainVM.mutableOfCollection.value = 0
+                    mainVM.isItemInCollectionInt.value = 0
+                    mainVM.isCollectionEmptyInt.value = 0
                 }
             }
         }
@@ -106,7 +107,8 @@ class Recognition2Adapter(
 
                 setOnClickListener {
                     coroutineScope.launch { activity.getCollectionDao().delete(databaseObject) }
-                    mainVM.mutableOfCollection.value = 1
+                    mainVM.isItemInCollectionInt.value = 1
+                    mainVM.isCollectionEmptyInt.value = 1
                 }
             }
         }

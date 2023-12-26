@@ -62,8 +62,6 @@ class FeedbackFragment: BaseMainFragment() {
                 animationUtils.commonObjectAppear(activityMain.getApp().getContext(), shownArray)
                 mainVM.feedbackValue = 0
             }
-
-            activityMain.showBottomNav()
         }
 
         return binding.root
@@ -83,8 +81,6 @@ class FeedbackFragment: BaseMainFragment() {
                     animationUtils.commonObjectAppear(activityMain.getApp().getContext(), shownArray)
                     mainVM.feedbackValue = 0
                 }
-
-                activityMain.showBottomNav()
             }
         }
 

@@ -17,7 +17,6 @@ class InformPageFragment: BaseMainFragment() {
 
     private val navFun = {
         mainVM.navigateToWithDelay(R.id.action_informPageFragment_to_main_graph_record)
-        activityMain.showBottomNav()
     }
 
     override var arrayOfViews = arrayListOf<ViewObject>()
@@ -49,14 +48,12 @@ class InformPageFragment: BaseMainFragment() {
 
         activityMain.setPopBackCallback{
             informAdapter.animOut()
-            activityMain.showBottomNav()
             activityMain.setRegValue(0)
         }
 
         activityMain.setToolbarAction(R.drawable.ic_arrow_back) {
             navigationBackAction {
                 informAdapter.animOut()
-                activityMain.showBottomNav()
                 activityMain.setRegValue(0)
             }
         }

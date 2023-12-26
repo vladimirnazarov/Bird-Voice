@@ -36,4 +36,5 @@
     <color name="button_primary">#286FE4</color>
     <color name="button_ripple">#0047CA</color>
     <color name="primary_blue">#1466FF</color>
+    <color name="hint_text">#929AA9</color>
 </resources>

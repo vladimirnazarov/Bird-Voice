@@ -165,4 +165,6 @@ class MainVM: ViewModel() {
     private var listOfResults: ArrayList<RecognizedBird> = arrayListOf()
     fun getResults() = listOfResults
     fun setList(list: ArrayList<RecognizedBird>) { listOfResults = list }
+
+    val mutableOfCollection = MutableLiveData<Int>()
 }

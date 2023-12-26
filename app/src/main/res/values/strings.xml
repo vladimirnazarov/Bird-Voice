@@ -4,8 +4,8 @@
 
     <!-- Choice -->
     <string name="launcher_app_name">bird voice</string>
-    <string name="log_in">Log In</string>
-    <string name="new_account">New account</string>
+    <string name="log_in">Log in</string>
+    <string name="new_account">Sign up</string>
 
     <!--  Login  -->
     <string name="welcome_back">Welcome back!</string>
@@ -28,7 +28,7 @@
 
     <!--  Register  -->
     <string name="telephone_number">Telephone number</string>
-    <string name="create">Create</string>
+    <string name="create">Sign up</string>
     <string name="next">Continue</string>
 
     <!--  Additional  -->
@@ -107,6 +107,7 @@
 
     <!--  Feedback  -->
     <string name="feedback_title">Feedback</string>
+    <string name="enter_your_feedback">Enter your feedback</string>
     <string name="send">Send</string>
     <string name="thanks">Thanks!</string>
     <string name="feedback_congrats_text">Thank you for your assistance in the development of the Bird Voice application, we appreciate every feedback and constantly improve our services and improve their accuracy!</string>

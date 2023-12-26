@@ -38,15 +38,12 @@ class  Recognition2Fragment: BaseMainFragment() {
         super.onResume()
 
         scope.launch {
-            val list = activityMain.getCollectionDao().getCollection() as ArrayList
-
             binding.recognition2Rv.apply {
                 activityMain.runOnUiThread {
                     layoutManager = LinearLayoutManager(activityMain.getApp().getContext())
                     adapter = Recognition2Adapter(
                         activityMain.getApp().getContext(),
                         mainVM,
-                        list,
                         activityMain,
                         scope
                     )

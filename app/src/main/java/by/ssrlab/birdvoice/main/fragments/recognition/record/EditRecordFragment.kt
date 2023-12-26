@@ -109,6 +109,12 @@ class EditRecordFragment: BaseMainFragment() {
         setupPlayer()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        activityMain.hideBottomNav()
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -137,6 +143,8 @@ class EditRecordFragment: BaseMainFragment() {
 
     override fun onStop() {
         super.onStop()
+
+        activityMain.showBottomNav()
 
         playerVM.saveBinding(binding)
         if (playerVM.getRotationValue() != resources.configuration.orientation) playerVM.saveRotationValue(resources.configuration.orientation)

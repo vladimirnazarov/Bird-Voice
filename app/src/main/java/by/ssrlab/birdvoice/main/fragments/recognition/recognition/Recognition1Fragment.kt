@@ -17,7 +17,6 @@ import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -62,19 +61,19 @@ class Recognition1Fragment: BaseMainFragment() {
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
         animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
 
-        activityMain.setPopBackCallback { initBackDialog() }
+        activityMain.setPopBackCallback {
+            initBackDialog()
+        }
 
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
 
         mainVM.setToolbarTitle(resources.getString(R.string.recognition_service))
-        activityMain.setToolbarAction(R.drawable.ic_arrow_back){
-            navigationBackAction {
-                initBackDialog()
-            }
+        activityMain.setToolbarAction(R.drawable.ic_arrow_back) {
+            initBackDialog()
         }
 
         recognizeAudio()
@@ -137,7 +136,6 @@ class Recognition1Fragment: BaseMainFragment() {
 
     private fun navigateAction() {
         scope.launch {
-            delay(1000)
             if (goNext) {
                 animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                 binding.recognitionLoaderHolder.visibility = View.INVISIBLE

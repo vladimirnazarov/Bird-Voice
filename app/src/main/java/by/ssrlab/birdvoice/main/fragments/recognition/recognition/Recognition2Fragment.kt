@@ -34,8 +34,10 @@ class  Recognition2Fragment: BaseMainFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+
+        activityMain.showBottomNav()
 
         scope.launch {
             binding.recognition2Rv.apply {

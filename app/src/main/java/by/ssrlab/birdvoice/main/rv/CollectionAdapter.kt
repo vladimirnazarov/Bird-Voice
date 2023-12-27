@@ -13,6 +13,7 @@ import by.ssrlab.birdvoice.databinding.CollectionRvItemBinding
 import by.ssrlab.birdvoice.db.objects.CollectionBird
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.MainActivity
+import by.ssrlab.birdvoice.main.vm.MainVM
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +23,8 @@ import kotlinx.coroutines.launch
 class CollectionAdapter(
     private val activity: MainActivity,
     private val list: ArrayList<CollectionBird>,
-    private val scope: CoroutineScope
+    private val scope: CoroutineScope,
+    private val mainVM: MainVM
 ): RecyclerView.Adapter<CollectionAdapter.CollectionHolder>() {
 
     inner class CollectionHolder(val binding: CollectionRvItemBinding): RecyclerView.ViewHolder(binding.root)
@@ -94,6 +96,7 @@ class CollectionAdapter(
 
                 activity.runOnUiThread {
                     notifyItemRemoved(position)
+                    if (list == arrayListOf<CollectionBird>()) mainVM.isCollectionEmptyInt.value = 1
                 }
 
                 delay(1500)

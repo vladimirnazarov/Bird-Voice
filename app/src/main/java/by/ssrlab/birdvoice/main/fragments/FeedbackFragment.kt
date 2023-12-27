@@ -62,15 +62,15 @@ class FeedbackFragment: BaseMainFragment() {
                 animationUtils.commonObjectAppear(activityMain.getApp().getContext(), shownArray)
                 mainVM.feedbackValue = 0
             }
-
-            activityMain.showBottomNav()
         }
 
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+
+        binding.feedbackMain.setOnClickListener { helpFunctions.hideKeyboard(binding.root, activityMain) }
 
         mainVM.setToolbarTitle(resources.getString(R.string.feedback_title))
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){
@@ -83,8 +83,6 @@ class FeedbackFragment: BaseMainFragment() {
                     animationUtils.commonObjectAppear(activityMain.getApp().getContext(), shownArray)
                     mainVM.feedbackValue = 0
                 }
-
-                activityMain.showBottomNav()
             }
         }
 

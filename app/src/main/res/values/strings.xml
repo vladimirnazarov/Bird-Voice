@@ -132,7 +132,7 @@
 
     <!--  Screen titles  -->
     <string name="record_your_environment">Record your environment</string>
-    <string name="listen_to_your_record">Listen to your record</string>
+    <string name="listen_to_your_record">Your record</string>
     <string name="recognition_service">Recognition service</string>
     <string name="recognition_results">Recognition results</string>
     <string name="how_it_works">How it works?</string>

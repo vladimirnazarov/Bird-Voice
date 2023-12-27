@@ -132,7 +132,7 @@
 
     <!--  Screen titles  -->
     <string name="record_your_environment">Запишите своё окружение</string>
-    <string name="listen_to_your_record">Прослушайте свою запись</string>
+    <string name="listen_to_your_record">Ваша запись</string>
     <string name="recognition_service">Сервис распознавания</string>
     <string name="recognition_results">Результаты распознавания</string>
     <string name="how_it_works">Как это работает?</string>

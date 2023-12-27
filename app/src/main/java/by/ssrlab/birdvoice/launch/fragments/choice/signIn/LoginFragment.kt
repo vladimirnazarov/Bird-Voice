@@ -76,8 +76,10 @@ class LoginFragment: BaseLaunchFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+
+        binding.loginMain.setOnClickListener { helpFunctions.hideKeyboard(binding.root, activityLaunch) }
 
         activityLaunch.setPopBackCallback {
             animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)

@@ -67,8 +67,10 @@ class FeedbackFragment: BaseMainFragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
+
+        binding.feedbackMain.setOnClickListener { helpFunctions.hideKeyboard(binding.root, activityMain) }
 
         mainVM.setToolbarTitle(resources.getString(R.string.feedback_title))
         activityMain.setToolbarAction(R.drawable.ic_arrow_back){

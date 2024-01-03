@@ -128,6 +128,10 @@ class MainVM: ViewModel() {
         }
     }
 
+    fun navigateUpDelay() {
+        navController.popBackStack()
+    }
+
     //Scope
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.Main + job)

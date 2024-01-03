@@ -17,6 +17,7 @@ import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -136,6 +137,7 @@ class Recognition1Fragment: BaseMainFragment() {
 
     private fun navigateAction() {
         scope.launch {
+            delay(500)
             if (goNext) {
                 animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                 binding.recognitionLoaderHolder.visibility = View.INVISIBLE
@@ -148,5 +150,7 @@ class Recognition1Fragment: BaseMainFragment() {
         animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
         breakableMarker = true
         binding.recognitionLoaderHolder.visibility = View.INVISIBLE
+
+        mainVM.navigateUpDelay()
     }
 }

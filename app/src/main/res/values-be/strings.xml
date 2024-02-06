@@ -104,6 +104,7 @@
     <string name="dialog_r1_title">Завершыць працэс распазнавання?</string>
     <string name="dialog_r1_body">Калі распазнанне спыніцца, вы вернецецеся на экран з вашым запісам</string>
     <string name="dialog_stop">Стоп</string>
+    <string name="are_you_sure_you_want_to_delete">Вы ўпэўнены што хочаце выдаліць свой акаўнт?</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Зваротная сувязь</string>
@@ -137,6 +138,5 @@
     <string name="recognition_service">Сэрвіс распазнавання</string>
     <string name="recognition_results">Вынікі распазнавання</string>
     <string name="how_it_works">Як гэта працуе?</string>
-    <string name="are_you_sure_you_want_to_delete">Вы ўпэўнены што хочаце выдаліць свой акаўнт?</string>
-    <string name="are_you_sure_you_want_to_delete">В</string>
+
 </resources>

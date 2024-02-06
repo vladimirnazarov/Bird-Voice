@@ -40,7 +40,9 @@ class StartFragment: BaseLaunchFragment() {
                     activityLaunch.apply {
                         if (getLoginManager().isTokenValid()) {
                             runOnUiThread {
-                                moveToMainActivity(recognitionToken = getLoginManager().getTokens())
+                                getLoginManager().getTokens { access, refresh, id ->
+                                    moveToMainActivity(recognitionToken = access, refreshToken = refresh, accountId = id)
+                                }
                             }
                         } else {
                             launchVM.navigate(R.id.action_logoFragment_to_choiceFragment)

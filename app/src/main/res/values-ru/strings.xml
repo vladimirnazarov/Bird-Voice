@@ -104,6 +104,7 @@
     <string name="dialog_r1_title">Остановить процесс распознавания?</string>
     <string name="dialog_r1_body">Если распознавание остановлено, вы вернетесь на экран с вашей записью</string>
     <string name="dialog_stop">Стоп</string>
+    <string name="are_you_sure_you_want_to_delete">Вы уверены что хотите удалить свой аккаунт?</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Обратная связь</string>
@@ -137,5 +138,5 @@
     <string name="recognition_service">Сервис распознавания</string>
     <string name="recognition_results">Результаты распознавания</string>
     <string name="how_it_works">Как это работает?</string>
-    <string name="are_you_sure_you_want_to_delete">Вы уверены что хотите удалить свой аккаунт?</string>
+
 </resources>

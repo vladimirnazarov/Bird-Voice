@@ -62,7 +62,7 @@ class MainVM: ViewModel() {
                 val dialogLogOutLanguageArray = arrayListOf(
                     ContextCompat.getString(activity, R.string.sign_out),
                     ContextCompat.getString(activity, R.string.are_you_sure_you_want_to_log_out),
-                    ContextCompat.getString(activity, R.string.no),
+                    ContextCompat.getString(activity, R.string.dialog_cancel),
                     ContextCompat.getString(activity, R.string.yes)
                 )
 
@@ -82,7 +82,7 @@ class MainVM: ViewModel() {
                 val dialogLogOutLanguageArray = arrayListOf(
                     ContextCompat.getString(activity, R.string.delete),
                     ContextCompat.getString(activity, R.string.are_you_sure_you_want_to_delete),
-                    ContextCompat.getString(activity, R.string.no),
+                    ContextCompat.getString(activity, R.string.dialog_cancel),
                     ContextCompat.getString(activity, R.string.yes)
                 )
 

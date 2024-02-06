@@ -14,7 +14,7 @@ object LoginClient {
 
     private var loginClient: OkHttpClient? = null
 
-    fun post(email: String, password: String, onSuccess: (String) -> Unit, onFailure: (String) -> Unit) {
+    fun post(email: String, password: String, onSuccess: (String, String, Int) -> Unit, onFailure: (String) -> Unit) {
 
         if (loginClient == null) loginClient = OkHttpClient.Builder().build()
 
@@ -37,7 +37,11 @@ object LoginClient {
                 response.use {
                     val responseBody = response.body?.string()
                     val jObject = responseBody?.let { it1 -> JSONObject(it1) }
-                    if (jObject?.getString("message") == "Login successfull") onSuccess(jObject.getJSONObject("token").getString("access"))
+                    if (jObject?.getString("message") == "Login successfull") onSuccess(
+                        jObject.getJSONObject("token").getString("access"),
+                        jObject.getJSONObject("token").getString("refresh"),
+                        jObject.getJSONObject("account").getInt("id")
+                        )
                     else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
                 }
             }

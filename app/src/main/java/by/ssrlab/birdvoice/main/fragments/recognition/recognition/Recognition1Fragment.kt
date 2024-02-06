@@ -115,7 +115,7 @@ class Recognition1Fragment: BaseMainFragment() {
                 it.close()
             }
 
-            RecognitionClient.post(mainVM.getToken(), file, activityMain.getApp().getLocaleInt(), { list ->
+            RecognitionClient.post(mainVM.getAccessToken(), file, activityMain.getApp().getLocaleInt(), { list ->
                 mainVM.setList(list)
                 file.delete()
                 navigateAction()
@@ -125,7 +125,7 @@ class Recognition1Fragment: BaseMainFragment() {
                 navigateAction()
             }
         } else {
-            mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getToken(), it, activityMain.getApp().getLocaleInt(), { list ->
+            mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getAccessToken(), it, activityMain.getApp().getLocaleInt(), { list ->
                 mainVM.setList(list)
                 navigateAction()
             }) { string ->

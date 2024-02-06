@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -12,6 +13,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import by.ssrlab.birdvoice.R
+import by.ssrlab.birdvoice.client.loginization.LogoutClient
 import by.ssrlab.birdvoice.databinding.ActivityMainBinding
 import by.ssrlab.birdvoice.databinding.DialogLanguageBinding
 import by.ssrlab.birdvoice.db.objects.RecognizedBird
@@ -58,7 +60,7 @@ class MainVM: ViewModel() {
             drawerButtonFeedback.setOnClickListener { initDrawerButtonAction(R.id.feedbackFragment, activity) }
             drawerButtonLogOut.setOnClickListener {
                 val dialogLogOutLanguageArray = arrayListOf(
-                    ContextCompat.getString(activity, R.string.log_out),
+                    ContextCompat.getString(activity, R.string.sign_out),
                     ContextCompat.getString(activity, R.string.are_you_sure_you_want_to_log_out),
                     ContextCompat.getString(activity, R.string.no),
                     ContextCompat.getString(activity, R.string.yes)
@@ -67,8 +69,33 @@ class MainVM: ViewModel() {
                 DialogCommonInitiator().initCommonDialog(activity, dialogLogOutLanguageArray, {
                     it.dismiss()
                     activity.closeDrawer()
-                    activity.getLoginManager().removeToken()
-                    intentBack(activity)
+
+                    LogoutClient().logOut(refresh, {
+                        activity.getLoginManager().removeTokens()
+                        intentBack(activity)
+                    }, { message ->
+                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                    })
+                })
+            }
+            drawerButtonDelete.setOnClickListener {
+                val dialogLogOutLanguageArray = arrayListOf(
+                    ContextCompat.getString(activity, R.string.delete),
+                    ContextCompat.getString(activity, R.string.are_you_sure_you_want_to_delete),
+                    ContextCompat.getString(activity, R.string.no),
+                    ContextCompat.getString(activity, R.string.yes)
+                )
+
+                DialogCommonInitiator().initCommonDialog(activity, dialogLogOutLanguageArray, {
+                    it.dismiss()
+                    activity.closeDrawer()
+
+                    LogoutClient().deleteUser(accountId, refresh, {
+                        activity.getLoginManager().removeTokens()
+                        intentBack(activity)
+                    }, { message ->
+                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                    })
                 })
             }
         }
@@ -161,9 +188,15 @@ class MainVM: ViewModel() {
     fun getUri() = uri
 
     //Token
-    private var token: String = ""
-    fun getToken() = token
-    fun setToken(token: String) { this.token = token }
+    private var access: String = ""
+    private var refresh: String = ""
+    private var accountId: Int = 0
+    fun getAccessToken() = access
+    fun setTokens(access: String, refresh: String, accountId: Int) {
+        this.access = access
+        this.refresh = refresh
+        this.accountId = accountId
+    }
 
     //Results
     private var listOfResults: ArrayList<RecognizedBird> = arrayListOf()

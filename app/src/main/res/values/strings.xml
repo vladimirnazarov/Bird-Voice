@@ -104,6 +104,7 @@
     <string name="dialog_r1_title">Stop the recognition process?</string>
     <string name="dialog_r1_body">If recognition is stopped, you will return back to the screen with your recording</string>
     <string name="dialog_stop">Stop</string>
+    <string name="are_you_sure_you_want_to_delete">Are you sure you want to delete your account?</string>
 
     <!--  Feedback  -->
     <string name="feedback_title">Feedback</string>
@@ -117,7 +118,8 @@
     <string name="language">Language</string>
     <string name="instruction">Instruction</string>
     <string name="feedback">Feedback</string>
-    <string name="log_out">Log out</string>
+    <string name="sign_out">Sign out</string>
+    <string name="delete">Delete account</string>
 
     <!--  Bottom nav  -->
     <string name="recording">Recording</string>

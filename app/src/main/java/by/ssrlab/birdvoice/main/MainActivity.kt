@@ -41,6 +41,8 @@ class MainActivity : AppCompatActivity() {
 
     private var regValue = 0
     private var recognitionToken = ""
+    private var refreshToken = ""
+    private var accountId = 0
 
     private val mainApp = MainApp()
     private val mainVM: MainVM by viewModels()
@@ -75,9 +77,11 @@ class MainActivity : AppCompatActivity() {
         loginManager = LoginManager(mainApp.getContext())
 
         regValue = intent.getIntExtra("userRegisterToken", 1)
-        recognitionToken = intent.getStringExtra("token").toString()
+        recognitionToken = intent.getStringExtra("access").toString()
+        refreshToken = intent.getStringExtra("refresh").toString()
+        accountId = intent.getIntExtra("accountId", 0)
 
-        mainVM.setToken(recognitionToken)
+        mainVM.setTokens(recognitionToken, refreshToken, accountId)
 
         registerActivityResultAction()
     }
@@ -115,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             drawerButtonLanguage.setText(R.string.language)
             drawerButtonFeedback.setText(R.string.feedback)
             drawerButtonInstruction.setText(R.string.instruction)
-            drawerButtonLogOut.setText(R.string.log_out)
+            drawerButtonLogOut.setText(R.string.sign_out)
         }
     }
 

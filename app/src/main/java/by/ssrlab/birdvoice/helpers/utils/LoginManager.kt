@@ -9,7 +9,9 @@ class LoginManager(context: Context) {
 
     companion object {
         private const val PREFS_NAME = "login_prefs"
-        private const val KEY_TOKEN = "token"
+        private const val ACCESS_TOKEN = "access"
+        private const val REFRESH_TOKEN = "refresh"
+        private const val ACCOUNT_ID = "accountId"
         private const val KEY_LAST_LOGIN_DATE = "last_login_date"
         private const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
         private const val EIGHT_HOURS = 8 * 60 * 60 * 1000
@@ -18,7 +20,11 @@ class LoginManager(context: Context) {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
     fun isTokenValid(): Boolean {
-        val token = getToken()
+        var token = ""
+        getTokens { access, _, _ ->
+            token = access
+        }
+
         val lastLoginDate = getLastLoginDate()
 
         if (token.isNotEmpty() && lastLoginDate.isNotEmpty()) {
@@ -31,7 +37,7 @@ class LoginManager(context: Context) {
             if (current != null && lastLogin != null) {
                 val timeDiff = current.time - lastLogin.time
                 return if (timeDiff >= EIGHT_HOURS) {
-                    removeToken()
+                    removeTokens()
                     false
                 } else {
                     true
@@ -42,22 +48,34 @@ class LoginManager(context: Context) {
         return false
     }
 
-    fun saveToken(token: String) {
+    fun saveTokens(access: String, refresh: String, accountId: Int) {
         val editor = sharedPreferences.edit()
-        editor.putString(KEY_TOKEN, token)
+        editor.putString(ACCESS_TOKEN, access)
+        editor.putString(REFRESH_TOKEN, refresh)
+        editor.putInt(ACCOUNT_ID, accountId)
         editor.putString(KEY_LAST_LOGIN_DATE, getCurrentDate())
         editor.apply()
     }
 
-    fun getToken() = sharedPreferences.getString(KEY_TOKEN, "") ?: ""
+    fun getTokens(onSuccess: (String, String, Int) -> Unit) {
+        val accessToken = sharedPreferences.getString(ACCESS_TOKEN, "") ?: ""
+        val refreshToken = sharedPreferences.getString(REFRESH_TOKEN, "") ?: ""
+        val accountId = sharedPreferences.getInt(ACCOUNT_ID, 0)
+
+        onSuccess(accessToken, refreshToken, accountId)
+    }
 
     private fun getLastLoginDate() = sharedPreferences.getString(KEY_LAST_LOGIN_DATE, "") ?: ""
 
-    fun removeToken() {
+    fun removeTokens() {
         val editor = sharedPreferences.edit()
-        editor.remove(KEY_TOKEN)
-        editor.remove(KEY_LAST_LOGIN_DATE)
-        editor.apply()
+        editor.apply {
+            remove(ACCESS_TOKEN)
+            remove(REFRESH_TOKEN)
+            remove(ACCOUNT_ID)
+            remove(KEY_LAST_LOGIN_DATE)
+            apply()
+        }
     }
 
     private fun getCurrentDate(): String {

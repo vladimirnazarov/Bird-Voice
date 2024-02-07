@@ -59,9 +59,11 @@ class LoginFragment: BaseLaunchFragment() {
 
             binding.loginSignInButton.setOnClickListener {
                 checkLogin {
-                    LoginClient.post(binding.loginUsernameInput.text.toString(), binding.loginPasswordInput.text.toString(), {
-                        if (binding.loginRememberMe.isChecked) activityLaunch.getLoginManager().saveToken(it)
-                        activityLaunch.runOnUiThread { activityLaunch.moveToMainActivity(recognitionToken = it) }
+                    LoginClient.post(binding.loginUsernameInput.text.toString(), binding.loginPasswordInput.text.toString(), { access, refresh, id ->
+                        if (binding.loginRememberMe.isChecked) activityLaunch.getLoginManager().saveTokens(access, refresh, id)
+                        activityLaunch.runOnUiThread {
+                            activityLaunch.moveToMainActivity(recognitionToken = access, refreshToken = refresh, accountId = id)
+                        }
                     }, { helpFunctions.checkLoginInput(binding.loginUsernameInput, binding.loginUsernameErrorMessage, it, activityLaunch, binding) })
                 }
             }

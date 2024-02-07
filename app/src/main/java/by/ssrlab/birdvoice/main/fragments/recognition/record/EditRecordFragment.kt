@@ -1,20 +1,14 @@
 package by.ssrlab.birdvoice.main.fragments.recognition.record
 
-import android.Manifest
-import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.ContentValues
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
@@ -25,9 +19,6 @@ import by.ssrlab.birdvoice.helpers.utils.DialogCommonInitiator
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
 import by.ssrlab.birdvoice.main.vm.PlayerVM
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
 
 class EditRecordFragment: BaseMainFragment() {
 
@@ -167,14 +158,12 @@ class EditRecordFragment: BaseMainFragment() {
                 val audioName = helpFunctions.getAudioName()
                 val contentResolver = activityMain.contentResolver
 
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) saveFilesUnderQ(audioName)
-                else saveFileUpperQ(audioName, contentResolver, fileUri)
+                saveFile(audioName, contentResolver, fileUri)
             }
         }
     }
 
-    @SuppressLint("InlinedApi", "Recycle")
-    private fun saveFileUpperQ(audioName: String, contentResolver: ContentResolver, fileUri: Uri) {
+    private fun saveFile(audioName: String, contentResolver: ContentResolver, fileUri: Uri) {
         val contentValues = ContentValues().apply {
             put(MediaStore.Audio.Media.DISPLAY_NAME, audioName)
             put(MediaStore.Audio.Media.MIME_TYPE, "audio/mp3")
@@ -185,42 +174,14 @@ class EditRecordFragment: BaseMainFragment() {
 
         audioUri?.let { uri ->
             contentResolver.openOutputStream(uri)?.use { outputStream ->
-                contentResolver.openInputStream(fileUri)?.copyTo(outputStream)
+                val stream = contentResolver.openInputStream(fileUri)
+                stream?.copyTo(outputStream)
 
-                showFileSavedToast()
-            }
-        }
-    }
-
-    private fun saveFilesUnderQ(audioName: String) {
-        checkStoragePermission {
-            val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC), audioName)
-            if (!file.exists()) {
-                file.createNewFile()
-
-                val outPutStream = FileOutputStream(file)
-                val inputStream = FileInputStream(mainVM.getAudioFile())
-                val buffer = ByteArray(1024)
-                var read: Int
-                var total = 0L
-
-                while (inputStream.read(buffer).also { read = it } != -1) {
-                    outPutStream.write(buffer, 0, read)
-                    total += read.toLong()
+                stream?.close().apply {
+                    showFileSavedToast()
                 }
-
-                inputStream.close()
-                outPutStream.close()
-                showFileSavedToast()
             }
         }
-    }
-
-    private fun checkStoragePermission(onSuccess: () -> Unit) {
-        while (ActivityCompat.checkSelfPermission(activityMain, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(activityMain, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PackageManager.PERMISSION_GRANTED)
-
-        onSuccess()
     }
 
     private fun showFileSavedToast() {

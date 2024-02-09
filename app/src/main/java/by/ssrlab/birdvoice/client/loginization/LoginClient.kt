@@ -40,8 +40,8 @@ object LoginClient {
                     if (jObject?.getString("message") == "Login successfull") onSuccess(
                         jObject.getJSONObject("token").getString("access"),
                         jObject.getJSONObject("token").getString("refresh"),
-                        jObject.getJSONObject("account").getInt("id")
-                        )
+                        jObject.getJSONObject("user").getJSONArray("account").getJSONObject(0).getInt("id")
+                    )
                     else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
                 }
             }

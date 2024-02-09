@@ -18,7 +18,7 @@ class LogoutClient {
         if (logoutClient == null) logoutClient = OkHttpClient.Builder().build()
 
         val body = MultipartBody.Builder().setType(MultipartBody.FORM)
-            .addFormDataPart("refresh",refreshToken)
+            .addFormDataPart("refresh", refreshToken)
             .build()
 
         val request = Request.Builder()
@@ -52,7 +52,7 @@ class LogoutClient {
             .build()
 
         val request = Request.Builder()
-            .url("https://bird-sounds-database.ssrlab.by/api/logout/")
+            .url("https://bird-sounds-database.ssrlab.by/api/delete-user/")
             .post(body)
             .build()
 

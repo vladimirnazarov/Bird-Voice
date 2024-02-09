@@ -87,6 +87,7 @@ class Recognition1Fragment: BaseMainFragment() {
 
         breakableMarker = true
         goNext = false
+        activityMain.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun initBackDialog() {
@@ -139,6 +140,11 @@ class Recognition1Fragment: BaseMainFragment() {
         scope.launch {
             delay(500)
             if (goNext) {
+                activityMain.apply {
+                    runOnUiThread {
+                        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                    }
+                }
                 animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
                 binding.recognitionLoaderHolder.visibility = View.INVISIBLE
                 mainVM.navigateToWithDelay(R.id.action_recognitionFragment1_to_recognitionFragment2)

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import by.ssrlab.birdvoice.R
+import by.ssrlab.birdvoice.client.loginization.LoginClient
 import by.ssrlab.birdvoice.databinding.FragmentStartBinding
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
@@ -38,14 +39,20 @@ class StartFragment: BaseLaunchFragment() {
 
                 withEndAction {
                     activityLaunch.apply {
-                        if (getLoginManager().isTokenValid()) {
-                            runOnUiThread {
-                                getLoginManager().getTokens { access, refresh, id ->
+                        getLoginManager().getTokens { login, password ->
+                            if (login.isNotEmpty() && password.isNotEmpty()) {
+                                LoginClient.post(login, password, { access, refresh, id ->
                                     moveToMainActivity(recognitionToken = access, refreshToken = refresh, accountId = id)
+                                }, {
+                                    activityLaunch.runOnUiThread {
+                                        launchVM.navigate(R.id.action_logoFragment_to_choiceFragment)
+                                    }
+                                })
+                            } else {
+                                activityLaunch.runOnUiThread {
+                                    launchVM.navigate(R.id.action_logoFragment_to_choiceFragment)
                                 }
                             }
-                        } else {
-                            launchVM.navigate(R.id.action_logoFragment_to_choiceFragment)
                         }
                     }
                 }

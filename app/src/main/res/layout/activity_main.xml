@@ -215,22 +215,11 @@
             android:clickable="true"
             android:focusable="true"
 
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="32dp"
             android:layout_marginStart="32dp"
 
-            app:layout_constraintBottom_toTopOf="@id/drawer_button_log_out"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <ImageView
-            android:id="@+id/drawer_bird"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:src="@drawable/drawer_bird"
-            android:elevation="2dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/drawer_button_log_out"
@@ -246,11 +235,22 @@
             android:clickable="true"
             android:focusable="true"
 
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginStart="32dp"
 
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/drawer_button_delete"
             app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:id="@+id/drawer_bird"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:src="@drawable/drawer_bird"
+            android:elevation="2dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
             android:id="@+id/drawer_cloud_top_left"

@@ -2,11 +2,11 @@ package by.ssrlab.birdvoice.client.loginization
 
 import okhttp3.Call
 import okhttp3.Callback
-import okhttp3.MultipartBody
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
-import org.json.JSONObject
 import java.io.IOException
 
 class LogoutClient {
@@ -17,9 +17,11 @@ class LogoutClient {
 
         if (logoutClient == null) logoutClient = OkHttpClient.Builder().build()
 
-        val body = MultipartBody.Builder().setType(MultipartBody.FORM)
-            .addFormDataPart("refresh", refreshToken)
-            .build()
+        val mediaType = "application/json".toMediaType()
+        val body = "{\"refresh\":\"$refreshToken\"}".toRequestBody(mediaType)
+//        val body = MultipartBody.Builder().setType(MultipartBody.FORM)
+//            .addFormDataPart("refresh", refreshToken)
+//            .build()
 
         val request = Request.Builder()
             .url("https://bird-sounds-database.ssrlab.by/api/logout/")
@@ -28,15 +30,18 @@ class LogoutClient {
 
         logoutClient?.newCall(request)?.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                onFailure(e.message.toString())
+//                onFailure(e.message.toString())
+                if (e.message?.matches(Regex("^HTTP 204 had non-zero.+")) == true)
+                    onSuccess()
+                else onFailure(e.message.toString())
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    val responseBody = response.body?.string()
-                    val jObject = responseBody?.let { it1 -> JSONObject(it1) }
-                    if (jObject?.getString("message") == "Logout success") onSuccess()
-                    else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
+//                    val responseBody = response.body?.string()
+//                    val jObject = responseBody?.let { it1 -> JSONObject(it1) }
+//                    if (jObject?.getString("message") == "Logout success") onSuccess()
+//                    else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
                 }
             }
         })
@@ -46,27 +51,29 @@ class LogoutClient {
 
         if (logoutClient == null) logoutClient = OkHttpClient.Builder().build()
 
-        val body = MultipartBody.Builder().setType(MultipartBody.FORM)
-            .addFormDataPart("id", accountId.toString())
-            .addFormDataPart("refresh", refreshToken)
-            .build()
+        val mediaType = "application/json".toMediaType()
+        val body = "{\"id\":\"$accountId\",\"refresh\":\"$refreshToken\"}".toRequestBody(mediaType)
 
         val request = Request.Builder()
             .url("https://bird-sounds-database.ssrlab.by/api/delete-user/")
             .post(body)
+            .addHeader("Content-Type", "application/json")
             .build()
 
         logoutClient?.newCall(request)?.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                onFailure(e.message.toString())
+//                onFailure(e.message.toString())
+                if (e.message?.matches(Regex("^HTTP 204 had non-zero.+")) == true)
+                    onSuccess()
+                else onFailure(e.message.toString())
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    val responseBody = response.body?.string()
-                    val jObject = responseBody?.let { it1 -> JSONObject(it1) }
-                    if (jObject?.getString("message") == "Account deleted") onSuccess()
-                    else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
+//                    val responseBody = response.body?.string()
+//                    val jObject = responseBody?.let { it1 -> JSONObject(it1) }
+//                    if (jObject?.getString("message") == "Account deleted") onSuccess()
+//                    else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
                 }
             }
         })

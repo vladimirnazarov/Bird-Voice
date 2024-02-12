@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.databinding.Recognition2RvItemBinding
@@ -43,18 +44,21 @@ class Recognition2Adapter(
     override fun onBindViewHolder(holder: Recognition2Holder, position: Int) {
         val databaseObject = CollectionBird(mainVM.getResults()[position].name, mainVM.getResults()[position].image)
 
+        /***/
         holder.binding.apply {
             var collectionList: List<CollectionBird>
+            val isItemInCollection = mainVM.createMutableLiveInt()
+
             coroutineScope.launch {
                 collectionList = activity.getCollectionDao().getCollection()
 
                 activity.runOnUiThread {
-                    if (!collectionList.contains(databaseObject)) mainVM.isItemInCollectionInt.value = 1
-                    else mainVM.isItemInCollectionInt.value = 0
+                    if (!collectionList.contains(databaseObject)) isItemInCollection.value = 1
+                    else isItemInCollection.value = 0
 
-                    mainVM.isItemInCollectionInt.observe(activity) {
-                        if (it == 1) addBirdAction(recognition2RvItemButton, databaseObject)
-                        else if (it == 0) removeBirdAction(recognition2RvItemButton, databaseObject)
+                    isItemInCollection.observe(activity) {
+                        if (it == 1) addBirdAction(recognition2RvItemButton, databaseObject, isItemInCollection)
+                        else if (it == 0) removeBirdAction(recognition2RvItemButton, databaseObject, isItemInCollection)
                     }
                 }
             }
@@ -84,7 +88,7 @@ class Recognition2Adapter(
         view.visibility = View.INVISIBLE
     }
 
-    private fun addBirdAction(button: MaterialButton, databaseObject: CollectionBird) {
+    private fun addBirdAction(button: MaterialButton, databaseObject: CollectionBird, isItemInCollection: MutableLiveData<Int>) {
         activity.runOnUiThread {
             button.apply {
                 setIconResource(R.drawable.ic_plus)
@@ -92,14 +96,14 @@ class Recognition2Adapter(
 
                 setOnClickListener {
                     coroutineScope.launch { activity.getCollectionDao().insert(databaseObject) }
-                    mainVM.isItemInCollectionInt.value = 0
+                    isItemInCollection.value = 0
                     mainVM.isCollectionEmptyInt.value = 0
                 }
             }
         }
     }
 
-    private fun removeBirdAction(button: MaterialButton, databaseObject: CollectionBird) {
+    private fun removeBirdAction(button: MaterialButton, databaseObject: CollectionBird, isItemInCollection: MutableLiveData<Int>) {
         activity.runOnUiThread {
             button.apply {
                 setIconResource(R.drawable.ic_added)
@@ -107,8 +111,7 @@ class Recognition2Adapter(
 
                 setOnClickListener {
                     coroutineScope.launch { activity.getCollectionDao().delete(databaseObject) }
-                    mainVM.isItemInCollectionInt.value = 1
-                    mainVM.isCollectionEmptyInt.value = 1
+                    isItemInCollection.value = 1
                 }
             }
         }

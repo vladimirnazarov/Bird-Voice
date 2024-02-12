@@ -41,13 +41,13 @@ class CollectionFragment: BaseMainFragment() {
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
         animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews, true)
 
-        mainVM.setToolbarTitle(resources.getString(R.string.collection))
-
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+
+        mainVM.setToolbarTitle(resources.getString(R.string.collection))
 
         activityMain.showBottomNav()
 
@@ -98,6 +98,6 @@ class CollectionFragment: BaseMainFragment() {
             }
         }
 
-        activityMain.setToolbarAction(R.drawable.ic_menu){ activityMain.openDrawer() }
+        activityMain.setToolbarAction(R.drawable.ic_menu) { activityMain.openDrawer() }
     }
 }

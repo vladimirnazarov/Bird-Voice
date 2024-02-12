@@ -74,7 +74,9 @@ class MainVM: ViewModel() {
                         activity.getLoginManager().removeTokens()
                         intentBack(activity)
                     }, { message ->
-                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                        activity.runOnUiThread {
+                            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                        }
                     })
                 })
             }
@@ -94,7 +96,9 @@ class MainVM: ViewModel() {
                         activity.getLoginManager().removeTokens()
                         intentBack(activity)
                     }, { message ->
-                        Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                        activity.runOnUiThread {
+                            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+                        }
                     })
                 })
             }
@@ -203,6 +207,7 @@ class MainVM: ViewModel() {
     fun getResults() = listOfResults
     fun setList(list: ArrayList<RecognizedBird>) { listOfResults = list }
 
-    val isItemInCollectionInt = MutableLiveData<Int>()
     val isCollectionEmptyInt = MutableLiveData<Int>()
+
+    fun createMutableLiveInt() = MutableLiveData<Int>()
 }

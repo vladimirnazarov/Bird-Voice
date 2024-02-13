@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity() {
             drawerButtonFeedback.setText(R.string.feedback)
             drawerButtonInstruction.setText(R.string.instruction)
             drawerButtonLogOut.setText(R.string.sign_out)
+            drawerButtonDelete.setText(R.string.delete)
         }
     }
 

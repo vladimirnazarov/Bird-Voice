@@ -130,7 +130,7 @@ class RecordFragment : BaseMainFragment() {
     }
 
     private fun requestRecordPermission(onSuccess: () -> Unit) {
-        while (ContextCompat.checkSelfPermission(
+        if (ContextCompat.checkSelfPermission(
                 activityMain.getApp().getContext(),
                 Manifest.permission.RECORD_AUDIO
             ) != PackageManager.PERMISSION_GRANTED
@@ -140,8 +140,7 @@ class RecordFragment : BaseMainFragment() {
                 arrayOf(Manifest.permission.RECORD_AUDIO),
                 1
             )
-        }
-        onSuccess()
+        } else onSuccess()
     }
 
     private fun buttonAction() {

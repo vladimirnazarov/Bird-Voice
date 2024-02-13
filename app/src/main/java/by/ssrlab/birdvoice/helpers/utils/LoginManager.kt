@@ -2,9 +2,6 @@ package by.ssrlab.birdvoice.helpers.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class LoginManager(context: Context) {
 

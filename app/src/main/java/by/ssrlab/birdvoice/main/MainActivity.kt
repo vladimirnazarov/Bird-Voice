@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     private var regValue = 0
     private var recognitionToken = ""
     private var refreshToken = ""
+    private var username = ""
     private var accountId = 0
 
     private val mainApp = MainApp()
@@ -79,6 +80,7 @@ class MainActivity : AppCompatActivity() {
         regValue = intent.getIntExtra("userRegisterToken", 1)
         recognitionToken = intent.getStringExtra("access").toString()
         refreshToken = intent.getStringExtra("refresh").toString()
+        username = intent.getStringExtra("username").toString()
         accountId = intent.getIntExtra("accountId", 0)
 
         mainVM.setTokens(recognitionToken, refreshToken, accountId)
@@ -244,4 +246,5 @@ class MainActivity : AppCompatActivity() {
     fun getApp() = mainApp
     fun getCollectionDao() = collectionDao
     fun getLoginManager() = loginManager
+    fun getUsername() = username
 }

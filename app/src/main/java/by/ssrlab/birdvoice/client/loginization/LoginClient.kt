@@ -14,7 +14,7 @@ object LoginClient {
 
     private var loginClient: OkHttpClient? = null
 
-    fun post(email: String, password: String, onSuccess: (String, String, Int) -> Unit, onFailure: (String) -> Unit) {
+    fun post(email: String, password: String, onSuccess: (String, String, String, Int) -> Unit, onFailure: (String) -> Unit) {
 
         if (loginClient == null) loginClient = OkHttpClient.Builder().build()
 
@@ -40,6 +40,7 @@ object LoginClient {
                     if (jObject?.getString("message") == "Login successfull") onSuccess(
                         jObject.getJSONObject("token").getString("access"),
                         jObject.getJSONObject("token").getString("refresh"),
+                        nickname,
                         jObject.getJSONObject("user").getJSONArray("account").getJSONObject(0).getInt("id")
                     )
                     else jObject?.getString("message")?.let { it1 -> onFailure(it1) }

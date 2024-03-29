@@ -77,13 +77,14 @@ class LaunchActivity : AppCompatActivity() {
         if (launchVM.onMapBackPressedCallback.isEnabled) launchVM.onMapBackPressedCallback.remove()
     }
 
-    fun moveToMainActivity(regOrLogToken: Int = 0, recognitionToken: String, refreshToken: String, accountId: Int) {
+    fun moveToMainActivity(regOrLogToken: Int = 0, recognitionToken: String, refreshToken: String, username: String, accountId: Int) {
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         intent.putExtra("userRegisterToken", regOrLogToken)
         intent.putExtra("access", recognitionToken)
         intent.putExtra("refresh", refreshToken)
+        intent.putExtra("username", username)
         intent.putExtra("accountId", accountId)
         startActivity(intent)
     }

@@ -61,10 +61,10 @@ class LoginFragment: BaseLaunchFragment() {
                 checkLogin {
                     val login = binding.loginUsernameInput.text.toString()
                     val password = binding.loginPasswordInput.text.toString()
-                    LoginClient.post(login, password, { access, refresh, id ->
+                    LoginClient.post(login, password, { access, refresh, username, id ->
                         if (binding.loginRememberMe.isChecked) activityLaunch.getLoginManager().saveTokens(login, password)
                         activityLaunch.runOnUiThread {
-                            activityLaunch.moveToMainActivity(recognitionToken = access, refreshToken = refresh, accountId = id)
+                            activityLaunch.moveToMainActivity(recognitionToken = access, refreshToken = refresh, username = username, accountId = id)
                         }
                     }, { helpFunctions.checkLoginInput(binding.loginUsernameInput, binding.loginUsernameErrorMessage, it, activityLaunch, binding) })
                 }

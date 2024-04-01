@@ -70,13 +70,13 @@ class RegisterFragment: BaseLaunchFragment() {
                 checkRegister {
                     RegistrationClient.post(binding.registerUsernameInput.text.toString(), binding.registerPasswordInput.text.toString(), {
                         //OnSuccess
-                        LoginClient.post(binding.registerUsernameInput.text.toString(), binding.registerPasswordInput.text.toString(), { access, refresh, id ->
+                        LoginClient.post(binding.registerUsernameInput.text.toString(), binding.registerPasswordInput.text.toString(), { access, refresh, username, id ->
                             launchVM.getScope().launch {
                                 delay(200)
                                 binding.registerCreateButton.isClickable = false
                                 launchVM.activityBinding?.launcherArrowBack?.isClickable = false
                                 animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews)
-                                activityLaunch.moveToMainActivity(recognitionToken = access, refreshToken = refresh, accountId = id)
+                                activityLaunch.moveToMainActivity(recognitionToken = access, refreshToken = refresh, username = username, accountId = id)
                             } }, { activityLaunch.runOnUiThread { Toast.makeText(activityLaunch, it, Toast.LENGTH_SHORT).show() } })
                     }, {
                         helpFunctions.checkLoginInput(binding.registerUsernameInput, binding.registerUsernameErrorMessage, it, activityLaunch, binding)

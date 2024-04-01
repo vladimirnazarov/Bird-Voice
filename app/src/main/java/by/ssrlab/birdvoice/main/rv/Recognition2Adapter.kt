@@ -44,7 +44,6 @@ class Recognition2Adapter(
     override fun onBindViewHolder(holder: Recognition2Holder, position: Int) {
         val databaseObject = CollectionBird(mainVM.getResults()[position].name, mainVM.getResults()[position].image)
 
-        /***/
         holder.binding.apply {
             var collectionList: List<CollectionBird>
             val isItemInCollection = mainVM.createMutableLiveInt()
@@ -68,7 +67,8 @@ class Recognition2Adapter(
                 transformations(RoundedCornersTransformation(16f))
             }
 
-            val title = "${mainVM.getResults()[position].name} (${mainVM.getResults()[position].startTime}-${mainVM.getResults()[position].endTime} ${activity.resources.getText(R.string.sec)})"
+//            val title = "${mainVM.getResults()[position].name} (${mainVM.getResults()[position].startTime}-${mainVM.getResults()[position].endTime} ${activity.resources.getText(R.string.sec)})"
+            val title = mainVM.getResults()[position].name
             recognition2RvItemTitle.text = title
         }
 

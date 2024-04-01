@@ -204,7 +204,12 @@ class MainVM: ViewModel() {
 
     //Results
     private var listOfResults: ArrayList<RecognizedBird> = arrayListOf()
-    fun getResults() = listOfResults
+    fun getResults(): ArrayList<RecognizedBird> {
+//        return listOfResults
+        return if (listOfResults.size > 3) {
+            listOfResults.subList(0, 2) as ArrayList<RecognizedBird>
+        } else listOfResults
+    }
     fun setList(list: ArrayList<RecognizedBird>) { listOfResults = list }
 
     val isCollectionEmptyInt = MutableLiveData<Int>()

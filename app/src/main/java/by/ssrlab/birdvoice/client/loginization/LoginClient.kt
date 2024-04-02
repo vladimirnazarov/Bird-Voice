@@ -7,6 +7,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
+import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
@@ -36,14 +37,21 @@ object LoginClient {
             override fun onResponse(call: Call, response: Response) {
                 response.use {
                     val responseBody = response.body?.string()
-                    val jObject = responseBody?.let { it1 -> JSONObject(it1) }
-                    if (jObject?.getString("message") == "Login successfull") onSuccess(
-                        jObject.getJSONObject("token").getString("access"),
-                        jObject.getJSONObject("token").getString("refresh"),
-                        nickname,
-                        jObject.getJSONObject("user").getJSONArray("account").getJSONObject(0).getInt("id")
-                    )
-                    else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
+
+                    try {
+                        val jObject = responseBody?.let { it1 -> JSONObject(it1) }
+                        if (jObject?.getString("message") == "Login successfull")
+                            onSuccess(
+                                jObject.getJSONObject("token").getString("access"),
+                                jObject.getJSONObject("token").getString("refresh"),
+                                nickname,
+                                jObject.getJSONObject("user").getJSONArray("account").getJSONObject(0).getInt("id")
+                        )
+
+                        else jObject?.getString("message")?.let { it1 -> onFailure(it1) }
+                    } catch (e: JSONException) {
+                        onFailure(e.message.toString())
+                    }
                 }
             }
         })

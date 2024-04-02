@@ -125,25 +125,7 @@ class Recognition1Fragment: BaseMainFragment() {
                 file.delete()
                 navigateAction()
             })
-
-//            RecognitionClient.post(mainVM.getAccessToken(), file, activityMain.getApp().getLocaleInt(), { list ->
-//                mainVM.setList(list)
-//                file.delete()
-//                navigateAction()
-//            }) { string ->
-//                activityMain.runOnUiThread { Toast.makeText(activityMain, string, Toast.LENGTH_SHORT).show() }
-//                file.delete()
-//                navigateAction()
-//            }
         } else {
-//            mainVM.getAudioFile()?.let { RecognitionClient.post(mainVM.getAccessToken(), it, activityMain.getApp().getLocaleInt(), { list ->
-//                mainVM.setList(list)
-//                navigateAction()
-//            }) { string ->
-//                activityMain.runOnUiThread { Toast.makeText(activityMain, string, Toast.LENGTH_SHORT).show() }
-//                navigateAction()
-//            }}
-
             mainVM.getAudioFile()?.let { RecognitionClient.sendToDatabase(it, mainVM.getAccessToken(), activityMain.getUsername(), { list ->
                 mainVM.setList(list)
                 navigateAction()

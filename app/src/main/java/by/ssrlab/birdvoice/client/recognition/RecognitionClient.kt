@@ -28,7 +28,7 @@ object RecognitionClient {
 
         val body = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
-            .addFormDataPart("audio_to_recognize", "audio_file", audioFile.asRequestBody("application/octet-stream".toMediaType()))
+            .addFormDataPart("audio_to_recognize", "$username android", audioFile.asRequestBody("application/octet-stream".toMediaType()))
             .addFormDataPart("access",token)
             .addFormDataPart("username",username)
             .build()
@@ -75,56 +75,4 @@ object RecognitionClient {
             }
         })
     }
-
-//    fun post(token: String, audioFile: File, language: Int, arrayAction: (ArrayList<RecognizedBird>) -> Unit, onFailure: (String) -> Unit) {
-//
-//        val body = MultipartBody.Builder().setType(MultipartBody.FORM)
-//            .addFormDataPart("audio_file","audio_file", audioFile.asRequestBody("application/octet-stream".toMediaType()))
-//            .addFormDataPart("language", language.toString())
-//            .build()
-//        val request = Request.Builder()
-//            .url("https://apiptushki.ssrlab.by/predict")
-//            .post(body)
-//            .addHeader("Authorization", "Bearer $token")
-//            .build()
-//
-//        recognitionClient.newCall(request).enqueue(object : Callback {
-//            override fun onFailure(call: Call, e: IOException) {
-//                onFailure(e.message!!)
-//            }
-//
-//            override fun onResponse(call: Call, response: Response) {
-//                response.use {
-//                    val responseBody = response.body?.string()
-//
-//                    try {
-//                        val jObject = responseBody?.let { it1 -> JSONObject(it1) }
-//                        val predictions = jObject?.getJSONObject("predictions")
-//                        val keys = predictions?.keys()
-//
-//                        val arrayOfResults = arrayListOf<RecognizedBird>()
-//
-//                        while (keys?.hasNext() == true) {
-//                            val key = keys.next()
-//
-//                            val birdInfoArray = predictions.getJSONArray(key)
-//
-//                            val recognizedBird = RecognizedBird(
-//                                image = birdInfoArray[0] as String,
-//                                name = key
-//                            )
-//
-//                            arrayOfResults.add(recognizedBird)
-//                        }
-//
-//                        arrayAction(arrayOfResults)
-//                    } catch (e: Throwable) {
-//                        if (responseBody != null) {
-//                            onFailure(responseBody)
-//                        }
-//                    }
-//                }
-//            }
-//        })
-//    }
 }

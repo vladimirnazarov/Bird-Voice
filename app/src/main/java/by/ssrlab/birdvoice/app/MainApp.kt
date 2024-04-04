@@ -3,7 +3,7 @@ package by.ssrlab.birdvoice.app
 import android.app.Application
 import android.content.Context
 import android.content.res.Configuration
-import java.util.*
+import java.util.Locale
 
 class MainApp : Application() {
 

@@ -84,9 +84,12 @@ object RecognitionClient {
         val buffer = StringBuffer(input.length)
         while (matcher.find()) {
             val hex = matcher.group(1)
-            val codePoint = Integer.parseInt(hex, 16)
+            val codePoint = hex?.let { Integer.parseInt(it, 16) }
             matcher.appendReplacement(buffer, "")
-            buffer.appendCodePoint(codePoint)
+
+            if (codePoint != null) {
+                buffer.appendCodePoint(codePoint)
+            }
         }
         matcher.appendTail(buffer)
         return buffer.toString()

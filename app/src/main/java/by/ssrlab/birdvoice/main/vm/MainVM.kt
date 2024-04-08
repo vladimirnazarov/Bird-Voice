@@ -205,9 +205,10 @@ class MainVM: ViewModel() {
     //Results
     private var listOfResults: ArrayList<RecognizedBird> = arrayListOf()
     fun getResults(): ArrayList<RecognizedBird> {
-//        return listOfResults
+        val list = arrayListOf<RecognizedBird>()
         return if (listOfResults.size > 3) {
-            listOfResults.subList(0, 2) as ArrayList<RecognizedBird>
+            for (i in 0 until 3) list.add(listOfResults[i])
+            list
         } else listOfResults
     }
     fun setList(list: ArrayList<RecognizedBird>) { listOfResults = list }

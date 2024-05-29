@@ -145,6 +145,7 @@
             android:lines="1"
             android:maxLines="1"
             android:maxLength="28"
+            android:inputType="text"
 
             app:layout_constraintStart_toStartOf="@id/login_username_title"
             app:layout_constraintEnd_toEndOf="@id/login_username_title"
@@ -185,7 +186,6 @@
 
             android:lines="1"
             android:maxLines="1"
-            android:maxLength="24"
             android:ems="15"
 
             app:layout_constraintStart_toStartOf="@id/login_password_title"
@@ -202,7 +202,7 @@
             android:padding="8dp"
             android:elevation="4dp"
 
-            android:src="@drawable/ic_launcher_hide_password"
+            android:src="@drawable/ic_launcher_show_password"
 
             app:layout_constraintEnd_toEndOf="@id/login_password_input"
             app:layout_constraintTop_toTopOf="@id/login_password_input"

@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.client.loginization.LoginClient
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
+import by.ssrlab.birdvoice.helpers.utils.HelpFunctions
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 
@@ -44,8 +45,8 @@ class LoginFragment: BaseLaunchFragment() {
         animationUtils.commonDefineObjectsVisibility(arrayOfViews)
         animationUtils.commonObjectAppear(activityLaunch.getApp().getContext(), arrayOfViews, true)
 
-        binding.loginUsernameInput.filters = helpFunctions.editTextFilters
-        binding.loginPasswordInput.filters = helpFunctions.editTextFilters
+        binding.loginUsernameInput.filters = helpFunctions.getLoginFilters()
+        binding.loginPasswordInput.filters = helpFunctions.getPasswordFilters()
 
         if (launchVM.boolPopBack) launchVM.showTop()
         binding.loginBird.animation.setAnimationListener(helpFunctions.createAnimationEndListener {

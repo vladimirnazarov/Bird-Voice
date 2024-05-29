@@ -45,8 +45,8 @@ class RegisterFragment: BaseLaunchFragment() {
                 ViewObject(registerPrivacyPolicy)
             )
 
-            registerUsernameInput.filters = helpFunctions.editTextFilters
-            registerPasswordInput.filters = helpFunctions.editTextFilters
+            registerUsernameInput.filters = helpFunctions.getLoginFilters()
+            registerPasswordInput.filters = helpFunctions.getPasswordFilters()
 
             registerPrivacyPolicy.movementMethod = LinkMovementMethod.getInstance()
         }

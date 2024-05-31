@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Resources
 import android.text.Editable
 import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -23,6 +24,8 @@ import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.launch.LaunchActivity
+import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
+import by.ssrlab.birdvoice.launch.fragments.choice.signIn.LoginFragment
 import by.ssrlab.birdvoice.launch.vm.LaunchVM
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -30,7 +33,8 @@ import java.util.Locale
 
 class HelpFunctions(private val mainApp: MainApp) {
 
-    val editTextFilters = arrayOf<InputFilter>(NoSpaceFilter(mainApp))
+    fun getLoginFilters() = arrayOf(NoSpaceFilter(mainApp), LengthFilter(mainApp.getContext().resources.getInteger(R.integer.maxLoginLength)))
+    fun getPasswordFilters() = arrayOf(NoSpaceFilter(mainApp), LengthFilter(mainApp.getContext().resources.getInteger(R.integer.maxPasswordLength)))
 
     fun controlPopBack(launchVM: LaunchVM, bool: Boolean) {
         launchVM.boolPopBack = bool
@@ -43,10 +47,10 @@ class HelpFunctions(private val mainApp: MainApp) {
     ) {
         if (passwordInput.transformationMethod == PasswordTransformationMethod.getInstance()) {
             passwordInput.transformationMethod = HideReturnsTransformationMethod.getInstance()
-            passwordShowButton.setImageResource(R.drawable.ic_launcher_show_password)
+            passwordShowButton.setImageResource(R.drawable.ic_launcher_hide_password)
         } else {
             passwordInput.transformationMethod = PasswordTransformationMethod.getInstance()
-            passwordShowButton.setImageResource(R.drawable.ic_launcher_hide_password)
+            passwordShowButton.setImageResource(R.drawable.ic_launcher_show_password)
         }
     }
 

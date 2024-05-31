@@ -65,7 +65,8 @@ object RecognitionClient {
                             name = key
                         )
 
-                        arrayOfResults.add(recognizedBird)
+                        if (recognizedBird.name != "unknown" && recognizedBird.name != "background")
+                            arrayOfResults.add(recognizedBird)
                     }
 
                     onSuccess(arrayOfResults)

@@ -15,8 +15,10 @@ import by.ssrlab.birdvoice.databinding.FragmentRecordBinding
 import by.ssrlab.birdvoice.helpers.recorder.AudioRecorder
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.main.fragments.BaseMainFragment
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class RecordFragment : BaseMainFragment() {
@@ -98,10 +100,10 @@ class RecordFragment : BaseMainFragment() {
         super.onStop()
 
         if (!pressedBool) {
-            recorder.stop()
-            pressedBool = !pressedBool
-
-            binding.recRecordButtonIcon.setImageResource(R.drawable.ic_rec_start)
+            recorder.stop(mainVM.getScope()) {
+                pressedBool = !pressedBool
+                binding.recRecordButtonIcon.setImageResource(R.drawable.ic_rec_start)
+            }
         }
 
         activityMain.switchToolbarUploadVisibility()
@@ -114,12 +116,16 @@ class RecordFragment : BaseMainFragment() {
         )
 
         if (!pressedBool) {
-            recorder.stop()
-
-            binding.recRecordButtonIcon.isClickable = false
-            animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
-            mainVM.navigateToWithDelay(R.id.action_recordFragment_to_editRecordFragment)
+            stopRecording()
         } else {
+            binding.recRecordButtonIcon.isClickable = false
+            mainVM.getScope().launch {
+                delay(1000)
+                withContext(Dispatchers.Main) {
+                    binding.recRecordButtonIcon.isClickable = true
+                }
+            }
+
             File(activityMain.cacheDir, "audio.mp3").also {
                 recorder.start(it)
                 mainVM.setAudioFile(it)
@@ -127,6 +133,14 @@ class RecordFragment : BaseMainFragment() {
         }
 
         pressedBool = !pressedBool
+    }
+
+    private fun stopRecording() {
+        recorder.stop(mainVM.getScope()) {
+            binding.recRecordButtonIcon.isClickable = false
+            animationUtils.commonObjectAppear(activityMain.getApp().getContext(), arrayOfViews)
+            mainVM.navigateToWithDelay(R.id.action_recordFragment_to_editRecordFragment)
+        }
     }
 
     private fun requestRecordPermission(onSuccess: () -> Unit) {

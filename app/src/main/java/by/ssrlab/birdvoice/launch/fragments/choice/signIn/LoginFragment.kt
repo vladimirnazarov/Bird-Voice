@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat
 import by.ssrlab.birdvoice.R
 import by.ssrlab.birdvoice.client.loginization.LoginClient
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
-import by.ssrlab.birdvoice.helpers.utils.HelpFunctions
 import by.ssrlab.birdvoice.helpers.utils.ViewObject
 import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
 

@@ -3,7 +3,6 @@ package by.ssrlab.birdvoice.helpers.utils
 import android.content.Context
 import android.content.res.Resources
 import android.text.Editable
-import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
@@ -24,8 +23,6 @@ import by.ssrlab.birdvoice.app.MainApp
 import by.ssrlab.birdvoice.databinding.FragmentLoginBinding
 import by.ssrlab.birdvoice.databinding.FragmentRegisterBinding
 import by.ssrlab.birdvoice.launch.LaunchActivity
-import by.ssrlab.birdvoice.launch.fragments.BaseLaunchFragment
-import by.ssrlab.birdvoice.launch.fragments.choice.signIn.LoginFragment
 import by.ssrlab.birdvoice.launch.vm.LaunchVM
 import java.text.SimpleDateFormat
 import java.util.Date
